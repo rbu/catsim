@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>catsim.cluster.stats &mdash; catsim 1.0a documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.0a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="catsim 1.0a documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">catsim 1.0a documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for catsim.cluster.stats</h1><div class="highlight"><pre>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">catsim.cluster</span> <span class="kn">import</span> <span class="n">distances</span>
+
+
+<span class="k">def</span> <span class="nf">means</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">clusters</span><span class="p">):</span>
+    <span class="c"># &quot;&quot;&quot;</span>
+    <span class="c"># Calculates de mean distances for each cluster:</span>
+
+    <span class="c"># .. math:: \\mu_g = \\frac{1}{N_g}\\sum_{i=1; j=i+1}^{N_g}d(i, j)</span>
+    <span class="c"># &quot;&quot;&quot;</span>
+
+    <span class="n">npoints</span><span class="p">,</span> <span class="n">nfeatures</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">centroids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="nb">max</span><span class="p">(</span><span class="n">clusters</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nfeatures</span><span class="p">])</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">clusters</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">clusters_aux</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">clusters</span> <span class="o">==</span> <span class="n">i</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">centroids</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">clusters_aux</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">centroids</span>
+
+
+<div class="viewcode-block" id="variances"><a class="viewcode-back" href="../../../catsim.cluster.stats.html#catsim.cluster.stats.variances">[docs]</a><span class="k">def</span> <span class="nf">variances</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">clusters</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculates the variance for each cluster</span>
+
+<span class="sd">    .. math:: \\sigma^2_g = \\frac{1}{N_g}\\sum_{i=1; j=i+1}^{N_g} (\mu_g - d(i, j))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">npoints</span><span class="p">,</span> <span class="n">nfeatures</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span>
+    <span class="n">cluster_means</span> <span class="o">=</span> <span class="n">means</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">clusters</span><span class="p">)</span>
+    <span class="n">variances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="nb">max</span><span class="p">(</span><span class="n">clusters</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nfeatures</span><span class="p">])</span>
+    <span class="c"># cluster_bins = np.bincount(np.delete(clusters, np.where(clusters == -1)))</span>
+    <span class="n">D</span> <span class="o">=</span> <span class="n">distances</span><span class="o">.</span><span class="n">euclidean</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">cluster_means</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">clusters</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">clusters_aux</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">clusters</span> <span class="o">==</span> <span class="n">i</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">variances</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">D</span><span class="p">[</span><span class="n">clusters_aux</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">variances</span>
+
+</div>
+<div class="viewcode-block" id="mean_variance"><a class="viewcode-back" href="../../../catsim.cluster.stats.html#catsim.cluster.stats.mean_variance">[docs]</a><span class="k">def</span> <span class="nf">mean_variance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">clusters</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the mean variance for all clusters</span>
+
+<span class="sd">    .. math:: \\sigma^2 = \\frac{1}{G}\\sum_{g=1}^G \\frac{1}{N} \\sum_{i=1; j=i+1}^N (\mu_g - d(i, j))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">variances</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">clusters</span><span class="p">))</span>
+
+</div>
+<div class="viewcode-block" id="dunn"><a class="viewcode-back" href="../../../catsim.cluster.stats.html#catsim.cluster.stats.dunn">[docs]</a><span class="k">def</span> <span class="nf">dunn</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">distances</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Dunn index for cluster validation (the bigger, the better)</span>
+
+<span class="sd">    .. math:: D = \\min_{i = 1 \\ldots n_c; j = i + 1\ldots n_c}\\left\\lbrace\\frac{d \\left( c_i,c_j \\right)}{\\max_{k = 1 \\ldots n_c} \\left(diam \\left(c_k \\right) \\right)} \\right\\rbrace</span>
+
+<span class="sd">    where :math:`d(c_i,c_j)` represents the distance between clusters</span>
+<span class="sd">    :math:`c_i` and :math:`c_j`, given by the distances between its two</span>
+<span class="sd">    closest data points, and :math:`diam(c_k)` is the diameter of cluster</span>
+<span class="sd">    :math:`c_k`, given by the distance between its two farthest data points.</span>
+
+<span class="sd">    The bigger the value of the resulting Dunn index, the better the</span>
+<span class="sd">    clustering result is considered, since higher values indicate that</span>
+<span class="sd">    clusters are compact (small :math:`diam(c_k)`) and far apart.</span>
+
+<span class="sd">    .. [Kov05] Kovács, F., Legány, C., &amp; Babos, A. (2005). Cluster validity measurement techniques. 6th International Symposium of Hungarian Researchers on Computational Intelligence.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">unique_cluster_distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">min_cluster_distances</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">distances</span><span class="p">))</span>
+    <span class="n">max_diameter</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">diameter</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">distances</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">unique_cluster_distances</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">unique_cluster_distances</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">max_diameter</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">unique_cluster_distances</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">max_diameter</span>
+
+</div>
+<div class="viewcode-block" id="min_cluster_distances"><a class="viewcode-back" href="../../../catsim.cluster.stats.html#catsim.cluster.stats.min_cluster_distances">[docs]</a><span class="k">def</span> <span class="nf">min_cluster_distances</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">D</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculates the distances between the two nearest points of each cluster.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c"># creates empty matrix</span>
+    <span class="n">min_distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">max</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="c"># iterates through all clusters</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)):</span>
+
+        <span class="c"># ignores outliers (in the case of DBSCAN, for example)</span>
+        <span class="k">if</span> <span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">c</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="k">continue</span>
+
+            <span class="c"># checks if data points belong to different clusters and updates</span>
+            <span class="c"># the minimum distance between clusters i and ii</span>
+            <span class="k">if</span> <span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">c</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span> <span class="ow">and</span> <span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">ii</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">min_distances</span><span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">c</span><span class="p">[</span><span class="n">ii</span><span class="p">]]:</span>
+                <span class="n">min_distances</span><span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                              <span class="n">c</span><span class="p">[</span><span class="n">ii</span><span class="p">]]</span> <span class="o">=</span> <span class="n">min_distances</span><span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="n">ii</span><span class="p">],</span>
+                                                     <span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">ii</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">min_distances</span>
+
+</div>
+<div class="viewcode-block" id="diameter"><a class="viewcode-back" href="../../../catsim.cluster.stats.html#catsim.cluster.stats.diameter">[docs]</a><span class="k">def</span> <span class="nf">diameter</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">D</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculates cluster diameters (the distance between the two farthest data</span>
+<span class="sd">    points in a cluster)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c"># creates empty matrix</span>
+    <span class="n">diameters</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="c"># iterates through all clusters</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)):</span>
+
+        <span class="c"># ignores outliers</span>
+        <span class="k">if</span> <span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">c</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="c"># if c[i] != -1 or c[ii] != -1 and c[i] == c[ii] and distances[i,</span>
+            <span class="c"># ii] &gt; diameters[c[i]]:</span>
+
+            <span class="c"># checks if data points are in the same clusters and updates</span>
+            <span class="c"># the diameter accordingly</span>
+            <span class="k">if</span> <span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">c</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span> <span class="ow">and</span> <span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">ii</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">diameters</span><span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]]:</span>
+                <span class="n">diameters</span><span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">ii</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">diameters</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">catsim 1.0a documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Douglas De Rizzo Meneghetti.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>
