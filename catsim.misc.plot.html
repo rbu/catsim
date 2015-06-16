@@ -59,25 +59,41 @@
 <dl class="function">
 <dt id="catsim.misc.plot.column">
 <code class="descclassname">catsim.misc.plot.</code><code class="descname">column</code><span class="sig-paren">(</span><em>matrix</em>, <em>i</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/misc/plot.html#column"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.misc.plot.column" title="Permalink to this definition">¶</a></dt>
-<dd><p>retorna colunas de uma lista bidimensional do Python</p>
+<dd><p>Returns columns from a bidimensional Python list (a list of lists)</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="catsim.misc.plot.gen3DClusterGraphs">
 <code class="descclassname">catsim.misc.plot.</code><code class="descname">gen3DClusterGraphs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/misc/plot.html#gen3DClusterGraphs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.misc.plot.gen3DClusterGraphs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gera gráficos 3D dos itens classificados</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="catsim.misc.plot.gen3DDatasetGraphs">
-<code class="descclassname">catsim.misc.plot.</code><code class="descname">gen3DDatasetGraphs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/misc/plot.html#gen3DDatasetGraphs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.misc.plot.gen3DDatasetGraphs" title="Permalink to this definition">¶</a></dt>
-<dd><p>gera os gráficos 3D dos parâmetros da TRI</p>
+<dd><p>Generates the 3D plots from the results CSV file</p>
 </dd></dl>
 
 <dl class="function">
 <dt id="catsim.misc.plot.genIRTGraphics">
 <code class="descclassname">catsim.misc.plot.</code><code class="descname">genIRTGraphics</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/misc/plot.html#genIRTGraphics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.misc.plot.genIRTGraphics" title="Permalink to this definition">¶</a></dt>
-<dd><p>gera curvas características e de informação dos itens para o ML3 da TRI</p>
+<dd><p>Generates the item characteristic and information functions for all
+items in the CSV results file</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="catsim.misc.plot.plot3D">
+<code class="descclassname">catsim.misc.plot.</code><code class="descname">plot3D</code><span class="sig-paren">(</span><em>points</em>, <em>clusters</em>, <em>title</em>, <em>centers=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/misc/plot.html#plot3D"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.misc.plot.plot3D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots 3D cluster charts</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>points</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.9)"><em>numpy.ndarray</em></a>) &#8211; a matrix with the 3D locations of the data points</li>
+<li><strong>clusters</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.9)"><em>numpy.ndarray</em></a>) &#8211; a list with the cluster memberships for each data point</li>
+<li><strong>title</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/string.html#module-string" title="(in Python v3.4)"><em>string</em></a>) &#8211; The title for the plot</li>
+<li><strong>centers</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.9)"><em>numpy.ndarray</em></a>) &#8211; a matrix with the positions of the cluster centers,
+if they exist</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>

@@ -55,6 +55,49 @@
             
   <div class="section" id="module-catsim.cluster.helpers">
 <span id="clustering-helper-functions"></span><h1>Clustering Helper Functions<a class="headerlink" href="#module-catsim.cluster.helpers" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="catsim.cluster.helpers.normalize">
+<code class="descclassname">catsim.cluster.helpers.</code><code class="descname">normalize</code><span class="sig-paren">(</span><em>c</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/cluster/helpers.html#normalize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cluster.helpers.normalize" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Normalize the clustering results list, so that they are comparable</dt>
+<dd>between each other.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>c</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.9)"><em>numpy.ndarray</em></a>) &#8211; a vector containing cluster memberships</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a vector containing normalized cluster memberships</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.9)">numpy.ndarray</a></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Note:</th><td class="field-body"><p class="first">as an example of what is meant by &#8216;normalization&#8217;, imagine the
+following cluster membership vectors:</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>In this case, both membership vectors can be considered equal, since
+they cluster data points in equal clusters. What this function does
+is transform both of them in the following:</p>
+<blockquote>
+<div><div class="highlight-python"><div class="highlight"><pre><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p class="last">In this way, membership vectors are comparable.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </div>
 
 

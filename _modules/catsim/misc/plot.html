@@ -58,11 +58,23 @@
 
 
 <div class="viewcode-block" id="column"><a class="viewcode-back" href="../../../catsim.misc.plot.html#catsim.misc.plot.column">[docs]</a><span class="k">def</span> <span class="nf">column</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">i</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;retorna colunas de uma lista bidimensional do Python&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Returns columns from a bidimensional Python list (a list of lists)&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">matrix</span><span class="p">]</span>
 
 </div>
-<span class="k">def</span> <span class="nf">plot3D</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">clusters</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">centers</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="plot3D"><a class="viewcode-back" href="../../../catsim.misc.plot.html#catsim.misc.plot.plot3D">[docs]</a><span class="k">def</span> <span class="nf">plot3D</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">clusters</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">centers</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Plots 3D cluster charts</span>
+
+<span class="sd">       :param points: a matrix with the 3D locations of the data points</span>
+<span class="sd">       :type points: numpy.ndarray</span>
+<span class="sd">       :param clusters: a list with the cluster memberships for each data point</span>
+<span class="sd">       :type clusters: numpy.ndarray</span>
+<span class="sd">       :param title: The title for the plot</span>
+<span class="sd">       :type title: string</span>
+<span class="sd">       :param centers: a matrix with the positions of the cluster centers,</span>
+<span class="sd">                       if they exist</span>
+<span class="sd">       :type centers: numpy.ndarray</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="c"># plota gráficos</span>
     <span class="c"># variáveis utilizadas no plot</span>
     <span class="n">colors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="s">&#39;bgrcmykbgrcmykbgrcmykbgrcmyk&#39;</span><span class="p">])</span>
@@ -95,9 +107,9 @@
 
     <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">cluster_graphdir</span> <span class="o">+</span> <span class="n">title</span> <span class="o">+</span> <span class="s">&#39;.pdf&#39;</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span>
 
-
+</div>
 <div class="viewcode-block" id="gen3DClusterGraphs"><a class="viewcode-back" href="../../../catsim.misc.plot.html#catsim.misc.plot.gen3DClusterGraphs">[docs]</a><span class="k">def</span> <span class="nf">gen3DClusterGraphs</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;Gera gráficos 3D dos itens classificados&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Generates the 3D plots from the results CSV file&quot;&quot;&quot;</span>
     <span class="n">datasets</span> <span class="o">=</span> <span class="n">loadDatasets</span><span class="p">()</span>
     <span class="n">df</span> <span class="o">=</span> <span class="n">loadResults</span><span class="p">()</span>
 
@@ -115,9 +127,8 @@
 
 </div>
 <div class="viewcode-block" id="genIRTGraphics"><a class="viewcode-back" href="../../../catsim.misc.plot.html#catsim.misc.plot.genIRTGraphics">[docs]</a><span class="k">def</span> <span class="nf">genIRTGraphics</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    gera curvas características e de informação dos itens para o ML3 da TRI</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Generates the item characteristic and information functions for all</span>
+<span class="sd">    items in the CSV results file&quot;&quot;&quot;</span>
     <span class="n">datasets</span> <span class="o">=</span> <span class="n">loadDatasets</span><span class="p">()</span>
     <span class="n">total_imagens</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">imagem_atual</span> <span class="o">=</span> <span class="mi">0</span>
@@ -190,8 +201,7 @@
           <span class="s">&#39; imagens</span><span class="se">\n</span><span class="s">Tempo: &#39;</span> <span class="o">+</span> <span class="n">format</span><span class="p">(</span><span class="n">timedelta</span><span class="p">(</span><span class="n">seconds</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)))</span>
 
 </div>
-<div class="viewcode-block" id="gen3DDatasetGraphs"><a class="viewcode-back" href="../../../catsim.misc.plot.html#catsim.misc.plot.gen3DDatasetGraphs">[docs]</a><span class="k">def</span> <span class="nf">gen3DDatasetGraphs</span><span class="p">():</span>
-    <span class="sd">&quot;&quot;&quot;gera os gráficos 3D dos parâmetros da TRI&quot;&quot;&quot;</span>
+<span class="k">def</span> <span class="nf">gen3DDatasetGraphs</span><span class="p">():</span>
     <span class="n">dados_graphdir</span> <span class="o">=</span> <span class="n">dissertacao</span> <span class="o">+</span> <span class="s">&#39;/img/3d/&#39;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">dados_graphdir</span><span class="p">):</span>
         <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">dados_graphdir</span><span class="p">)</span>
@@ -222,7 +232,7 @@
         <span class="n">ax</span><span class="o">.</span><span class="n">set_zlabel</span><span class="p">(</span><span class="s">&#39;c&#39;</span><span class="p">)</span>
 
         <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">dados_graphdir</span> <span class="o">+</span> <span class="n">dataset_name</span> <span class="o">+</span> <span class="s">&#39;.pdf&#39;</span><span class="p">,</span>
-                    <span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span></div>
+                    <span class="n">bbox_inches</span><span class="o">=</span><span class="s">&#39;tight&#39;</span><span class="p">)</span>
 </pre></div>
 
           </div>
