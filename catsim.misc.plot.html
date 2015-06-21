@@ -63,21 +63,8 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="catsim.misc.plot.gen3DClusterGraphs">
-<code class="descclassname">catsim.misc.plot.</code><code class="descname">gen3DClusterGraphs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/misc/plot.html#gen3DClusterGraphs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.misc.plot.gen3DClusterGraphs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates the 3D plots from the results CSV file</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="catsim.misc.plot.genIRTGraphics">
-<code class="descclassname">catsim.misc.plot.</code><code class="descname">genIRTGraphics</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/misc/plot.html#genIRTGraphics"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.misc.plot.genIRTGraphics" title="Permalink to this definition">¶</a></dt>
-<dd><p>Generates the item characteristic and information functions for all
-items in the CSV results file</p>
-</dd></dl>
-
-<dl class="function">
 <dt id="catsim.misc.plot.plot3D">
-<code class="descclassname">catsim.misc.plot.</code><code class="descname">plot3D</code><span class="sig-paren">(</span><em>points</em>, <em>clusters</em>, <em>title</em>, <em>centers=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/misc/plot.html#plot3D"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.misc.plot.plot3D" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">catsim.misc.plot.</code><code class="descname">plot3D</code><span class="sig-paren">(</span><em>points</em>, <em>clusters</em>, <em>title</em>, <em>path</em>, <em>centers=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/misc/plot.html#plot3D"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.misc.plot.plot3D" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots 3D cluster charts</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -89,6 +76,30 @@ items in the CSV results file</p>
 <li><strong>title</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/string.html#module-string" title="(in Python v3.4)"><em>string</em></a>) &#8211; The title for the plot</li>
 <li><strong>centers</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.9)"><em>numpy.ndarray</em></a>) &#8211; a matrix with the positions of the cluster centers,
 if they exist</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="catsim.misc.plot.plotIRT">
+<code class="descclassname">catsim.misc.plot.</code><code class="descname">plotIRT</code><span class="sig-paren">(</span><em>a=1</em>, <em>b=0</em>, <em>c=0</em>, <em>title=None</em>, <em>ptype='icc'</em>, <em>filepath=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/misc/plot.html#plotIRT"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.misc.plot.plotIRT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots &#8216;Item Response Theory&#8217;-related item plots</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>a</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/functions.html#float" title="(in Python v3.4)"><em>float</em></a>) &#8211; item discrimination parameter</li>
+<li><strong>b</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/functions.html#float" title="(in Python v3.4)"><em>float</em></a>) &#8211; item difficulty parameter</li>
+<li><strong>c</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/functions.html#float" title="(in Python v3.4)"><em>float</em></a>) &#8211; item pseudo-guessing parameter</li>
+<li><strong>title</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/string.html#module-string" title="(in Python v3.4)"><em>string</em></a>) &#8211; plot title</li>
+<li><strong>ptype</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/string.html#module-string" title="(in Python v3.4)"><em>string</em></a>) &#8211; &#8216;icc&#8217; for the item characteristic curve, &#8216;iif&#8217; for the
+item information curve or &#8216;both&#8217; for both curve in the
+same plot</li>
+<li><strong>filepath</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/string.html#module-string" title="(in Python v3.4)"><em>string</em></a>) &#8211; saves the plot in the given path</li>
 </ul>
 </td>
 </tr>

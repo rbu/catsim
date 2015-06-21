@@ -142,7 +142,8 @@
 <span class="sd">    items parameters</span>
 
 <span class="sd">    :param response_vector: a binary list containing the response vector</span>
-<span class="sd">    :param administered_items: a numpy array containing the parameters of the answered items</span>
+<span class="sd">    :param administered_items: a numpy array containing the parameters of the</span>
+<span class="sd">                               answered items</span>
 <span class="sd">    :param precision: number of decimal points of precision</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">lbound</span> <span class="o">=</span> <span class="o">-</span><span class="mi">8</span>
@@ -173,16 +174,16 @@
 <span class="sd">    .. math:: I(\\theta) = a^2\\frac{(P(\\theta)-c)^2}{(1-c)^2}.\\frac{(1-P(\\theta))}{P(\\theta)}</span>
 
 <span class="sd">    :param theta: the individual&#39;s proficiency value. This parameter value has</span>
-<span class="sd">                  no boundary, but if a distribution of the form :math:`N(0, 1)` was</span>
-<span class="sd">                  used to estimate the parameters, then :math:`-4 \\leq \\theta \\leq</span>
-<span class="sd">                  4`.</span>
+<span class="sd">                  no boundary, but if a distribution of the form</span>
+<span class="sd">                  :math:`N(0, 1)` was used to estimate the parameters, then</span>
+<span class="sd">                  :math:`-4 \\leq \\theta \\leq 4`.</span>
 
 <span class="sd">    :param a: the discrimination parameter of the item, usually a positive</span>
 <span class="sd">              value in which :math:`0.8 \\leq a \\leq 2.5`.</span>
 
 <span class="sd">    :param b: the item difficulty parameter. This parameter value has no</span>
-<span class="sd">              boundary, but if a distribution of the form :math:`N(0, 1)` was used to</span>
-<span class="sd">              estimate the parameters, then :math:`-4 \\leq b \\leq 4`.</span>
+<span class="sd">              boundary, but if a distribution of the form :math:`N(0, 1)` was</span>
+<span class="sd">              used to estimate the parameters, then :math:`-4 \\leq b \\leq 4`.</span>
 
 <span class="sd">    :param c: the item pseudo-guessing parameter. Being a probability,</span>
 <span class="sd">        :math:`0\\leq c \\leq 1`, but items considered good usually have</span>

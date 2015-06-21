@@ -69,7 +69,8 @@ items parameters</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>response_vector</strong> &#8211; a binary list containing the response vector</li>
-<li><strong>administered_items</strong> &#8211; a numpy array containing the parameters of the answered items</li>
+<li><strong>administered_items</strong> &#8211; a numpy array containing the parameters of the
+answered items</li>
 <li><strong>precision</strong> &#8211; number of decimal points of precision</li>
 </ul>
 </td>
@@ -90,14 +91,14 @@ items parameters</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>theta</strong> &#8211; the individual&#8217;s proficiency value. This parameter value has
-no boundary, but if a distribution of the form <span class="math">\(N(0, 1)\)</span> was
-used to estimate the parameters, then <span class="math">\(-4 \leq \theta \leq
-4\)</span>.</li>
+no boundary, but if a distribution of the form
+<span class="math">\(N(0, 1)\)</span> was used to estimate the parameters, then
+<span class="math">\(-4 \leq \theta \leq 4\)</span>.</li>
 <li><strong>a</strong> &#8211; the discrimination parameter of the item, usually a positive
 value in which <span class="math">\(0.8 \leq a \leq 2.5\)</span>.</li>
 <li><strong>b</strong> &#8211; the item difficulty parameter. This parameter value has no
-boundary, but if a distribution of the form <span class="math">\(N(0, 1)\)</span> was used to
-estimate the parameters, then <span class="math">\(-4 \leq b \leq 4\)</span>.</li>
+boundary, but if a distribution of the form <span class="math">\(N(0, 1)\)</span> was
+used to estimate the parameters, then <span class="math">\(-4 \leq b \leq 4\)</span>.</li>
 <li><strong>c</strong> &#8211; the item pseudo-guessing parameter. Being a probability,
 <span class="math">\(0\leq c \leq 1\)</span>, but items considered good usually have
 <span class="math">\(c \leq 0.2\)</span>.</li>
