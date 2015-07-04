@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Clustering Statistical and Validity Functions &mdash; catsim 1.0a documentation</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="catsim 1.0a documentation" href="index.html" />
+    <link rel="next" title="Miscellaneous Plotting Functions" href="catsim.misc.plot.html" />
+    <link rel="prev" title="K-medoids Clustering Algorithm" href="catsim.cluster.kmedoids.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="catsim.misc.plot.html" title="Miscellaneous Plotting Functions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="catsim.cluster.kmedoids.html" title="K-medoids Clustering Algorithm"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">catsim 1.0a documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-catsim.cluster.stats">
+<span id="clustering-statistical-and-validity-functions"></span><h1>Clustering Statistical and Validity Functions<a class="headerlink" href="#module-catsim.cluster.stats" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="catsim.cluster.stats.diameter">
+<code class="descclassname">catsim.cluster.stats.</code><code class="descname">diameter</code><span class="sig-paren">(</span><em>c</em>, <em>D</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/cluster/stats.html#diameter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cluster.stats.diameter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates cluster diameters (the distance between the two farthest data
+points in a cluster)</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="catsim.cluster.stats.dunn">
+<code class="descclassname">catsim.cluster.stats.</code><code class="descname">dunn</code><span class="sig-paren">(</span><em>c</em>, <em>distances</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/cluster/stats.html#dunn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cluster.stats.dunn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dunn index for cluster validation (the bigger, the better)</p>
+<div class="math">
+\[D = \min_{i = 1 \ldots n_c; j = i + 1\ldots n_c}\left\lbrace\frac{d \left( c_i,c_j \right)}{\max_{k = 1 \ldots n_c} \left(diam \left(c_k \right) \right)} \right\rbrace\]</div>
+<p>where <span class="math">\(d(c_i,c_j)\)</span> represents the distance between clusters
+<span class="math">\(c_i\)</span> and <span class="math">\(c_j\)</span>, given by the distances between its two
+closest data points, and <span class="math">\(diam(c_k)\)</span> is the diameter of cluster
+<span class="math">\(c_k\)</span>, given by the distance between its two farthest data points.</p>
+<p>The bigger the value of the resulting Dunn index, the better the
+clustering result is considered, since higher values indicate that
+clusters are compact (small <span class="math">\(diam(c_k)\)</span>) and far apart.</p>
+<table class="docutils citation" frame="void" id="kov05" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[Kov05]</td><td>Kovács, F., Legány, C., &amp; Babos, A. (2005). Cluster validity
+measurement techniques. 6th International Symposium of Hungarian
+Researchers on Computational Intelligence.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="catsim.cluster.stats.mean_variance">
+<code class="descclassname">catsim.cluster.stats.</code><code class="descname">mean_variance</code><span class="sig-paren">(</span><em>x</em>, <em>clusters</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/cluster/stats.html#mean_variance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cluster.stats.mean_variance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the mean variance for all clusters</p>
+<div class="math">
+\[\sigma^2 = \frac{1}{G}\sum_{g=1}^G \frac{1}{N} \sum_{i=1; j=i+1}^N (\mu_g - d(i, j))\]</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="catsim.cluster.stats.min_cluster_distances">
+<code class="descclassname">catsim.cluster.stats.</code><code class="descname">min_cluster_distances</code><span class="sig-paren">(</span><em>c</em>, <em>D</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/cluster/stats.html#min_cluster_distances"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cluster.stats.min_cluster_distances" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the distances between the two nearest points of each cluster.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="catsim.cluster.stats.variances">
+<code class="descclassname">catsim.cluster.stats.</code><code class="descname">variances</code><span class="sig-paren">(</span><em>x</em>, <em>clusters</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/cluster/stats.html#variances"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cluster.stats.variances" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the variance for each cluster</p>
+<div class="math">
+\[\sigma^2_g = \frac{1}{N_g}\sum_{i=1; j=i+1}^{N_g} (\mu_g - d(i, j))\]</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="catsim.cluster.kmedoids.html"
+                        title="previous chapter">K-medoids Clustering Algorithm</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="catsim.misc.plot.html"
+                        title="next chapter">Miscellaneous Plotting Functions</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/catsim.cluster.stats.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="catsim.misc.plot.html" title="Miscellaneous Plotting Functions"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="catsim.cluster.kmedoids.html" title="K-medoids Clustering Algorithm"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">catsim 1.0a documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Douglas De Rizzo Meneghetti.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>catsim.cluster.helpers &mdash; catsim 1.0a documentation</title>
+    
+    <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '1.0a',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="catsim 1.0a documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">catsim 1.0a documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for catsim.cluster.helpers</h1><div class="highlight"><pre>
+<div class="viewcode-block" id="normalize"><a class="viewcode-back" href="../../../catsim.cluster.helpers.html#catsim.cluster.helpers.normalize">[docs]</a><span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Normalize the clustering results list, so that they are comparable</span>
+<span class="sd">       between each other.</span>
+
+<span class="sd">    :param c: a vector containing cluster memberships</span>
+<span class="sd">    :type c: numpy.ndarray</span>
+<span class="sd">    :return: a vector containing normalized cluster memberships</span>
+<span class="sd">    :rtype: numpy.ndarray</span>
+
+<span class="sd">    :note: as an example of what is meant by &#39;normalization&#39;, imagine the</span>
+<span class="sd">           following cluster membership vectors:</span>
+
+<span class="sd">            .. code-block:: python</span>
+
+<span class="sd">               [2, 2, 3, 2, 1, 0]</span>
+<span class="sd">               [1, 1, 2, 1, 3, 0]</span>
+<span class="sd">           </span>
+<span class="sd">           In this case, both membership vectors can be considered equal, since</span>
+<span class="sd">           they cluster data points in equal clusters. What this function does</span>
+<span class="sd">           is transform both of them in the following:</span>
+<span class="sd">           </span>
+<span class="sd">            .. code-block:: python</span>
+<span class="sd">           </span>
+<span class="sd">               [0, 0, 1, 0, 2, 3]</span>
+
+<span class="sd">           In this way, membership vectors are comparable.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">c</span> <span class="o">+=</span> <span class="nb">max</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>  <span class="c"># shift all assginments away from their original values</span>
+    <span class="n">bogus</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>  <span class="c"># get a bogus value that is not in the original array</span>
+
+    <span class="c"># initialize an array with the bogus value and fill it with the cluster</span>
+    <span class="c"># assignments in the order they appear</span>
+    <span class="n">natural_assignments</span> <span class="o">=</span> <span class="p">[</span><span class="n">bogus</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">c</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">natural_assignments</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="n">c</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">ii</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">natural_assignments</span><span class="p">:</span>
+                <span class="n">natural_assignments</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">ii</span>
+                <span class="k">break</span>
+
+    <span class="c"># clusters are assigned in the order they appear, eg. the first cluster is</span>
+    <span class="c"># 0, the second is 1 and so on. apprently, it skips -1, which is &#39;no</span>
+    <span class="c"># assignment&#39;, so this characteristic is preserved</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">natural_assignments</span><span class="p">)):</span>
+        <span class="n">c</span><span class="p">[</span><span class="n">c</span> <span class="o">==</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">bogus</span>
+        <span class="n">c</span><span class="p">[</span><span class="n">c</span> <span class="o">==</span> <span class="n">natural_assignments</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">i</span>
+
+    <span class="k">return</span> <span class="n">c</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">catsim 1.0a documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Douglas De Rizzo Meneghetti.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>
