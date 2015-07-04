@@ -146,8 +146,49 @@ profficiency values</li>
 
 <dl class="function">
 <dt id="catsim.cat.simulate.simCAT">
-<code class="descclassname">catsim.cat.simulate.</code><code class="descname">simCAT</code><span class="sig-paren">(</span><em>items</em>, <em>clusters</em>, <em>examinees=1</em>, <em>n_itens=20</em>, <em>r_max_interval=10</em>, <em>optimizer='BFGS'</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/cat/simulate.html#simCAT"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cat.simulate.simCAT" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">catsim.cat.simulate.</code><code class="descname">simCAT</code><span class="sig-paren">(</span><em>items</em>, <em>clusters</em>, <em>examinees=1</em>, <em>n_itens=20</em>, <em>r_max=1</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/cat/simulate.html#simCAT"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cat.simulate.simCAT" title="Permalink to this definition">¶</a></dt>
 <dd><p>CAT simulation and validation method proposed by <a class="reference internal" href="#bar10" id="id3">[Bar10]</a>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>items</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.9)"><em>numpy.ndarray</em></a>) &#8211; an n x 3 matrix containing item parameters</li>
+<li><strong>clusters</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/stdtypes.html#list" title="(in Python v3.4)"><em>list</em></a>) &#8211; a list containing item cluster memberships</li>
+<li><strong>n_itens</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/functions.html#int" title="(in Python v3.4)"><em>int</em></a>) &#8211; the number of items an examinee will answer during the
+adaptive test</li>
+<li><strong>r_max</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/functions.html#float" title="(in Python v3.4)"><em>float</em></a>) &#8211; maximum exposure rate for items</li>
+<li><strong>verbose</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/functions.html#bool" title="(in Python v3.4)"><em>bool</em></a>) &#8211; whether the process should output partial results to the
+console</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p>a list containing two dictionaries:</p>
+<p><strong>globalResults</strong>:
+The global results of the simulation process.</p>
+<blockquote>
+<div><p><em>Qtd. Itens</em>: number of items in the test;</p>
+<p><em>RMSE</em>: root mean squared error of the estimations;</p>
+<p><em>Overlap</em>: overlap rate;</p>
+<p><em>r_max</em>: maximum exposure rate.</p>
+</div></blockquote>
+<p><strong>localResults</strong>:
+Individual results for each simulated examinee.</p>
+<blockquote>
+<div><p><em>Theta</em>: true theta value of the individual;</p>
+<p><em>Est. theta</em>: estimated theta value of the individual;</p>
+<p><em>Id. Itens</em>: a list containing the id. of the items used
+during the test, in the order they were used;</p>
+<p><em>r_max</em>: maximum exposure rate.</p>
+</div></blockquote>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3.4/library/stdtypes.html#list" title="(in Python v3.4)">list</a></p>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>
