@@ -63,44 +63,39 @@
 <span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">differential_evolution</span>
 
 
-<div class="viewcode-block" id="simCAT"><a class="viewcode-back" href="../../../catsim.cat.simulate.html#catsim.cat.simulate.simCAT">[docs]</a><span class="k">def</span> <span class="nf">simCAT</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">clusters</span><span class="p">,</span> <span class="n">examinees</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_itens</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">r_max</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="simCAT"><a class="viewcode-back" href="../../../catsim.cat.simulate.html#catsim.cat.simulate.simCAT">[docs]</a><span class="k">def</span> <span class="nf">simCAT</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">clusters</span><span class="p">,</span> <span class="n">examinees</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_itens</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">r_max</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;CAT simulation and validation method proposed by [Bar10]_.</span>
-
 <span class="sd">       :param items: an n x 3 matrix containing item parameters</span>
 <span class="sd">       :param clusters: a list containing item cluster memberships</span>
 <span class="sd">       :param n_itens: the number of items an examinee will answer during the</span>
-<span class="sd">                       adaptive test</span>
+<span class="sd">       adaptive test</span>
 <span class="sd">       :param r_max: maximum exposure rate for items</span>
-<span class="sd">       :param verbose: whether the process should output partial results to the</span>
-<span class="sd">                       console</span>
 <span class="sd">       :type items: numpy.ndarray</span>
 <span class="sd">       :type clusters: list</span>
 <span class="sd">       :type n_itens: int</span>
 <span class="sd">       :type r_max: float</span>
-<span class="sd">       :type verbose: bool</span>
-
 <span class="sd">       :return: a list containing two dictionaries:</span>
 
 <span class="sd">                **globalResults**:</span>
 <span class="sd">                The global results of the simulation process.</span>
-<span class="sd">                  *Qtd. Itens*: number of items in the test;</span>
+<span class="sd">                    *Qtd. Itens*: number of items in the test;</span>
 
-<span class="sd">                  *RMSE*: root mean squared error of the estimations;</span>
+<span class="sd">                    *RMSE*: root mean squared error of the estimations;</span>
 
-<span class="sd">                  *Overlap*: overlap rate;</span>
+<span class="sd">                    *Overlap*: overlap rate;</span>
 
-<span class="sd">                  *r_max*: maximum exposure rate.</span>
+<span class="sd">                    *r_max*: maximum exposure rate.</span>
 
 <span class="sd">                **localResults**:</span>
 <span class="sd">                Individual results for each simulated examinee.</span>
-<span class="sd">                  *Theta*: true theta value of the individual;</span>
+<span class="sd">                    *Theta*: true theta value of the individual;</span>
 
-<span class="sd">                  *Est. theta*: estimated theta value of the individual;</span>
+<span class="sd">                    *Est. theta*: estimated theta value of the individual;</span>
 
-<span class="sd">                  *Id. Itens*: a list containing the id. of the items used</span>
-<span class="sd">                  during the test, in the order they were used;</span>
+<span class="sd">                    *Id. Itens*: a list containing the id. of the items used</span>
+<span class="sd">                    during the test, in the order they were used;</span>
 
-<span class="sd">                  *r_max*: maximum exposure rate.</span>
+<span class="sd">                    *r_max*: maximum exposure rate.</span>
 
 <span class="sd">       :rtype: list</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -116,16 +111,13 @@
     <span class="c"># true thetas extracted from a normal distribution</span>
     <span class="n">true_thetas</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">examinees</span><span class="p">)</span>
 
-    <span class="c"># adds a column for each item&#39;s exposure rate to the item parameter matrix</span>
+    <span class="c"># adds a column for each item&#39;s exposure rate and their cluster membership</span>
     <span class="n">items</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">bank_size</span> <span class="o">=</span> <span class="n">items</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="c"># max_difficulty = np.max(items[1])</span>
-    <span class="c"># min_difficulty = np.min(items[1])</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="n">items</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">clusters</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">clusters</span><span class="p">),</span> <span class="mi">1</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
 
     <span class="n">globalResults</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">localResults</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">&#39;Max exposure rate = &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">r_max</span><span class="p">))</span>
     <span class="n">estimatedThetasForThisR</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">id_itens</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">items</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
@@ -156,18 +148,34 @@
             <span class="c"># an exposure rate under the allowed constraints, and applies</span>
             <span class="c"># it</span>
             <span class="k">if</span> <span class="n">items</span><span class="p">[</span><span class="n">counter</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="p">(</span>
-                    <span class="n">items</span><span class="p">[</span><span class="n">counter</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="n">counter</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">/</span> <span class="n">bank_size</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">r_max</span><span class="p">):</span>
-                <span class="n">selected_item_cluster</span> <span class="o">=</span> <span class="n">clusters</span><span class="p">[</span><span class="n">selected_item</span><span class="p">]</span>
-                <span class="n">random_item</span> <span class="o">=</span> <span class="bp">None</span>
-                <span class="k">while</span> <span class="n">random_item</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-                    <span class="n">random_item</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-                    <span class="k">if</span><span class="p">(</span>
-                        <span class="n">selected_item_cluster</span> <span class="o">==</span> <span class="n">clusters</span><span class="p">[</span><span class="n">random_item</span><span class="p">]</span> <span class="ow">and</span>
-                        <span class="n">random_item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">administered_items</span>
-                    <span class="p">):</span>
-                        <span class="n">selected_item</span> <span class="o">=</span> <span class="n">random_item</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">random_item</span> <span class="o">=</span> <span class="bp">None</span>
+                    <span class="n">items</span><span class="p">[</span><span class="n">counter</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="n">counter</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="o">&gt;=</span> <span class="n">r_max</span><span class="p">):</span>
+
+                <span class="n">selected_item_cluster</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">(</span><span class="n">clusters</span><span class="p">[</span><span class="n">selected_item</span><span class="p">])</span>
+                <span class="c"># print(&#39;cluster do melhor item &#39; + str(selected_item_cluster))</span>
+                <span class="c"># print(&#39;clusters de todos os itens\n&#39; + str(items[:, 4]))</span>
+                <span class="c"># print(str(np.where(items[:, 4] == selected_item_cluster)))</span>
+                <span class="c"># print(items[np.where(items[:, 4] == selected_item_cluster)][:, 3] &lt; r_max)</span>
+
+                <span class="c"># checks whether there is an item in the same cluster with</span>
+                <span class="c"># exposure rate below the maximum threshold</span>
+                <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">items</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="n">selected_item_cluster</span><span class="p">)][:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">r_max</span><span class="p">):</span>
+                    <span class="n">random_item</span> <span class="o">=</span> <span class="bp">None</span>
+                    <span class="k">while</span> <span class="n">random_item</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                        <span class="n">random_item</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+                        <span class="k">if</span><span class="p">(</span>
+                            <span class="n">selected_item_cluster</span> <span class="o">==</span> <span class="n">clusters</span><span class="p">[</span><span class="n">random_item</span><span class="p">]</span> <span class="ow">and</span>
+                            <span class="n">random_item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">administered_items</span>
+                        <span class="p">):</span>
+                            <span class="n">selected_item</span> <span class="o">=</span> <span class="n">random_item</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">random_item</span> <span class="o">=</span> <span class="bp">None</span>
+
+                <span class="c"># if not, selects the one with smallest exposure rate</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">item_indexes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+                        <span class="n">items</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="n">selected_item_cluster</span><span class="p">)</span>
+                    <span class="n">selected_item</span> <span class="o">=</span> <span class="n">item_indexes</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span>
+                        <span class="n">items</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">items</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="n">selected_item_cluster</span><span class="p">)][:,</span> <span class="mi">3</span><span class="p">])]</span>
 
             <span class="n">id_itens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">selected_item</span><span class="p">)</span>
 
@@ -183,7 +191,9 @@
             <span class="c"># adds the administered item to the pool of administered items</span>
             <span class="n">administered_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">selected_item</span><span class="p">)</span>
 
-            <span class="n">items</span><span class="p">[</span><span class="n">selected_item</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="c"># update the exposure value for this item</span>
+            <span class="n">items</span><span class="p">[</span><span class="n">selected_item</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="n">selected_item</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="n">examinees</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">examinees</span>
 
             <span class="c"># reestimation of the examinee&#39;s proficiency: if the response</span>
             <span class="c"># vector contains only success or errors, Dodd&#39;s method is used</span>
@@ -201,23 +211,6 @@
                         <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">response_vector</span><span class="p">,</span> <span class="n">items</span><span class="p">[</span><span class="n">administered_items</span><span class="p">]))</span>
                     <span class="n">est_theta</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
-                <span class="c"># res = minimize(</span>
-                <span class="c">#     catsim.cat.irt.negativelogLik, [est_theta],</span>
-                <span class="c">#     args=[response_vector, items[administered_items]],</span>
-                <span class="c">#     method=optimizer)</span>
-                <span class="c"># est_theta = res.x[0]</span>
-
-                <span class="c"># try:</span>
-                <span class="c"># res = brute(</span>
-                <span class="c">#     catsim.cat.irt.negativelogLik, ranges=[[-6, 6]],</span>
-                <span class="c">#     args=(response_vector, items[administered_items]))</span>
-                <span class="c"># est_theta = res[0]</span>
-
-            <span class="c"># if est_theta &gt; max_difficulty:</span>
-            <span class="c">#     est_theta = max_difficulty</span>
-            <span class="c"># if est_theta &lt; min_difficulty:</span>
-            <span class="c">#     est_theta = min_difficulty</span>
-
         <span class="c"># save the results for this examinee simulation</span>
         <span class="n">localResults</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s">&#39;Theta&#39;</span><span class="p">:</span> <span class="n">true_theta</span><span class="p">,</span>
                              <span class="s">&#39;Est. Theta&#39;</span><span class="p">:</span> <span class="n">est_theta</span><span class="p">,</span>
@@ -227,22 +220,13 @@
         <span class="n">estimatedThetasForThisR</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">est_theta</span><span class="p">)</span>
     <span class="c"># end true_theta loop</span>
 
-    <span class="c"># print(&#39;taxas de exposição antes\n&#39; + str(items[:, 3]))</span>
-    <span class="c"># print(&#39;tamanho do banco\n&#39; + str(bank_size))</span>
-
-    <span class="n">items</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">/</span> <span class="n">examinees</span>
-
-    <span class="c"># print(&#39;taxas de exposição\n&#39; + str(items[:, 3]))</span>
-    <span class="c"># print(&#39;rmse\n&#39; + str(rmse(true_thetas, estimatedThetasForThisR)))</span>
-    <span class="c"># print(&#39;overlap\n&#39; + str(overlap_rate(items, n_itens)))</span>
-
     <span class="c"># save the results for this r value</span>
     <span class="n">globalResults</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+        <span class="s">&#39;Nº de grupos&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">clusters</span><span class="p">)),</span>
         <span class="s">&#39;Qtd. Itens&#39;</span><span class="p">:</span> <span class="n">n_itens</span><span class="p">,</span>
         <span class="s">&#39;RMSE&#39;</span><span class="p">:</span> <span class="n">rmse</span><span class="p">(</span><span class="n">true_thetas</span><span class="p">,</span> <span class="n">estimatedThetasForThisR</span><span class="p">),</span>
         <span class="s">&#39;Overlap&#39;</span><span class="p">:</span> <span class="n">overlap_rate</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">n_itens</span><span class="p">),</span>
         <span class="s">&#39;r_max&#39;</span><span class="p">:</span> <span class="n">r_max</span><span class="p">})</span>
-<span class="c"># end r_max loop</span>
 
     <span class="k">return</span> <span class="n">globalResults</span><span class="p">,</span> <span class="n">localResults</span>
 
