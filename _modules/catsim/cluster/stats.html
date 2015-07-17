@@ -72,12 +72,11 @@
 <div class="viewcode-block" id="variances"><a class="viewcode-back" href="../../../catsim.cluster.stats.html#catsim.cluster.stats.variances">[docs]</a><span class="k">def</span> <span class="nf">variances</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">clusters</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Calculates the variance for each cluster</span>
 
-<span class="sd">    .. math:: \\sigma^2_g = \\frac{1}{N_g}\\sum_{i=1; j=i+1}^{N_g} (\mu_g - d(i, j))</span>
+<span class="sd">    .. math:: \\sigma^2_g = \\sum_{i=1; j=i+1}^{N_g} (\mu_g - d(i, j))</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">npoints</span><span class="p">,</span> <span class="n">nfeatures</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span>
     <span class="n">cluster_means</span> <span class="o">=</span> <span class="n">means</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">clusters</span><span class="p">)</span>
-    <span class="n">variances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="nb">max</span><span class="p">(</span><span class="n">clusters</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">nfeatures</span><span class="p">])</span>
+    <span class="n">variances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="nb">max</span><span class="p">(</span><span class="n">clusters</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span>
     <span class="c"># cluster_bins = np.bincount(np.delete(clusters, np.where(clusters == -1)))</span>
     <span class="n">D</span> <span class="o">=</span> <span class="n">distances</span><span class="o">.</span><span class="n">euclidean</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">cluster_means</span><span class="p">)</span>
 

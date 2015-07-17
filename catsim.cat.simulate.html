@@ -61,7 +61,7 @@ application of adaptive tests. Most of this module is based on the work of
 <table class="docutils citation" frame="void" id="bar10" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[Bar10]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id3">2</a>)</em> BARRADA, Juan Ramón et al. A method for the comparison of item
+<tr><td class="label">[Bar10]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id3">2</a>, <a class="fn-backref" href="#id4">3</a>)</em> BARRADA, Juan Ramón et al. A method for the comparison of item
 selection rules in computerized adaptive testing. Applied Psychological
 Measurement, v. 34, n. 6, p. 438-452, 2010.</td></tr>
 </tbody>
@@ -83,8 +83,11 @@ or 0s</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>theta</strong> &#8211; the initial profficiency level</li>
-<li><strong>items</strong> &#8211; a numpy array containing the parameters of the items in the database. This is necessary to capture the maximum and minimum difficulty levels necessary for the method.</li>
-<li><strong>correct</strong> &#8211; a boolean value informing whether or not the examinee correctly answered the current item.</li>
+<li><strong>items</strong> &#8211; a numpy array containing the parameters of the items in the
+database. This is necessary to capture the maximum and minimum
+difficulty levels necessary for the method.</li>
+<li><strong>correct</strong> &#8211; a boolean value informing whether or not the examinee
+correctly answered the current item.</li>
 </ul>
 </td>
 </tr>
@@ -97,6 +100,40 @@ or 0s</p>
 Stepsize on Computerized Adaptive Attitude Measurement Using the Rating
 Scale Model. Applied Psychological Measurement, 14(4), 355–366.
 <a class="reference external" href="http://doi.org/10.1177/014662169001400403">http://doi.org/10.1177/014662169001400403</a></td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="catsim.cat.simulate.generateItemBank">
+<code class="descclassname">catsim.cat.simulate.</code><code class="descname">generateItemBank</code><span class="sig-paren">(</span><em>items</em>, <em>itemtype='3PL'</em>, <em>corr=0.5</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/cat/simulate.html#generateItemBank"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cat.simulate.generateItemBank" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a synthetic item bank whose parameters approximately follow
+real-world parameters, as proposed by <a class="reference internal" href="#bar10" id="id3">[Bar10]</a>.</p>
+<p>Item parameters are extracted from the following probability distributions:</p>
+<ul class="simple">
+<li>discrimination: <span class="math">\(N(1.2,0.25)\)</span></li>
+<li>difficulty: <span class="math">\(N(0,1)\)</span></li>
+<li>pseudo-guessing: <span class="math">\(N(0.25,0.02)\)</span></li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>items</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/functions.html#int" title="(in Python v3.4)"><em>int</em></a>) &#8211; how many items are to be generated</li>
+<li><strong>itemtype</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/string.html#module-string" title="(in Python v3.4)"><em>string</em></a>) &#8211; either <code class="docutils literal"><span class="pre">1PL</span></code>, <code class="docutils literal"><span class="pre">2PL</span></code> or <code class="docutils literal"><span class="pre">3PL</span></code> for the one-, two- or
+three-parameter logistic model</li>
+<li><strong>corr</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/functions.html#float" title="(in Python v3.4)"><em>float</em></a>) &#8211; the correlation between item discrimination and difficulty. If
+<code class="docutils literal"><span class="pre">itemtype</span> <span class="pre">==</span> <span class="pre">'1PL'</span></code>, it is ignored.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">an <code class="docutils literal"><span class="pre">itens</span> <span class="pre">x</span> <span class="pre">3</span></code> numerical matrix containing item parameters</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.9)">numpy.ndarray</a></p>
+</td>
+</tr>
 </tbody>
 </table>
 </dd></dl>
@@ -146,45 +183,74 @@ profficiency values</li>
 
 <dl class="function">
 <dt id="catsim.cat.simulate.simCAT">
-<code class="descclassname">catsim.cat.simulate.</code><code class="descname">simCAT</code><span class="sig-paren">(</span><em>items</em>, <em>clusters</em>, <em>examinees=1</em>, <em>n_itens=20</em>, <em>r_max=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/cat/simulate.html#simCAT"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cat.simulate.simCAT" title="Permalink to this definition">¶</a></dt>
-<dd><p>CAT simulation and validation method proposed by <a class="reference internal" href="#bar10" id="id3">[Bar10]</a>.
-:param items: an n x 3 matrix containing item parameters
-:param clusters: a list containing item cluster memberships
-:param n_itens: the number of items an examinee will answer during the
-adaptive test
-:param r_max: maximum exposure rate for items
-:type items: numpy.ndarray
-:type clusters: list
-:type n_itens: int
-:type r_max: float
-:return: a list containing two dictionaries:</p>
-<blockquote>
-<div><p><strong>globalResults</strong>:
-The global results of the simulation process.</p>
-<blockquote>
-<div><p><em>Qtd. Itens</em>: number of items in the test;</p>
-<p><em>RMSE</em>: root mean squared error of the estimations;</p>
-<p><em>Overlap</em>: overlap rate;</p>
-<p><em>r_max</em>: maximum exposure rate.</p>
-</div></blockquote>
-<p><strong>localResults</strong>:
-Individual results for each simulated examinee.</p>
-<blockquote>
-<div><p><em>Theta</em>: true theta value of the individual;</p>
-<p><em>Est. theta</em>: estimated theta value of the individual;</p>
-<p><em>Id. Itens</em>: a list containing the id. of the items used
-during the test, in the order they were used;</p>
-<p><em>r_max</em>: maximum exposure rate.</p>
-</div></blockquote>
-</div></blockquote>
+<code class="descclassname">catsim.cat.simulate.</code><code class="descname">simCAT</code><span class="sig-paren">(</span><em>items</em>, <em>clusters=None</em>, <em>examinees=1</em>, <em>n_itens=20</em>, <em>r_max=1</em>, <em>method='item_info'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/cat/simulate.html#simCAT"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cat.simulate.simCAT" title="Permalink to this definition">¶</a></dt>
+<dd><p>CAT simulation and validation method proposed by <a class="reference internal" href="#bar10" id="id4">[Bar10]</a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="https://docs.python.org/3.4/library/stdtypes.html#list" title="(in Python v3.4)">list</a></td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>items</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.9)"><em>numpy.ndarray</em></a>) &#8211; an n x 3 matrix containing item parameters</li>
+<li><strong>clusters</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/stdtypes.html#list" title="(in Python v3.4)"><em>list</em></a>) &#8211; a list containing item cluster memberships</li>
+<li><strong>n_itens</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/functions.html#int" title="(in Python v3.4)"><em>int</em></a>) &#8211; the number of items an examinee will answer during the
+adaptive test</li>
+<li><strong>r_max</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/functions.html#float" title="(in Python v3.4)"><em>float</em></a>) &#8211; maximum exposure rate for items</li>
+<li><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/string.html#module-string" title="(in Python v3.4)"><em>string</em></a>) &#8211; <p>one of the available methods for cluster selection. Given
+the estimated theta value at each step:</p>
+<blockquote>
+<div><code class="docutils literal"><span class="pre">max_info</span></code>: ignores cluster selection altogether and
+selects the item with maximum information to be applied
+at each step. This is the traditional item selection
+method used by CATs, prioritizing precision over item
+exposure;<p><code class="docutils literal"><span class="pre">item_info</span></code>: selects the cluster which has the item
+with maximum information;</p>
+<p><code class="docutils literal"><span class="pre">cluster_info</span></code>: selects the cluster whose items sum of
+information is maximum;</p>
+<p><code class="docutils literal"><span class="pre">weighted_info</span></code>: selects the cluster whose weighted
+sum of information is maximum. The weighted equals the
+number of items in the cluster;</p>
+</div></blockquote>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p>a list containing two dictionaries:</p>
+<dl class="docutils">
+<dt><strong>globalResults</strong>: The global results of the simulation process.</dt>
+<dd><p class="first"><em>Qtd. Itens</em>: number of items in the test;</p>
+<p><em>RMSE</em>: root mean squared error of the estimations;</p>
+<p><em>Overlap</em>: overlap rate;</p>
+<p class="last"><em>r_max</em>: maximum exposure rate.</p>
+</dd>
+<dt><strong>localResults</strong>: Individual results for each simulated examinee.</dt>
+<dd><p class="first"><em>Theta</em>: true theta value of the individual;</p>
+<p><em>Est. theta</em>: estimated theta value of the individual;</p>
+<p><em>Id. Itens</em>: a list containing the id. of the items used
+during the test, in the order they were used;</p>
+<p class="last"><em>r_max</em>: maximum exposure rate.</p>
+</dd>
+</dl>
+</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3.4/library/stdtypes.html#list" title="(in Python v3.4)">list</a></p>
+</td>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="function">
+<dt id="catsim.cat.simulate.sum_cluster_infos">
+<code class="descclassname">catsim.cat.simulate.</code><code class="descname">sum_cluster_infos</code><span class="sig-paren">(</span><em>theta</em>, <em>items</em>, <em>clusters</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/cat/simulate.html#sum_cluster_infos"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cat.simulate.sum_cluster_infos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the sum of item informations, separated by cluster</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="catsim.cat.simulate.weighted_cluster_infos">
+<code class="descclassname">catsim.cat.simulate.</code><code class="descname">weighted_cluster_infos</code><span class="sig-paren">(</span><em>theta</em>, <em>items</em>, <em>clusters</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/cat/simulate.html#weighted_cluster_infos"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cat.simulate.weighted_cluster_infos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the weighted sum of item informations, separated by cluster.
+The weight is the number of items in each cluster.</p>
 </dd></dl>
 
 </div>
