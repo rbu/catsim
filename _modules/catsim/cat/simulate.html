@@ -99,9 +99,8 @@
 <span class="sd">                       number of items in the cluster;</span>
 
 <span class="sd">    :type method: string</span>
-<span class="sd">    :return: a list containing two dictionaries:</span>
-
-<span class="sd">            **globalResults**: The global results of the simulation process.</span>
+<span class="sd">    :return: a list containing two dictionaries. The first contains the global</span>
+<span class="sd">             results of the simulation process.</span>
 <span class="sd">                *Qtd. Itens*: number of items in the test;</span>
 
 <span class="sd">                *RMSE*: root mean squared error of the estimations;</span>
@@ -118,7 +117,8 @@
 <span class="sd">                *Id. Itens*: a list containing the id. of the items used</span>
 <span class="sd">                during the test, in the order they were used;</span>
 
-<span class="sd">                *r_max*: maximum exposure rate.</span>
+<span class="sd">                *r*: exposure rate of the items in the bank, after the</span>
+<span class="sd">                simulations</span>
 
 <span class="sd">    :rtype: list</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -144,14 +144,19 @@
 
     <span class="c"># adds a column for each item&#39;s exposure rate and their cluster membership</span>
     <span class="n">items</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">items</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">clusters</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="n">clusters</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">items</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
     <span class="n">items</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
         <span class="n">items</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">clusters</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">clusters</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">)</span>
 
-    <span class="n">globalResults</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">localResults</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">est_thetas</span> <span class="o">=</span> <span class="p">[]</span>
 
+    <span class="n">current_examinee</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">for</span> <span class="n">true_theta</span> <span class="ow">in</span> <span class="n">true_thetas</span><span class="p">:</span>
+        <span class="n">current_examinee</span> <span class="o">+=</span> <span class="mi">1</span>
 
         <span class="c"># estimated theta value</span>
         <span class="n">est_theta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
@@ -243,7 +248,7 @@
                 <span class="c"># selected cluster with r &lt; rmax that have not been</span>
                 <span class="c"># administered</span>
                 <span class="n">valid_indexes_low_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span>
-                    <span class="p">(</span><span class="n">items</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="n">selected_cluster</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">items</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">r_max</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">administered_items</span><span class="p">)))</span>
+                    <span class="p">(</span><span class="n">items</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="n">selected_cluster</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">items</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">/</span> <span class="n">current_examinee</span> <span class="o">&lt;</span> <span class="n">r_max</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">administered_items</span><span class="p">)))</span>
 
                 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">valid_indexes_low_r</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="c"># sort both items and their indexes by their information</span>
@@ -252,7 +257,6 @@
                                   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">items</span><span class="p">[</span><span class="n">valid_indexes_low_r</span><span class="p">]]</span>
                     <span class="n">valid_indexes_low_r</span> <span class="o">=</span> <span class="p">[</span>
                         <span class="n">index</span> <span class="k">for</span> <span class="p">(</span><span class="n">inf_value</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">inf_values</span><span class="p">,</span> <span class="n">valid_indexes_low_r</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)]</span>
-                    <span class="c"># sorted_items = items[valid_indexes_low_r]</span>
 
                     <span class="n">selected_item</span> <span class="o">=</span> <span class="n">valid_indexes_low_r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
@@ -263,7 +267,6 @@
                                   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">items</span><span class="p">[</span><span class="n">valid_indexes</span><span class="p">]]</span>
                     <span class="n">valid_indexes</span> <span class="o">=</span> <span class="p">[</span>
                         <span class="n">index</span> <span class="k">for</span> <span class="p">(</span><span class="n">inf_value</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">inf_values</span><span class="p">,</span> <span class="n">valid_indexes</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)]</span>
-                    <span class="c"># sorted_items = items[valid_indexes_low_r]</span>
 
                     <span class="n">selected_item</span> <span class="o">=</span> <span class="n">valid_indexes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
@@ -289,8 +292,7 @@
             <span class="n">administered_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">selected_item</span><span class="p">)</span>
 
             <span class="c"># update the exposure value for this item</span>
-            <span class="n">items</span><span class="p">[</span><span class="n">selected_item</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="n">selected_item</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="n">examinees</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">examinees</span>
+            <span class="n">items</span><span class="p">[</span><span class="n">selected_item</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 
             <span class="c"># reestimation of the examinee&#39;s proficiency: if the response</span>
             <span class="c"># vector contains only success or errors, Dodd&#39;s method is used</span>
@@ -308,24 +310,22 @@
                         <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">response_vector</span><span class="p">,</span> <span class="n">items</span><span class="p">[</span><span class="n">administered_items</span><span class="p">]))</span>
                     <span class="n">est_theta</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
+        <span class="n">items</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">/=</span> <span class="n">examinees</span>
+
         <span class="c"># save the results for this examinee simulation</span>
         <span class="n">localResults</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s">&#39;Theta&#39;</span><span class="p">:</span> <span class="n">true_theta</span><span class="p">,</span>
                              <span class="s">&#39;Est. Theta&#39;</span><span class="p">:</span> <span class="n">est_theta</span><span class="p">,</span>
                              <span class="s">&#39;Id. Itens&#39;</span><span class="p">:</span> <span class="n">administered_items</span><span class="p">,</span>
-                             <span class="s">&#39;r_max&#39;</span><span class="p">:</span> <span class="n">r_max</span><span class="p">})</span>
+                             <span class="s">&#39;r&#39;</span><span class="p">:</span> <span class="n">items</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]})</span>
 
         <span class="n">est_thetas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">est_theta</span><span class="p">)</span>
     <span class="c"># end true_theta loop</span>
 
-    <span class="c"># save the results for this r value</span>
-    <span class="n">globalResults</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
-        <span class="s">&#39;Nº de grupos&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">clusters</span><span class="p">)),</span>
-        <span class="s">&#39;Qtd. Itens&#39;</span><span class="p">:</span> <span class="n">n_itens</span><span class="p">,</span>
-        <span class="s">&#39;RMSE&#39;</span><span class="p">:</span> <span class="n">rmse</span><span class="p">(</span><span class="n">true_thetas</span><span class="p">,</span> <span class="n">est_thetas</span><span class="p">),</span>
-        <span class="s">&#39;Overlap&#39;</span><span class="p">:</span> <span class="n">overlap_rate</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">n_itens</span><span class="p">),</span>
-        <span class="s">&#39;r_max&#39;</span><span class="p">:</span> <span class="n">r_max</span><span class="p">})</span>
-
-    <span class="k">return</span> <span class="n">globalResults</span><span class="p">,</span> <span class="n">localResults</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s">&#39;Nº de grupos&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">clusters</span><span class="p">)),</span>
+            <span class="s">&#39;Qtd. Itens&#39;</span><span class="p">:</span> <span class="n">n_itens</span><span class="p">,</span>
+            <span class="s">&#39;RMSE&#39;</span><span class="p">:</span> <span class="n">rmse</span><span class="p">(</span><span class="n">true_thetas</span><span class="p">,</span> <span class="n">est_thetas</span><span class="p">),</span>
+            <span class="s">&#39;Overlap&#39;</span><span class="p">:</span> <span class="n">overlap_rate</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">n_itens</span><span class="p">),</span>
+            <span class="s">&#39;r_max&#39;</span><span class="p">:</span> <span class="n">r_max</span><span class="p">},</span> <span class="n">localResults</span>
 
 </div>
 <div class="viewcode-block" id="dodd"><a class="viewcode-back" href="../../../catsim.cat.simulate.html#catsim.cat.simulate.dodd">[docs]</a><span class="k">def</span> <span class="nf">dodd</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">correct</span><span class="p">):</span>
@@ -372,7 +372,19 @@
 <span class="sd">    :param predicted: a list or 1-D numpy array containing the estimated</span>
 <span class="sd">                      profficiency values</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="n">predicted</span><span class="p">))</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">actual</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">predicted</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;actuala nd predicted need to be the same size&#39;</span><span class="p">)</span>
+
+    <span class="c"># se = 0</span>
+    <span class="c"># for i in range(len(actual)):</span>
+    <span class="c">#     se += (predicted[i] - actual[i])**2</span>
+
+    <span class="c"># mse = se / len(actual)</span>
+
+    <span class="c"># rmse = np.sqrt(mse)</span>
+
+    <span class="c"># return rmse</span>
+    <span class="k">return</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="n">predicted</span><span class="p">)</span><span class="o">**.</span><span class="mi">5</span>
 
 </div>
 <div class="viewcode-block" id="overlap_rate"><a class="viewcode-back" href="../../../catsim.cat.simulate.html#catsim.cat.simulate.overlap_rate">[docs]</a><span class="k">def</span> <span class="nf">overlap_rate</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">testSize</span><span class="p">):</span>
@@ -424,7 +436,7 @@
 <span class="sd">    real-world parameters, as proposed by [Bar10]_.</span>
 
 <span class="sd">    Item parameters are extracted from the following probability distributions:</span>
-<span class="sd">    </span>
+
 <span class="sd">    * discrimination: :math:`N(1.2,0.25)`</span>
 
 <span class="sd">    * difficulty: :math:`N(0,1)`</span>

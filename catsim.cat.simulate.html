@@ -214,20 +214,24 @@ number of items in the cluster;</p>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><p>a list containing two dictionaries:</p>
-<dl class="docutils">
-<dt><strong>globalResults</strong>: The global results of the simulation process.</dt>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><dl class="docutils">
+<dt>a list containing two dictionaries. The first contains the global</dt>
+<dd><dl class="first last docutils">
+<dt>results of the simulation process.</dt>
 <dd><p class="first"><em>Qtd. Itens</em>: number of items in the test;</p>
 <p><em>RMSE</em>: root mean squared error of the estimations;</p>
 <p><em>Overlap</em>: overlap rate;</p>
 <p class="last"><em>r_max</em>: maximum exposure rate.</p>
+</dd>
+</dl>
 </dd>
 <dt><strong>localResults</strong>: Individual results for each simulated examinee.</dt>
 <dd><p class="first"><em>Theta</em>: true theta value of the individual;</p>
 <p><em>Est. theta</em>: estimated theta value of the individual;</p>
 <p><em>Id. Itens</em>: a list containing the id. of the items used
 during the test, in the order they were used;</p>
-<p class="last"><em>r_max</em>: maximum exposure rate.</p>
+<p class="last"><em>r</em>: exposure rate of the items in the bank, after the
+simulations</p>
 </dd>
 </dl>
 </p>
