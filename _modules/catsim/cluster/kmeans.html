@@ -49,11 +49,11 @@
             
   <h1>Source code for catsim.cluster.kmeans</h1><div class="highlight"><pre>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
 <span class="kn">import</span> <span class="nn">catsim.cluster.distances</span>
 <span class="kn">import</span> <span class="nn">catsim.misc.stats</span>
 <span class="kn">import</span> <span class="nn">catsim.cluster.stats</span>
 <span class="kn">from</span> <span class="nn">catsim.cluster.helpers</span> <span class="kn">import</span> <span class="n">normalize</span>
-
 
 <span class="n">possible_inits</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;naive&#39;</span><span class="p">,</span> <span class="s">&#39;varCovar&#39;</span><span class="p">,</span> <span class="s">&#39;ward&#39;</span><span class="p">]</span>
 <span class="n">possible_metrics</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;euclidean&#39;</span><span class="p">,</span> <span class="s">&#39;mahalanobis&#39;</span><span class="p">]</span>
@@ -255,10 +255,12 @@
             <span class="n">var</span> <span class="o">=</span> <span class="n">this_var</span>
             <span class="n">final_clusters</span> <span class="o">=</span> <span class="n">clusters</span>
     <span class="k">return</span> <span class="n">final_clusters</span>
+
 </div>
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span> <span class="k">as</span> <span class="n">sKmeans</span>
     <span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_blobs</span>
+
     <span class="n">n_clusters</span> <span class="o">=</span> <span class="mi">20</span>
     <span class="n">x</span><span class="p">,</span> <span class="n">clusters</span> <span class="o">=</span> <span class="n">make_blobs</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">n_clusters</span><span class="p">)</span>
 

@@ -58,28 +58,6 @@
 <p>Module containing functions pertaining to Item Response Theory
 three-parameter logistic model.</p>
 <dl class="function">
-<dt id="catsim.cat.irt.bruteMLE">
-<code class="descclassname">catsim.cat.irt.</code><code class="descname">bruteMLE</code><span class="sig-paren">(</span><em>response_vector</em>, <em>administered_items</em>, <em>precision=12</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/cat/irt.html#bruteMLE"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cat.irt.bruteMLE" title="Permalink to this definition">¶</a></dt>
-<dd><p>Finds and returns the theta value which maximizes the likelihood
-function, given a response vector and a matrix with the administered
-items parameters</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>response_vector</strong> &#8211; a binary list containing the response vector</li>
-<li><strong>administered_items</strong> &#8211; a numpy array containing the parameters of the
-answered items</li>
-<li><strong>precision</strong> &#8211; number of decimal points of precision</li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
 <dt id="catsim.cat.irt.inf">
 <code class="descclassname">catsim.cat.irt.</code><code class="descname">inf</code><span class="sig-paren">(</span><em>theta</em>, <em>a</em>, <em>b</em>, <em>c</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/cat/irt.html#inf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cat.irt.inf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Item Response Theory three-parameter information function</p>
@@ -137,9 +115,32 @@ probabilities in a sum of probabilities:</p>
 </dd></dl>
 
 <dl class="function">
+<dt id="catsim.cat.irt.maximum_likelihood">
+<code class="descclassname">catsim.cat.irt.</code><code class="descname">maximum_likelihood</code><span class="sig-paren">(</span><em>response_vector</em>, <em>administered_items</em>, <em>precision=6</em>, <em>verbose=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/cat/irt.html#maximum_likelihood"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cat.irt.maximum_likelihood" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses a hill-climbing algorithm to find and returns the theta value
+that maximizes the likelihood function, given a response vector and a
+matrix with the administered items parameters.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>response_vector</strong> &#8211; a binary list containing the response vector</li>
+<li><strong>administered_items</strong> &#8211; a numpy array containing the parameters of the
+answered items</li>
+<li><strong>precision</strong> &#8211; number of decimal points of precision</li>
+<li><strong>verbose</strong> &#8211; verbosity level of the maximization method</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="catsim.cat.irt.negativelogLik">
 <code class="descclassname">catsim.cat.irt.</code><code class="descname">negativelogLik</code><span class="sig-paren">(</span><em>est_theta</em>, <em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/cat/irt.html#negativelogLik"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cat.irt.negativelogLik" title="Permalink to this definition">¶</a></dt>
-<dd><p>Function used by <a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/optimize.html#module-scipy.optimize" title="(in SciPy v0.15.1)"><code class="xref py py-mod docutils literal"><span class="pre">scipy.optimize</span></code></a> functions to find the estimated
+<dd><p>Function used by <a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/optimize.html#module-scipy.optimize" title="(in SciPy v0.16.0)"><code class="xref py py-mod docutils literal"><span class="pre">scipy.optimize</span></code></a> functions to find the estimated
 proficiency that maximizes the likelihood of a given response vector</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
