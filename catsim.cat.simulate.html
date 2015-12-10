@@ -131,7 +131,7 @@ three-parameter logistic model</li>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">an <code class="docutils literal"><span class="pre">itens</span> <span class="pre">x</span> <span class="pre">3</span></code> numerical matrix containing item parameters</p>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">numpy.ndarray</p>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)">numpy.ndarray</a></p>
 </td>
 </tr>
 </tbody>
@@ -190,7 +190,7 @@ profficiency values</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>items</strong> (<em>numpy.ndarray</em>) &#8211; an n x 3 matrix containing item parameters</li>
+<li><strong>items</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><em>numpy.ndarray</em></a>) &#8211; an n x 3 matrix containing item parameters</li>
 <li><strong>clusters</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/stdtypes.html#list" title="(in Python v3.4)"><em>list</em></a>) &#8211; a list containing item cluster memberships</li>
 <li><strong>n_itens</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/functions.html#int" title="(in Python v3.4)"><em>int</em></a>) &#8211; the number of items an examinee will answer during the
 adaptive test</li>
@@ -212,11 +212,12 @@ number of items in the cluster;</p>
 </div></blockquote>
 </li>
 <li><strong>optimization</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/string.html#module-string" title="(in Python v3.4)"><em>string</em></a>) &#8211; the optimization to be used in order to estimate the
-<span class="math">\(\hat{\theta}\)</span> values. <cite>brute</cite> for a hill-climbing
-algorithm; <cite>fmin</cite> for scipy&#8217;s function minimization method;
+<span class="math">\(\hat{\theta}\)</span> values. <cite>hill</cite> for a hill-climbing
+algorithm; <cite>binary</cite> for a binary search algorithm;
+<cite>fmin</cite> for scipy&#8217;s function minimization method;
 <cite>DE</cite> for scipy&#8217;s differential evolution. With their default
-parameters, the firt method takes roughly 190 function
-evaluations to converge; the second takes 40 funcction
+parameters, the first method takes roughly 35 function
+evaluations to converge; the second takes 40 function
 evaluations; and the last, between 80 and 100 function
 evaluations. The default method is <cite>fmin</cite>, due to its speed.</li>
 <li><strong>r_control</strong> (<a class="reference external" href="https://docs.python.org/3.4/library/string.html#module-string" title="(in Python v3.4)"><em>string</em></a>) &#8211; if <cite>passive</cite> and all items <span class="math">\(i\)</span> in the selected

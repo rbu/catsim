@@ -60,7 +60,7 @@
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
 <span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">differential_evolution</span><span class="p">,</span> <span class="n">fmin</span>
 
-<span class="kn">from</span> <span class="nn">catsim.cat.irt</span> <span class="kn">import</span> <span class="n">maximum_likelihood</span><span class="p">,</span> <span class="n">inf</span><span class="p">,</span> <span class="n">tpm</span><span class="p">,</span> <span class="n">negativelogLik</span>
+<span class="kn">from</span> <span class="nn">catsim.cat.irt</span> <span class="kn">import</span> <span class="n">hill_climbing_ml</span><span class="p">,</span> <span class="n">inf</span><span class="p">,</span> <span class="n">tpm</span><span class="p">,</span> <span class="n">negativelogLik</span><span class="p">,</span> <span class="n">binary_search_ml</span>
 
 <span class="n">existent_methods</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;max_info&#39;</span><span class="p">,</span> <span class="s">&#39;item_info&#39;</span><span class="p">,</span> <span class="s">&#39;cluster_info&#39;</span><span class="p">,</span> <span class="s">&#39;weighted_info&#39;</span><span class="p">]</span>
 <span class="n">cluster_dependent_methods</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;item_info&#39;</span><span class="p">,</span> <span class="s">&#39;cluster_info&#39;</span><span class="p">,</span> <span class="s">&#39;weighted_info&#39;</span><span class="p">]</span>
@@ -101,11 +101,12 @@
 
 <span class="sd">    :type method: string</span>
 <span class="sd">    :param optimization: the optimization to be used in order to estimate the</span>
-<span class="sd">                         :math:`\\hat{\\theta}` values. `brute` for a hill-climbing</span>
-<span class="sd">                         algorithm; `fmin` for scipy&#39;s function minimization method;</span>
+<span class="sd">                         :math:`\\hat{\\theta}` values. `hill` for a hill-climbing</span>
+<span class="sd">                         algorithm; `binary` for a binary search algorithm;</span>
+<span class="sd">                         `fmin` for scipy&#39;s function minimization method;</span>
 <span class="sd">                         `DE` for scipy&#39;s differential evolution. With their default</span>
-<span class="sd">                         parameters, the firt method takes roughly 190 function</span>
-<span class="sd">                         evaluations to converge; the second takes 40 funcction</span>
+<span class="sd">                         parameters, the first method takes roughly 35 function</span>
+<span class="sd">                         evaluations to converge; the second takes 40 function</span>
 <span class="sd">                         evaluations; and the last, between 80 and 100 function</span>
 <span class="sd">                         evaluations. The default method is `fmin`, due to its speed.</span>
 <span class="sd">    :type optimization: string</span>
@@ -153,7 +154,7 @@
     <span class="k">if</span> <span class="n">method</span> <span class="ow">in</span> <span class="n">cluster_dependent_methods</span> <span class="ow">and</span> <span class="n">clusters</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="s">&#39;Method {0} cannot be used when clusters is None&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">method</span><span class="p">))</span>
-    <span class="k">if</span> <span class="n">optimization</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;brute&#39;</span><span class="p">,</span> <span class="s">&#39;fmin&#39;</span><span class="p">,</span> <span class="s">&#39;DE&#39;</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">optimization</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;hill&#39;</span><span class="p">,</span> <span class="s">&#39;binary&#39;</span><span class="p">,</span> <span class="s">&#39;fmin&#39;</span><span class="p">,</span> <span class="s">&#39;DE&#39;</span><span class="p">]:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Optimization method not supported&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">r_control</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;passive&#39;</span><span class="p">,</span> <span class="s">&#39;aggressive&#39;</span><span class="p">]:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&#39;Exposure control method not supported&#39;</span><span class="p">)</span>
@@ -333,8 +334,11 @@
                     <span class="n">est_theta</span> <span class="o">=</span> <span class="n">dodd</span><span class="p">(</span><span class="n">est_theta</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
                 <span class="c"># else, a maximum likelihood approach is used</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">optimization</span> <span class="o">==</span> <span class="s">&#39;brute&#39;</span><span class="p">:</span>
-                        <span class="n">est_theta</span> <span class="o">=</span> <span class="n">maximum_likelihood</span><span class="p">(</span>
+                    <span class="k">if</span> <span class="n">optimization</span> <span class="o">==</span> <span class="s">&#39;hill&#39;</span><span class="p">:</span>
+                        <span class="n">est_theta</span> <span class="o">=</span> <span class="n">hill_climbing_ml</span><span class="p">(</span>
+                            <span class="n">response_vector</span><span class="p">,</span> <span class="n">items</span><span class="p">[</span><span class="n">administered_items</span><span class="p">])</span>
+                    <span class="k">elif</span> <span class="n">optimization</span> <span class="o">==</span> <span class="s">&#39;binary&#39;</span><span class="p">:</span>
+                        <span class="n">est_theta</span> <span class="o">=</span> <span class="n">binary_search_ml</span><span class="p">(</span>
                             <span class="n">response_vector</span><span class="p">,</span> <span class="n">items</span><span class="p">[</span><span class="n">administered_items</span><span class="p">])</span>
                     <span class="k">elif</span> <span class="n">optimization</span> <span class="o">==</span> <span class="s">&#39;fmin&#39;</span><span class="p">:</span>
                         <span class="n">est_theta</span> <span class="o">=</span> <span class="n">fmin</span><span class="p">(</span><span class="n">negativelogLik</span><span class="p">,</span> <span class="n">est_theta</span><span class="p">,</span> <span class="p">(</span><span class="n">response_vector</span><span class="p">,</span> <span class="n">items</span><span class="p">[</span><span class="n">administered_items</span><span class="p">]))</span>

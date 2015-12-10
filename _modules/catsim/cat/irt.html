@@ -137,7 +137,7 @@
     <span class="k">return</span> <span class="o">-</span><span class="n">logLik</span><span class="p">(</span><span class="n">est_theta</span><span class="p">,</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
 </div>
-<div class="viewcode-block" id="maximum_likelihood"><a class="viewcode-back" href="../../../catsim.cat.irt.html#catsim.cat.irt.maximum_likelihood">[docs]</a><span class="k">def</span> <span class="nf">maximum_likelihood</span><span class="p">(</span><span class="n">response_vector</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="hill_climbing_ml"><a class="viewcode-back" href="../../../catsim.cat.irt.html#catsim.cat.irt.hill_climbing_ml">[docs]</a><span class="k">def</span> <span class="nf">hill_climbing_ml</span><span class="p">(</span><span class="n">response_vector</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Uses a hill-climbing algorithm to find and returns the theta value</span>
 <span class="sd">    that maximizes the likelihood function, given a response vector and a</span>
 <span class="sd">    matrix with the administered items parameters.</span>
@@ -176,7 +176,7 @@
                 <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
                     <span class="k">print</span><span class="p">(</span><span class="s">&#39;Iteration: {0}, Theta: {1}, LL: {2}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">iters</span><span class="p">,</span> <span class="n">ii</span><span class="p">,</span> <span class="n">ll</span><span class="p">))</span>
 
-                <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">best_theta</span> <span class="o">-</span> <span class="n">ii</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">float</span><span class="p">(</span><span class="s">&#39;1e-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">precision</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">best_theta</span> <span class="o">-</span> <span class="n">ii</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">float</span><span class="p">(</span><span class="s">&#39;1e-&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">precision</span><span class="p">)):</span>
                     <span class="k">return</span> <span class="n">ii</span>
 
                 <span class="n">best_theta</span> <span class="o">=</span> <span class="n">ii</span>
@@ -187,6 +187,51 @@
                 <span class="k">break</span>
 
     <span class="k">return</span> <span class="n">best_theta</span>
+
+</div>
+<div class="viewcode-block" id="binary_search_ml"><a class="viewcode-back" href="../../../catsim.cat.irt.html#catsim.cat.irt.binary_search_ml">[docs]</a><span class="k">def</span> <span class="nf">binary_search_ml</span><span class="p">(</span><span class="n">response_vector</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">35</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Uses a binary search algorithm to find and returns the theta value</span>
+<span class="sd">    that maximizes the likelihood function, given a response vector and a</span>
+<span class="sd">    matrix with the administered items parameters.</span>
+
+<span class="sd">    :param response_vector: a binary list containing the response vector</span>
+<span class="sd">    :param administered_items: a numpy array containing the parameters of the</span>
+<span class="sd">                               answered items</span>
+<span class="sd">    :param precision: number of decimal points of precision</span>
+<span class="sd">    :param verbose: verbosity level of the maximization method</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="nb">set</span><span class="p">(</span><span class="n">response_vector</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="s">&#39;inf&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="nb">set</span><span class="p">(</span><span class="n">response_vector</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="s">&#39;-inf&#39;</span><span class="p">)</span>
+
+    <span class="n">lbound</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">administered_items</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">ubound</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">administered_items</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">best_theta</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="s">&#39;inf&#39;</span><span class="p">)</span>
+    <span class="n">iters</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">iters</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&#39;Bounds: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">lbound</span><span class="p">)</span> <span class="o">+</span> <span class="s">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ubound</span><span class="p">))</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">&#39;Iteration: {0}, Theta: {1}, LL: {2}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">iters</span><span class="p">,</span> <span class="n">best_theta</span><span class="p">,</span>
+                                                               <span class="n">logLik</span><span class="p">(</span><span class="n">best_theta</span><span class="p">,</span> <span class="n">response_vector</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">)))</span>
+
+        <span class="k">if</span> <span class="n">logLik</span><span class="p">(</span><span class="n">ubound</span><span class="p">,</span> <span class="n">response_vector</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">logLik</span><span class="p">(</span><span class="n">lbound</span><span class="p">,</span> <span class="n">response_vector</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">):</span>
+
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">best_theta</span> <span class="o">-</span> <span class="n">ubound</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">float</span><span class="p">(</span><span class="s">&#39;1e-&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">precision</span><span class="p">)):</span>
+                <span class="k">return</span> <span class="n">ubound</span>
+
+            <span class="n">best_theta</span> <span class="o">=</span> <span class="n">ubound</span>
+            <span class="n">lbound</span> <span class="o">+=</span> <span class="p">(</span><span class="n">ubound</span> <span class="o">-</span> <span class="n">lbound</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">best_theta</span> <span class="o">-</span> <span class="n">lbound</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">float</span><span class="p">(</span><span class="s">&#39;1e-&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">precision</span><span class="p">)):</span>
+                <span class="k">return</span> <span class="n">lbound</span>
+
+            <span class="n">best_theta</span> <span class="o">=</span> <span class="n">lbound</span>
+            <span class="n">ubound</span> <span class="o">-=</span> <span class="p">(</span><span class="n">ubound</span> <span class="o">-</span> <span class="n">lbound</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
 
 </div>
 <div class="viewcode-block" id="inf"><a class="viewcode-back" href="../../../catsim.cat.irt.html#catsim.cat.irt.inf">[docs]</a><span class="k">def</span> <span class="nf">inf</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
