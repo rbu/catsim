@@ -138,10 +138,10 @@
 <span class="sd">&quot;&quot;&quot;Module containing functions pertaining to the Item Response Theory logistic models.&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">math</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
 
 
-<div class="viewcode-block" id="tpm"><a class="viewcode-back" href="../../catsim.irt.html#catsim.irt.tpm">[docs]</a><span class="k">def</span> <span class="nf">tpm</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+<div class="viewcode-block" id="tpm"><a class="viewcode-back" href="../../catsim.irt.html#catsim.irt.tpm">[docs]</a><span class="k">def</span> <span class="nf">tpm</span><span class="p">(</span><span class="n">theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Item Response Theory three-parameter logistic function:</span>
 
 <span class="sd">    .. math:: P(X_i = 1| \\theta) = c_i + \\frac{1-c_i}{1+ e^{Da_i(\\theta-b_i)}}</span>
@@ -172,8 +172,8 @@
         <span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="inf"><a class="viewcode-back" href="../../catsim.irt.html#catsim.irt.inf">[docs]</a><span class="k">def</span> <span class="nf">inf</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Item Response Theory three-parameter information function</span>
+<div class="viewcode-block" id="inf"><a class="viewcode-back" href="../../catsim.irt.html#catsim.irt.inf">[docs]</a><span class="k">def</span> <span class="nf">inf</span><span class="p">(</span><span class="n">theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Calculates the information value of an item using the Item Response Theory three-parameter logistic model function:</span>
 
 <span class="sd">    .. math:: I(\\theta) = a^2\\frac{(P(\\theta)-c)^2}{(1-c)^2}.\\frac{(1-P(\\theta))}{P(\\theta)}</span>
 
@@ -200,9 +200,11 @@
     <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">ml3</span> <span class="o">-</span> <span class="n">c</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">c</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ml3</span><span class="p">)</span> <span class="o">/</span> <span class="n">ml3</span></div>
 
 
-<div class="viewcode-block" id="logLik"><a class="viewcode-back" href="../../catsim.irt.html#catsim.irt.logLik">[docs]</a><span class="k">def</span> <span class="nf">logLik</span><span class="p">(</span><span class="n">est_theta</span><span class="p">,</span> <span class="n">response_vector</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">):</span>
+<div class="viewcode-block" id="logLik"><a class="viewcode-back" href="../../catsim.irt.html#catsim.irt.logLik">[docs]</a><span class="k">def</span> <span class="nf">logLik</span><span class="p">(</span><span class="n">est_theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">response_vector</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Calculates the log-likelihood of an estimated proficiency, given a</span>
 <span class="sd">    response vector and the parameters of the answered items.</span>
+
+<span class="sd">    The likelihood function of a given :math:`\\theta` value given the answers to :math:`I` items is given by:</span>
 
 <span class="sd">    .. math:: L(X_{Ij} | \\theta_j, a_I, b_I, c_I) = \\prod_{i=1} ^ I P_{ij}(\\theta)^{X_{ij}} Q_{ij}(\\theta)^{1-X_{ij}}</span>
 
@@ -215,6 +217,7 @@
 <span class="sd">    :param est_theta: estimated proficiency value</span>
 <span class="sd">    :param response_vector: a binary list containing the response vector</span>
 <span class="sd">    :param administered_items: a numpy array containing the parameters of the answered items</span>
+<span class="sd">    :returns: log-likelihood of a given proficiency value, given the responses to the administered items</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># inspired in the example found in</span>
     <span class="c1"># http://stats.stackexchange.com/questions/66199/maximum-likelihood-curve-</span>
@@ -240,16 +243,21 @@
     <span class="c1">#     raise</span>
 
 
-<div class="viewcode-block" id="negativelogLik"><a class="viewcode-back" href="../../catsim.irt.html#catsim.irt.negativelogLik">[docs]</a><span class="k">def</span> <span class="nf">negativelogLik</span><span class="p">(</span><span class="n">est_theta</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Function used by :py:mod:`scipy.optimize` functions to find the estimated</span>
-<span class="sd">    proficiency that maximizes the likelihood of a given response vector</span>
+<div class="viewcode-block" id="negativelogLik"><a class="viewcode-back" href="../../catsim.irt.html#catsim.irt.negativelogLik">[docs]</a><span class="k">def</span> <span class="nf">negativelogLik</span><span class="p">(</span><span class="n">est_theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Function used by :py:mod:`scipy.optimize` optimization functions that tend to minimize</span>
+<span class="sd">    values, instead of maximizing them. Calculates the negative log-likelihood of a proficiency</span>
+<span class="sd">    value, given a response vector and the parameters of the administered items. The value of</span>
+<span class="sd">    :py:func:`negativelogLik` is simply the value of :math:`-` :py:func:`logLik` or, mathematically:</span>
+
+<span class="sd">    .. math:: - \\log L(X_{Ij} | \\theta_j, , a_I, b_I, c_I)</span>
 
 <span class="sd">    :param est_theta: estimated proficiency value</span>
-<span class="sd">    :type est_theta: float</span>
-<span class="sd">    :param args: a list containing the response vector and the array of</span>
-<span class="sd">                 administered items, just like :py:func:`logLik`</span>
-<span class="sd">    :type args: list</span>
-<span class="sd">    :return: the estimated proficiency that maximizes the likelihood function</span>
+
+<span class="sd">    args:</span>
+
+<span class="sd">    :param response_vector list: a binary list containing the response vector</span>
+<span class="sd">    :param administered_items numpy.ndarray: a numpy array containing the parameters of the answered items</span>
+<span class="sd">    :returns: negative log-likelihood of a given proficiency value, given the responses to the administered items</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="o">-</span><span class="n">logLik</span><span class="p">(</span><span class="n">est_theta</span><span class="p">,</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span></div>
 
@@ -272,9 +280,9 @@
 <span class="sd">    :rtype: numpy.ndarray</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">items</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">items</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">items</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])),</span> <span class="n">items</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">items</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">items</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])),</span> <span class="n">items</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">items</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="n">items</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">items</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">items</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">items</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">items</span></div>
 
@@ -294,8 +302,8 @@
 <span class="sd">                      just print the error message to standard output.</span>
 <span class="sd">    :type raise_err: bool</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Item matrix is not of type {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">)))))</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Item matrix is not of type {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">)))))</span>
 
     <span class="n">err</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
 

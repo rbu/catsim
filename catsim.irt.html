@@ -140,8 +140,8 @@
 <p>Module containing functions pertaining to the Item Response Theory logistic models.</p>
 <dl class="function">
 <dt id="catsim.irt.inf">
-<code class="descclassname">catsim.irt.</code><code class="descname">inf</code><span class="sig-paren">(</span><em>theta</em>, <em>a</em>, <em>b</em>, <em>c</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/irt.html#inf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.irt.inf" title="Permalink to this definition">¶</a></dt>
-<dd><p>Item Response Theory three-parameter information function</p>
+<code class="descclassname">catsim.irt.</code><code class="descname">inf</code><span class="sig-paren">(</span><em>theta: float</em>, <em>a: float</em>, <em>b: float</em>, <em>c: float=0</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/irt.html#inf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.irt.inf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the information value of an item using the Item Response Theory three-parameter logistic model function:</p>
 <div class="math">
 \[I(\theta) = a^2\frac{(P(\theta)-c)^2}{(1-c)^2}.\frac{(1-P(\theta))}{P(\theta)}\]</div>
 <table class="docutils field-list" frame="void" rules="none">
@@ -149,16 +149,16 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>theta</strong> &#8211; the individual&#8217;s proficiency value. This parameter value has
+<li><strong>theta</strong> (<code class="docutils literal"><span class="pre">float</span></code>) &#8211; the individual&#8217;s proficiency value. This parameter value has
 no boundary, but if a distribution of the form
 <span class="math">\(N(0, 1)\)</span> was used to estimate the parameters, then
 <span class="math">\(-4 \leq \theta \leq 4\)</span>.</li>
-<li><strong>a</strong> &#8211; the discrimination parameter of the item, usually a positive
+<li><strong>a</strong> (<code class="docutils literal"><span class="pre">float</span></code>) &#8211; the discrimination parameter of the item, usually a positive
 value in which <span class="math">\(0.8 \leq a \leq 2.5\)</span>.</li>
-<li><strong>b</strong> &#8211; the item difficulty parameter. This parameter value has no
+<li><strong>b</strong> (<code class="docutils literal"><span class="pre">float</span></code>) &#8211; the item difficulty parameter. This parameter value has no
 boundary, but if a distribution of the form <span class="math">\(N(0, 1)\)</span> was
 used to estimate the parameters, then <span class="math">\(-4 \leq b \leq 4\)</span>.</li>
-<li><strong>c</strong> &#8211; the item pseudo-guessing parameter. Being a probability,
+<li><strong>c</strong> (<code class="docutils literal"><span class="pre">float</span></code>) &#8211; the item pseudo-guessing parameter. Being a probability,
 <span class="math">\(0\leq c \leq 1\)</span>, but items considered good usually have
 <span class="math">\(c \leq 0.2\)</span>.</li>
 </ul>
@@ -176,9 +176,10 @@ used to estimate the parameters, then <span class="math">\(-4 \leq b \leq 4\)</s
 
 <dl class="function">
 <dt id="catsim.irt.logLik">
-<code class="descclassname">catsim.irt.</code><code class="descname">logLik</code><span class="sig-paren">(</span><em>est_theta</em>, <em>response_vector</em>, <em>administered_items</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/irt.html#logLik"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.irt.logLik" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">catsim.irt.</code><code class="descname">logLik</code><span class="sig-paren">(</span><em>est_theta: float</em>, <em>response_vector: list</em>, <em>administered_items: numpy.ndarray</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/irt.html#logLik"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.irt.logLik" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the log-likelihood of an estimated proficiency, given a
 response vector and the parameters of the answered items.</p>
+<p>The likelihood function of a given <span class="math">\(\theta\)</span> value given the answers to <span class="math">\(I\)</span> items is given by:</p>
 <div class="math">
 \[L(X_{Ij} | \theta_j, a_I, b_I, c_I) = \prod_{i=1} ^ I P_{ij}(\theta)^{X_{ij}} Q_{ij}(\theta)^{1-X_{ij}}\]</div>
 <p>For computational reasons, it is common to use the log-likelihood in
@@ -190,11 +191,17 @@ probabilities in a sum of probabilities:</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>est_theta</strong> &#8211; estimated proficiency value</li>
-<li><strong>response_vector</strong> &#8211; a binary list containing the response vector</li>
-<li><strong>administered_items</strong> &#8211; a numpy array containing the parameters of the answered items</li>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="docutils literal"><span class="pre">float</span></code></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>est_theta</strong> (<code class="docutils literal"><span class="pre">float</span></code>) &#8211; estimated proficiency value</li>
+<li><strong>response_vector</strong> (<code class="docutils literal"><span class="pre">list</span></code>) &#8211; a binary list containing the response vector</li>
+<li><strong>administered_items</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>) &#8211; a numpy array containing the parameters of the answered items</li>
 </ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">log-likelihood of a given proficiency value, given the responses to the administered items</p>
 </td>
 </tr>
 </tbody>
@@ -203,21 +210,35 @@ probabilities in a sum of probabilities:</p>
 
 <dl class="function">
 <dt id="catsim.irt.negativelogLik">
-<code class="descclassname">catsim.irt.</code><code class="descname">negativelogLik</code><span class="sig-paren">(</span><em>est_theta</em>, <em>*args</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/irt.html#negativelogLik"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.irt.negativelogLik" title="Permalink to this definition">¶</a></dt>
-<dd><p>Function used by <a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/optimize.html#module-scipy.optimize" title="(in SciPy v0.17.0)"><code class="xref py py-mod docutils literal"><span class="pre">scipy.optimize</span></code></a> functions to find the estimated
-proficiency that maximizes the likelihood of a given response vector</p>
+<code class="descclassname">catsim.irt.</code><code class="descname">negativelogLik</code><span class="sig-paren">(</span><em>est_theta: float</em>, <em>*args</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/irt.html#negativelogLik"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.irt.negativelogLik" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function used by <a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/optimize.html#module-scipy.optimize" title="(in SciPy v0.17.0)"><code class="xref py py-mod docutils literal"><span class="pre">scipy.optimize</span></code></a> optimization functions that tend to minimize
+values, instead of maximizing them. Calculates the negative log-likelihood of a proficiency
+value, given a response vector and the parameters of the administered items. The value of
+<a class="reference internal" href="#catsim.irt.negativelogLik" title="catsim.irt.negativelogLik"><code class="xref py py-func docutils literal"><span class="pre">negativelogLik()</span></code></a> is simply the value of <span class="math">\(-\)</span> <a class="reference internal" href="#catsim.irt.logLik" title="catsim.irt.logLik"><code class="xref py py-func docutils literal"><span class="pre">logLik()</span></code></a> or, mathematically:</p>
+<div class="math">
+\[- \log L(X_{Ij} | \theta_j, , a_I, b_I, c_I)\]</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="docutils literal"><span class="pre">float</span></code></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>est_theta</strong> (<code class="docutils literal"><span class="pre">float</span></code>) &#8211; estimated proficiency value</td>
+</tr>
+</tbody>
+</table>
+<p>args:</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>est_theta</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) &#8211; estimated proficiency value</li>
-<li><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a>) &#8211; a list containing the response vector and the array of
-administered items, just like <a class="reference internal" href="#catsim.irt.logLik" title="catsim.irt.logLik"><code class="xref py py-func docutils literal"><span class="pre">logLik()</span></code></a></li>
+<li><strong>list</strong> (<em>response_vector</em>) &#8211; a binary list containing the response vector</li>
+<li><strong>numpy.ndarray</strong> (<em>administered_items</em>) &#8211; a numpy array containing the parameters of the answered items</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">the estimated proficiency that maximizes the likelihood function</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">negative log-likelihood of a given proficiency value, given the responses to the administered items</p>
 </td>
 </tr>
 </tbody>
@@ -250,7 +271,7 @@ columns, respectively. the pseudo-guessing column is added such that items simul
 
 <dl class="function">
 <dt id="catsim.irt.tpm">
-<code class="descclassname">catsim.irt.</code><code class="descname">tpm</code><span class="sig-paren">(</span><em>theta</em>, <em>a</em>, <em>b</em>, <em>c</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/irt.html#tpm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.irt.tpm" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">catsim.irt.</code><code class="descname">tpm</code><span class="sig-paren">(</span><em>theta: float</em>, <em>a: float</em>, <em>b: float</em>, <em>c: float=0</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/irt.html#tpm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.irt.tpm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Item Response Theory three-parameter logistic function:</p>
 <div class="math">
 \[P(X_i = 1| \theta) = c_i + \frac{1-c_i}{1+ e^{Da_i(\theta-b_i)}}\]</div>
@@ -258,17 +279,20 @@ columns, respectively. the pseudo-guessing column is added such that items simul
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>theta</strong> &#8211; the individual&#8217;s proficiency value. This parameter value has
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="docutils literal"><span class="pre">float</span></code></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>theta</strong> (<code class="docutils literal"><span class="pre">float</span></code>) &#8211; the individual&#8217;s proficiency value. This parameter value has
 no boundary, but if a distribution of the form <span class="math">\(N(0, 1)\)</span> was
 used to estimate the parameters, then <span class="math">\(-4 \leq \theta \leq
 4\)</span>.</li>
-<li><strong>a</strong> &#8211; the discrimination parameter of the item, usually a positive
+<li><strong>a</strong> (<code class="docutils literal"><span class="pre">float</span></code>) &#8211; the discrimination parameter of the item, usually a positive
 value in which <span class="math">\(0.8 \leq a \leq 2.5\)</span>.</li>
-<li><strong>b</strong> &#8211; the item difficulty parameter. This parameter value has no
+<li><strong>b</strong> (<code class="docutils literal"><span class="pre">float</span></code>) &#8211; the item difficulty parameter. This parameter value has no
 boundaries, but it is necessary that it be in the same value space
 as <cite>theta</cite> (usually <span class="math">\(-4 \leq b \leq 4\)</span>).</li>
-<li><strong>c</strong> &#8211; the item pseudo-guessing parameter. Being a probability,
+<li><strong>c</strong> (<code class="docutils literal"><span class="pre">float</span></code>) &#8211; the item pseudo-guessing parameter. Being a probability,
 <span class="math">\(0\leq c \leq 1\)</span>, but items considered good usually have
 <span class="math">\(c \leq 0.2\)</span>.</li>
 </ul>
