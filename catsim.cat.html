@@ -1,0 +1,330 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Computerized Adaptive Test-related Functions &mdash; catsim documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="catsim documentation" href="index.html"/>
+        <link rel="next" title="Initialization Methods" href="catsim.initialization.html"/>
+        <link rel="prev" title="Welcome to catsim’s documentation!" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> catsim
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="">Computerized Adaptive Test-related Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="catsim.initialization.html">Initialization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="catsim.irt.html">Item Response Theory Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="catsim.plot.html">Miscellaneous Plotting Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="catsim.reestimation.html">Reestimation Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="catsim.selection.html">Item Selection Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="catsim.simulation.html">Computerized Adaptive Testing Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="catsim.stats.html">Miscellaneous Statistical Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="catsim.stopping.html">Stopping Criteria</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">catsim</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Computerized Adaptive Test-related Functions</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/catsim.cat.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-catsim.cat">
+<span id="computerized-adaptive-test-related-functions"></span><h1>Computerized Adaptive Test-related Functions<a class="headerlink" href="#module-catsim.cat" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="catsim.cat.dodd">
+<code class="descclassname">catsim.cat.</code><code class="descname">dodd</code><span class="sig-paren">(</span><em>theta</em>, <em>items</em>, <em>correct</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/cat.html#dodd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cat.dodd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method proposed by <a class="reference internal" href="#dod90" id="id1">[Dod90]</a> for the reestimation of
+<span class="math">\(\hat{\theta}\)</span> when the response vector is composed entirely of 1s
+or 0s</p>
+<div class="math">
+\[\begin{split}\hat{\theta}_{t+1} = \left\lbrace \begin{array}{ll}
+\hat{\theta}_t+\frac{b_{max}-\hat{\theta_t}}{2} &amp; \text{if } X_t = 1 \\
+\hat{\theta}_t-\frac{\hat{\theta}_t-b_{min}}{2} &amp; \text{if }  X_t = 0
+\end{array} \right\rbrace\end{split}\]</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>theta</strong> &#8211; the initial proficiency level</li>
+<li><strong>items</strong> &#8211; a numpy array containing the parameters of the items in the
+database. This is necessary to capture the maximum and minimum
+difficulty levels necessary for the method.</li>
+<li><strong>correct</strong> &#8211; a boolean value informing whether or not the examinee
+correctly answered the current item.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="dod90" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[Dod90]</a></td><td>Dodd, B. G. (1990). The Effect of Item Selection Procedure and
+Stepsize on Computerized Adaptive Attitude Measurement Using the Rating
+Scale Model. Applied Psychological Measurement, 14(4), 355-366.
+<a class="reference external" href="http://doi.org/10.1177/014662169001400403">http://doi.org/10.1177/014662169001400403</a></td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="catsim.cat.generate_item_bank">
+<code class="descclassname">catsim.cat.</code><code class="descname">generate_item_bank</code><span class="sig-paren">(</span><em>n: int</em>, <em>itemtype: str='3PL'</em>, <em>corr: float=0.5</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/cat.html#generate_item_bank"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cat.generate_item_bank" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate a synthetic item bank whose parameters approximately follow
+real-world parameters, as proposed by <a class="reference internal" href="catsim.simulation.html#bar10" id="id2">[Bar10]</a>.</p>
+<p>Item parameters are extracted from the following probability distributions:</p>
+<ul class="simple">
+<li>discrimination: <span class="math">\(N(1.2,0.25)\)</span></li>
+<li>difficulty: <span class="math">\(N(0,1)\)</span></li>
+<li>pseudo-guessing: <span class="math">\(N(0.25,0.02)\)</span></li>
+</ul>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>n</strong> (<code class="docutils literal"><span class="pre">int</span></code>) &#8211; how many items are to be generated</li>
+<li><strong>itemtype</strong> (<code class="docutils literal"><span class="pre">str</span></code>) &#8211; either <code class="docutils literal"><span class="pre">1PL</span></code>, <code class="docutils literal"><span class="pre">2PL</span></code> or <code class="docutils literal"><span class="pre">3PL</span></code> for the one-, two- or
+three-parameter logistic model</li>
+<li><strong>corr</strong> (<code class="docutils literal"><span class="pre">float</span></code>) &#8211; the correlation between item discrimination and difficulty. If
+<code class="docutils literal"><span class="pre">itemtype</span> <span class="pre">==</span> <span class="pre">'1PL'</span></code>, it is ignored.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">an <code class="docutils literal"><span class="pre">n</span> <span class="pre">x</span> <span class="pre">3</span></code> numerical matrix containing item parameters</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)">numpy.ndarray</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">generate_item_bank</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;1PL&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">generate_item_bank</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;2PL&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">generate_item_bank</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;3PL&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">generate_item_bank</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;3PL&#39;</span><span class="p">,</span> <span class="n">corr</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="catsim.cat.overlap_rate">
+<code class="descclassname">catsim.cat.</code><code class="descname">overlap_rate</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>test_size: int</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/cat.html#overlap_rate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cat.overlap_rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test overlap rate:</p>
+<div class="math">
+\[T=\frac{N}{Q}S_{r}^2 + \frac{Q}{N}\]</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>items</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>) &#8211; a matrix containing, in the 4th column, the number of
+times each item was used in the tests.</li>
+<li><strong>test_size</strong> (<code class="docutils literal"><span class="pre">int</span></code>) &#8211; an integer informing the number of items in a test.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="catsim.cat.rmse">
+<code class="descclassname">catsim.cat.</code><code class="descname">rmse</code><span class="sig-paren">(</span><em>actual</em>, <em>predicted</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/cat.html#rmse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cat.rmse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Root mean squared error:</p>
+<div class="math">
+\[RMSE = \sqrt{\frac{\sum_{i=1}^{N} (\hat{\theta}_i - \theta_{i})^2}{N}}\]</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>actual</strong> &#8211; a list or 1-D numpy array containing the true proficiency values</li>
+<li><strong>predicted</strong> &#8211; a list or 1-D numpy array containing the estimated proficiency values</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="catsim.initialization.html" class="btn btn-neutral float-right" title="Initialization Methods" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="Welcome to catsim’s documentation!" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Douglas De Rizzo Meneghetti.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.2a',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

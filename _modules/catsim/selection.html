@@ -1,0 +1,420 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>catsim.selection &mdash; catsim documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="catsim documentation" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> catsim
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../catsim.cat.html">Computerized Adaptive Test-related Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../catsim.initialization.html">Initialization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../catsim.irt.html">Item Response Theory Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../catsim.plot.html">Miscellaneous Plotting Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../catsim.reestimation.html">Reestimation Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../catsim.selection.html">Item Selection Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../catsim.simulation.html">Computerized Adaptive Testing Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../catsim.stats.html">Miscellaneous Statistical Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../catsim.stopping.html">Stopping Criteria</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">catsim</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      
+    <li>catsim.selection</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for catsim.selection</h1><div class="highlight"><pre>
+<span class="kn">from</span> <span class="nn">catsim</span> <span class="kn">import</span> <span class="n">irt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABCMeta</span><span class="p">,</span> <span class="n">abstractmethod</span>
+
+
+<div class="viewcode-block" id="Selector"><a class="viewcode-back" href="../../catsim.selection.html#catsim.selection.Selector">[docs]</a><span class="k">class</span> <span class="nc">Selector</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Base class representing a CAT item selector.&quot;&quot;&quot;</span>
+    <span class="n">__metaclass__</span> <span class="o">=</span> <span class="n">ABCMeta</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Selector</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+
+    <span class="nd">@abstractmethod</span>
+<div class="viewcode-block" id="Selector.select"><a class="viewcode-back" href="../../catsim.selection.html#catsim.selection.Selector.select">[docs]</a>    <span class="k">def</span> <span class="nf">select</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">est_theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get the indexes of all items that have not yet been administered, calculate</span>
+<span class="sd">        their information value and pick the one with maximum information</span>
+
+<span class="sd">        :param items: an item matrix in which the first 3 columns represent item discrimination,</span>
+<span class="sd">                      difficulty and pseudo-guessing parameters, respectively.</span>
+<span class="sd">        :param administered_items: a list with the indexes of all administered from the item matrix</span>
+<span class="sd">        :param est_theta: estimated proficiency value</span>
+<span class="sd">        :returns: index of the first non-administered item with maximum information</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div></div>
+
+
+<div class="viewcode-block" id="MaxInfoSelector"><a class="viewcode-back" href="../../catsim.selection.html#catsim.selection.MaxInfoSelector">[docs]</a><span class="k">class</span> <span class="nc">MaxInfoSelector</span><span class="p">(</span><span class="n">Selector</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Selector that returns the first non-administered item with maximum information, given an estimated theta&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+
+<div class="viewcode-block" id="MaxInfoSelector.select"><a class="viewcode-back" href="../../catsim.selection.html#catsim.selection.MaxInfoSelector.select">[docs]</a>    <span class="k">def</span> <span class="nf">select</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">est_theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get the indexes of all items that have not yet been administered, calculate</span>
+<span class="sd">        their information value and pick the one with maximum information</span>
+
+<span class="sd">        :param items: an item matrix in which the first 3 columns represent item discrimination,</span>
+<span class="sd">                      difficulty and pseudo-guessing parameters, respectively.</span>
+<span class="sd">        :param administered_items: a list with the indexes of all administered from the item matrix</span>
+<span class="sd">        :param est_theta: estimated proficiency value</span>
+<span class="sd">        :returns: index of the first non-administered item with maximum information</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">valid_indexes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">items</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">administered_items</span><span class="p">)))</span>
+        <span class="n">inf_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">irt</span><span class="o">.</span><span class="n">inf</span><span class="p">(</span><span class="n">est_theta</span><span class="p">,</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">items</span><span class="p">[</span><span class="n">valid_indexes</span><span class="p">]]</span>
+        <span class="n">valid_indexes</span> <span class="o">=</span> <span class="p">[</span><span class="n">index</span> <span class="k">for</span> <span class="p">(</span><span class="n">inf_value</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">inf_values</span><span class="p">,</span> <span class="n">valid_indexes</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)]</span>
+
+        <span class="k">return</span> <span class="n">valid_indexes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div></div>
+
+
+<div class="viewcode-block" id="ClusterSelector"><a class="viewcode-back" href="../../catsim.selection.html#catsim.selection.ClusterSelector">[docs]</a><span class="k">class</span> <span class="nc">ClusterSelector</span><span class="p">(</span><span class="n">Selector</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Cluster-based Item Selection Method.</span>
+
+<span class="sd">        .. [Men15] Meneghetti, D. R. (2015). Metolodogia de seleção de itens em testes adaptativos informatizados baseada em agrupamento por similaridade (Mestrado). Centro Universitário da FEI. Retrieved from https://www.researchgate.net/publication/283944553_Metodologia_de_selecao_de_itens_em_Testes_Adaptativos_Informatizados_baseada_em_Agrupamento_por_Similaridade</span>
+
+<span class="sd">    :param clusters: a list containing item cluster memberships</span>
+<span class="sd">    :type clusters: list</span>
+<span class="sd">    :param r_max: maximum exposure rate for items</span>
+<span class="sd">    :type r_max: float</span>
+<span class="sd">    :param method: one of the available methods for cluster selection. Given</span>
+<span class="sd">                   the estimated theta value at each step:</span>
+
+<span class="sd">                       ``item_info``: selects the cluster which has the item</span>
+<span class="sd">                       with maximum information;</span>
+
+<span class="sd">                       ``cluster_info``: selects the cluster whose items sum of</span>
+<span class="sd">                       information is maximum;</span>
+
+<span class="sd">                       ``weighted_info``: selects the cluster whose weighted</span>
+<span class="sd">                       sum of information is maximum. The weighted equals the</span>
+<span class="sd">                       number of items in the cluster;</span>
+
+<span class="sd">    :type method: string</span>
+<span class="sd">    :param r_control: if `passive` and all items :math:`i` in the selected</span>
+<span class="sd">                      cluster have :math:`r_i &gt; r^{max}`, applies the item with</span>
+<span class="sd">                      maximum information; if `aggressive`, applies the item</span>
+<span class="sd">                      with smallest :math:`r` value.</span>
+<span class="sd">    :type r_control: string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clusters</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;item_info&#39;</span><span class="p">,</span> <span class="n">r_max</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">r_control</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;passive&#39;</span><span class="p">):</span>
+        <span class="n">available_methods</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;item_info&#39;</span><span class="p">,</span> <span class="s1">&#39;cluster_info&#39;</span><span class="p">,</span> <span class="s1">&#39;weighted_info&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">available_methods</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;{0} is not a valid cluster selection method; choose one from {1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">available_methods</span><span class="p">))</span>
+        <span class="n">available_rcontrol</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;passive&#39;</span><span class="p">,</span> <span class="s1">&#39;aggressive&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">r_control</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">available_rcontrol</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;{0} is not a valid item exposure control method; choose one from {1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r_control</span><span class="p">,</span> <span class="n">available_rcontrol</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__clusters</span> <span class="o">=</span> <span class="n">clusters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__method</span> <span class="o">=</span> <span class="n">method</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__r_max</span> <span class="o">=</span> <span class="n">r_max</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__r_control</span> <span class="o">=</span> <span class="n">r_control</span>
+
+<div class="viewcode-block" id="ClusterSelector.select"><a class="viewcode-back" href="../../catsim.selection.html#catsim.selection.ClusterSelector.select">[docs]</a>    <span class="k">def</span> <span class="nf">select</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">est_theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;CAT simulation and validation method proposed by [Bar10]_.</span>
+
+<span class="sd">        :param items: an item matrix in which the first 3 columns represent item discrimination,</span>
+<span class="sd">                      difficulty and pseudo-guessing parameters, respectively.</span>
+<span class="sd">        :type items: numpy.ndarray</span>
+<span class="sd">        :param administered_items: a list with the indexes of all administered from the item matrix</span>
+<span class="sd">        :param est_theta: estimated proficiency value</span>
+<span class="sd">        :type est_theta: float</span>
+<span class="sd">        :returns: index of the first non-administered item with maximum information</span>
+<span class="sd">        :rtype: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">selected_cluster</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="c1"># this part of the code selects the cluster from which the item at</span>
+        <span class="c1"># the current point of the test will be chosen</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__method</span> <span class="o">==</span> <span class="s1">&#39;item_info&#39;</span><span class="p">:</span>
+            <span class="c1"># finds the item in the matrix which maximizes the</span>
+            <span class="c1"># information, given the current estimated theta value</span>
+            <span class="n">max_inf</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">counter</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">irt</span><span class="o">.</span><span class="n">inf</span><span class="p">(</span><span class="n">est_theta</span><span class="p">,</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">&gt;</span> <span class="n">max_inf</span><span class="p">:</span>
+                    <span class="c1"># gets the indexes of all the items in the same cluster</span>
+                    <span class="c1"># as the current selected item that have not been</span>
+                    <span class="c1"># administered</span>
+                    <span class="n">valid_indexes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">items</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">[</span><span class="mi">4</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">administered_items</span><span class="p">)))</span>
+
+                    <span class="c1"># checks if at least one item from this cluster has not</span>
+                    <span class="c1"># been adminitered to this examinee yet</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">valid_indexes</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">selected_cluster</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+                        <span class="n">max_inf</span> <span class="o">=</span> <span class="n">irt</span><span class="o">.</span><span class="n">inf</span><span class="p">(</span><span class="n">est_theta</span><span class="p">,</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">__method</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;cluster_info&#39;</span><span class="p">,</span> <span class="s1">&#39;weighted_info&#39;</span><span class="p">]:</span>
+            <span class="c1"># calculates the cluster information, depending on the method</span>
+            <span class="c1"># selected</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__method</span> <span class="o">==</span> <span class="s1">&#39;cluster_info&#39;</span><span class="p">:</span>
+                <span class="n">cluster_infos</span> <span class="o">=</span> <span class="n">ClusterSelector</span><span class="o">.</span><span class="n">sum_cluster_infos</span><span class="p">(</span><span class="n">est_theta</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__clusters</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">__method</span> <span class="o">==</span> <span class="s1">&#39;weighted_info&#39;</span><span class="p">:</span>
+                <span class="n">cluster_infos</span> <span class="o">=</span> <span class="n">ClusterSelector</span><span class="o">.</span><span class="n">weighted_cluster_infos</span><span class="p">(</span><span class="n">est_theta</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__clusters</span><span class="p">)</span>
+
+            <span class="c1"># sorts clusters descending by their information values</span>
+            <span class="c1"># this type of sorting was seem on</span>
+            <span class="c1"># http://stackoverflow.com/a/6618543</span>
+            <span class="n">sorted_clusters</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">cluster</span> <span class="k">for</span> <span class="p">(</span><span class="n">inf_value</span><span class="p">,</span> <span class="n">cluster</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">cluster_infos</span><span class="p">,</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__clusters</span><span class="p">)),</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+            <span class="c1"># walks through the sorted clusters in order</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sorted_clusters</span><span class="p">)):</span>
+                <span class="n">valid_indexes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">items</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="n">sorted_clusters</span><span class="p">[</span><span class="n">i</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+
+                <span class="c1"># checks if at least one item from this cluster has not</span>
+                <span class="c1"># been adminitered to this examinee yet</span>
+                <span class="k">if</span> <span class="nb">set</span><span class="p">(</span><span class="n">valid_indexes</span><span class="p">)</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">administered_items</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">set</span><span class="p">(</span><span class="n">valid_indexes</span><span class="p">):</span>
+                    <span class="n">selected_cluster</span> <span class="o">=</span> <span class="n">sorted_clusters</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                    <span class="k">break</span>
+                    <span class="c1"># the for loop ends with the cluster that has a) the maximum</span>
+                    <span class="c1"># information possible and b) at least one item that has not</span>
+                    <span class="c1"># yet been administered</span>
+
+        <span class="k">assert</span> <span class="n">selected_cluster</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span>
+
+        <span class="c1"># in this part, an item is chosen from the cluster that was</span>
+        <span class="c1"># selected above</span>
+        <span class="n">selected_item</span> <span class="o">=</span> <span class="bp">None</span>
+
+        <span class="c1"># gets the indexes and information values from the items in the</span>
+        <span class="c1"># selected cluster that have not been administered</span>
+        <span class="n">valid_indexes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">items</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="n">selected_cluster</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">administered_items</span><span class="p">)))</span>
+
+        <span class="c1"># gets the indexes and information values from the items in the</span>
+        <span class="c1"># selected cluster with r &lt; rmax that have not been</span>
+        <span class="c1"># administered</span>
+        <span class="n">valid_indexes_low_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">((</span><span class="n">items</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="n">selected_cluster</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">items</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">__r_max</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">administered_items</span><span class="p">)))</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">valid_indexes_low_r</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># sort both items and their indexes by their information</span>
+            <span class="c1"># value</span>
+            <span class="n">inf_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">irt</span><span class="o">.</span><span class="n">inf</span><span class="p">(</span><span class="n">est_theta</span><span class="p">,</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">items</span><span class="p">[</span><span class="n">valid_indexes_low_r</span><span class="p">]]</span>
+            <span class="n">valid_indexes_low_r</span> <span class="o">=</span> <span class="p">[</span><span class="n">index</span> <span class="k">for</span> <span class="p">(</span><span class="n">inf_value</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">inf_values</span><span class="p">,</span> <span class="n">valid_indexes_low_r</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)]</span>
+
+            <span class="n">selected_item</span> <span class="o">=</span> <span class="n">valid_indexes_low_r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># if all items in the selected cluster have exceed their r values,</span>
+        <span class="c1"># select the one with smallest r, regardless of information</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__r_control</span> <span class="o">==</span> <span class="s1">&#39;passive&#39;</span><span class="p">:</span>
+                <span class="n">inf_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">irt</span><span class="o">.</span><span class="n">inf</span><span class="p">(</span><span class="n">est_theta</span><span class="p">,</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">items</span><span class="p">[</span><span class="n">valid_indexes</span><span class="p">]]</span>
+                <span class="n">valid_indexes</span> <span class="o">=</span> <span class="p">[</span><span class="n">index</span> <span class="k">for</span> <span class="p">(</span><span class="n">inf_value</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">inf_values</span><span class="p">,</span> <span class="n">valid_indexes</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)]</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">__r_control</span> <span class="o">==</span> <span class="s1">&#39;aggressive&#39;</span><span class="p">:</span>
+                <span class="n">valid_indexes</span> <span class="o">=</span> <span class="p">[</span><span class="n">index</span> <span class="k">for</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="n">valid_indexes</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">valid_indexes</span><span class="p">))]</span>
+
+            <span class="n">selected_item</span> <span class="o">=</span> <span class="n">valid_indexes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">selected_item</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ClusterSelector.sum_cluster_infos"><a class="viewcode-back" href="../../catsim.selection.html#catsim.selection.ClusterSelector.sum_cluster_infos">[docs]</a>    <span class="k">def</span> <span class="nf">sum_cluster_infos</span><span class="p">(</span><span class="n">theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">clusters</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Returns the sum of item informations, separated by cluster</span>
+
+<span class="sd">        :param theta: an examinee&#39;s :math:`\\theta` value</span>
+<span class="sd">        :param items: a matrix containing item parameters</span>
+<span class="sd">        :param clusters: a list containing item cluster memberships, represented by integers</span>
+<span class="sd">        :returns: list containing the sum of item information values for each cluster&quot;&quot;&quot;</span>
+        <span class="n">cluster_infos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">clusters</span><span class="p">))))</span>
+
+        <span class="k">for</span> <span class="n">cluster</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">clusters</span><span class="p">):</span>
+            <span class="n">cluster_indexes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">clusters</span> <span class="o">==</span> <span class="n">cluster</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">[</span><span class="n">cluster_indexes</span><span class="p">]:</span>
+                <span class="n">cluster_infos</span><span class="p">[</span><span class="n">cluster</span><span class="p">]</span> <span class="o">=</span> <span class="n">cluster_infos</span><span class="p">[</span><span class="n">cluster</span><span class="p">]</span> <span class="o">+</span> <span class="n">irt</span><span class="o">.</span><span class="n">inf</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">cluster_infos</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ClusterSelector.weighted_cluster_infos"><a class="viewcode-back" href="../../catsim.selection.html#catsim.selection.ClusterSelector.weighted_cluster_infos">[docs]</a>    <span class="k">def</span> <span class="nf">weighted_cluster_infos</span><span class="p">(</span><span class="n">theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">clusters</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the weighted sum of item informations, separated by cluster.</span>
+<span class="sd">        The weight is the number of items in each cluster.</span>
+
+<span class="sd">        :param theta: an examinee&#39;s :math:`\\theta` value</span>
+<span class="sd">        :param items: a matrix containing item parameters</span>
+<span class="sd">        :param clusters: a list containing item cluster memberships, represented by integers</span>
+<span class="sd">        :returns: list containing the sum of item information values for each cluster,</span>
+<span class="sd">                 divided by the number of items in each cluster&quot;&quot;&quot;</span>
+        <span class="n">cluster_infos</span> <span class="o">=</span> <span class="n">ClusterSelector</span><span class="o">.</span><span class="n">sum_cluster_infos</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">clusters</span><span class="p">)</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">clusters</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cluster_infos</span><span class="p">)):</span>
+            <span class="n">cluster_infos</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cluster_infos</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">count</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">cluster_infos</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, Douglas De Rizzo Meneghetti.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'1.2a',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
