@@ -144,7 +144,7 @@
 <span class="sd">   Measurement, v. 34, n. 6, p. 438-452, 2010.&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">catsim</span> <span class="kn">import</span> <span class="n">irt</span>
+<span class="kn">from</span> <span class="nn">catsim</span> <span class="kn">import</span> <span class="n">irt</span><span class="p">,</span> <span class="n">cat</span>
 <span class="kn">from</span> <span class="nn">catsim.initialization</span> <span class="kn">import</span> <span class="n">Initializer</span><span class="p">,</span> <span class="n">RandomInitializer</span>
 <span class="kn">from</span> <span class="nn">catsim.selection</span> <span class="kn">import</span> <span class="n">Selector</span><span class="p">,</span> <span class="n">MaxInfoSelector</span>
 <span class="kn">from</span> <span class="nn">catsim.reestimation</span> <span class="kn">import</span> <span class="n">Estimator</span><span class="p">,</span> <span class="n">HillClimbingEstimator</span>
@@ -167,34 +167,24 @@
         <span class="c1"># adds a column for each item&#39;s exposure rate and their cluster membership</span>
         <span class="n">items</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">items</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="n">items</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__items</span> <span class="o">=</span> <span class="n">items</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__estimations</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__administered_items</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># `examinees` is passed to its special setter</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">examinees</span> <span class="o">=</span> <span class="n">examinees</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">estimations</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">administered_items</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">items</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__items</span>
 
-    <span class="nd">@items.setter</span>
-    <span class="k">def</span> <span class="nf">items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__items</span> <span class="o">=</span> <span class="n">items</span>
-
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">administered_items</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__administered_items</span>
 
-    <span class="nd">@administered_items.setter</span>
-    <span class="k">def</span> <span class="nf">administered_items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__administered_items</span> <span class="o">=</span> <span class="n">administered_items</span>
-
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">estimations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__estimations</span>
-
-    <span class="nd">@estimations.setter</span>
-    <span class="k">def</span> <span class="nf">estimations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">estimations</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__estimations</span> <span class="o">=</span> <span class="n">estimations</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">examinees</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -227,7 +217,7 @@
 
         <span class="k">for</span> <span class="n">true_theta</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">examinees</span><span class="p">:</span>
             <span class="n">est_theta</span> <span class="o">=</span> <span class="n">initializer</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
-            <span class="n">response_vector</span><span class="p">,</span> <span class="n">administered_items</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+            <span class="n">response_vector</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">,</span> <span class="n">est_thetas</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
 
             <span class="k">while</span> <span class="ow">not</span> <span class="n">stopper</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">administered_items</span><span class="p">)):</span>
                 <span class="n">selected_item</span> <span class="o">=</span> <span class="n">selector</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">,</span> <span class="n">est_theta</span><span class="p">)</span>
@@ -244,18 +234,19 @@
                 <span class="n">administered_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">selected_item</span><span class="p">)</span>
 
                 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">response_vector</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                    <span class="k">pass</span>
+                    <span class="n">est_theta</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">dodd</span><span class="p">(</span><span class="n">est_theta</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">est_theta</span> <span class="o">=</span> <span class="n">estimator</span><span class="o">.</span><span class="n">estimate</span><span class="p">(</span>
-                        <span class="n">response_vector</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">administered_items</span><span class="p">],</span> <span class="n">est_theta</span>
-                    <span class="p">)</span>
+                    <span class="n">est_theta</span> <span class="o">=</span> <span class="n">estimator</span><span class="o">.</span><span class="n">estimate</span><span class="p">(</span><span class="n">response_vector</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">administered_items</span><span class="p">],</span>
+                                                   <span class="n">est_theta</span><span class="p">)</span>
 
                 <span class="c1"># update the exposure value for this item</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">administered_items</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
                     <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">administered_items</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">examinees</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
                 <span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">examinees</span><span class="p">)</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">__estimations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">est_theta</span><span class="p">)</span>
+                <span class="n">est_thetas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">est_theta</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">__estimations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">est_thetas</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__administered_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">administered_items</span><span class="p">)</span></div></div>
 
 

@@ -140,16 +140,16 @@
 <p>Module with functions for plotting IRT-related results.</p>
 <dl class="function">
 <dt id="catsim.plot.gen3D_dataset_scatter">
-<code class="descclassname">catsim.plot.</code><code class="descname">gen3D_dataset_scatter</code><span class="sig-paren">(</span><em>title</em>, <em>items</em>, <em>path</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/plot.html#gen3D_dataset_scatter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.plot.gen3D_dataset_scatter" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">catsim.plot.</code><code class="descname">gen3D_dataset_scatter</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>title: str='Item parameters'</em>, <em>filepath: str=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/plot.html#gen3D_dataset_scatter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.plot.gen3D_dataset_scatter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate the item matrix tridimensional dataset scatter plot</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>title</strong> (<a class="reference external" href="https://docs.python.org/3/library/string.html#module-string" title="(in Python v3.5)"><em>string</em></a>) &#8211; the scatter plot title, which will also be used as the file name</li>
-<li><strong>items</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><em>numpy.ndarray</em></a>) &#8211; the item matrix</li>
-<li><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/string.html#module-string" title="(in Python v3.5)"><em>string</em></a>) &#8211; the path to save the scatter plot</li>
+<li><strong>items</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>) &#8211; the item matrix</li>
+<li><strong>title</strong> (<code class="docutils literal"><span class="pre">str</span></code>) &#8211; the scatter plot title</li>
+<li><strong>filepath</strong> (<code class="docutils literal"><span class="pre">str</span></code>) &#8211; the path to save the scatter plot</li>
 </ul>
 </td>
 </tr>
@@ -158,21 +158,44 @@
 </dd></dl>
 
 <dl class="function">
-<dt id="catsim.plot.plot_irt">
-<code class="descclassname">catsim.plot.</code><code class="descname">plot_irt</code><span class="sig-paren">(</span><em>a=1</em>, <em>b=0</em>, <em>c=0</em>, <em>title=None</em>, <em>ptype='icc'</em>, <em>filepath=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/plot.html#plot_irt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.plot.plot_irt" title="Permalink to this definition">¶</a></dt>
+<dt id="catsim.plot.item_curve">
+<code class="descclassname">catsim.plot.</code><code class="descname">item_curve</code><span class="sig-paren">(</span><em>a: float=1</em>, <em>b: float=0</em>, <em>c: float=0</em>, <em>title: str=None</em>, <em>ptype: str='icc'</em>, <em>filepath: str=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/plot.html#item_curve"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.plot.item_curve" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots &#8216;Item Response Theory&#8217;-related item plots</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>a</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) &#8211; item discrimination parameter</li>
-<li><strong>b</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) &#8211; item difficulty parameter</li>
-<li><strong>c</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) &#8211; item pseudo-guessing parameter</li>
-<li><strong>title</strong> (<a class="reference external" href="https://docs.python.org/3/library/string.html#module-string" title="(in Python v3.5)"><em>string</em></a>) &#8211; plot title</li>
-<li><strong>ptype</strong> (<a class="reference external" href="https://docs.python.org/3/library/string.html#module-string" title="(in Python v3.5)"><em>string</em></a>) &#8211; &#8216;icc&#8217; for the item characteristic curve, &#8216;iif&#8217; for the item
+<li><strong>a</strong> (<code class="docutils literal"><span class="pre">float</span></code>) &#8211; item discrimination parameter</li>
+<li><strong>b</strong> (<code class="docutils literal"><span class="pre">float</span></code>) &#8211; item difficulty parameter</li>
+<li><strong>c</strong> (<code class="docutils literal"><span class="pre">float</span></code>) &#8211; item pseudo-guessing parameter</li>
+<li><strong>title</strong> (<code class="docutils literal"><span class="pre">str</span></code>) &#8211; plot title</li>
+<li><strong>ptype</strong> (<code class="docutils literal"><span class="pre">str</span></code>) &#8211; &#8216;icc&#8217; for the item characteristic curve, &#8216;iif&#8217; for the item
 information curve or &#8216;both&#8217; for both curves in the same plot</li>
-<li><strong>filepath</strong> (<a class="reference external" href="https://docs.python.org/3/library/string.html#module-string" title="(in Python v3.5)"><em>string</em></a>) &#8211; saves the plot in the given path</li>
+<li><strong>filepath</strong> (<code class="docutils literal"><span class="pre">str</span></code>) &#8211; saves the plot in the given path</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="catsim.plot.test_progress">
+<code class="descclassname">catsim.plot.</code><code class="descname">test_progress</code><span class="sig-paren">(</span><em>title: str=None</em>, <em>simulator: catsim.simulation.Simulator=None</em>, <em>index: int=None</em>, <em>thetas: list=None</em>, <em>administered_items: numpy.ndarray=None</em>, <em>true_theta: float=None</em>, <em>filepath: str=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/plot.html#test_progress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.plot.test_progress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a plot representing an examinee&#8217;s test progress</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>title</strong> (<code class="docutils literal"><span class="pre">str</span></code>) &#8211; the plot title</li>
+<li><strong>simulator</strong> (<a class="reference internal" href="catsim.simulation.html#catsim.simulation.Simulator" title="catsim.simulation.Simulator"><code class="xref py py-class docutils literal"><span class="pre">Simulator</span></code></a>) &#8211; a simulator which has already simulated a series of CATs, containing estimations to the examinees&#8217; proficiencies and a list of administered items for each examinee</li>
+<li><strong>index</strong> (<code class="docutils literal"><span class="pre">int</span></code>) &#8211; the index of the examinee in the simulator whose plot is to be done</li>
+<li><strong>thetas</strong> (<code class="docutils literal"><span class="pre">list</span></code>) &#8211; if a <code class="xref py py-class docutils literal"><span class="pre">Simulator</span></code> is not passed, then a list of proficiency estimations can be manually passed to the function</li>
+<li><strong>administered_items</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>) &#8211; if a <code class="xref py py-class docutils literal"><span class="pre">Simulator</span></code> is not passed, then a matrix of administered items, represented by their parameters, can be manually passed to the function</li>
+<li><strong>true_theta</strong> (<code class="docutils literal"><span class="pre">float</span></code>) &#8211; the value of the examinee&#8217;s true proficiency. If it is passed, it will be shown on the plot, otherwise not</li>
+<li><strong>filepath</strong> (<code class="docutils literal"><span class="pre">str</span></code>) &#8211; the path to save the plot</li>
 </ul>
 </td>
 </tr>

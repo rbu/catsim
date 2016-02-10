@@ -139,7 +139,7 @@
 <span id="computerized-adaptive-test-related-functions"></span><h1>Computerized Adaptive Test-related Functions<a class="headerlink" href="#module-catsim.cat" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="catsim.cat.dodd">
-<code class="descclassname">catsim.cat.</code><code class="descname">dodd</code><span class="sig-paren">(</span><em>theta</em>, <em>items</em>, <em>correct</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/cat.html#dodd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cat.dodd" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">catsim.cat.</code><code class="descname">dodd</code><span class="sig-paren">(</span><em>theta: float</em>, <em>items: numpy.ndarray</em>, <em>correct: bool</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/cat.html#dodd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cat.dodd" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method proposed by <a class="reference internal" href="#dod90" id="id1">[Dod90]</a> for the reestimation of
 <span class="math">\(\hat{\theta}\)</span> when the response vector is composed entirely of 1s
 or 0s</p>
@@ -152,14 +152,20 @@ or 0s</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>theta</strong> &#8211; the initial proficiency level</li>
-<li><strong>items</strong> &#8211; a numpy array containing the parameters of the items in the
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="docutils literal"><span class="pre">float</span></code></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>theta</strong> (<code class="docutils literal"><span class="pre">float</span></code>) &#8211; the initial proficiency level</li>
+<li><strong>items</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>) &#8211; a numpy array containing the parameters of the items in the
 database. This is necessary to capture the maximum and minimum
 difficulty levels necessary for the method.</li>
-<li><strong>correct</strong> &#8211; a boolean value informing whether or not the examinee
+<li><strong>correct</strong> (<code class="docutils literal"><span class="pre">bool</span></code>) &#8211; a boolean value informing whether or not the examinee
 correctly answered the current item.</li>
 </ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a new estimation for <span class="math">\(\theta\)</span></p>
 </td>
 </tr>
 </tbody>
