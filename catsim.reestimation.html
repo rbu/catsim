@@ -153,6 +153,7 @@
 </tr>
 </tbody>
 </table>
+<p class="rubric">Methods</p>
 <dl class="method">
 <dt id="catsim.reestimation.BinarySearchEstimator.estimate">
 <code class="descname">estimate</code><span class="sig-paren">(</span><em>response_vector: list</em>, <em>administered_items: numpy.ndarray</em>, <em>current_theta: float=None</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/reestimation.html#BinarySearchEstimator.estimate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.reestimation.BinarySearchEstimator.estimate" title="Permalink to this definition">¶</a></dt>
@@ -199,6 +200,7 @@ bounds for <span class="math">\(\theta\)</span> exist.</td>
 </tr>
 </tbody>
 </table>
+<p class="rubric">Methods</p>
 <dl class="method">
 <dt id="catsim.reestimation.DifferentialEvolutionEstimator.estimate">
 <code class="descname">estimate</code><span class="sig-paren">(</span><em>response_vector: list</em>, <em>administered_items: numpy.ndarray</em>, <em>current_theta: float=None</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/reestimation.html#DifferentialEvolutionEstimator.estimate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.reestimation.DifferentialEvolutionEstimator.estimate" title="Permalink to this definition">¶</a></dt>
@@ -233,6 +235,7 @@ answered items</li>
 <dt id="catsim.reestimation.Estimator">
 <em class="property">class </em><code class="descclassname">catsim.reestimation.</code><code class="descname">Estimator</code><a class="reference internal" href="_modules/catsim/reestimation.html#Estimator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.reestimation.Estimator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Base class for proficiency estimators</p>
+<p class="rubric">Methods</p>
 <dl class="method">
 <dt id="catsim.reestimation.Estimator.estimate">
 <code class="descname">estimate</code><span class="sig-paren">(</span><em>response_vector: list</em>, <em>administered_items: numpy.ndarray</em>, <em>current_theta: float</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/reestimation.html#Estimator.estimate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.reestimation.Estimator.estimate" title="Permalink to this definition">¶</a></dt>
@@ -267,6 +270,7 @@ answered items</li>
 <dt id="catsim.reestimation.FMinEstimator">
 <em class="property">class </em><code class="descclassname">catsim.reestimation.</code><code class="descname">FMinEstimator</code><a class="reference internal" href="_modules/catsim/reestimation.html#FMinEstimator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.reestimation.FMinEstimator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Estimator that uses <a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.fmin.html#scipy.optimize.fmin" title="(in SciPy v0.17.0)"><code class="xref py py-func docutils literal"><span class="pre">scipy.optimize.fmin()</span></code></a> to minimize the negative log-likelihood function</p>
+<p class="rubric">Methods</p>
 <dl class="method">
 <dt id="catsim.reestimation.FMinEstimator.estimate">
 <code class="descname">estimate</code><span class="sig-paren">(</span><em>response_vector: list</em>, <em>administered_items: numpy.ndarray</em>, <em>current_theta: float</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/reestimation.html#FMinEstimator.estimate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.reestimation.FMinEstimator.estimate" title="Permalink to this definition">¶</a></dt>
@@ -313,6 +317,7 @@ answered items</li>
 </tr>
 </tbody>
 </table>
+<p class="rubric">Methods</p>
 <dl class="method">
 <dt id="catsim.reestimation.HillClimbingEstimator.estimate">
 <code class="descname">estimate</code><span class="sig-paren">(</span><em>response_vector: list</em>, <em>administered_items: numpy.ndarray</em>, <em>current_theta: float=None</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/reestimation.html#HillClimbingEstimator.estimate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.reestimation.HillClimbingEstimator.estimate" title="Permalink to this definition">¶</a></dt>

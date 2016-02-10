@@ -176,6 +176,49 @@ with smallest <span class="math">\(r\)</span> value.</li>
 </tr>
 </tbody>
 </table>
+<p class="rubric">Methods</p>
+<dl class="staticmethod">
+<dt id="catsim.selection.ClusterSelector.cluster_averages">
+<em class="property">static </em><code class="descname">cluster_averages</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>c: list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/selection.html#ClusterSelector.cluster_averages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.ClusterSelector.cluster_averages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the average values of item parameters by cluster</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>items</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>) &#8211; a matrix containing item parameters.</li>
+<li><strong>c</strong> (<code class="docutils literal"><span class="pre">list</span></code>) &#8211; a list containing clustering memeberships.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a matrix containing the average values of each parameter by cluster. Lines are clusters, columns are parameters.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="catsim.selection.ClusterSelector.cluster_sum">
+<em class="property">static </em><code class="descname">cluster_sum</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>c: list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/selection.html#ClusterSelector.cluster_sum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.ClusterSelector.cluster_sum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the sum of item parameter values for each cluster cluster</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>items</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>) &#8211; a matrix containing item parameters.</li>
+<li><strong>c</strong> (<code class="docutils literal"><span class="pre">list</span></code>) &#8211; a list containing clustering memeberships.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a matrix containing the sum of each parameter by cluster. Lines are clusters, columns are parameters.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="method">
 <dt id="catsim.selection.ClusterSelector.select">
 <code class="descname">select</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>administered_items: list</em>, <em>est_theta: float</em><span class="sig-paren">)</span> &rarr; int<a class="reference internal" href="_modules/catsim/selection.html#ClusterSelector.select"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.ClusterSelector.select" title="Permalink to this definition">¶</a></dt>
@@ -184,18 +227,18 @@ with smallest <span class="math">\(r\)</span> value.</li>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>items</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><em>numpy.ndarray</em></a>) &#8211; an item matrix in which the first 3 columns represent item discrimination,
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="docutils literal"><span class="pre">int</span></code></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>items</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>) &#8211; an item matrix in which the first 3 columns represent item discrimination,
 difficulty and pseudo-guessing parameters, respectively.</li>
 <li><strong>administered_items</strong> (<code class="docutils literal"><span class="pre">list</span></code>) &#8211; a list with the indexes of all administered from the item matrix</li>
-<li><strong>est_theta</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) &#8211; estimated proficiency value</li>
+<li><strong>est_theta</strong> (<code class="docutils literal"><span class="pre">float</span></code>) &#8211; estimated proficiency value</li>
 </ul>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">index of the first non-administered item with maximum information</p>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.5)">int</a></p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">index of the first non-administered item with maximum information</p>
 </td>
 </tr>
 </tbody>
@@ -257,6 +300,7 @@ divided by the number of items in each cluster</p>
 <dt id="catsim.selection.MaxInfoSelector">
 <em class="property">class </em><code class="descclassname">catsim.selection.</code><code class="descname">MaxInfoSelector</code><a class="reference internal" href="_modules/catsim/selection.html#MaxInfoSelector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.MaxInfoSelector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Selector that returns the first non-administered item with maximum information, given an estimated theta</p>
+<p class="rubric">Methods</p>
 <dl class="method">
 <dt id="catsim.selection.MaxInfoSelector.select">
 <code class="descname">select</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>administered_items: list</em>, <em>est_theta: float</em><span class="sig-paren">)</span> &rarr; int<a class="reference internal" href="_modules/catsim/selection.html#MaxInfoSelector.select"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.MaxInfoSelector.select" title="Permalink to this definition">¶</a></dt>
@@ -290,6 +334,7 @@ difficulty and pseudo-guessing parameters, respectively.</li>
 <dt id="catsim.selection.Selector">
 <em class="property">class </em><code class="descclassname">catsim.selection.</code><code class="descname">Selector</code><a class="reference internal" href="_modules/catsim/selection.html#Selector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.Selector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Base class representing a CAT item selector.</p>
+<p class="rubric">Methods</p>
 <dl class="method">
 <dt id="catsim.selection.Selector.select">
 <code class="descname">select</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>administered_items: list</em>, <em>est_theta: float</em><span class="sig-paren">)</span> &rarr; int<a class="reference internal" href="_modules/catsim/selection.html#Selector.select"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.Selector.select" title="Permalink to this definition">¶</a></dt>

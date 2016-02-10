@@ -164,7 +164,11 @@
 
         <span class="n">available_distributions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;uniform&#39;</span><span class="p">,</span> <span class="s1">&#39;normal&#39;</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">dist_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">available_distributions</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;{0} not in available distributions {1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dist_type</span><span class="p">,</span> <span class="n">available_distributions</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s1">&#39;{0} not in available distributions {1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">dist_type</span><span class="p">,</span> <span class="n">available_distributions</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">__dist_type</span> <span class="o">=</span> <span class="n">dist_type</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__dist_params</span> <span class="o">=</span> <span class="n">dist_params</span>

@@ -236,8 +236,9 @@
                 <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">response_vector</span><span class="p">))</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                     <span class="n">est_theta</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">dodd</span><span class="p">(</span><span class="n">est_theta</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">est_theta</span> <span class="o">=</span> <span class="n">estimator</span><span class="o">.</span><span class="n">estimate</span><span class="p">(</span><span class="n">response_vector</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">administered_items</span><span class="p">],</span>
-                                                   <span class="n">est_theta</span><span class="p">)</span>
+                    <span class="n">est_theta</span> <span class="o">=</span> <span class="n">estimator</span><span class="o">.</span><span class="n">estimate</span><span class="p">(</span>
+                        <span class="n">response_vector</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">administered_items</span><span class="p">],</span> <span class="n">est_theta</span>
+                    <span class="p">)</span>
 
                 <span class="c1"># update the exposure value for this item</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">administered_items</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>

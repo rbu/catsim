@@ -136,7 +136,7 @@
             
   <h1>Source code for catsim.selection</h1><div class="highlight"><pre>
 <span class="kn">from</span> <span class="nn">catsim</span> <span class="kn">import</span> <span class="n">irt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
 <span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABCMeta</span><span class="p">,</span> <span class="n">abstractmethod</span>
 
 
@@ -148,7 +148,7 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">Selector</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
 
     <span class="nd">@abstractmethod</span>
-<div class="viewcode-block" id="Selector.select"><a class="viewcode-back" href="../../catsim.selection.html#catsim.selection.Selector.select">[docs]</a>    <span class="k">def</span> <span class="nf">select</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">est_theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<div class="viewcode-block" id="Selector.select"><a class="viewcode-back" href="../../catsim.selection.html#catsim.selection.Selector.select">[docs]</a>    <span class="k">def</span> <span class="nf">select</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">est_theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Get the indexes of all items that have not yet been administered, calculate</span>
 <span class="sd">        their information value and pick the one with maximum information</span>
 
@@ -167,7 +167,7 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
 
-<div class="viewcode-block" id="MaxInfoSelector.select"><a class="viewcode-back" href="../../catsim.selection.html#catsim.selection.MaxInfoSelector.select">[docs]</a>    <span class="k">def</span> <span class="nf">select</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">est_theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<div class="viewcode-block" id="MaxInfoSelector.select"><a class="viewcode-back" href="../../catsim.selection.html#catsim.selection.MaxInfoSelector.select">[docs]</a>    <span class="k">def</span> <span class="nf">select</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">est_theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Get the indexes of all items that have not yet been administered, calculate</span>
 <span class="sd">        their information value and pick the one with maximum information</span>
 
@@ -177,9 +177,14 @@
 <span class="sd">        :param est_theta: estimated proficiency value</span>
 <span class="sd">        :returns: index of the first non-administered item with maximum information</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">valid_indexes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">items</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">administered_items</span><span class="p">)))</span>
+        <span class="n">valid_indexes</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">items</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">administered_items</span><span class="p">)))</span>
         <span class="n">inf_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">irt</span><span class="o">.</span><span class="n">inf</span><span class="p">(</span><span class="n">est_theta</span><span class="p">,</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">items</span><span class="p">[</span><span class="n">valid_indexes</span><span class="p">]]</span>
-        <span class="n">valid_indexes</span> <span class="o">=</span> <span class="p">[</span><span class="n">index</span> <span class="k">for</span> <span class="p">(</span><span class="n">inf_value</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">inf_values</span><span class="p">,</span> <span class="n">valid_indexes</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)]</span>
+        <span class="n">valid_indexes</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">index</span> <span class="k">for</span> <span class="p">(</span><span class="n">inf_value</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span>
+                <span class="nb">zip</span><span class="p">(</span><span class="n">inf_values</span><span class="p">,</span> <span class="n">valid_indexes</span><span class="p">),</span>
+                <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span>
+            <span class="p">)</span>
+        <span class="p">]</span>
 
         <span class="k">return</span> <span class="n">valid_indexes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div></div>
 
@@ -214,30 +219,41 @@
 <span class="sd">    :type r_control: string</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">clusters</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;item_info&#39;</span><span class="p">,</span> <span class="n">r_max</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">r_control</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;passive&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">clusters</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
+        <span class="n">method</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;item_info&#39;</span><span class="p">,</span>
+        <span class="n">r_max</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">r_control</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;passive&#39;</span>
+    <span class="p">):</span>
         <span class="n">available_methods</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;item_info&#39;</span><span class="p">,</span> <span class="s1">&#39;cluster_info&#39;</span><span class="p">,</span> <span class="s1">&#39;weighted_info&#39;</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">available_methods</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;{0} is not a valid cluster selection method; choose one from {1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">available_methods</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s1">&#39;{0} is not a valid cluster selection method; choose one from {1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">method</span><span class="p">,</span> <span class="n">available_methods</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
         <span class="n">available_rcontrol</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;passive&#39;</span><span class="p">,</span> <span class="s1">&#39;aggressive&#39;</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">r_control</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">available_rcontrol</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;{0} is not a valid item exposure control method; choose one from {1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r_control</span><span class="p">,</span> <span class="n">available_rcontrol</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s1">&#39;{0} is not a valid item exposure control method; choose one from {1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                    <span class="n">r_control</span><span class="p">,</span> <span class="n">available_rcontrol</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">__clusters</span> <span class="o">=</span> <span class="n">clusters</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__method</span> <span class="o">=</span> <span class="n">method</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__r_max</span> <span class="o">=</span> <span class="n">r_max</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__r_control</span> <span class="o">=</span> <span class="n">r_control</span>
 
-<div class="viewcode-block" id="ClusterSelector.select"><a class="viewcode-back" href="../../catsim.selection.html#catsim.selection.ClusterSelector.select">[docs]</a>    <span class="k">def</span> <span class="nf">select</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">est_theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<div class="viewcode-block" id="ClusterSelector.select"><a class="viewcode-back" href="../../catsim.selection.html#catsim.selection.ClusterSelector.select">[docs]</a>    <span class="k">def</span> <span class="nf">select</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">est_theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;CAT simulation and validation method proposed by [Bar10]_.</span>
 
 <span class="sd">        :param items: an item matrix in which the first 3 columns represent item discrimination,</span>
 <span class="sd">                      difficulty and pseudo-guessing parameters, respectively.</span>
-<span class="sd">        :type items: numpy.ndarray</span>
 <span class="sd">        :param administered_items: a list with the indexes of all administered from the item matrix</span>
 <span class="sd">        :param est_theta: estimated proficiency value</span>
-<span class="sd">        :type est_theta: float</span>
 <span class="sd">        :returns: index of the first non-administered item with maximum information</span>
-<span class="sd">        :rtype: int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">selected_cluster</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="c1"># this part of the code selects the cluster from which the item at</span>
@@ -251,12 +267,22 @@
                     <span class="c1"># gets the indexes of all the items in the same cluster</span>
                     <span class="c1"># as the current selected item that have not been</span>
                     <span class="c1"># administered</span>
-                    <span class="n">valid_indexes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">items</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">[</span><span class="mi">4</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">administered_items</span><span class="p">)))</span>
+                    <span class="n">valid_indexes</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                        <span class="nb">list</span><span class="p">(</span>
+                            <span class="nb">set</span><span class="p">(</span>
+                                <span class="n">numpy</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__clusters</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">__clusters</span><span class="p">[</span><span class="n">counter</span><span class="p">])[</span>
+                                    <span class="mi">0</span>
+                                <span class="p">]</span>
+                            <span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span>
+                                <span class="n">administered_items</span>
+                            <span class="p">)</span>
+                        <span class="p">)</span>
+                    <span class="p">)</span>
 
                     <span class="c1"># checks if at least one item from this cluster has not</span>
                     <span class="c1"># been adminitered to this examinee yet</span>
                     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">valid_indexes</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                        <span class="n">selected_cluster</span> <span class="o">=</span> <span class="n">i</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+                        <span class="n">selected_cluster</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__clusters</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span>
                         <span class="n">max_inf</span> <span class="o">=</span> <span class="n">irt</span><span class="o">.</span><span class="n">inf</span><span class="p">(</span><span class="n">est_theta</span><span class="p">,</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 
         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">__method</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;cluster_info&#39;</span><span class="p">,</span> <span class="s1">&#39;weighted_info&#39;</span><span class="p">]:</span>
@@ -265,16 +291,27 @@
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__method</span> <span class="o">==</span> <span class="s1">&#39;cluster_info&#39;</span><span class="p">:</span>
                 <span class="n">cluster_infos</span> <span class="o">=</span> <span class="n">ClusterSelector</span><span class="o">.</span><span class="n">sum_cluster_infos</span><span class="p">(</span><span class="n">est_theta</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__clusters</span><span class="p">)</span>
             <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">__method</span> <span class="o">==</span> <span class="s1">&#39;weighted_info&#39;</span><span class="p">:</span>
-                <span class="n">cluster_infos</span> <span class="o">=</span> <span class="n">ClusterSelector</span><span class="o">.</span><span class="n">weighted_cluster_infos</span><span class="p">(</span><span class="n">est_theta</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__clusters</span><span class="p">)</span>
+                <span class="n">cluster_infos</span> <span class="o">=</span> <span class="n">ClusterSelector</span><span class="o">.</span><span class="n">weighted_cluster_infos</span><span class="p">(</span>
+                    <span class="n">est_theta</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__clusters</span>
+                <span class="p">)</span>
 
             <span class="c1"># sorts clusters descending by their information values</span>
             <span class="c1"># this type of sorting was seem on</span>
             <span class="c1"># http://stackoverflow.com/a/6618543</span>
-            <span class="n">sorted_clusters</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">cluster</span> <span class="k">for</span> <span class="p">(</span><span class="n">inf_value</span><span class="p">,</span> <span class="n">cluster</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">cluster_infos</span><span class="p">,</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__clusters</span><span class="p">)),</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+            <span class="n">sorted_clusters</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">cluster</span>
+                    <span class="k">for</span> <span class="p">(</span><span class="n">inf_value</span><span class="p">,</span> <span class="n">cluster</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span>
+                        <span class="nb">zip</span><span class="p">(</span><span class="n">cluster_infos</span><span class="p">,</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__clusters</span><span class="p">)),</span>
+                        <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span>
+                    <span class="p">)</span>
+                <span class="p">],</span>
+                <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span>
+            <span class="p">)</span>
 
             <span class="c1"># walks through the sorted clusters in order</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sorted_clusters</span><span class="p">)):</span>
-                <span class="n">valid_indexes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">items</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="n">sorted_clusters</span><span class="p">[</span><span class="n">i</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="n">valid_indexes</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">items</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="n">sorted_clusters</span><span class="p">[</span><span class="n">i</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
 
                 <span class="c1"># checks if at least one item from this cluster has not</span>
                 <span class="c1"># been adminitered to this examinee yet</span>
@@ -293,18 +330,40 @@
 
         <span class="c1"># gets the indexes and information values from the items in the</span>
         <span class="c1"># selected cluster that have not been administered</span>
-        <span class="n">valid_indexes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">items</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="n">selected_cluster</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">administered_items</span><span class="p">)))</span>
+        <span class="n">valid_indexes</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+            <span class="nb">list</span><span class="p">(</span>
+                <span class="nb">set</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__clusters</span> <span class="o">==</span> <span class="n">selected_cluster</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span>
+                    <span class="n">administered_items</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
 
         <span class="c1"># gets the indexes and information values from the items in the</span>
         <span class="c1"># selected cluster with r &lt; rmax that have not been</span>
         <span class="c1"># administered</span>
-        <span class="n">valid_indexes_low_r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">((</span><span class="n">items</span><span class="p">[:,</span> <span class="mi">4</span><span class="p">]</span> <span class="o">==</span> <span class="n">selected_cluster</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">items</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">__r_max</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">administered_items</span><span class="p">)))</span>
+        <span class="n">valid_indexes_low_r</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+            <span class="nb">list</span><span class="p">(</span>
+                <span class="nb">set</span><span class="p">(</span>
+                    <span class="n">numpy</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span>
+                        <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__clusters</span> <span class="o">==</span> <span class="n">selected_cluster</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span>
+                            <span class="n">items</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">__r_max</span>
+                        <span class="p">)</span>
+                    <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">administered_items</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">valid_indexes_low_r</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="c1"># sort both items and their indexes by their information</span>
             <span class="c1"># value</span>
             <span class="n">inf_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">irt</span><span class="o">.</span><span class="n">inf</span><span class="p">(</span><span class="n">est_theta</span><span class="p">,</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">items</span><span class="p">[</span><span class="n">valid_indexes_low_r</span><span class="p">]]</span>
-            <span class="n">valid_indexes_low_r</span> <span class="o">=</span> <span class="p">[</span><span class="n">index</span> <span class="k">for</span> <span class="p">(</span><span class="n">inf_value</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">inf_values</span><span class="p">,</span> <span class="n">valid_indexes_low_r</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)]</span>
+            <span class="n">valid_indexes_low_r</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">index</span>
+                <span class="k">for</span> <span class="p">(</span><span class="n">inf_value</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span>
+                    <span class="nb">zip</span><span class="p">(</span><span class="n">inf_values</span><span class="p">,</span> <span class="n">valid_indexes_low_r</span><span class="p">),</span>
+                    <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span>
+                <span class="p">)</span>
+            <span class="p">]</span>
 
             <span class="n">selected_item</span> <span class="o">=</span> <span class="n">valid_indexes_low_r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
@@ -313,34 +372,44 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__r_control</span> <span class="o">==</span> <span class="s1">&#39;passive&#39;</span><span class="p">:</span>
                 <span class="n">inf_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">irt</span><span class="o">.</span><span class="n">inf</span><span class="p">(</span><span class="n">est_theta</span><span class="p">,</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">items</span><span class="p">[</span><span class="n">valid_indexes</span><span class="p">]]</span>
-                <span class="n">valid_indexes</span> <span class="o">=</span> <span class="p">[</span><span class="n">index</span> <span class="k">for</span> <span class="p">(</span><span class="n">inf_value</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">inf_values</span><span class="p">,</span> <span class="n">valid_indexes</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)]</span>
+                <span class="n">valid_indexes</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="n">index</span>
+                    <span class="k">for</span> <span class="p">(</span><span class="n">inf_value</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span>
+                        <span class="nb">zip</span><span class="p">(</span><span class="n">inf_values</span><span class="p">,</span> <span class="n">valid_indexes</span><span class="p">),</span>
+                        <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span>
+                    <span class="p">)</span>
+                <span class="p">]</span>
             <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">__r_control</span> <span class="o">==</span> <span class="s1">&#39;aggressive&#39;</span><span class="p">:</span>
-                <span class="n">valid_indexes</span> <span class="o">=</span> <span class="p">[</span><span class="n">index</span> <span class="k">for</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="n">valid_indexes</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">valid_indexes</span><span class="p">))]</span>
+                <span class="n">valid_indexes</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="n">index</span> <span class="k">for</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="n">valid_indexes</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">valid_indexes</span><span class="p">))</span>
+                <span class="p">]</span>
 
             <span class="n">selected_item</span> <span class="o">=</span> <span class="n">valid_indexes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
         <span class="k">return</span> <span class="n">selected_item</span></div>
 
     <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="ClusterSelector.sum_cluster_infos"><a class="viewcode-back" href="../../catsim.selection.html#catsim.selection.ClusterSelector.sum_cluster_infos">[docs]</a>    <span class="k">def</span> <span class="nf">sum_cluster_infos</span><span class="p">(</span><span class="n">theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">clusters</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<div class="viewcode-block" id="ClusterSelector.sum_cluster_infos"><a class="viewcode-back" href="../../catsim.selection.html#catsim.selection.ClusterSelector.sum_cluster_infos">[docs]</a>    <span class="k">def</span> <span class="nf">sum_cluster_infos</span><span class="p">(</span><span class="n">theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">clusters</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Returns the sum of item informations, separated by cluster</span>
 
 <span class="sd">        :param theta: an examinee&#39;s :math:`\\theta` value</span>
 <span class="sd">        :param items: a matrix containing item parameters</span>
 <span class="sd">        :param clusters: a list containing item cluster memberships, represented by integers</span>
 <span class="sd">        :returns: list containing the sum of item information values for each cluster&quot;&quot;&quot;</span>
-        <span class="n">cluster_infos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">clusters</span><span class="p">))))</span>
+        <span class="n">cluster_infos</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">clusters</span><span class="p">))))</span>
 
         <span class="k">for</span> <span class="n">cluster</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">clusters</span><span class="p">):</span>
-            <span class="n">cluster_indexes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">clusters</span> <span class="o">==</span> <span class="n">cluster</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">cluster_indexes</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">clusters</span> <span class="o">==</span> <span class="n">cluster</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 
             <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">[</span><span class="n">cluster_indexes</span><span class="p">]:</span>
-                <span class="n">cluster_infos</span><span class="p">[</span><span class="n">cluster</span><span class="p">]</span> <span class="o">=</span> <span class="n">cluster_infos</span><span class="p">[</span><span class="n">cluster</span><span class="p">]</span> <span class="o">+</span> <span class="n">irt</span><span class="o">.</span><span class="n">inf</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+                <span class="n">cluster_infos</span><span class="p">[</span><span class="n">cluster</span><span class="p">]</span> <span class="o">=</span> <span class="n">cluster_infos</span><span class="p">[</span><span class="n">cluster</span><span class="p">]</span> <span class="o">+</span> <span class="n">irt</span><span class="o">.</span><span class="n">inf</span><span class="p">(</span>
+                    <span class="n">theta</span><span class="p">,</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                <span class="p">)</span>
 
         <span class="k">return</span> <span class="n">cluster_infos</span></div>
 
     <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="ClusterSelector.weighted_cluster_infos"><a class="viewcode-back" href="../../catsim.selection.html#catsim.selection.ClusterSelector.weighted_cluster_infos">[docs]</a>    <span class="k">def</span> <span class="nf">weighted_cluster_infos</span><span class="p">(</span><span class="n">theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">clusters</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
+<div class="viewcode-block" id="ClusterSelector.weighted_cluster_infos"><a class="viewcode-back" href="../../catsim.selection.html#catsim.selection.ClusterSelector.weighted_cluster_infos">[docs]</a>    <span class="k">def</span> <span class="nf">weighted_cluster_infos</span><span class="p">(</span><span class="n">theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">clusters</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns the weighted sum of item informations, separated by cluster.</span>
 <span class="sd">        The weight is the number of items in each cluster.</span>
 
@@ -350,12 +419,48 @@
 <span class="sd">        :returns: list containing the sum of item information values for each cluster,</span>
 <span class="sd">                 divided by the number of items in each cluster&quot;&quot;&quot;</span>
         <span class="n">cluster_infos</span> <span class="o">=</span> <span class="n">ClusterSelector</span><span class="o">.</span><span class="n">sum_cluster_infos</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">clusters</span><span class="p">)</span>
-        <span class="n">count</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">clusters</span><span class="p">)</span>
+        <span class="n">count</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">clusters</span><span class="p">)</span>
 
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cluster_infos</span><span class="p">)):</span>
             <span class="n">cluster_infos</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">cluster_infos</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">count</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
 
-        <span class="k">return</span> <span class="n">cluster_infos</span></div></div>
+        <span class="k">return</span> <span class="n">cluster_infos</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ClusterSelector.cluster_sum"><a class="viewcode-back" href="../../catsim.selection.html#catsim.selection.ClusterSelector.cluster_sum">[docs]</a>    <span class="k">def</span> <span class="nf">cluster_sum</span><span class="p">(</span><span class="n">items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the sum of item parameter values for each cluster cluster</span>
+
+<span class="sd">        :param items: a matrix containing item parameters.</span>
+<span class="sd">        :param c: a list containing clustering memeberships.</span>
+<span class="sd">        :returns: a matrix containing the sum of each parameter by cluster. Lines are clusters, columns are parameters.&quot;&quot;&quot;</span>
+        <span class="n">averages</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">numpy</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">numpy</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">c</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">averages</span><span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+=</span> <span class="n">items</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+            <span class="n">averages</span><span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+=</span> <span class="n">items</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="n">averages</span><span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="mi">2</span><span class="p">]</span> <span class="o">+=</span> <span class="n">items</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">averages</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="ClusterSelector.cluster_averages"><a class="viewcode-back" href="../../catsim.selection.html#catsim.selection.ClusterSelector.cluster_averages">[docs]</a>    <span class="k">def</span> <span class="nf">cluster_averages</span><span class="p">(</span><span class="n">items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns the average values of item parameters by cluster</span>
+
+<span class="sd">        :param items: a matrix containing item parameters.</span>
+<span class="sd">        :param c: a list containing clustering memeberships.</span>
+<span class="sd">        :returns: a matrix containing the average values of each parameter by cluster. Lines are clusters, columns are parameters.&quot;&quot;&quot;</span>
+        <span class="n">averages</span> <span class="o">=</span> <span class="n">ClusterSelector</span><span class="o">.</span><span class="n">cluster_sum</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+
+        <span class="n">occurrences</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">int64</span><span class="p">))</span>
+
+        <span class="k">for</span> <span class="n">counter</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">occurrences</span><span class="p">):</span>
+            <span class="n">averages</span><span class="p">[</span><span class="n">counter</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">averages</span><span class="p">[</span><span class="n">counter</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="n">i</span>
+            <span class="n">averages</span><span class="p">[</span><span class="n">counter</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">averages</span><span class="p">[</span><span class="n">counter</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="n">i</span>
+            <span class="n">averages</span><span class="p">[</span><span class="n">counter</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">averages</span><span class="p">[</span><span class="n">counter</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="n">i</span>
+
+        <span class="k">return</span> <span class="n">averages</span></div></div>
 </pre></div>
 
            </div>
