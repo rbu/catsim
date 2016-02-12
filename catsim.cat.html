@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Computerized Adaptive Test-related Functions &mdash; catsim documentation</title>
+  <title>Computerized Adaptive Test-related Functions</title>
   
 
   
@@ -30,9 +30,9 @@
   
 
   
-    <link rel="top" title="catsim documentation" href="index.html"/>
-        <link rel="next" title="Initialization Methods" href="catsim.initialization.html"/>
-        <link rel="prev" title="Welcome to catsim’s documentation!" href="index.html"/> 
+    <link rel="top" title="None" href="index.html"/>
+        <link rel="next" title="Miscellaneous Plotting Functions" href="catsim.plot.html"/>
+        <link rel="prev" title="Item Response Theory Functions" href="catsim.irt.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                1.2
+                0.8
               </div>
             
           
@@ -82,15 +82,16 @@
             
             
                 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="">Computerized Adaptive Test-related Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="catsim.initialization.html">Initialization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="item_matrix.html">The Item Matrix</a></li>
 <li class="toctree-l1"><a class="reference internal" href="catsim.irt.html">Item Response Theory Functions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Computerized Adaptive Test-related Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="catsim.plot.html">Miscellaneous Plotting Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="catsim.reestimation.html">Reestimation Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="catsim.selection.html">Item Selection Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="catsim.simulation.html">Computerized Adaptive Testing Simulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="catsim.stats.html">Miscellaneous Statistical Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="catsim.initialization.html">Initialization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="catsim.selection.html">Item Selection Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="catsim.reestimation.html">Reestimation Methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="catsim.stopping.html">Stopping Criteria</a></li>
+<li class="toctree-l1"><a class="reference internal" href="catsim.simulation.html">Computerized Adaptive Testing Simulation</a></li>
 </ul>
 
             
@@ -137,12 +138,29 @@
             
   <div class="section" id="module-catsim.cat">
 <span id="computerized-adaptive-test-related-functions"></span><h1>Computerized Adaptive Test-related Functions<a class="headerlink" href="#module-catsim.cat" title="Permalink to this headline">¶</a></h1>
+<p>Functions used specifically during the application/simulation of computerized adaptive tests.</p>
+<table class="docutils citation" frame="void" id="bar10" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label">[Bar10]</td><td><em>(<a class="fn-backref" href="#id2">1</a>, <a class="fn-backref" href="#id3">2</a>, <a class="fn-backref" href="#id4">3</a>)</em> BARRADA, Juan Ramón et al. A method for the comparison of item
+selection rules in computerized adaptive testing. Applied Psychological
+Measurement, v. 34, n. 6, p. 438-452, 2010.</td></tr>
+</tbody>
+</table>
+<table class="docutils citation" frame="void" id="dod90" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[Dod90]</a></td><td>Dodd, B. G. (1990). The Effect of Item Selection Procedure and
+Stepsize on Computerized Adaptive Attitude Measurement Using the Rating
+Scale Model. Applied Psychological Measurement, 14(4), 355-366.
+<a class="reference external" href="http://doi.org/10.1177/014662169001400403">http://doi.org/10.1177/014662169001400403</a></td></tr>
+</tbody>
+</table>
 <dl class="function">
 <dt id="catsim.cat.dodd">
 <code class="descclassname">catsim.cat.</code><code class="descname">dodd</code><span class="sig-paren">(</span><em>theta: float</em>, <em>items: numpy.ndarray</em>, <em>correct: bool</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/cat.html#dodd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cat.dodd" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method proposed by <a class="reference internal" href="#dod90" id="id1">[Dod90]</a> for the reestimation of
-<span class="math">\(\hat{\theta}\)</span> when the response vector is composed entirely of 1s
-or 0s</p>
+<dd><p>Method proposed by <a class="reference internal" href="#dod90" id="id1">[Dod90]</a> for the reestimation of <span class="math">\(\hat{\theta}\)</span>
+when the response vector is composed entirely of 1s or 0s</p>
 <div class="math">
 \[\begin{split}\hat{\theta}_{t+1} = \left\lbrace \begin{array}{ll}
 \hat{\theta}_t+\frac{b_{max}-\hat{\theta_t}}{2} &amp; \text{if } X_t = 1 \\
@@ -168,15 +186,6 @@ correctly answered the current item.</li>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a new estimation for <span class="math">\(\theta\)</span></p>
 </td>
 </tr>
-</tbody>
-</table>
-<table class="docutils citation" frame="void" id="dod90" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[Dod90]</a></td><td>Dodd, B. G. (1990). The Effect of Item Selection Procedure and
-Stepsize on Computerized Adaptive Attitude Measurement Using the Rating
-Scale Model. Applied Psychological Measurement, 14(4), 355-366.
-<a class="reference external" href="http://doi.org/10.1177/014662169001400403">http://doi.org/10.1177/014662169001400403</a></td></tr>
 </tbody>
 </table>
 </dd></dl>
@@ -224,7 +233,7 @@ three-parameter logistic model</li>
 <dl class="function">
 <dt id="catsim.cat.overlap_rate">
 <code class="descclassname">catsim.cat.</code><code class="descname">overlap_rate</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>test_size: int</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/cat.html#overlap_rate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cat.overlap_rate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Test overlap rate, an average measure of how much of the test two examinees take is equal. It is given by:</p>
+<dd><p>Test overlap rate, an average measure of how much of the test two examinees take is equal <a class="reference internal" href="catsim.simulation.html#bar10" id="id3">[Bar10]</a>. It is given by:</p>
 <div class="math">
 \[T=\frac{N}{Q}S_{r}^2 + \frac{Q}{N}\]</div>
 <p>If, for example <span class="math">\(T = 0.5\)</span>, it means that the tests of two random examinees have 50% of equal items.</p>
@@ -252,7 +261,7 @@ times each item was used in the tests.</li>
 <dl class="function">
 <dt id="catsim.cat.rmse">
 <code class="descclassname">catsim.cat.</code><code class="descname">rmse</code><span class="sig-paren">(</span><em>actual: typing.Iterable</em>, <em>predicted: typing.Iterable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/cat.html#rmse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cat.rmse" title="Permalink to this definition">¶</a></dt>
-<dd><p>Root mean squared error, a common value used when measuring the precision with which a computerized adaptive test estimates examinees proficiencies. The value is calculated by:</p>
+<dd><p>Root mean squared error, a common value used when measuring the precision with which a computerized adaptive test estimates examinees proficiencies <a class="reference internal" href="catsim.simulation.html#bar10" id="id4">[Bar10]</a>. The value is calculated by:</p>
 <div class="math">
 \[RMSE = \sqrt{\frac{\sum_{i=1}^{N} (\hat{\theta}_i - \theta_{i})^2}{N}}\]</div>
 <p>where <span class="math">\(\hat{\theta}_i\)</span> is examinee <span class="math">\(i\)</span> estimated proficiency and <span class="math">\(\hat{\theta}_i\)</span> is examinee <span class="math">\(i\)</span> actual proficiency.</p>
@@ -282,10 +291,10 @@ times each item was used in the tests.</li>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="catsim.initialization.html" class="btn btn-neutral float-right" title="Initialization Methods" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="catsim.plot.html" class="btn btn-neutral float-right" title="Miscellaneous Plotting Functions" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="Welcome to catsim’s documentation!" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="catsim.irt.html" class="btn btn-neutral" title="Item Response Theory Functions" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -294,7 +303,7 @@ times each item was used in the tests.</li>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2015, Douglas De Rizzo Meneghetti.
+        &copy; Copyright 2016, Douglas De Rizzo Meneghetti.
 
     </p>
   </div>
@@ -316,7 +325,7 @@ times each item was used in the tests.</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.2a',
+            VERSION:'0.8',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

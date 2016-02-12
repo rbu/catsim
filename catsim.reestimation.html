@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Reestimation Methods &mdash; catsim documentation</title>
+  <title>Reestimation Methods</title>
   
 
   
@@ -30,9 +30,9 @@
   
 
   
-    <link rel="top" title="catsim documentation" href="index.html"/>
-        <link rel="next" title="Item Selection Methods" href="catsim.selection.html"/>
-        <link rel="prev" title="Miscellaneous Plotting Functions" href="catsim.plot.html"/> 
+    <link rel="top" title="None" href="index.html"/>
+        <link rel="next" title="Stopping Criteria" href="catsim.stopping.html"/>
+        <link rel="prev" title="Item Selection Methods" href="catsim.selection.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                1.2
+                0.8
               </div>
             
           
@@ -82,15 +82,16 @@
             
             
                 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="catsim.cat.html">Computerized Adaptive Test-related Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="catsim.initialization.html">Initialization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="item_matrix.html">The Item Matrix</a></li>
 <li class="toctree-l1"><a class="reference internal" href="catsim.irt.html">Item Response Theory Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="catsim.cat.html">Computerized Adaptive Test-related Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="catsim.plot.html">Miscellaneous Plotting Functions</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Reestimation Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="catsim.selection.html">Item Selection Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="catsim.simulation.html">Computerized Adaptive Testing Simulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="catsim.stats.html">Miscellaneous Statistical Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="catsim.initialization.html">Initialization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="catsim.selection.html">Item Selection Methods</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Reestimation Methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="catsim.stopping.html">Stopping Criteria</a></li>
+<li class="toctree-l1"><a class="reference internal" href="catsim.simulation.html">Computerized Adaptive Testing Simulation</a></li>
 </ul>
 
             
@@ -153,6 +154,7 @@
 </tr>
 </tbody>
 </table>
+<p class="rubric">Attributes</p>
 <p class="rubric">Methods</p>
 <dl class="method">
 <dt id="catsim.reestimation.BinarySearchEstimator.estimate">
@@ -182,6 +184,12 @@ answered items</li>
 </table>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="catsim.reestimation.BinarySearchEstimator.evaluations">
+<code class="descname">evaluations</code><a class="headerlink" href="#catsim.reestimation.BinarySearchEstimator.evaluations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Count the number of function evaluations during the most recent estimation process</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
@@ -200,6 +208,7 @@ bounds for <span class="math">\(\theta\)</span> exist.</td>
 </tr>
 </tbody>
 </table>
+<p class="rubric">Attributes</p>
 <p class="rubric">Methods</p>
 <dl class="method">
 <dt id="catsim.reestimation.DifferentialEvolutionEstimator.estimate">
@@ -227,6 +236,12 @@ answered items</li>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="catsim.reestimation.DifferentialEvolutionEstimator.evaluations">
+<code class="descname">evaluations</code><a class="headerlink" href="#catsim.reestimation.DifferentialEvolutionEstimator.evaluations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Count the number of function evaluations during the most recent estimation process</p>
 </dd></dl>
 
 </dd></dl>
@@ -317,6 +332,7 @@ answered items</li>
 </tr>
 </tbody>
 </table>
+<p class="rubric">Attributes</p>
 <p class="rubric">Methods</p>
 <dl class="method">
 <dt id="catsim.reestimation.HillClimbingEstimator.estimate">
@@ -346,6 +362,12 @@ answered items</li>
 </table>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="catsim.reestimation.HillClimbingEstimator.evaluations">
+<code class="descname">evaluations</code><a class="headerlink" href="#catsim.reestimation.HillClimbingEstimator.evaluations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Count the number of function evaluations during the most recent estimation process</p>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -357,10 +379,10 @@ answered items</li>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="catsim.selection.html" class="btn btn-neutral float-right" title="Item Selection Methods" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="catsim.stopping.html" class="btn btn-neutral float-right" title="Stopping Criteria" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="catsim.plot.html" class="btn btn-neutral" title="Miscellaneous Plotting Functions" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="catsim.selection.html" class="btn btn-neutral" title="Item Selection Methods" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -369,7 +391,7 @@ answered items</li>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2015, Douglas De Rizzo Meneghetti.
+        &copy; Copyright 2016, Douglas De Rizzo Meneghetti.
 
     </p>
   </div>
@@ -391,7 +413,7 @@ answered items</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.2a',
+            VERSION:'0.8',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

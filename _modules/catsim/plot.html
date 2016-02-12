@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>catsim.plot &mdash; catsim documentation</title>
+  <title>catsim.plot</title>
   
 
   
@@ -30,7 +30,7 @@
   
 
   
-    <link rel="top" title="catsim documentation" href="../../index.html"/>
+    <link rel="top" title="None" href="../../index.html"/>
         <link rel="up" title="Module code" href="../index.html"/> 
 
   
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                1.2
+                0.8
               </div>
             
           
@@ -169,6 +169,9 @@
 <span class="sd">        plot.item_curve(item[0], item[1], item[2], ptype=&#39;icc&#39;)</span>
 <span class="sd">        plot.item_curve(item[0], item[1], item[2], ptype=&#39;iic&#39;)</span>
 <span class="sd">        plot.item_curve(item[0], item[1], item[2], ptype=&#39;both&#39;)</span>
+
+<span class="sd">    When both curves are plotted in the same figure, the figure has no grid,</span>
+<span class="sd">    since each curve has a different scale.</span>
 
 <span class="sd">    :param a: item discrimination parameter</span>
 <span class="sd">    :param b: item difficulty parameter</span>
@@ -306,6 +309,8 @@
     <span class="n">thetas</span><span class="p">:</span> <span class="nb">list</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
     <span class="n">administered_items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
     <span class="n">true_theta</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">see</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+    <span class="n">reliability</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
     <span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="bp">None</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Generates a plot representing an examinee&#39;s test progress</span>
@@ -327,6 +332,7 @@
 <span class="sd">        s = Simulator(generate_item_bank(100), 10)</span>
 <span class="sd">        s.simulate(initializer, selector, estimator, stopper)</span>
 <span class="sd">        plot.test_progress(simulator=s, index=0)</span>
+<span class="sd">        plot.test_progress(simulator=s, index=0, true_theta=s.examinees[0], see=True)</span>
 
 <span class="sd">    :param title: the plot title</span>
 <span class="sd">    :param simulator: a simulator which has already simulated a series of CATs, containing estimations to the examinees&#39; proficiencies and a list of administered items for each examinee</span>
@@ -334,6 +340,7 @@
 <span class="sd">    :param thetas: if a :py:class:`Simulator` is not passed, then a list of proficiency estimations can be manually passed to the function</span>
 <span class="sd">    :param administered_items: if a :py:class:`Simulator` is not passed, then a matrix of administered items, represented by their parameters, can be manually passed to the function</span>
 <span class="sd">    :param true_theta: the value of the examinee&#39;s true proficiency. If it is passed, it will be shown on the plot, otherwise not</span>
+<span class="sd">    :param see: plot the standard error of estimation during the test. It only works if both proficiencies and administered items are passed</span>
 <span class="sd">    :param filepath: the path to save the plot</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">simulator</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">thetas</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">administered_items</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
@@ -359,12 +366,22 @@
     <span class="n">xs</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">thetas</span><span class="p">))</span> <span class="k">if</span> <span class="n">thetas</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="k">else</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">administered_items</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]))</span>
 
     <span class="k">if</span> <span class="n">thetas</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">thetas</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">r&#39;$\theta$&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">thetas</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">r&#39;$\hat{\theta}$&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">administered_items</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
         <span class="n">difficulties</span> <span class="o">=</span> <span class="n">administered_items</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
         <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">difficulties</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Item difficulty&#39;</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">true_theta</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">true_theta</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;True theta&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">hlines</span><span class="p">(</span><span class="n">true_theta</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">xs</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">r&#39;$\theta$&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">thetas</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">administered_items</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+
+        <span class="c1"># calculate and plot standard error and reliability</span>
+        <span class="k">if</span> <span class="n">see</span><span class="p">:</span>
+            <span class="n">sees</span> <span class="o">=</span> <span class="p">[</span><span class="n">irt</span><span class="o">.</span><span class="n">see</span><span class="p">(</span><span class="n">thetas</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">administered_items</span><span class="p">[:</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">]</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">sees</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">r&#39;$SEE$&#39;</span><span class="p">)</span>
+
+        <span class="c1"># if reliability:</span>
+        <span class="c1">#     reliabilities = [irt.reliability(thetas[x], administered_items[:x + 1, ]) for x in xs]</span>
+        <span class="c1">#     plt.plot(xs, reliabilities, label=&#39;Reliability&#39;)</span>
 
     <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Items&#39;</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
@@ -387,7 +404,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2015, Douglas De Rizzo Meneghetti.
+        &copy; Copyright 2016, Douglas De Rizzo Meneghetti.
 
     </p>
   </div>
@@ -409,7 +426,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.2a',
+            VERSION:'0.8',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

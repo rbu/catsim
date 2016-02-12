@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Miscellaneous Plotting Functions &mdash; catsim documentation</title>
+  <title>Miscellaneous Plotting Functions</title>
   
 
   
@@ -30,9 +30,9 @@
   
 
   
-    <link rel="top" title="catsim documentation" href="index.html"/>
-        <link rel="next" title="Reestimation Methods" href="catsim.reestimation.html"/>
-        <link rel="prev" title="Item Response Theory Functions" href="catsim.irt.html"/> 
+    <link rel="top" title="None" href="index.html"/>
+        <link rel="next" title="Miscellaneous Statistical Functions" href="catsim.stats.html"/>
+        <link rel="prev" title="Computerized Adaptive Test-related Functions" href="catsim.cat.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                1.2
+                0.8
               </div>
             
           
@@ -82,15 +82,16 @@
             
             
                 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="catsim.cat.html">Computerized Adaptive Test-related Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="catsim.initialization.html">Initialization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="item_matrix.html">The Item Matrix</a></li>
 <li class="toctree-l1"><a class="reference internal" href="catsim.irt.html">Item Response Theory Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="catsim.cat.html">Computerized Adaptive Test-related Functions</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Miscellaneous Plotting Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="catsim.reestimation.html">Reestimation Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="catsim.selection.html">Item Selection Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="catsim.simulation.html">Computerized Adaptive Testing Simulation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="catsim.stats.html">Miscellaneous Statistical Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="catsim.initialization.html">Initialization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="catsim.selection.html">Item Selection Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="catsim.reestimation.html">Reestimation Methods</a></li>
 <li class="toctree-l1"><a class="reference internal" href="catsim.stopping.html">Stopping Criteria</a></li>
+<li class="toctree-l1"><a class="reference internal" href="catsim.simulation.html">Computerized Adaptive Testing Simulation</a></li>
 </ul>
 
             
@@ -178,6 +179,8 @@
 <img alt="_images/catsim-plot-2_02.png" src="_images/catsim-plot-2_02.png" />
 <p class="caption"><span class="caption-text">(<a class="reference external" href=".//catsim-plot-2_02.png">png</a>, <a class="reference external" href=".//catsim-plot-2_02.hires.png">hires.png</a>, <a class="reference external" href=".//catsim-plot-2_02.pdf">pdf</a>)</span></p>
 </div>
+<p>When both curves are plotted in the same figure, the figure has no grid,
+since each curve has a different scale.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -199,11 +202,16 @@ information curve or &#8216;both&#8217; for both curves in the same plot</li>
 
 <dl class="function">
 <dt id="catsim.plot.test_progress">
-<code class="descclassname">catsim.plot.</code><code class="descname">test_progress</code><span class="sig-paren">(</span><em>title: str=None</em>, <em>simulator: catsim.simulation.Simulator=None</em>, <em>index: int=None</em>, <em>thetas: list=None</em>, <em>administered_items: numpy.ndarray=None</em>, <em>true_theta: float=None</em>, <em>filepath: str=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/plot.html#test_progress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.plot.test_progress" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">catsim.plot.</code><code class="descname">test_progress</code><span class="sig-paren">(</span><em>title: str=None</em>, <em>simulator: catsim.simulation.Simulator=None</em>, <em>index: int=None</em>, <em>thetas: list=None</em>, <em>administered_items: numpy.ndarray=None</em>, <em>true_theta: float=None</em>, <em>see: bool=False</em>, <em>reliability: bool=False</em>, <em>filepath: str=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/plot.html#test_progress"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.plot.test_progress" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates a plot representing an examinee&#8217;s test progress</p>
-<p>(<a class="reference external" href=".//catsim-plot-3.py">Source code</a>, <a class="reference external" href=".//catsim-plot-3.png">png</a>, <a class="reference external" href=".//catsim-plot-3.hires.png">hires.png</a>, <a class="reference external" href=".//catsim-plot-3.pdf">pdf</a>)</p>
-<div class="figure">
-<img alt="_images/catsim-plot-3.png" src="_images/catsim-plot-3.png" />
+<p>(<a class="reference external" href=".//catsim-plot-3.py">Source code</a>)</p>
+<div class="figure" id="id4">
+<img alt="_images/catsim-plot-3_00.png" src="_images/catsim-plot-3_00.png" />
+<p class="caption"><span class="caption-text">(<a class="reference external" href=".//catsim-plot-3_00.png">png</a>, <a class="reference external" href=".//catsim-plot-3_00.hires.png">hires.png</a>, <a class="reference external" href=".//catsim-plot-3_00.pdf">pdf</a>)</span></p>
+</div>
+<div class="figure" id="id5">
+<img alt="_images/catsim-plot-3_01.png" src="_images/catsim-plot-3_01.png" />
+<p class="caption"><span class="caption-text">(<a class="reference external" href=".//catsim-plot-3_01.png">png</a>, <a class="reference external" href=".//catsim-plot-3_01.hires.png">hires.png</a>, <a class="reference external" href=".//catsim-plot-3_01.pdf">pdf</a>)</span></p>
 </div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -216,6 +224,7 @@ information curve or &#8216;both&#8217; for both curves in the same plot</li>
 <li><strong>thetas</strong> (<code class="docutils literal"><span class="pre">list</span></code>) &#8211; if a <code class="xref py py-class docutils literal"><span class="pre">Simulator</span></code> is not passed, then a list of proficiency estimations can be manually passed to the function</li>
 <li><strong>administered_items</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>) &#8211; if a <code class="xref py py-class docutils literal"><span class="pre">Simulator</span></code> is not passed, then a matrix of administered items, represented by their parameters, can be manually passed to the function</li>
 <li><strong>true_theta</strong> (<code class="docutils literal"><span class="pre">float</span></code>) &#8211; the value of the examinee&#8217;s true proficiency. If it is passed, it will be shown on the plot, otherwise not</li>
+<li><strong>see</strong> (<code class="docutils literal"><span class="pre">bool</span></code>) &#8211; plot the standard error of estimation during the test. It only works if both proficiencies and administered items are passed</li>
 <li><strong>filepath</strong> (<code class="docutils literal"><span class="pre">str</span></code>) &#8211; the path to save the plot</li>
 </ul>
 </td>
@@ -233,10 +242,10 @@ information curve or &#8216;both&#8217; for both curves in the same plot</li>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="catsim.reestimation.html" class="btn btn-neutral float-right" title="Reestimation Methods" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="catsim.stats.html" class="btn btn-neutral float-right" title="Miscellaneous Statistical Functions" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="catsim.irt.html" class="btn btn-neutral" title="Item Response Theory Functions" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="catsim.cat.html" class="btn btn-neutral" title="Computerized Adaptive Test-related Functions" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -245,7 +254,7 @@ information curve or &#8216;both&#8217; for both curves in the same plot</li>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2015, Douglas De Rizzo Meneghetti.
+        &copy; Copyright 2016, Douglas De Rizzo Meneghetti.
 
     </p>
   </div>
@@ -267,7 +276,7 @@ information curve or &#8216;both&#8217; for both curves in the same plot</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.2a',
+            VERSION:'0.8',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

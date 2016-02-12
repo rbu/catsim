@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>catsim.irt &mdash; catsim documentation</title>
+  <title>catsim.irt</title>
   
 
   
@@ -30,7 +30,7 @@
   
 
   
-    <link rel="top" title="catsim documentation" href="../../index.html"/>
+    <link rel="top" title="None" href="../../index.html"/>
         <link rel="up" title="Module code" href="../index.html"/> 
 
   
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                1.2
+                0.8
               </div>
             
           
@@ -140,14 +140,20 @@
 
 <span class="sd">On the mathematical domain, IRT allows us to calculate the probability with which an examinee might answer an item correctly. For that both items and examinees are modelled using numerical parameters. This allows for the estimation and analysis of examinees proficiencies on the same scale as items difficulties. It also allows for the quality of items to be judged by the values of their parameters.</span>
 
-<span class="sd">This module containing functions pertaining to the Item Response Theory logistic models.&quot;&quot;&quot;</span>
+<span class="sd">This module containing functions pertaining to the Item Response Theory logistic models.</span>
+
+<span class="sd">.. [Ayala2009] De Ayala, R. J. (2009). The Theory and Practice of Item Response Theory. New York: Guilford Press. Retrieved from http://books.google.com/books?id=-k36zbOBa28C&amp;pgis=1</span>
+
+<span class="sd">.. [Thissen00] Thissen, D. (2000). Reliability and measurement precision. In H. Wainer (Ed.), Computerized adaptive testing: A primer (2nd ed., pp. 159–184). Lawrence Erlbaum Associates Publishers.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">numpy</span>
 
 
 <div class="viewcode-block" id="tpm"><a class="viewcode-back" href="../../catsim.irt.html#catsim.irt.tpm">[docs]</a><span class="k">def</span> <span class="nf">tpm</span><span class="p">(</span><span class="n">theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Item Response Theory three-parameter logistic function:</span>
+    <span class="sd">&quot;&quot;&quot;Item Response Theory three-parameter logistic function [Ayala2009]_:</span>
 
 <span class="sd">    .. math:: P(X_i = 1| \\theta) = c_i + \\frac{1-c_i}{1+ e^{Da_i(\\theta-b_i)}}</span>
 
@@ -177,8 +183,45 @@
         <span class="p">)</span></div>
 
 
+<div class="viewcode-block" id="see"><a class="viewcode-back" href="../../catsim.irt.html#catsim.irt.see">[docs]</a><span class="k">def</span> <span class="nf">see</span><span class="p">(</span><span class="n">theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Computes the standard error of estimation (:math:`SEE`) of a test at a specific :math:`\\theta` value [Ayala2009]_:</span>
+
+<span class="sd">    .. math:: SEE = \\frac{1}{I(\\theta)}</span>
+
+<span class="sd">    where :math:`I(\\theta)` is the test information (see :py:func:`test_info`).</span>
+
+<span class="sd">    :param theta: a proficiency value.</span>
+<span class="sd">    :param items: a matrix containing item parameters.</span>
+<span class="sd">    :returns: the standard error of estimation at `theta` for a test represented by `items`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">test_info</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">items</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="test_info"><a class="viewcode-back" href="../../catsim.irt.html#catsim.irt.test_info">[docs]</a><span class="k">def</span> <span class="nf">test_info</span><span class="p">(</span><span class="n">theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Computes the test information of a test at a specific :math:`\\theta` value [Ayala2009]_:</span>
+
+<span class="sd">    .. math:: I(\\theta) = \\sum_{j \\in J} I_j(\\theta)</span>
+
+<span class="sd">    where :math:`J` is the set of items in the test and :math:`I_j(\\theta)` is the item information of :math:`j` at aspecific :math:`\\theta` value.</span>
+
+<span class="sd">    :param theta: a proficiency value.</span>
+<span class="sd">    :param items: a matrix containing item parameters.</span>
+<span class="sd">    :returns: the test information at `theta` for a test represented by `items`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">([</span><span class="n">inf</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">])</span></div>
+
+<span class="c1"># </span>
+<span class="c1"># def reliability(theta: float, items: numpy.ndarray):</span>
+<span class="c1">#     &quot;&quot;&quot; Computes test reliability [Thissen00]_, given by</span>
+<span class="c1">#</span>
+<span class="c1">#     .. math:: 1 - \\frac{1}{I(\\theta)}</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     # return 1 - see(theta, items)**2</span>
+<span class="c1">#     return 1 - (1 / test_info(theta, items))</span>
+
+
 <div class="viewcode-block" id="inf"><a class="viewcode-back" href="../../catsim.irt.html#catsim.irt.inf">[docs]</a><span class="k">def</span> <span class="nf">inf</span><span class="p">(</span><span class="n">theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Calculates the information value of an item using the Item Response Theory three-parameter logistic model function:</span>
+    <span class="sd">&quot;&quot;&quot;Calculates the information value of an item using the Item Response Theory three-parameter logistic model function [Ayala2009]_:</span>
 
 <span class="sd">    .. math:: I(\\theta) = a^2\\frac{(P(\\theta)-c)^2}{(1-c)^2}.\\frac{(1-P(\\theta))}{P(\\theta)}</span>
 
@@ -207,7 +250,7 @@
 
 <div class="viewcode-block" id="logLik"><a class="viewcode-back" href="../../catsim.irt.html#catsim.irt.logLik">[docs]</a><span class="k">def</span> <span class="nf">logLik</span><span class="p">(</span><span class="n">est_theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">response_vector</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Calculates the log-likelihood of an estimated proficiency, given a</span>
-<span class="sd">    response vector and the parameters of the answered items.</span>
+<span class="sd">    response vector and the parameters of the answered items [Ayala2009]_.</span>
 
 <span class="sd">    The likelihood function of a given :math:`\\theta` value given the answers to :math:`I` items is given by:</span>
 
@@ -344,7 +387,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2015, Douglas De Rizzo Meneghetti.
+        &copy; Copyright 2016, Douglas De Rizzo Meneghetti.
 
     </p>
   </div>
@@ -366,7 +409,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.2a',
+            VERSION:'0.8',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
