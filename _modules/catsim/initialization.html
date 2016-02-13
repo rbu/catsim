@@ -149,11 +149,10 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">Initializer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
 
     <span class="nd">@abstractmethod</span>
-<div class="viewcode-block" id="Initializer.initialize"><a class="viewcode-back" href="../../catsim.initialization.html#catsim.initialization.Initializer.initialize">[docs]</a>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Initializer.initialize"><a class="viewcode-back" href="../../catsim.initialization.html#catsim.initialization.Initializer.initialize">[docs]</a>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Selects an examinee&#39;s initial :math:`\\theta` value</span>
 
 <span class="sd">        :returns: examinee&#39;s initial :math:`\\theta` value</span>
-<span class="sd">        :rtype: float</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">pass</span></div></div>
 
@@ -175,17 +174,17 @@
                 <span class="p">)</span>
             <span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">__dist_type</span> <span class="o">=</span> <span class="n">dist_type</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__dist_params</span> <span class="o">=</span> <span class="n">dist_params</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dist_type</span> <span class="o">=</span> <span class="n">dist_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_dist_params</span> <span class="o">=</span> <span class="n">dist_params</span>
 
 <div class="viewcode-block" id="RandomInitializer.initialize"><a class="viewcode-back" href="../../catsim.initialization.html#catsim.initialization.RandomInitializer.initialize">[docs]</a>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Generates a value using the chosen distribution and parameters</span>
 
 <span class="sd">        :returns: a proficiency value generated from the chosen distribution using the passed parameters&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dist_type</span> <span class="o">==</span> <span class="s1">&#39;uniform&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__dist_params</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__dist_params</span><span class="p">))</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dist_type</span> <span class="o">==</span> <span class="s1">&#39;normal&#39;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__dist_params</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist_params</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span></div></div>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dist_type</span> <span class="o">==</span> <span class="s1">&#39;uniform&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dist_params</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dist_params</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dist_type</span> <span class="o">==</span> <span class="s1">&#39;normal&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dist_params</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">dist_params</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span></div></div>
 
 
 <div class="viewcode-block" id="FixedPointInitializer"><a class="viewcode-back" href="../../catsim.initialization.html#catsim.initialization.FixedPointInitializer">[docs]</a><span class="k">class</span> <span class="nc">FixedPointInitializer</span><span class="p">(</span><span class="n">Initializer</span><span class="p">):</span>
@@ -194,13 +193,13 @@
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">FixedPointInitializer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">__start</span> <span class="o">=</span> <span class="n">start</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_start</span> <span class="o">=</span> <span class="n">start</span>
 
 <div class="viewcode-block" id="FixedPointInitializer.initialize"><a class="viewcode-back" href="../../catsim.initialization.html#catsim.initialization.FixedPointInitializer.initialize">[docs]</a>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Returns the same proficiency value that was passed to the constructor of the initializer</span>
 
 <span class="sd">        :returns: the same proficiency value that was passed to the constructor of the initializer&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__start</span></div></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_start</span></div></div>
 </pre></div>
 
            </div>

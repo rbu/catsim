@@ -261,7 +261,7 @@ times each item was used in the tests.</li>
 
 <dl class="function">
 <dt id="catsim.cat.rmse">
-<code class="descclassname">catsim.cat.</code><code class="descname">rmse</code><span class="sig-paren">(</span><em>actual: typing.Iterable</em>, <em>predicted: typing.Iterable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/cat.html#rmse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cat.rmse" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">catsim.cat.</code><code class="descname">rmse</code><span class="sig-paren">(</span><em>actual: collections.abc.Iterable</em>, <em>predicted: collections.abc.Iterable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/cat.html#rmse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cat.rmse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Root mean squared error, a common value used when measuring the precision with which a computerized adaptive test estimates examinees proficiencies <a class="reference internal" href="catsim.simulation.html#bar10" id="id4">[Bar10]</a>. The value is calculated by:</p>
 <div class="math">
 \[RMSE = \sqrt{\frac{\sum_{i=1}^{N} (\hat{\theta}_i - \theta_{i})^2}{N}}\]</div>
@@ -271,8 +271,8 @@ times each item was used in the tests.</li>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>actual</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">Iterable</span></code></a>) &#8211; a list or 1-D numpy array containing the true proficiency values</li>
-<li><strong>predicted</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Iterable" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">Iterable</span></code></a>) &#8211; a list or 1-D numpy array containing the estimated proficiency values</li>
+<li><strong>actual</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">Iterable</span></code></a>) &#8211; a list or 1-D numpy array containing the true proficiency values</li>
+<li><strong>predicted</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">Iterable</span></code></a>) &#8211; a list or 1-D numpy array containing the estimated proficiency values</li>
 </ul>
 </td>
 </tr>

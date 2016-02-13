@@ -193,9 +193,12 @@
 
 <span class="sd">    :param theta: a proficiency value.</span>
 <span class="sd">    :param items: a matrix containing item parameters.</span>
-<span class="sd">    :returns: the standard error of estimation at `theta` for a test represented by `items`</span>
+<span class="sd">    :returns: the standard error of estimation at `theta` for a test represented by `items`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">test_info</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">items</span><span class="p">))</span></div>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">test_info</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">items</span><span class="p">))</span>
+    <span class="k">except</span> <span class="ne">ZeroDivisionError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;-inf&#39;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="test_info"><a class="viewcode-back" href="../../catsim.irt.html#catsim.irt.test_info">[docs]</a><span class="k">def</span> <span class="nf">test_info</span><span class="p">(</span><span class="n">theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
@@ -203,22 +206,32 @@
 
 <span class="sd">    .. math:: I(\\theta) = \\sum_{j \\in J} I_j(\\theta)</span>
 
-<span class="sd">    where :math:`J` is the set of items in the test and :math:`I_j(\\theta)` is the item information of :math:`j` at aspecific :math:`\\theta` value.</span>
+<span class="sd">    where :math:`J` is the set of items in the test and :math:`I_j(\\theta)` is the</span>
+<span class="sd">    item information of :math:`j` at aspecific :math:`\\theta` value.</span>
 
 <span class="sd">    :param theta: a proficiency value.</span>
 <span class="sd">    :param items: a matrix containing item parameters.</span>
-<span class="sd">    :returns: the test information at `theta` for a test represented by `items`</span>
+<span class="sd">    :returns: the test information at `theta` for a test represented by `items`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">sum</span><span class="p">([</span><span class="n">inf</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">item</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">items</span><span class="p">])</span></div>
 
-<span class="c1"># </span>
-<span class="c1"># def reliability(theta: float, items: numpy.ndarray):</span>
-<span class="c1">#     &quot;&quot;&quot; Computes test reliability [Thissen00]_, given by</span>
-<span class="c1">#</span>
-<span class="c1">#     .. math:: 1 - \\frac{1}{I(\\theta)}</span>
-<span class="c1">#     &quot;&quot;&quot;</span>
-<span class="c1">#     # return 1 - see(theta, items)**2</span>
-<span class="c1">#     return 1 - (1 / test_info(theta, items))</span>
+
+<div class="viewcode-block" id="reliability"><a class="viewcode-back" href="../../catsim.irt.html#catsim.irt.reliability">[docs]</a><span class="k">def</span> <span class="nf">reliability</span><span class="p">(</span><span class="n">theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Computes test reliability [Thissen00]_, given by</span>
+
+<span class="sd">    .. math:: Rel = 1 - \\frac{1}{I(\\theta)}</span>
+
+<span class="sd">    Test reliability is a measure of internal consistency for the test, similar</span>
+<span class="sd">    to Cronbach&#39;s :math:`\\alpha` in Classical Test Theory. Its value is always</span>
+<span class="sd">    lower than 1, with values close to 1 indicating good reliability. If</span>
+<span class="sd">    :math:`I(\\theta) &lt; 1`, :math:`Rel &lt; 0` and in these cases it does not make</span>
+<span class="sd">    sense, but usually the application of additional items solves this problem.</span>
+
+<span class="sd">    :param theta: a proficiency value.</span>
+<span class="sd">    :param items: a matrix containing item parameters.</span>
+<span class="sd">    :returns: the test reliability at `theta` for a test represented by `items`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">test_info</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">items</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="inf"><a class="viewcode-back" href="../../catsim.irt.html#catsim.irt.inf">[docs]</a><span class="k">def</span> <span class="nf">inf</span><span class="p">(</span><span class="n">theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
@@ -242,10 +255,10 @@
 <span class="sd">        :math:`0\\leq c \\leq 1`, but items considered good usually have</span>
 <span class="sd">        :math:`c \\leq 0.2`.</span>
 
-<span class="sd">    :returns: the information value of the item at the designated `theta` point</span>
-<span class="sd">    :rtype: float</span>
+<span class="sd">    :returns: the information value of the item at the designated `theta` point.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">ml3</span> <span class="o">=</span> <span class="n">tpm</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+
     <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">ml3</span> <span class="o">-</span> <span class="n">c</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">c</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ml3</span><span class="p">)</span> <span class="o">/</span> <span class="n">ml3</span></div>
 
 
@@ -311,7 +324,7 @@
     <span class="k">return</span> <span class="o">-</span><span class="n">logLik</span><span class="p">(</span><span class="n">est_theta</span><span class="p">,</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span></div>
 
 
-<div class="viewcode-block" id="normalize_item_bank"><a class="viewcode-back" href="../../catsim.irt.html#catsim.irt.normalize_item_bank">[docs]</a><span class="k">def</span> <span class="nf">normalize_item_bank</span><span class="p">(</span><span class="n">items</span><span class="p">):</span>
+<div class="viewcode-block" id="normalize_item_bank"><a class="viewcode-back" href="../../catsim.irt.html#catsim.irt.normalize_item_bank">[docs]</a><span class="k">def</span> <span class="nf">normalize_item_bank</span><span class="p">(</span><span class="n">items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Normalize an item matrix so that it conforms to the standard used by catsim.</span>
 <span class="sd">    The item matrix must have dimension nx3, in which column 1 represents item discrimination,</span>
 <span class="sd">    column 2 represents item difficulty and column 3 represents the pseudo-guessing parameter.</span>
@@ -323,10 +336,8 @@
 <span class="sd">    columns, respectively. the pseudo-guessing column is added such that items simulate the 2-parameter logistic model.</span>
 
 <span class="sd">    :param items: the item matrix</span>
-<span class="sd">    :type items: numpy.ndarray</span>
 
 <span class="sd">    :returns: an nx3 item matrix conforming to 1, 2 and 3 parameter logistic models</span>
-<span class="sd">    :rtype: numpy.ndarray</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">items</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">items</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">items</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])),</span> <span class="n">items</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -336,7 +347,7 @@
     <span class="k">return</span> <span class="n">items</span></div>
 
 
-<div class="viewcode-block" id="validate_item_bank"><a class="viewcode-back" href="../../catsim.irt.html#catsim.irt.validate_item_bank">[docs]</a><span class="k">def</span> <span class="nf">validate_item_bank</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">raise_err</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="validate_item_bank"><a class="viewcode-back" href="../../catsim.irt.html#catsim.irt.validate_item_bank">[docs]</a><span class="k">def</span> <span class="nf">validate_item_bank</span><span class="p">(</span><span class="n">items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">raise_err</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Validates the shape and parameters in the item matrix so that it conforms to the standard</span>
 <span class="sd">    used by catsim. The item matrix must have dimension nx3, in which column 1 represents item</span>
 <span class="sd">    discrimination, column 2 represents item difficulty and column 3 represents the</span>
@@ -346,10 +357,8 @@
 <span class="sd">    :math:`\\forall i \\in I , a_i &gt; 0 \\wedge 0 &lt; c_i &lt; 1`</span>
 
 <span class="sd">    :param items: the item matrix</span>
-<span class="sd">    :type items: numpy.ndarray</span>
 <span class="sd">    :param raise_err: whether to raise an error in case the validation fails or</span>
 <span class="sd">                      just print the error message to standard output.</span>
-<span class="sd">    :type raise_err: bool</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Item matrix is not of type {0}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">)))))</span>

@@ -156,9 +156,9 @@
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>clusters</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.5)"><em>list</em></a>) &#8211; a list containing item cluster memberships</li>
-<li><strong>r_max</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.5)"><em>float</em></a>) &#8211; maximum exposure rate for items</li>
-<li><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/string.html#module-string" title="(in Python v3.5)"><em>string</em></a>) &#8211; <p>one of the available methods for cluster selection. Given
+<li><strong>clusters</strong> &#8211; a list containing item cluster memberships</li>
+<li><strong>r_max</strong> &#8211; maximum exposure rate for items</li>
+<li><strong>method</strong> &#8211; <p>one of the available methods for cluster selection. Given
 the estimated theta value at each step:</p>
 <blockquote>
 <div><code class="docutils literal"><span class="pre">item_info</span></code>: selects the cluster which has the item
@@ -169,7 +169,7 @@ sum of information is maximum. The weighted equals the
 number of items in the cluster;</p>
 </div></blockquote>
 </li>
-<li><strong>r_control</strong> (<a class="reference external" href="https://docs.python.org/3/library/string.html#module-string" title="(in Python v3.5)"><em>string</em></a>) &#8211; if <cite>passive</cite> and all items <span class="math">\(i\)</span> in the selected
+<li><strong>r_control</strong> &#8211; if <cite>passive</cite> and all items <span class="math">\(i\)</span> in the selected
 cluster have <span class="math">\(r_i &gt; r^{max}\)</span>, applies the item with
 maximum information; if <cite>aggressive</cite>, applies the item
 with smallest <span class="math">\(r\)</span> value.</li>

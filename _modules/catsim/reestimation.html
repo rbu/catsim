@@ -141,7 +141,6 @@
 
 <span class="kn">from</span> <span class="nn">catsim</span> <span class="kn">import</span> <span class="n">irt</span>
 <span class="kn">import</span> <span class="nn">numpy</span>
-<span class="kn">import</span> <span class="nn">pymc</span>
 <span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">fmin</span>
 <span class="kn">from</span> <span class="nn">scipy.optimize</span> <span class="kn">import</span> <span class="n">differential_evolution</span>
 
@@ -180,14 +179,16 @@
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">precision</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">HillClimbingEstimator</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__precision</span> <span class="o">=</span> <span class="n">precision</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__verbose</span> <span class="o">=</span> <span class="n">verbose</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__iters</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_precision</span> <span class="o">=</span> <span class="n">precision</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_iters</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">evaluations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Count the number of function evaluations during the most recent estimation process&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__iters</span>
+    <span class="k">def</span> <span class="nf">evaluations</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Count the number of function evaluations during the most recent estimation process</span>
+
+<span class="sd">        :returns: number of function evaluations&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_iters</span>
 
 <div class="viewcode-block" id="HillClimbingEstimator.estimate"><a class="viewcode-back" href="../../catsim.reestimation.html#catsim.reestimation.HillClimbingEstimator.estimate">[docs]</a>    <span class="k">def</span> <span class="nf">estimate</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -217,24 +218,24 @@
         <span class="n">best_theta</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
         <span class="n">max_ll</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">__iters</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_iters</span> <span class="o">=</span> <span class="mi">0</span>
 
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
             <span class="n">intervals</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">lbound</span><span class="p">,</span> <span class="n">ubound</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__verbose</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span><span class="p">:</span>
                 <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Bounds: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">lbound</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ubound</span><span class="p">))</span>
                 <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Interval size: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">intervals</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">intervals</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
 
             <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="n">intervals</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">__iters</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_iters</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="n">ll</span> <span class="o">=</span> <span class="n">irt</span><span class="o">.</span><span class="n">logLik</span><span class="p">(</span><span class="n">ii</span><span class="p">,</span> <span class="n">response_vector</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">ll</span> <span class="o">&gt;</span> <span class="n">max_ll</span><span class="p">:</span>
                     <span class="n">max_ll</span> <span class="o">=</span> <span class="n">ll</span>
 
-                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__verbose</span><span class="p">:</span>
-                        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Iteration: {0}, Theta: {1}, LL: {2}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__iters</span><span class="p">,</span> <span class="n">ii</span><span class="p">,</span> <span class="n">ll</span><span class="p">))</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span><span class="p">:</span>
+                        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Iteration: {0}, Theta: {1}, LL: {2}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_iters</span><span class="p">,</span> <span class="n">ii</span><span class="p">,</span> <span class="n">ll</span><span class="p">))</span>
 
-                    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">best_theta</span> <span class="o">-</span> <span class="n">ii</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;1e-&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__precision</span><span class="p">)):</span>
+                    <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">best_theta</span> <span class="o">-</span> <span class="n">ii</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;1e-&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_precision</span><span class="p">)):</span>
                         <span class="k">return</span> <span class="n">ii</span>
 
                     <span class="n">best_theta</span> <span class="o">=</span> <span class="n">ii</span>
@@ -251,21 +252,21 @@
     <span class="sd">&quot;&quot;&quot;Estimator that uses a binary search approach in the log-likelihood function domain to maximize it</span>
 
 <span class="sd">    :param precision: number of decimal points of precision</span>
-<span class="sd">    :type precision: int</span>
 <span class="sd">    :param verbose: verbosity level of the maximization method</span>
-<span class="sd">    :type verbose: boolean</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">precision</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">BinarySearchEstimator</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__precision</span> <span class="o">=</span> <span class="n">precision</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__verbose</span> <span class="o">=</span> <span class="n">verbose</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__iters</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_precision</span> <span class="o">=</span> <span class="n">precision</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span> <span class="o">=</span> <span class="n">verbose</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_iters</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">evaluations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Count the number of function evaluations during the most recent estimation process&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__iters</span>
+        <span class="sd">&quot;&quot;&quot;Count the number of function evaluations during the most recent estimation process</span>
+
+<span class="sd">        :returns: number of function evaluations&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_iters</span>
 
 <div class="viewcode-block" id="BinarySearchEstimator.estimate"><a class="viewcode-back" href="../../catsim.reestimation.html#catsim.reestimation.BinarySearchEstimator.estimate">[docs]</a>    <span class="k">def</span> <span class="nf">estimate</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -292,15 +293,15 @@
         <span class="n">lbound</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">administered_items</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
         <span class="n">ubound</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">administered_items</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
         <span class="n">best_theta</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__iters</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_iters</span> <span class="o">=</span> <span class="mi">0</span>
 
         <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__iters</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__verbose</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_iters</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span><span class="p">:</span>
                 <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Bounds: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">lbound</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ubound</span><span class="p">))</span>
                 <span class="k">print</span><span class="p">(</span>
                     <span class="s1">&#39;Iteration: {0}, Theta: {1}, LL: {2}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">__iters</span><span class="p">,</span> <span class="n">best_theta</span><span class="p">,</span> <span class="n">irt</span><span class="o">.</span><span class="n">logLik</span><span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_iters</span><span class="p">,</span> <span class="n">best_theta</span><span class="p">,</span> <span class="n">irt</span><span class="o">.</span><span class="n">logLik</span><span class="p">(</span>
                             <span class="n">best_theta</span><span class="p">,</span> <span class="n">response_vector</span><span class="p">,</span> <span class="n">administered_items</span>
                         <span class="p">)</span>
                     <span class="p">)</span>
@@ -310,14 +311,14 @@
                 <span class="n">lbound</span><span class="p">,</span> <span class="n">response_vector</span><span class="p">,</span> <span class="n">administered_items</span>
             <span class="p">):</span>
 
-                <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">best_theta</span> <span class="o">-</span> <span class="n">ubound</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;1e-&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__precision</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">best_theta</span> <span class="o">-</span> <span class="n">ubound</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;1e-&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_precision</span><span class="p">)):</span>
                     <span class="k">return</span> <span class="n">ubound</span>
 
                 <span class="n">best_theta</span> <span class="o">=</span> <span class="n">ubound</span>
                 <span class="n">lbound</span> <span class="o">+=</span> <span class="p">(</span><span class="n">ubound</span> <span class="o">-</span> <span class="n">lbound</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
             <span class="k">else</span><span class="p">:</span>
 
-                <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">best_theta</span> <span class="o">-</span> <span class="n">lbound</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;1e-&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__precision</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">best_theta</span> <span class="o">-</span> <span class="n">lbound</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;1e-&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_precision</span><span class="p">)):</span>
                     <span class="k">return</span> <span class="n">lbound</span>
 
                 <span class="n">best_theta</span> <span class="o">=</span> <span class="n">lbound</span>
@@ -340,7 +341,6 @@
 <span class="sd">        :param response_vector: a binary list containing the response vector</span>
 <span class="sd">        :param administered_items: a matrix containing the parameters of the</span>
 <span class="sd">                                   answered items</span>
-<span class="sd">        :type administered_items: numpy.ndarray</span>
 <span class="sd">        :param current_theta: the current estimation of the examinee&#39;s :math:`\\theta` value</span>
 <span class="sd">        :returns: a new estimation of the examinee&#39;s proficiency, given his answers up until now</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -350,23 +350,26 @@
 <div class="viewcode-block" id="DifferentialEvolutionEstimator"><a class="viewcode-back" href="../../catsim.reestimation.html#catsim.reestimation.DifferentialEvolutionEstimator">[docs]</a><span class="k">class</span> <span class="nc">DifferentialEvolutionEstimator</span><span class="p">(</span><span class="n">Estimator</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Estimator that uses :py:func:`scipy.optimize.differential_evolution` to minimize the negative log-likelihood function</span>
 
-<span class="sd">    :param bounds: a tuple containing both lower and upper bounds for the differential evolution algorithm search space.</span>
-<span class="sd">                   In theory, it is best if they represent the minimum and maximum possible</span>
-<span class="sd">                   :math:`\\theta` values; in practice, one could also use the smallest and largest</span>
-<span class="sd">                   difficulty parameters in the item bank, in case no better</span>
-<span class="sd">                   bounds for :math:`\\theta` exist.</span>
+<span class="sd">    :param bounds: a tuple containing both lower and upper bounds for the differential</span>
+<span class="sd">                   evolution algorithm search space. In theory, it is best if they</span>
+<span class="sd">                   represent the minimum and maximum possible :math:`\\theta` values;</span>
+<span class="sd">                   in practice, one could also use the smallest and largest difficulty</span>
+<span class="sd">                   parameters in the item bank, in case no better bounds for</span>
+<span class="sd">                   :math:`\\theta` exist.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bounds</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">DifferentialEvolutionEstimator</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__lower_bound</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">bounds</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__upper_bound</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">bounds</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__iters</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lower_bound</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">bounds</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_upper_bound</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">bounds</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_iters</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">evaluations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Count the number of function evaluations during the most recent estimation process&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__iters</span>
+        <span class="sd">&quot;&quot;&quot;Count the number of function evaluations during the most recent estimation process</span>
+
+<span class="sd">        :returns: number of function evaluations&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_iters</span>
 
 <div class="viewcode-block" id="DifferentialEvolutionEstimator.estimate"><a class="viewcode-back" href="../../catsim.reestimation.html#catsim.reestimation.DifferentialEvolutionEstimator.estimate">[docs]</a>    <span class="k">def</span> <span class="nf">estimate</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -383,18 +386,17 @@
 <span class="sd">                                   answered items</span>
 <span class="sd">        :param current_theta: the current estimation of the examinee&#39;s :math:`\\theta` value</span>
 <span class="sd">        :returns: not used by this selector</span>
-<span class="sd">        :rtype: float</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">res</span> <span class="o">=</span> <span class="n">differential_evolution</span><span class="p">(</span>
             <span class="n">irt</span><span class="o">.</span><span class="n">negativelogLik</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">[</span>
-                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">__lower_bound</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__upper_bound</span> <span class="o">*</span> <span class="mi">2</span><span class="p">]</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_lower_bound</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_upper_bound</span> <span class="o">*</span> <span class="mi">2</span><span class="p">]</span>
             <span class="p">],</span>
             <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">response_vector</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">)</span>
         <span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">__iters</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">nfev</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_iters</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">nfev</span>
 
         <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div></div>
 </pre></div>

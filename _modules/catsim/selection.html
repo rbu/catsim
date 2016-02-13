@@ -197,9 +197,7 @@
 <span class="sd">        .. [Men15] Meneghetti, D. R. (2015). Metolodogia de seleção de itens em testes adaptativos informatizados baseada em agrupamento por similaridade (Mestrado). Centro Universitário da FEI. Retrieved from https://www.researchgate.net/publication/283944553_Metodologia_de_selecao_de_itens_em_Testes_Adaptativos_Informatizados_baseada_em_Agrupamento_por_Similaridade</span>
 
 <span class="sd">    :param clusters: a list containing item cluster memberships</span>
-<span class="sd">    :type clusters: list</span>
 <span class="sd">    :param r_max: maximum exposure rate for items</span>
-<span class="sd">    :type r_max: float</span>
 <span class="sd">    :param method: one of the available methods for cluster selection. Given</span>
 <span class="sd">                   the estimated theta value at each step:</span>
 
@@ -213,12 +211,10 @@
 <span class="sd">                       sum of information is maximum. The weighted equals the</span>
 <span class="sd">                       number of items in the cluster;</span>
 
-<span class="sd">    :type method: string</span>
 <span class="sd">    :param r_control: if `passive` and all items :math:`i` in the selected</span>
 <span class="sd">                      cluster have :math:`r_i &gt; r^{max}`, applies the item with</span>
 <span class="sd">                      maximum information; if `aggressive`, applies the item</span>
 <span class="sd">                      with smallest :math:`r` value.</span>
-<span class="sd">    :type r_control: string</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span>
@@ -243,10 +239,10 @@
                 <span class="p">)</span>
             <span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">__clusters</span> <span class="o">=</span> <span class="n">clusters</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__method</span> <span class="o">=</span> <span class="n">method</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__r_max</span> <span class="o">=</span> <span class="n">r_max</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__r_control</span> <span class="o">=</span> <span class="n">r_control</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_clusters</span> <span class="o">=</span> <span class="n">clusters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_method</span> <span class="o">=</span> <span class="n">method</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_r_max</span> <span class="o">=</span> <span class="n">r_max</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_r_control</span> <span class="o">=</span> <span class="n">r_control</span>
 
 <div class="viewcode-block" id="ClusterSelector.select"><a class="viewcode-back" href="../../catsim.selection.html#catsim.selection.ClusterSelector.select">[docs]</a>    <span class="k">def</span> <span class="nf">select</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">est_theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;CAT simulation and validation method proposed by [Bar10]_.</span>
@@ -260,7 +256,7 @@
         <span class="n">selected_cluster</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="c1"># this part of the code selects the cluster from which the item at</span>
         <span class="c1"># the current point of the test will be chosen</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__method</span> <span class="o">==</span> <span class="s1">&#39;item_info&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_method</span> <span class="o">==</span> <span class="s1">&#39;item_info&#39;</span><span class="p">:</span>
             <span class="c1"># finds the item in the matrix which maximizes the</span>
             <span class="c1"># information, given the current estimated theta value</span>
             <span class="n">max_inf</span> <span class="o">=</span> <span class="mi">0</span>
@@ -272,7 +268,7 @@
                     <span class="n">valid_indexes</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
                         <span class="nb">list</span><span class="p">(</span>
                             <span class="nb">set</span><span class="p">(</span>
-                                <span class="n">numpy</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__clusters</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">__clusters</span><span class="p">[</span><span class="n">counter</span><span class="p">])[</span>
+                                <span class="n">numpy</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_clusters</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clusters</span><span class="p">[</span><span class="n">counter</span><span class="p">])[</span>
                                     <span class="mi">0</span>
                                 <span class="p">]</span>
                             <span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span>
@@ -284,17 +280,17 @@
                     <span class="c1"># checks if at least one item from this cluster has not</span>
                     <span class="c1"># been adminitered to this examinee yet</span>
                     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">valid_indexes</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-                        <span class="n">selected_cluster</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__clusters</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span>
+                        <span class="n">selected_cluster</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clusters</span><span class="p">[</span><span class="n">counter</span><span class="p">]</span>
                         <span class="n">max_inf</span> <span class="o">=</span> <span class="n">irt</span><span class="o">.</span><span class="n">inf</span><span class="p">(</span><span class="n">est_theta</span><span class="p">,</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
 
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">__method</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;cluster_info&#39;</span><span class="p">,</span> <span class="s1">&#39;weighted_info&#39;</span><span class="p">]:</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_method</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;cluster_info&#39;</span><span class="p">,</span> <span class="s1">&#39;weighted_info&#39;</span><span class="p">]:</span>
             <span class="c1"># calculates the cluster information, depending on the method</span>
             <span class="c1"># selected</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__method</span> <span class="o">==</span> <span class="s1">&#39;cluster_info&#39;</span><span class="p">:</span>
-                <span class="n">cluster_infos</span> <span class="o">=</span> <span class="n">ClusterSelector</span><span class="o">.</span><span class="n">sum_cluster_infos</span><span class="p">(</span><span class="n">est_theta</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__clusters</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">__method</span> <span class="o">==</span> <span class="s1">&#39;weighted_info&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_method</span> <span class="o">==</span> <span class="s1">&#39;cluster_info&#39;</span><span class="p">:</span>
+                <span class="n">cluster_infos</span> <span class="o">=</span> <span class="n">ClusterSelector</span><span class="o">.</span><span class="n">sum_cluster_infos</span><span class="p">(</span><span class="n">est_theta</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clusters</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_method</span> <span class="o">==</span> <span class="s1">&#39;weighted_info&#39;</span><span class="p">:</span>
                 <span class="n">cluster_infos</span> <span class="o">=</span> <span class="n">ClusterSelector</span><span class="o">.</span><span class="n">weighted_cluster_infos</span><span class="p">(</span>
-                    <span class="n">est_theta</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__clusters</span>
+                    <span class="n">est_theta</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clusters</span>
                 <span class="p">)</span>
 
             <span class="c1"># sorts clusters descending by their information values</span>
@@ -304,7 +300,7 @@
                 <span class="p">[</span>
                     <span class="n">cluster</span>
                     <span class="k">for</span> <span class="p">(</span><span class="n">inf_value</span><span class="p">,</span> <span class="n">cluster</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span>
-                        <span class="nb">zip</span><span class="p">(</span><span class="n">cluster_infos</span><span class="p">,</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__clusters</span><span class="p">)),</span>
+                        <span class="nb">zip</span><span class="p">(</span><span class="n">cluster_infos</span><span class="p">,</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_clusters</span><span class="p">)),</span>
                         <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span>
                     <span class="p">)</span>
                 <span class="p">],</span>
@@ -334,7 +330,7 @@
         <span class="c1"># selected cluster that have not been administered</span>
         <span class="n">valid_indexes</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
             <span class="nb">list</span><span class="p">(</span>
-                <span class="nb">set</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__clusters</span> <span class="o">==</span> <span class="n">selected_cluster</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span>
+                <span class="nb">set</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_clusters</span> <span class="o">==</span> <span class="n">selected_cluster</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span>
                     <span class="n">administered_items</span>
                 <span class="p">)</span>
             <span class="p">)</span>
@@ -347,8 +343,8 @@
             <span class="nb">list</span><span class="p">(</span>
                 <span class="nb">set</span><span class="p">(</span>
                     <span class="n">numpy</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span>
-                        <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__clusters</span> <span class="o">==</span> <span class="n">selected_cluster</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span>
-                            <span class="n">items</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">__r_max</span>
+                        <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_clusters</span> <span class="o">==</span> <span class="n">selected_cluster</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span>
+                            <span class="n">items</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_r_max</span>
                         <span class="p">)</span>
                     <span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
                 <span class="p">)</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">administered_items</span><span class="p">)</span>
@@ -372,7 +368,7 @@
         <span class="c1"># if all items in the selected cluster have exceed their r values,</span>
         <span class="c1"># select the one with smallest r, regardless of information</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">__r_control</span> <span class="o">==</span> <span class="s1">&#39;passive&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_r_control</span> <span class="o">==</span> <span class="s1">&#39;passive&#39;</span><span class="p">:</span>
                 <span class="n">inf_values</span> <span class="o">=</span> <span class="p">[</span><span class="n">irt</span><span class="o">.</span><span class="n">inf</span><span class="p">(</span><span class="n">est_theta</span><span class="p">,</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">items</span><span class="p">[</span><span class="n">valid_indexes</span><span class="p">]]</span>
                 <span class="n">valid_indexes</span> <span class="o">=</span> <span class="p">[</span>
                     <span class="n">index</span>
@@ -381,7 +377,7 @@
                         <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span>
                     <span class="p">)</span>
                 <span class="p">]</span>
-            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">__r_control</span> <span class="o">==</span> <span class="s1">&#39;aggressive&#39;</span><span class="p">:</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_r_control</span> <span class="o">==</span> <span class="s1">&#39;aggressive&#39;</span><span class="p">:</span>
                 <span class="n">valid_indexes</span> <span class="o">=</span> <span class="p">[</span>
                     <span class="n">index</span> <span class="k">for</span> <span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="n">valid_indexes</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">valid_indexes</span><span class="p">))</span>
                 <span class="p">]</span>

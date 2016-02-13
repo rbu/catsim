@@ -169,35 +169,35 @@
         <span class="c1"># adds a column for each item&#39;s exposure rate and their cluster membership</span>
         <span class="n">items</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">items</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">__items</span> <span class="o">=</span> <span class="n">items</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__estimations</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__administered_items</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_items</span> <span class="o">=</span> <span class="n">items</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_estimations</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_administered_items</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="c1"># `examinees` is passed to its special setter</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">examinees</span> <span class="o">=</span> <span class="n">examinees</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">items</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__items</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_items</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">administered_items</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__administered_items</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_administered_items</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">estimations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__estimations</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_estimations</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">examinees</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__examinees</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_examinees</span>
 
     <span class="nd">@examinees.setter</span>
     <span class="k">def</span> <span class="nf">examinees</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">examinees</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">examinees</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__examinees</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">examinees</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_examinees</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">examinees</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">examinees</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__examinees</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">examinees</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_examinees</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">examinees</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Simulator.simulate"><a class="viewcode-back" href="../../catsim.simulation.html#catsim.simulation.Simulator.simulate">[docs]</a>    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">initializer</span><span class="p">:</span> <span class="n">Initializer</span><span class="p">,</span> <span class="n">selector</span><span class="p">:</span> <span class="n">Selector</span><span class="p">,</span> <span class="n">estimator</span><span class="p">:</span> <span class="n">Estimator</span><span class="p">,</span> <span class="n">stopper</span><span class="p">:</span> <span class="n">Stopper</span>
@@ -265,8 +265,8 @@
 
                 <span class="n">est_thetas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">est_theta</span><span class="p">)</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">__estimations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">est_thetas</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__administered_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">administered_items</span><span class="p">)</span></div></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_estimations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">est_thetas</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_administered_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">administered_items</span><span class="p">)</span></div></div>
 
 
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
