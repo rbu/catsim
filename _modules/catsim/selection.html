@@ -425,7 +425,7 @@
         <span class="k">return</span> <span class="n">cluster_infos</span></div>
 
     <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="ClusterSelector.cluster_sum"><a class="viewcode-back" href="../../catsim.selection.html#catsim.selection.ClusterSelector.cluster_sum">[docs]</a>    <span class="k">def</span> <span class="nf">cluster_sum</span><span class="p">(</span><span class="n">items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
+<div class="viewcode-block" id="ClusterSelector.sum_cluster_params"><a class="viewcode-back" href="../../catsim.selection.html#catsim.selection.ClusterSelector.sum_cluster_params">[docs]</a>    <span class="k">def</span> <span class="nf">sum_cluster_params</span><span class="p">(</span><span class="n">items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns the sum of item parameter values for each cluster cluster</span>
 
 <span class="sd">        :param items: a matrix containing item parameters.</span>
@@ -443,13 +443,13 @@
         <span class="k">return</span> <span class="n">averages</span></div>
 
     <span class="nd">@staticmethod</span>
-<div class="viewcode-block" id="ClusterSelector.cluster_averages"><a class="viewcode-back" href="../../catsim.selection.html#catsim.selection.ClusterSelector.cluster_averages">[docs]</a>    <span class="k">def</span> <span class="nf">cluster_averages</span><span class="p">(</span><span class="n">items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
+<div class="viewcode-block" id="ClusterSelector.avg_cluster_params"><a class="viewcode-back" href="../../catsim.selection.html#catsim.selection.ClusterSelector.avg_cluster_params">[docs]</a>    <span class="k">def</span> <span class="nf">avg_cluster_params</span><span class="p">(</span><span class="n">items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns the average values of item parameters by cluster</span>
 
 <span class="sd">        :param items: a matrix containing item parameters.</span>
 <span class="sd">        :param c: a list containing clustering memeberships.</span>
 <span class="sd">        :returns: a matrix containing the average values of each parameter by cluster. Lines are clusters, columns are parameters.&quot;&quot;&quot;</span>
-        <span class="n">averages</span> <span class="o">=</span> <span class="n">ClusterSelector</span><span class="o">.</span><span class="n">cluster_sum</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+        <span class="n">averages</span> <span class="o">=</span> <span class="n">ClusterSelector</span><span class="o">.</span><span class="n">sum_cluster_params</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
 
         <span class="n">occurrences</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">int64</span><span class="p">))</span>
 

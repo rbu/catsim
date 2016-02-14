@@ -180,8 +180,8 @@ with smallest <span class="math">\(r\)</span> value.</li>
 </table>
 <p class="rubric">Methods</p>
 <dl class="staticmethod">
-<dt id="catsim.selection.ClusterSelector.cluster_averages">
-<em class="property">static </em><code class="descname">cluster_averages</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>c: list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/selection.html#ClusterSelector.cluster_averages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.ClusterSelector.cluster_averages" title="Permalink to this definition">¶</a></dt>
+<dt id="catsim.selection.ClusterSelector.avg_cluster_params">
+<em class="property">static </em><code class="descname">avg_cluster_params</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>c: list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/selection.html#ClusterSelector.avg_cluster_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.ClusterSelector.avg_cluster_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the average values of item parameters by cluster</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -194,27 +194,6 @@ with smallest <span class="math">\(r\)</span> value.</li>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a matrix containing the average values of each parameter by cluster. Lines are clusters, columns are parameters.</p>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="catsim.selection.ClusterSelector.cluster_sum">
-<em class="property">static </em><code class="descname">cluster_sum</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>c: list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/selection.html#ClusterSelector.cluster_sum"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.ClusterSelector.cluster_sum" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the sum of item parameter values for each cluster cluster</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>items</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>) &#8211; a matrix containing item parameters.</li>
-<li><strong>c</strong> (<code class="docutils literal"><span class="pre">list</span></code>) &#8211; a list containing clustering memeberships.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a matrix containing the sum of each parameter by cluster. Lines are clusters, columns are parameters.</p>
 </td>
 </tr>
 </tbody>
@@ -266,6 +245,27 @@ difficulty and pseudo-guessing parameters, respectively.</li>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">list containing the sum of item information values for each cluster</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="catsim.selection.ClusterSelector.sum_cluster_params">
+<em class="property">static </em><code class="descname">sum_cluster_params</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>c: list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/selection.html#ClusterSelector.sum_cluster_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.ClusterSelector.sum_cluster_params" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the sum of item parameter values for each cluster cluster</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>items</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>) &#8211; a matrix containing item parameters.</li>
+<li><strong>c</strong> (<code class="docutils literal"><span class="pre">list</span></code>) &#8211; a list containing clustering memeberships.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">a matrix containing the sum of each parameter by cluster. Lines are clusters, columns are parameters.</p>
 </td>
 </tr>
 </tbody>
