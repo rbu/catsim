@@ -181,14 +181,29 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">HillClimbingEstimator</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_precision</span> <span class="o">=</span> <span class="n">precision</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span> <span class="o">=</span> <span class="n">verbose</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_iters</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_evaluations</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calls</span> <span class="o">=</span> <span class="mi">0</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">evaluations</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Count the number of function evaluations during the most recent estimation process</span>
+    <span class="k">def</span> <span class="nf">calls</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;How many times the estimator has been called to maximize/minimize the log-likelihood function</span>
+
+<span class="sd">        :returns: number of times the estimator has been called to maximize/minimize the log-likelihood function&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calls</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">evaluations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Total number of times the estimator has evaluated the log-likelihood function during its existence</span>
 
 <span class="sd">        :returns: number of function evaluations&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_iters</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evaluations</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">avg_evaluations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Average number of function evaluations for all tests the estimator has been used</span>
+
+<span class="sd">        :returns: average number of function evaluations&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evaluations</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calls</span>
 
 <div class="viewcode-block" id="HillClimbingEstimator.estimate"><a class="viewcode-back" href="../../catsim.reestimation.html#catsim.reestimation.HillClimbingEstimator.estimate">[docs]</a>    <span class="k">def</span> <span class="nf">estimate</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -208,6 +223,8 @@
 <span class="sd">        :rtype: float</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calls</span> <span class="o">+=</span> <span class="mi">1</span>
+
         <span class="k">if</span> <span class="nb">set</span><span class="p">(</span><span class="n">response_vector</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">set</span><span class="p">(</span><span class="n">response_vector</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -218,7 +235,7 @@
         <span class="n">best_theta</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
         <span class="n">max_ll</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_iters</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_evaluations</span> <span class="o">=</span> <span class="mi">0</span>
 
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
             <span class="n">intervals</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">lbound</span><span class="p">,</span> <span class="n">ubound</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
@@ -227,13 +244,17 @@
                 <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Interval size: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">intervals</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">intervals</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
 
             <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="n">intervals</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_iters</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_evaluations</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="n">ll</span> <span class="o">=</span> <span class="n">irt</span><span class="o">.</span><span class="n">logLik</span><span class="p">(</span><span class="n">ii</span><span class="p">,</span> <span class="n">response_vector</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">ll</span> <span class="o">&gt;</span> <span class="n">max_ll</span><span class="p">:</span>
                     <span class="n">max_ll</span> <span class="o">=</span> <span class="n">ll</span>
 
                     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span><span class="p">:</span>
-                        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Iteration: {0}, Theta: {1}, LL: {2}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_iters</span><span class="p">,</span> <span class="n">ii</span><span class="p">,</span> <span class="n">ll</span><span class="p">))</span>
+                        <span class="k">print</span><span class="p">(</span>
+                            <span class="s1">&#39;Iteration: {0}, Theta: {1}, LL: {2}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                                <span class="bp">self</span><span class="o">.</span><span class="n">_evaluations</span><span class="p">,</span> <span class="n">ii</span><span class="p">,</span> <span class="n">ll</span>
+                            <span class="p">)</span>
+                        <span class="p">)</span>
 
                     <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">best_theta</span> <span class="o">-</span> <span class="n">ii</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;1e-&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_precision</span><span class="p">)):</span>
                         <span class="k">return</span> <span class="n">ii</span>
@@ -259,14 +280,29 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">BinarySearchEstimator</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_precision</span> <span class="o">=</span> <span class="n">precision</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span> <span class="o">=</span> <span class="n">verbose</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_iters</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_evaluations</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calls</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">calls</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;How many times the estimator has been called to maximize/minimize the log-likelihood function</span>
+
+<span class="sd">        :returns: number of times the estimator has been called to maximize/minimize the log-likelihood function&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calls</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">evaluations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Count the number of function evaluations during the most recent estimation process</span>
+        <span class="sd">&quot;&quot;&quot;Total number of times the estimator has evaluated the log-likelihood function during its existence</span>
 
 <span class="sd">        :returns: number of function evaluations&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_iters</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evaluations</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">avg_evaluations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Average number of function evaluations for all tests the estimator has been used</span>
+
+<span class="sd">        :returns: average number of function evaluations&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evaluations</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calls</span>
 
 <div class="viewcode-block" id="BinarySearchEstimator.estimate"><a class="viewcode-back" href="../../catsim.reestimation.html#catsim.reestimation.BinarySearchEstimator.estimate">[docs]</a>    <span class="k">def</span> <span class="nf">estimate</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -285,6 +321,8 @@
 <span class="sd">        :returns: a new estimation of the examinee&#39;s proficiency, given his answers up until now</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calls</span> <span class="o">+=</span> <span class="mi">1</span>
+
         <span class="k">if</span> <span class="nb">set</span><span class="p">(</span><span class="n">response_vector</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">set</span><span class="p">(</span><span class="n">response_vector</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -293,15 +331,15 @@
         <span class="n">lbound</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">administered_items</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
         <span class="n">ubound</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">administered_items</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
         <span class="n">best_theta</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_iters</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_evaluations</span> <span class="o">=</span> <span class="mi">0</span>
 
         <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_iters</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_evaluations</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_verbose</span><span class="p">:</span>
                 <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Bounds: &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">lbound</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">ubound</span><span class="p">))</span>
                 <span class="k">print</span><span class="p">(</span>
                     <span class="s1">&#39;Iteration: {0}, Theta: {1}, LL: {2}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">_iters</span><span class="p">,</span> <span class="n">best_theta</span><span class="p">,</span> <span class="n">irt</span><span class="o">.</span><span class="n">logLik</span><span class="p">(</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">_evaluations</span><span class="p">,</span> <span class="n">best_theta</span><span class="p">,</span> <span class="n">irt</span><span class="o">.</span><span class="n">logLik</span><span class="p">(</span>
                             <span class="n">best_theta</span><span class="p">,</span> <span class="n">response_vector</span><span class="p">,</span> <span class="n">administered_items</span>
                         <span class="p">)</span>
                     <span class="p">)</span>
@@ -330,6 +368,29 @@
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">FMinEstimator</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_evaluations</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calls</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">calls</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;How many times the estimator has been called to maximize/minimize the log-likelihood function</span>
+
+<span class="sd">        :returns: number of times the estimator has been called to maximize/minimize the log-likelihood function&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calls</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">evaluations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Total number of times the estimator has evaluated the log-likelihood function during its existence</span>
+
+<span class="sd">        :returns: number of function evaluations&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evaluations</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">avg_evaluations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Average number of function evaluations for all tests the estimator has been used</span>
+
+<span class="sd">        :returns: average number of function evaluations&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evaluations</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calls</span>
 
 <div class="viewcode-block" id="FMinEstimator.estimate"><a class="viewcode-back" href="../../catsim.reestimation.html#catsim.reestimation.FMinEstimator.estimate">[docs]</a>    <span class="k">def</span> <span class="nf">estimate</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">response_vector</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">current_theta</span><span class="p">:</span> <span class="nb">float</span>
@@ -344,7 +405,19 @@
 <span class="sd">        :param current_theta: the current estimation of the examinee&#39;s :math:`\\theta` value</span>
 <span class="sd">        :returns: a new estimation of the examinee&#39;s proficiency, given his answers up until now</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">fmin</span><span class="p">(</span><span class="n">irt</span><span class="o">.</span><span class="n">negativelogLik</span><span class="p">,</span> <span class="n">current_theta</span><span class="p">,</span> <span class="p">(</span><span class="n">response_vector</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">))</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calls</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="n">fmin</span><span class="p">(</span>
+            <span class="n">irt</span><span class="o">.</span><span class="n">negativelogLik</span><span class="p">,</span>
+            <span class="n">current_theta</span><span class="p">,</span>
+            <span class="p">(</span><span class="n">response_vector</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">),</span>
+            <span class="n">disp</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+            <span class="n">full_output</span><span class="o">=</span><span class="bp">True</span>
+        <span class="p">)</span>
+
+        <span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_evaluations</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">res</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div></div>
 
 
 <div class="viewcode-block" id="DifferentialEvolutionEstimator"><a class="viewcode-back" href="../../catsim.reestimation.html#catsim.reestimation.DifferentialEvolutionEstimator">[docs]</a><span class="k">class</span> <span class="nc">DifferentialEvolutionEstimator</span><span class="p">(</span><span class="n">Estimator</span><span class="p">):</span>
@@ -362,14 +435,29 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">DifferentialEvolutionEstimator</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_lower_bound</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">bounds</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_upper_bound</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">bounds</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_iters</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_evaluations</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calls</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">calls</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;How many times the estimator has been called to maximize/minimize the log-likelihood function</span>
+
+<span class="sd">        :returns: number of times the estimator has been called to maximize/minimize the log-likelihood function&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calls</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">evaluations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Count the number of function evaluations during the most recent estimation process</span>
+        <span class="sd">&quot;&quot;&quot;Total number of times the estimator has evaluated the log-likelihood function during its existence</span>
 
 <span class="sd">        :returns: number of function evaluations&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_iters</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evaluations</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">avg_evaluations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Average number of function evaluations for all tests the estimator has been used</span>
+
+<span class="sd">        :returns: average number of function evaluations&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_evaluations</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calls</span>
 
 <div class="viewcode-block" id="DifferentialEvolutionEstimator.estimate"><a class="viewcode-back" href="../../catsim.reestimation.html#catsim.reestimation.DifferentialEvolutionEstimator.estimate">[docs]</a>    <span class="k">def</span> <span class="nf">estimate</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -388,6 +476,8 @@
 <span class="sd">        :returns: not used by this selector</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">_calls</span> <span class="o">+=</span> <span class="mi">1</span>
+
         <span class="n">res</span> <span class="o">=</span> <span class="n">differential_evolution</span><span class="p">(</span>
             <span class="n">irt</span><span class="o">.</span><span class="n">negativelogLik</span><span class="p">,</span>
             <span class="n">bounds</span><span class="o">=</span><span class="p">[</span>
@@ -396,7 +486,7 @@
             <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">response_vector</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">)</span>
         <span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_iters</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">nfev</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_evaluations</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">nfev</span>
 
         <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span></div></div>
 </pre></div>

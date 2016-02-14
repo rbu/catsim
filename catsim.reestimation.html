@@ -157,6 +157,34 @@
 </table>
 <p class="rubric">Attributes</p>
 <p class="rubric">Methods</p>
+<dl class="attribute">
+<dt id="catsim.reestimation.BinarySearchEstimator.avg_evaluations">
+<code class="descname">avg_evaluations</code><a class="headerlink" href="#catsim.reestimation.BinarySearchEstimator.avg_evaluations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Average number of function evaluations for all tests the estimator has been used</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">average number of function evaluations</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="catsim.reestimation.BinarySearchEstimator.calls">
+<code class="descname">calls</code><a class="headerlink" href="#catsim.reestimation.BinarySearchEstimator.calls" title="Permalink to this definition">¶</a></dt>
+<dd><p>How many times the estimator has been called to maximize/minimize the log-likelihood function</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">number of times the estimator has been called to maximize/minimize the log-likelihood function</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="method">
 <dt id="catsim.reestimation.BinarySearchEstimator.estimate">
 <code class="descname">estimate</code><span class="sig-paren">(</span><em>response_vector: list</em>, <em>administered_items: numpy.ndarray</em>, <em>current_theta: float=None</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/reestimation.html#BinarySearchEstimator.estimate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.reestimation.BinarySearchEstimator.estimate" title="Permalink to this definition">¶</a></dt>
@@ -188,7 +216,7 @@ answered items</li>
 <dl class="attribute">
 <dt id="catsim.reestimation.BinarySearchEstimator.evaluations">
 <code class="descname">evaluations</code><a class="headerlink" href="#catsim.reestimation.BinarySearchEstimator.evaluations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Count the number of function evaluations during the most recent estimation process</p>
+<dd><p>Total number of times the estimator has evaluated the log-likelihood function during its existence</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -220,6 +248,34 @@ parameters in the item bank, in case no better bounds for
 </table>
 <p class="rubric">Attributes</p>
 <p class="rubric">Methods</p>
+<dl class="attribute">
+<dt id="catsim.reestimation.DifferentialEvolutionEstimator.avg_evaluations">
+<code class="descname">avg_evaluations</code><a class="headerlink" href="#catsim.reestimation.DifferentialEvolutionEstimator.avg_evaluations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Average number of function evaluations for all tests the estimator has been used</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">average number of function evaluations</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="catsim.reestimation.DifferentialEvolutionEstimator.calls">
+<code class="descname">calls</code><a class="headerlink" href="#catsim.reestimation.DifferentialEvolutionEstimator.calls" title="Permalink to this definition">¶</a></dt>
+<dd><p>How many times the estimator has been called to maximize/minimize the log-likelihood function</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">number of times the estimator has been called to maximize/minimize the log-likelihood function</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="method">
 <dt id="catsim.reestimation.DifferentialEvolutionEstimator.estimate">
 <code class="descname">estimate</code><span class="sig-paren">(</span><em>response_vector: list</em>, <em>administered_items: numpy.ndarray</em>, <em>current_theta: float=None</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/reestimation.html#DifferentialEvolutionEstimator.estimate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.reestimation.DifferentialEvolutionEstimator.estimate" title="Permalink to this definition">¶</a></dt>
@@ -251,7 +307,7 @@ answered items</li>
 <dl class="attribute">
 <dt id="catsim.reestimation.DifferentialEvolutionEstimator.evaluations">
 <code class="descname">evaluations</code><a class="headerlink" href="#catsim.reestimation.DifferentialEvolutionEstimator.evaluations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Count the number of function evaluations during the most recent estimation process</p>
+<dd><p>Total number of times the estimator has evaluated the log-likelihood function during its existence</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -303,7 +359,36 @@ answered items</li>
 <dt id="catsim.reestimation.FMinEstimator">
 <em class="property">class </em><code class="descclassname">catsim.reestimation.</code><code class="descname">FMinEstimator</code><a class="reference internal" href="_modules/catsim/reestimation.html#FMinEstimator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.reestimation.FMinEstimator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Estimator that uses <a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.fmin.html#scipy.optimize.fmin" title="(in SciPy v0.17.0)"><code class="xref py py-func docutils literal"><span class="pre">scipy.optimize.fmin()</span></code></a> to minimize the negative log-likelihood function</p>
+<p class="rubric">Attributes</p>
 <p class="rubric">Methods</p>
+<dl class="attribute">
+<dt id="catsim.reestimation.FMinEstimator.avg_evaluations">
+<code class="descname">avg_evaluations</code><a class="headerlink" href="#catsim.reestimation.FMinEstimator.avg_evaluations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Average number of function evaluations for all tests the estimator has been used</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">average number of function evaluations</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="catsim.reestimation.FMinEstimator.calls">
+<code class="descname">calls</code><a class="headerlink" href="#catsim.reestimation.FMinEstimator.calls" title="Permalink to this definition">¶</a></dt>
+<dd><p>How many times the estimator has been called to maximize/minimize the log-likelihood function</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">number of times the estimator has been called to maximize/minimize the log-likelihood function</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="method">
 <dt id="catsim.reestimation.FMinEstimator.estimate">
 <code class="descname">estimate</code><span class="sig-paren">(</span><em>response_vector: list</em>, <em>administered_items: numpy.ndarray</em>, <em>current_theta: float</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/reestimation.html#FMinEstimator.estimate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.reestimation.FMinEstimator.estimate" title="Permalink to this definition">¶</a></dt>
@@ -332,6 +417,20 @@ answered items</li>
 </table>
 </dd></dl>
 
+<dl class="attribute">
+<dt id="catsim.reestimation.FMinEstimator.evaluations">
+<code class="descname">evaluations</code><a class="headerlink" href="#catsim.reestimation.FMinEstimator.evaluations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Total number of times the estimator has evaluated the log-likelihood function during its existence</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">number of function evaluations</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
@@ -352,6 +451,34 @@ answered items</li>
 </table>
 <p class="rubric">Attributes</p>
 <p class="rubric">Methods</p>
+<dl class="attribute">
+<dt id="catsim.reestimation.HillClimbingEstimator.avg_evaluations">
+<code class="descname">avg_evaluations</code><a class="headerlink" href="#catsim.reestimation.HillClimbingEstimator.avg_evaluations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Average number of function evaluations for all tests the estimator has been used</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">average number of function evaluations</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="catsim.reestimation.HillClimbingEstimator.calls">
+<code class="descname">calls</code><a class="headerlink" href="#catsim.reestimation.HillClimbingEstimator.calls" title="Permalink to this definition">¶</a></dt>
+<dd><p>How many times the estimator has been called to maximize/minimize the log-likelihood function</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">number of times the estimator has been called to maximize/minimize the log-likelihood function</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 <dl class="method">
 <dt id="catsim.reestimation.HillClimbingEstimator.estimate">
 <code class="descname">estimate</code><span class="sig-paren">(</span><em>response_vector: list</em>, <em>administered_items: numpy.ndarray</em>, <em>current_theta: float=None</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/reestimation.html#HillClimbingEstimator.estimate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.reestimation.HillClimbingEstimator.estimate" title="Permalink to this definition">¶</a></dt>
@@ -383,7 +510,7 @@ answered items</li>
 <dl class="attribute">
 <dt id="catsim.reestimation.HillClimbingEstimator.evaluations">
 <code class="descname">evaluations</code><a class="headerlink" href="#catsim.reestimation.HillClimbingEstimator.evaluations" title="Permalink to this definition">¶</a></dt>
-<dd><p>Count the number of function evaluations during the most recent estimation process</p>
+<dd><p>Total number of times the estimator has evaluated the log-likelihood function during its existence</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />

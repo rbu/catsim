@@ -145,6 +145,7 @@
 <span class="sd">   selection rules in computerized adaptive testing. Applied Psychological</span>
 <span class="sd">   Measurement, v. 34, n. 6, p. 438-452, 2010.&quot;&quot;&quot;</span>
 
+<span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">numpy</span>
 <span class="kn">from</span> <span class="nn">catsim</span> <span class="kn">import</span> <span class="n">irt</span><span class="p">,</span> <span class="n">cat</span>
 <span class="kn">from</span> <span class="nn">catsim.initialization</span> <span class="kn">import</span> <span class="n">Initializer</span>
@@ -169,6 +170,7 @@
         <span class="c1"># adds a column for each item&#39;s exposure rate and their cluster membership</span>
         <span class="n">items</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">items</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">_duration</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_items</span> <span class="o">=</span> <span class="n">items</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_estimations</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_administered_items</span> <span class="o">=</span> <span class="p">[]</span>
@@ -191,6 +193,10 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">examinees</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_examinees</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">duration</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_duration</span>
 
     <span class="nd">@examinees.setter</span>
     <span class="k">def</span> <span class="nf">examinees</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">examinees</span><span class="p">):</span>
@@ -221,6 +227,7 @@
 <span class="sd">        &gt;&gt;&gt; Simulator(generate_item_bank(100), 10).simulate(initializer, selector, estimator, stopper)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
+        <span class="n">start_time</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">))</span>
         <span class="k">for</span> <span class="n">true_theta</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">examinees</span><span class="p">:</span>
             <span class="n">est_theta</span> <span class="o">=</span> <span class="n">initializer</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
             <span class="n">response_vector</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">,</span> <span class="n">est_thetas</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
@@ -266,7 +273,9 @@
                 <span class="n">est_thetas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">est_theta</span><span class="p">)</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">_estimations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">est_thetas</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_administered_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">administered_items</span><span class="p">)</span></div></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_administered_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">administered_items</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_duration</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">))</span> <span class="o">-</span> <span class="n">start_time</span></div></div>
 
 
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
