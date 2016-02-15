@@ -82,15 +82,15 @@
             
                 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../item_matrix.html">The Item Matrix</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.initialization.html">Initialization Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.selection.html">Item Selection Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.reestimation.html">Reestimation Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.stopping.html">Stopping Criteria</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.simulation.html">Computerized Adaptive Testing Simulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.irt.html">Item Response Theory Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.cat.html">Computerized Adaptive Test-related Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.plot.html">Miscellaneous Plotting Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.stats.html">Miscellaneous Statistical Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../initialization.html">Initialization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../selection.html">Item Selection Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reestimation.html">Reestimation Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stopping.html">Stopping Criteria</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../simulation.html">Computerized Adaptive Testing Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../irt.html">Item Response Theory Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cat.html">Computerized Adaptive Test-related Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plot.html">Miscellaneous Plotting Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stats.html">Miscellaneous Statistical Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
 </ul>
 
@@ -141,7 +141,7 @@
 <span class="kn">import</span> <span class="nn">numpy</span>
 
 
-<div class="viewcode-block" id="Initializer"><a class="viewcode-back" href="../../catsim.initialization.html#catsim.initialization.Initializer">[docs]</a><span class="k">class</span> <span class="nc">Initializer</span><span class="p">:</span>
+<div class="viewcode-block" id="Initializer"><a class="viewcode-back" href="../../initialization.html#catsim.initialization.Initializer">[docs]</a><span class="k">class</span> <span class="nc">Initializer</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Base class for CAT initializers&quot;&quot;&quot;</span>
     <span class="n">__metaclass__</span> <span class="o">=</span> <span class="n">ABCMeta</span>
 
@@ -149,7 +149,7 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">Initializer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
 
     <span class="nd">@abstractmethod</span>
-<div class="viewcode-block" id="Initializer.initialize"><a class="viewcode-back" href="../../catsim.initialization.html#catsim.initialization.Initializer.initialize">[docs]</a>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<div class="viewcode-block" id="Initializer.initialize"><a class="viewcode-back" href="../../initialization.html#catsim.initialization.Initializer.initialize">[docs]</a>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Selects an examinee&#39;s initial :math:`\\theta` value</span>
 
 <span class="sd">        :returns: examinee&#39;s initial :math:`\\theta` value</span>
@@ -157,11 +157,13 @@
         <span class="k">pass</span></div></div>
 
 
-<div class="viewcode-block" id="RandomInitializer"><a class="viewcode-back" href="../../catsim.initialization.html#catsim.initialization.RandomInitializer">[docs]</a><span class="k">class</span> <span class="nc">RandomInitializer</span><span class="p">(</span><span class="n">Initializer</span><span class="p">):</span>
+<div class="viewcode-block" id="RandomInitializer"><a class="viewcode-back" href="../../initialization.html#catsim.initialization.RandomInitializer">[docs]</a><span class="k">class</span> <span class="nc">RandomInitializer</span><span class="p">(</span><span class="n">Initializer</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Randomly initializes the first estimate of an examinee&#39;s proficiency</span>
 
 <span class="sd">    :param dist_type: either `uniform` or `normal`</span>
-<span class="sd">    :param dist_params: a tuple containing minimum and maximum values for the uniform distribution (in no particular order) or the average and standard deviation values for the normal distribution (in this particular order).&quot;&quot;&quot;</span>
+<span class="sd">    :param dist_params: a tuple containing minimum and maximum values for the</span>
+<span class="sd">    uniform distribution (in no particular order) or the average and standard</span>
+<span class="sd">    deviation values for the normal distribution (in this particular order).&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dist_type</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;uniform&#39;</span><span class="p">,</span> <span class="n">dist_params</span><span class="p">:</span> <span class="nb">tuple</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">RandomInitializer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
@@ -177,7 +179,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">_dist_type</span> <span class="o">=</span> <span class="n">dist_type</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_dist_params</span> <span class="o">=</span> <span class="n">dist_params</span>
 
-<div class="viewcode-block" id="RandomInitializer.initialize"><a class="viewcode-back" href="../../catsim.initialization.html#catsim.initialization.RandomInitializer.initialize">[docs]</a>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<div class="viewcode-block" id="RandomInitializer.initialize"><a class="viewcode-back" href="../../initialization.html#catsim.initialization.RandomInitializer.initialize">[docs]</a>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Generates a value using the chosen distribution and parameters</span>
 
 <span class="sd">        :returns: a proficiency value generated from the chosen distribution using the passed parameters&quot;&quot;&quot;</span>
@@ -187,7 +189,7 @@
             <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_dist_params</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_dist_params</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span></div></div>
 
 
-<div class="viewcode-block" id="FixedPointInitializer"><a class="viewcode-back" href="../../catsim.initialization.html#catsim.initialization.FixedPointInitializer">[docs]</a><span class="k">class</span> <span class="nc">FixedPointInitializer</span><span class="p">(</span><span class="n">Initializer</span><span class="p">):</span>
+<div class="viewcode-block" id="FixedPointInitializer"><a class="viewcode-back" href="../../initialization.html#catsim.initialization.FixedPointInitializer">[docs]</a><span class="k">class</span> <span class="nc">FixedPointInitializer</span><span class="p">(</span><span class="n">Initializer</span><span class="p">):</span>
     <span class="s2">&quot;Initializes every proficiency at the same point.&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
@@ -195,7 +197,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_start</span> <span class="o">=</span> <span class="n">start</span>
 
-<div class="viewcode-block" id="FixedPointInitializer.initialize"><a class="viewcode-back" href="../../catsim.initialization.html#catsim.initialization.FixedPointInitializer.initialize">[docs]</a>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<div class="viewcode-block" id="FixedPointInitializer.initialize"><a class="viewcode-back" href="../../initialization.html#catsim.initialization.FixedPointInitializer.initialize">[docs]</a>    <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Returns the same proficiency value that was passed to the constructor of the initializer</span>
 
 <span class="sd">        :returns: the same proficiency value that was passed to the constructor of the initializer&quot;&quot;&quot;</span>

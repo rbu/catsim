@@ -82,15 +82,15 @@
             
                 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../item_matrix.html">The Item Matrix</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.initialization.html">Initialization Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.selection.html">Item Selection Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.reestimation.html">Reestimation Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.stopping.html">Stopping Criteria</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.simulation.html">Computerized Adaptive Testing Simulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.irt.html">Item Response Theory Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.cat.html">Computerized Adaptive Test-related Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.plot.html">Miscellaneous Plotting Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.stats.html">Miscellaneous Statistical Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../initialization.html">Initialization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../selection.html">Item Selection Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reestimation.html">Reestimation Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stopping.html">Stopping Criteria</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../simulation.html">Computerized Adaptive Testing Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../irt.html">Item Response Theory Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cat.html">Computerized Adaptive Test-related Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plot.html">Miscellaneous Plotting Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stats.html">Miscellaneous Statistical Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
 </ul>
 
@@ -142,7 +142,7 @@
 <span class="kn">import</span> <span class="nn">numpy</span>
 
 
-<div class="viewcode-block" id="coefvariation"><a class="viewcode-back" href="../../catsim.stats.html#catsim.stats.coefvariation">[docs]</a><span class="k">def</span> <span class="nf">coefvariation</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">axis</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<div class="viewcode-block" id="coefvariation"><a class="viewcode-back" href="../../stats.html#catsim.stats.coefvariation">[docs]</a><span class="k">def</span> <span class="nf">coefvariation</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">axis</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
     <span class="sd">&#39;&#39;&#39;Calculates the coefficientof variation of the rows or columns of a matrix.</span>
 <span class="sd">    The coefficient of variation is given by the standard deviation divided by the mean of a variable:</span>
 
@@ -181,7 +181,7 @@
     <span class="k">return</span> <span class="n">corr</span>
 
 
-<div class="viewcode-block" id="covariance"><a class="viewcode-back" href="../../catsim.stats.html#catsim.stats.covariance">[docs]</a><span class="k">def</span> <span class="nf">covariance</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">minus_one</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+<div class="viewcode-block" id="covariance"><a class="viewcode-back" href="../../stats.html#catsim.stats.covariance">[docs]</a><span class="k">def</span> <span class="nf">covariance</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">minus_one</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Calculates the covariance matrix of another matrix</span>
 
 <span class="sd">    :param x: a data matrix</span>
@@ -208,7 +208,7 @@
     <span class="k">return</span> <span class="n">covars</span></div>
 
 
-<div class="viewcode-block" id="bincount"><a class="viewcode-back" href="../../catsim.stats.html#catsim.stats.bincount">[docs]</a><span class="k">def</span> <span class="nf">bincount</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<div class="viewcode-block" id="bincount"><a class="viewcode-back" href="../../stats.html#catsim.stats.bincount">[docs]</a><span class="k">def</span> <span class="nf">bincount</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Count the number of occurrences from each integer in a list or 1-D :py:class:`numpy.ndarray`.</span>
 <span class="sd">    If there are gaps between the numbers, then the numbers in those gaps are given a 0 value of occurrences.</span>
 
@@ -227,7 +227,7 @@
     <span class="k">return</span> <span class="n">count</span></div>
 
 
-<div class="viewcode-block" id="scatter_matrix"><a class="viewcode-back" href="../../catsim.stats.html#catsim.stats.scatter_matrix">[docs]</a><span class="k">def</span> <span class="nf">scatter_matrix</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+<div class="viewcode-block" id="scatter_matrix"><a class="viewcode-back" href="../../stats.html#catsim.stats.scatter_matrix">[docs]</a><span class="k">def</span> <span class="nf">scatter_matrix</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Calculates the scatter matrix of a data matrix. The scatter matrix is an unnormalized</span>
 <span class="sd">    version of the covariance matrix, in which the means of the observation values are subtracted.</span>
 

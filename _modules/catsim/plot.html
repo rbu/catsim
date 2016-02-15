@@ -82,15 +82,15 @@
             
                 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../item_matrix.html">The Item Matrix</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.initialization.html">Initialization Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.selection.html">Item Selection Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.reestimation.html">Reestimation Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.stopping.html">Stopping Criteria</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.simulation.html">Computerized Adaptive Testing Simulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.irt.html">Item Response Theory Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.cat.html">Computerized Adaptive Test-related Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.plot.html">Miscellaneous Plotting Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.stats.html">Miscellaneous Statistical Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../initialization.html">Initialization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../selection.html">Item Selection Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reestimation.html">Reestimation Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stopping.html">Stopping Criteria</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../simulation.html">Computerized Adaptive Testing Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../irt.html">Item Response Theory Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cat.html">Computerized Adaptive Test-related Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plot.html">Miscellaneous Plotting Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stats.html">Miscellaneous Statistical Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
 </ul>
 
@@ -152,7 +152,7 @@
     <span class="k">return</span> <span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">matrix</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="item_curve"><a class="viewcode-back" href="../../catsim.plot.html#catsim.plot.item_curve">[docs]</a><span class="k">def</span> <span class="nf">item_curve</span><span class="p">(</span>
+<div class="viewcode-block" id="item_curve"><a class="viewcode-back" href="../../plot.html#catsim.plot.item_curve">[docs]</a><span class="k">def</span> <span class="nf">item_curve</span><span class="p">(</span>
     <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
     <span class="n">c</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
@@ -266,7 +266,7 @@
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="gen3D_dataset_scatter"><a class="viewcode-back" href="../../catsim.plot.html#catsim.plot.gen3D_dataset_scatter">[docs]</a><span class="k">def</span> <span class="nf">gen3D_dataset_scatter</span><span class="p">(</span>
+<div class="viewcode-block" id="gen3D_dataset_scatter"><a class="viewcode-back" href="../../plot.html#catsim.plot.gen3D_dataset_scatter">[docs]</a><span class="k">def</span> <span class="nf">gen3D_dataset_scatter</span><span class="p">(</span>
     <span class="n">items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
     <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
     <span class="n">filepath</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
@@ -313,7 +313,7 @@
         <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="test_progress"><a class="viewcode-back" href="../../catsim.plot.html#catsim.plot.test_progress">[docs]</a><span class="k">def</span> <span class="nf">test_progress</span><span class="p">(</span>
+<div class="viewcode-block" id="test_progress"><a class="viewcode-back" href="../../plot.html#catsim.plot.test_progress">[docs]</a><span class="k">def</span> <span class="nf">test_progress</span><span class="p">(</span>
     <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
     <span class="n">simulator</span><span class="p">:</span> <span class="n">Simulator</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
     <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>

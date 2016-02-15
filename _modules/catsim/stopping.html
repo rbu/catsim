@@ -82,15 +82,15 @@
             
                 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../item_matrix.html">The Item Matrix</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.initialization.html">Initialization Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.selection.html">Item Selection Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.reestimation.html">Reestimation Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.stopping.html">Stopping Criteria</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.simulation.html">Computerized Adaptive Testing Simulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.irt.html">Item Response Theory Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.cat.html">Computerized Adaptive Test-related Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.plot.html">Miscellaneous Plotting Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.stats.html">Miscellaneous Statistical Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../initialization.html">Initialization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../selection.html">Item Selection Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reestimation.html">Reestimation Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stopping.html">Stopping Criteria</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../simulation.html">Computerized Adaptive Testing Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../irt.html">Item Response Theory Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cat.html">Computerized Adaptive Test-related Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plot.html">Miscellaneous Plotting Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stats.html">Miscellaneous Statistical Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
 </ul>
 
@@ -142,7 +142,7 @@
 <span class="kn">import</span> <span class="nn">numpy</span>
 
 
-<div class="viewcode-block" id="Stopper"><a class="viewcode-back" href="../../catsim.stopping.html#catsim.stopping.Stopper">[docs]</a><span class="k">class</span> <span class="nc">Stopper</span><span class="p">:</span>
+<div class="viewcode-block" id="Stopper"><a class="viewcode-back" href="../../stopping.html#catsim.stopping.Stopper">[docs]</a><span class="k">class</span> <span class="nc">Stopper</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Base class for CAT stop criterion&quot;&quot;&quot;</span>
     <span class="n">__metaclass__</span> <span class="o">=</span> <span class="n">ABCMeta</span>
 
@@ -150,7 +150,7 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">Stopper</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
 
     <span class="nd">@abstractmethod</span>
-<div class="viewcode-block" id="Stopper.stop"><a class="viewcode-back" href="../../catsim.stopping.html#catsim.stopping.Stopper.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">estimations</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<div class="viewcode-block" id="Stopper.stop"><a class="viewcode-back" href="../../stopping.html#catsim.stopping.Stopper.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">estimations</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Checks whether the test reached its stopping criterion</span>
 
 <span class="sd">        :param administered_itens: a matrix with the parameters of administered Items</span>
@@ -159,7 +159,7 @@
         <span class="k">pass</span></div></div>
 
 
-<div class="viewcode-block" id="MaxItemStopper"><a class="viewcode-back" href="../../catsim.stopping.html#catsim.stopping.MaxItemStopper">[docs]</a><span class="k">class</span> <span class="nc">MaxItemStopper</span><span class="p">(</span><span class="n">Stopper</span><span class="p">):</span>
+<div class="viewcode-block" id="MaxItemStopper"><a class="viewcode-back" href="../../stopping.html#catsim.stopping.MaxItemStopper">[docs]</a><span class="k">class</span> <span class="nc">MaxItemStopper</span><span class="p">(</span><span class="n">Stopper</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Stopping criterion for maximum number of items in a test</span>
 
 <span class="sd">    :param max_itens: the maximum number of items in the test&quot;&quot;&quot;</span>
@@ -168,7 +168,7 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">MaxItemStopper</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_max_itens</span> <span class="o">=</span> <span class="n">max_itens</span>
 
-<div class="viewcode-block" id="MaxItemStopper.stop"><a class="viewcode-back" href="../../catsim.stopping.html#catsim.stopping.MaxItemStopper.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">estimations</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<div class="viewcode-block" id="MaxItemStopper.stop"><a class="viewcode-back" href="../../stopping.html#catsim.stopping.MaxItemStopper.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">estimations</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Checks whether the test reached its stopping criterion</span>
 
 <span class="sd">        :param administered_itens: a matrix with the parameters of administered Items</span>
@@ -184,7 +184,7 @@
         <span class="k">return</span> <span class="n">n_itens</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_itens</span></div></div>
 
 
-<div class="viewcode-block" id="MinErrorStopper"><a class="viewcode-back" href="../../catsim.stopping.html#catsim.stopping.MinErrorStopper">[docs]</a><span class="k">class</span> <span class="nc">MinErrorStopper</span><span class="p">(</span><span class="n">Stopper</span><span class="p">):</span>
+<div class="viewcode-block" id="MinErrorStopper"><a class="viewcode-back" href="../../stopping.html#catsim.stopping.MinErrorStopper">[docs]</a><span class="k">class</span> <span class="nc">MinErrorStopper</span><span class="p">(</span><span class="n">Stopper</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Stopping criterion for minimum standard error of estimation (see :py:func:`catsim.irt.see`)</span>
 
 <span class="sd">    :param min_error: the minimum standard error of estimation the test must achieve before stopping&quot;&quot;&quot;</span>
@@ -193,7 +193,7 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">MinErrorStopper</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_min_error</span> <span class="o">=</span> <span class="n">min_error</span>
 
-<div class="viewcode-block" id="MinErrorStopper.stop"><a class="viewcode-back" href="../../catsim.stopping.html#catsim.stopping.MinErrorStopper.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">estimations</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<div class="viewcode-block" id="MinErrorStopper.stop"><a class="viewcode-back" href="../../stopping.html#catsim.stopping.MinErrorStopper.stop">[docs]</a>    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">estimations</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Checks whether the test reached its stopping criterion</span>
 
 <span class="sd">        :param administered_itens: a matrix with the parameters of administered Items</span>

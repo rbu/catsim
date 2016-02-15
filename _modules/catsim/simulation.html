@@ -82,15 +82,15 @@
             
                 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../item_matrix.html">The Item Matrix</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.initialization.html">Initialization Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.selection.html">Item Selection Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.reestimation.html">Reestimation Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.stopping.html">Stopping Criteria</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.simulation.html">Computerized Adaptive Testing Simulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.irt.html">Item Response Theory Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.cat.html">Computerized Adaptive Test-related Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.plot.html">Miscellaneous Plotting Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../catsim.stats.html">Miscellaneous Statistical Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../initialization.html">Initialization Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../selection.html">Item Selection Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../reestimation.html">Reestimation Methods</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stopping.html">Stopping Criteria</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../simulation.html">Computerized Adaptive Testing Simulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../irt.html">Item Response Theory Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cat.html">Computerized Adaptive Test-related Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plot.html">Miscellaneous Plotting Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stats.html">Miscellaneous Statistical Functions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
 </ul>
 
@@ -154,7 +154,7 @@
 <span class="kn">from</span> <span class="nn">catsim.stopping</span> <span class="kn">import</span> <span class="n">Stopper</span>
 
 
-<div class="viewcode-block" id="Simulator"><a class="viewcode-back" href="../../catsim.simulation.html#catsim.simulation.Simulator">[docs]</a><span class="k">class</span> <span class="nc">Simulator</span><span class="p">:</span>
+<div class="viewcode-block" id="Simulator"><a class="viewcode-back" href="../../simulation.html#catsim.simulation.Simulator">[docs]</a><span class="k">class</span> <span class="nc">Simulator</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Class representing the simulator. It gathers several objects that describe the full</span>
 <span class="sd">    simulation process and simulates one or more computerized adaptive tests</span>
 
@@ -205,7 +205,7 @@
         <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">examinees</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_examinees</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">examinees</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Simulator.simulate"><a class="viewcode-back" href="../../catsim.simulation.html#catsim.simulation.Simulator.simulate">[docs]</a>    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span>
+<div class="viewcode-block" id="Simulator.simulate"><a class="viewcode-back" href="../../simulation.html#catsim.simulation.Simulator.simulate">[docs]</a>    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">initializer</span><span class="p">:</span> <span class="n">Initializer</span><span class="p">,</span> <span class="n">selector</span><span class="p">:</span> <span class="n">Selector</span><span class="p">,</span> <span class="n">estimator</span><span class="p">:</span> <span class="n">Estimator</span><span class="p">,</span> <span class="n">stopper</span><span class="p">:</span> <span class="n">Stopper</span>
     <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Simulates a computerized adaptive testing application to one or more examinees</span>
