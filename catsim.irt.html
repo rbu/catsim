@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.8
+                0.8.1
               </div>
             
           
@@ -139,52 +139,50 @@
             
   <div class="section" id="module-catsim.irt">
 <span id="item-response-theory-functions"></span><h1>Item Response Theory Functions<a class="headerlink" href="#module-catsim.irt" title="Permalink to this headline">¶</a></h1>
-<p>Item Response Theory is a group of statistical tools created with the purpose of measuring latent traits, like personality traits or knowledge in specific areas. IRT allows for the creation of a measuring instrument (the test), under which every examinee may be positioned and compared with others. The masuring instrument is created by items, which can be most commonly represented as tasks in a test.</p>
-<p>On the mathematical domain, IRT allows us to calculate the probability with which an examinee might answer an item correctly. For that both items and examinees are modelled using numerical parameters. This allows for the estimation and analysis of examinees proficiencies on the same scale as items difficulties. It also allows for the quality of items to be judged by the values of their parameters.</p>
+<p>Item Response Theory is a group of statistical tools created with the purpose
+of measuring latent traits, like personality traits or knowledge in specific areas.
+IRT allows for the creation of a measuring instrument (the test), under which every
+examinee may be positioned and compared with others. The masuring instrument is
+created by items, which can be most commonly represented as tasks in a test.</p>
+<p>On the mathematical domain, IRT allows us to calculate the probability with
+which an examinee might answer an item correctly. For that both items and
+examinees are modelled using numerical parameters. This allows for the
+estimation and analysis of examinees proficiencies on the same scale as items
+difficulties. It also allows for the quality of items to be judged by the values
+of their parameters.</p>
 <p>This module containing functions pertaining to the Item Response Theory logistic models.</p>
-<table class="docutils citation" frame="void" id="ayala2009" rules="none">
+<blockquote>
+<div><table class="docutils citation" frame="void" id="ayala2009" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label">[Ayala2009]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id2">2</a>, <a class="fn-backref" href="#id4">3</a>, <a class="fn-backref" href="#id5">4</a>, <a class="fn-backref" href="#id6">5</a>)</em> De Ayala, R. J. (2009). The Theory and Practice of Item Response Theory. New York: Guilford Press. Retrieved from <a class="reference external" href="http://books.google.com/books?id=-k36zbOBa28C&amp;pgis=1">http://books.google.com/books?id=-k36zbOBa28C&amp;pgis=1</a></td></tr>
+<tr><td class="label">[Ayala2009]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id2">2</a>, <a class="fn-backref" href="#id4">3</a>, <a class="fn-backref" href="#id5">4</a>, <a class="fn-backref" href="#id6">5</a>)</em> De Ayala, R. J. (2009). The Theory and Practice of Item</td></tr>
 </tbody>
 </table>
+</div></blockquote>
+<p>Response Theory. New York: Guilford Press. Retrieved from
+<a class="reference external" href="http://books.google.com/books?id=-k36zbOBa28C&amp;pgis=1">http://books.google.com/books?id=-k36zbOBa28C&amp;pgis=1</a></p>
 <table class="docutils citation" frame="void" id="thissen00" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id3">[Thissen00]</a></td><td>Thissen, D. (2000). Reliability and measurement precision. In H. Wainer (Ed.), Computerized adaptive testing: A primer (2nd ed., pp. 159–184). Lawrence Erlbaum Associates Publishers.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id3">[Thissen00]</a></td><td>Thissen, D. (2000). Reliability and measurement precision. In H.</td></tr>
 </tbody>
 </table>
+<p>Wainer (Ed.), Computerized adaptive testing: A primer (2nd ed., pp. 159–184).
+Lawrence Erlbaum Associates Publishers.</p>
 <dl class="function">
 <dt id="catsim.irt.inf">
 <code class="descclassname">catsim.irt.</code><code class="descname">inf</code><span class="sig-paren">(</span><em>theta: float</em>, <em>a: float</em>, <em>b: float</em>, <em>c: float=0</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/irt.html#inf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.irt.inf" title="Permalink to this definition">¶</a></dt>
-<dd><p>Calculates the information value of an item using the Item Response Theory three-parameter logistic model function <a class="reference internal" href="#ayala2009" id="id1">[Ayala2009]</a>:</p>
-<div class="math">
+<dd><p>Calculates the information value of an item using the Item Response Theory
+three-parameter logistic model function <a class="reference internal" href="#ayala2009" id="id1">[Ayala2009]</a>:</p>
+<blockquote>
+<div><div class="math">
 \[I(\theta) = a^2\frac{(P(\theta)-c)^2}{(1-c)^2}.\frac{(1-P(\theta))}{P(\theta)}\]</div>
+</div></blockquote>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="docutils literal"><span class="pre">float</span></code></p>
-</td>
-</tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>theta</strong> (<code class="docutils literal"><span class="pre">float</span></code>) &#8211; the individual&#8217;s proficiency value. This parameter value has
-no boundary, but if a distribution of the form
-<span class="math">\(N(0, 1)\)</span> was used to estimate the parameters, then
-<span class="math">\(-4 \leq \theta \leq 4\)</span>.</li>
-<li><strong>a</strong> (<code class="docutils literal"><span class="pre">float</span></code>) &#8211; the discrimination parameter of the item, usually a positive
-value in which <span class="math">\(0.8 \leq a \leq 2.5\)</span>.</li>
-<li><strong>b</strong> (<code class="docutils literal"><span class="pre">float</span></code>) &#8211; the item difficulty parameter. This parameter value has no
-boundary, but if a distribution of the form <span class="math">\(N(0, 1)\)</span> was
-used to estimate the parameters, then <span class="math">\(-4 \leq b \leq 4\)</span>.</li>
-<li><strong>c</strong> (<code class="docutils literal"><span class="pre">float</span></code>) &#8211; the item pseudo-guessing parameter. Being a probability,
-<span class="math">\(0\leq c \leq 1\)</span>, but items considered good usually have
-<span class="math">\(c \leq 0.2\)</span>.</li>
-</ul>
-</td>
-</tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">the information value of the item at the designated <cite>theta</cite> point.</p>
-</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="docutils literal"><span class="pre">float</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -201,8 +199,12 @@ response vector and the parameters of the answered items <a class="reference int
 <p>For computational reasons, it is common to use the log-likelihood in
 maximization/minimization problems, transforming the product of
 probabilities in a sum of probabilities:</p>
-<div class="math">
-\[\log L(X_{Ij} | \theta_j, , a_I, b_I, c_I) = \sum_{i=1} ^ I \left\lbrace x_{ij} \log P_{ij}(\theta)+ (1 - x_{ij}) \log Q_{ij}(\theta) \right\rbrace\]</div>
+<blockquote>
+<div><div class="math">
+\[\log L(X_{Ij} | \theta_j, , a_I, b_I, c_I) = \sum_{i=1} ^ I\]</div>
+</div></blockquote>
+<p>leftlbrace x_{ij} log P_{ij}(theta)+ (1 - x_{ij}) log
+Q_{ij}(theta) rightrbrace</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -465,7 +467,7 @@ just print the error message to standard output.</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.8',
+            VERSION:'0.8.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

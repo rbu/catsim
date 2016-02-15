@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                0.8
+                0.8.1
               </div>
             
           
@@ -137,7 +137,7 @@
            <div itemprop="articleBody">
             
   <h1>Source code for catsim.cat</h1><div class="highlight"><pre>
-<span class="sd">&quot;&quot;&quot;Functions used specifically during the application/simulation of computerized adaptive tests.</span>
+<span></span><span class="sd">&quot;&quot;&quot;Functions used specifically during the application/simulation of computerized adaptive tests.</span>
 
 <span class="sd">.. [Bar10] BARRADA, Juan Ramón et al. A method for the comparison of item</span>
 <span class="sd">   selection rules in computerized adaptive testing. Applied Psychological</span>
@@ -178,11 +178,14 @@
 
 
 <div class="viewcode-block" id="rmse"><a class="viewcode-back" href="../../catsim.cat.html#catsim.cat.rmse">[docs]</a><span class="k">def</span> <span class="nf">rmse</span><span class="p">(</span><span class="n">actual</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">predicted</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Root mean squared error, a common value used when measuring the precision with which a computerized adaptive test estimates examinees proficiencies [Bar10]_. The value is calculated by:</span>
+    <span class="sd">&quot;&quot;&quot;Root mean squared error, a common value used when measuring the precision</span>
+<span class="sd">    with which a computerized adaptive test estimates examinees proficiencies [Bar10]_.</span>
+<span class="sd">    The value is calculated by:</span>
 
 <span class="sd">    .. math:: RMSE = \\sqrt{\\frac{\\sum_{i=1}^{N} (\\hat{\\theta}_i - \\theta_{i})^2}{N}}</span>
 
-<span class="sd">    where :math:`\\hat{\\theta}_i` is examinee :math:`i` estimated proficiency and :math:`\\hat{\\theta}_i` is examinee :math:`i` actual proficiency.</span>
+<span class="sd">    where :math:`\\hat{\\theta}_i` is examinee :math:`i` estimated proficiency and</span>
+<span class="sd">    :math:`\\hat{\\theta}_i` is examinee :math:`i` actual proficiency.</span>
 
 <span class="sd">    :param actual: a list or 1-D numpy array containing the true proficiency values</span>
 <span class="sd">    :param predicted: a list or 1-D numpy array containing the estimated proficiency values</span>
@@ -296,7 +299,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'0.8',
+            VERSION:'0.8.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
