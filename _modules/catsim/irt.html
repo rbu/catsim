@@ -184,14 +184,15 @@
 <span class="sd">              as `theta` (usually :math:`-4 \\leq b \\leq 4`).</span>
 
 <span class="sd">    :param c: the item pseudo-guessing parameter. Being a probability,</span>
-<span class="sd">        :math:`0\\leq c \\leq 1`, but items considered good usually have</span>
-<span class="sd">        :math:`c \\leq 0.2`.</span>
+<span class="sd">              :math:`0\\leq c \\leq 1`, but items considered good usually have</span>
+<span class="sd">              :math:`c \\leq 0.2`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">c</span> <span class="o">+</span> <span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">a</span> <span class="o">*</span> <span class="p">(</span><span class="n">theta</span> <span class="o">-</span> <span class="n">b</span><span class="p">))))</span></div>
 
 
 <div class="viewcode-block" id="see"><a class="viewcode-back" href="../../irt.html#catsim.irt.see">[docs]</a><span class="k">def</span> <span class="nf">see</span><span class="p">(</span><span class="n">theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Computes the standard error of estimation (:math:`SEE`) of a test at a specific :math:`\\theta` value [Ayala2009]_:</span>
+    <span class="sd">&quot;&quot;&quot;Computes the standard error of estimation (:math:`SEE`) of a test at a</span>
+<span class="sd">    specific :math:`\\theta` value [Ayala2009]_:</span>
 
 <span class="sd">    .. math:: SEE = \\frac{1}{I(\\theta)}</span>
 
@@ -341,7 +342,6 @@
 <span class="sd">    columns, respectively. the pseudo-guessing column is added such that items simulate the 2-parameter logistic model.</span>
 
 <span class="sd">    :param items: the item matrix</span>
-
 <span class="sd">    :returns: an nx3 item matrix conforming to 1, 2 and 3 parameter logistic models</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>

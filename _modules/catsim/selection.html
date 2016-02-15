@@ -418,7 +418,7 @@
 <span class="sd">        :param items: a matrix containing item parameters</span>
 <span class="sd">        :param clusters: a list containing item cluster memberships, represented by integers</span>
 <span class="sd">        :returns: list containing the sum of item information values for each cluster,</span>
-<span class="sd">                 divided by the number of items in each cluster&quot;&quot;&quot;</span>
+<span class="sd">                  divided by the number of items in each cluster&quot;&quot;&quot;</span>
         <span class="n">cluster_infos</span> <span class="o">=</span> <span class="n">ClusterSelector</span><span class="o">.</span><span class="n">sum_cluster_infos</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">items</span><span class="p">,</span> <span class="n">clusters</span><span class="p">)</span>
         <span class="n">count</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">clusters</span><span class="p">)</span>
 
@@ -451,7 +451,8 @@
 
 <span class="sd">        :param items: a matrix containing item parameters.</span>
 <span class="sd">        :param c: a list containing clustering memeberships.</span>
-<span class="sd">        :returns: a matrix containing the average values of each parameter by cluster. Lines are clusters, columns are parameters.&quot;&quot;&quot;</span>
+<span class="sd">        :returns: a matrix containing the average values of each parameter by cluster.</span>
+<span class="sd">                  Lines are clusters, columns are parameters.&quot;&quot;&quot;</span>
         <span class="n">averages</span> <span class="o">=</span> <span class="n">ClusterSelector</span><span class="o">.</span><span class="n">sum_cluster_params</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
 
         <span class="n">occurrences</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">int64</span><span class="p">))</span>

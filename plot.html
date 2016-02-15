@@ -222,28 +222,30 @@ information curve or &#8216;both&#8217; for both curves in the same plot</li>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
 <li><strong>title</strong> (<code class="docutils literal"><span class="pre">str</span></code>) &#8211; the plot title.</li>
-<li><strong>simulator</strong> (<a class="reference internal" href="simulation.html#catsim.simulation.Simulator" title="catsim.simulation.Simulator"><code class="xref py py-class docutils literal"><span class="pre">Simulator</span></code></a>) &#8211; a simulator which has already simulated a series of CATs,</li>
+<li><strong>simulator</strong> (<a class="reference internal" href="simulation.html#catsim.simulation.Simulator" title="catsim.simulation.Simulator"><code class="xref py py-class docutils literal"><span class="pre">Simulator</span></code></a>) &#8211; a simulator which has already simulated a series of CATs,
+containing estimations to the examinees&#8217; proficiencies and
+a list of administered items for each examinee.</li>
+<li><strong>index</strong> (<code class="docutils literal"><span class="pre">int</span></code>) &#8211; the index of the examinee in the simulator whose plot is to be done.</li>
+<li><strong>thetas</strong> (<code class="docutils literal"><span class="pre">list</span></code>) &#8211; if a <code class="xref py py-class docutils literal"><span class="pre">Simulator</span></code> is not passed, then a list of proficiency
+estimations can be manually passed to the function.</li>
+<li><strong>administered_items</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>) &#8211; if a <code class="xref py py-class docutils literal"><span class="pre">Simulator</span></code> is not passed, then a
+matrix of administered items, represented by their
+parameters, can be manually passed to the function.</li>
+<li><strong>true_theta</strong> (<code class="docutils literal"><span class="pre">float</span></code>) &#8211; the value of the examinee&#8217;s true proficiency. If it is passed,
+it will be shown on the plot, otherwise not.</li>
+<li><strong>info</strong> (<code class="docutils literal"><span class="pre">bool</span></code>) &#8211; plot test information. It only works if both proficiencies and
+administered items are passed.</li>
+<li><strong>see</strong> (<code class="docutils literal"><span class="pre">bool</span></code>) &#8211; plot the standard error of estimation during the test. It only
+works if both proficiencies and administered items are passed.</li>
+<li><strong>reliability</strong> (<code class="docutils literal"><span class="pre">bool</span></code>) &#8211; plot the test reliability. It only works if both proficiencies
+and administered items are passed.</li>
+<li><strong>filepath</strong> (<code class="docutils literal"><span class="pre">str</span></code>) &#8211; the path to save the plot</li>
+<li><strong>show</strong> (<code class="docutils literal"><span class="pre">bool</span></code>) &#8211; whether the generated plot is to be shown</li>
 </ul>
 </td>
 </tr>
 </tbody>
 </table>
-<p>containing estimations to the examinees&#8217; proficiencies and a list of administered
-items for each examinee.
-:param index: the index of the examinee in the simulator whose plot is to be done.
-:param thetas: if a <code class="xref py py-class docutils literal"><span class="pre">Simulator</span></code> is not passed, then a list of proficiency
-estimations can be manually passed to the function.
-:param administered_items: if a <code class="xref py py-class docutils literal"><span class="pre">Simulator</span></code> is not passed, then a
-matrix of administered items, represented by their parameters, can be manually passed to the function.
-:param true_theta: the value of the examinee&#8217;s true proficiency. If it is passed,
-it will be shown on the plot, otherwise not.
-:param info: plot test information. It only works if both proficiencies and administered items are passed.
-:param see: plot the standard error of estimation during the test. It only
-works if both proficiencies and administered items are passed.
-:param reliability: plot the test reliability. It only works if both proficiencies
-and administered items are passed.
-:param filepath: the path to save the plot
-:param show: whether the generated plot is to be shown</p>
 </dd></dl>
 
 </div>
