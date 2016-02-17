@@ -82,16 +82,17 @@
             
                 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../item_matrix.html">The Item Matrix</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../initialization.html">Initialization Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../selection.html">Item Selection Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../reestimation.html">Reestimation Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../stopping.html">Stopping Criteria</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../simulation.html">Computerized Adaptive Testing Simulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../irt.html">Item Response Theory Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../cat.html">Computerized Adaptive Test-related Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../plot.html">Miscellaneous Plotting Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../stats.html">Miscellaneous Statistical Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../initialization.html">Initialization Methods &#8211; <code class="docutils literal"><span class="pre">catsim.initialization</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../selection.html">Item Selection Methods &#8211; <code class="docutils literal"><span class="pre">catsim.selection</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../estimation.html">Estimation Methods &#8211; <code class="docutils literal"><span class="pre">catsim.estimation</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stopping.html">Stopping Criteria &#8211; <code class="docutils literal"><span class="pre">catsim.stopping</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../simulation.html">Computerized Adaptive Testing Simulation &#8211; <code class="docutils literal"><span class="pre">catsim.simulation</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../irt.html">Item Response Theory Functions &#8211; <code class="docutils literal"><span class="pre">catsim.irt</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cat.html">Computerized Adaptive Test-related Functions &#8211; <code class="docutils literal"><span class="pre">catsim.cat</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plot.html">Miscellaneous Plotting Functions &#8211; <code class="docutils literal"><span class="pre">catsim.plot</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stats.html">Miscellaneous Statistical Functions &#8211; <code class="docutils literal"><span class="pre">catsim.stats</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
 </ul>
 
             
@@ -139,18 +140,14 @@
   <h1>Source code for catsim.simulation</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Module containing functions relevant to the process of simulating the</span>
 <span class="sd">application of adaptive tests. Most of this module is based on the work of</span>
-<span class="sd">[Bar10]_.</span>
-
-<span class="sd">.. [Bar10] BARRADA, Juan Ramón et al. A method for the comparison of item</span>
-<span class="sd">   selection rules in computerized adaptive testing. Applied Psychological</span>
-<span class="sd">   Measurement, v. 34, n. 6, p. 438-452, 2010.&quot;&quot;&quot;</span>
+<span class="sd">[Bar10]_.&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">time</span>
 <span class="kn">import</span> <span class="nn">numpy</span>
 <span class="kn">from</span> <span class="nn">catsim</span> <span class="kn">import</span> <span class="n">irt</span><span class="p">,</span> <span class="n">cat</span>
 <span class="kn">from</span> <span class="nn">catsim.initialization</span> <span class="kn">import</span> <span class="n">Initializer</span>
 <span class="kn">from</span> <span class="nn">catsim.selection</span> <span class="kn">import</span> <span class="n">Selector</span>
-<span class="kn">from</span> <span class="nn">catsim.reestimation</span> <span class="kn">import</span> <span class="n">Estimator</span>
+<span class="kn">from</span> <span class="nn">catsim.estimation</span> <span class="kn">import</span> <span class="n">Estimator</span>
 <span class="kn">from</span> <span class="nn">catsim.stopping</span> <span class="kn">import</span> <span class="n">Stopper</span>
 
 
@@ -217,7 +214,7 @@
 
 <span class="sd">        &gt;&gt;&gt; from catsim.initialization import RandomInitializer</span>
 <span class="sd">        &gt;&gt;&gt; from catsim.selection import MaxInfoSelector</span>
-<span class="sd">        &gt;&gt;&gt; from catsim.reestimation import HillClimbingEstimator</span>
+<span class="sd">        &gt;&gt;&gt; from catsim.estimation import HillClimbingEstimator</span>
 <span class="sd">        &gt;&gt;&gt; from catsim.stopping import MaxItemStopper</span>
 <span class="sd">        &gt;&gt;&gt; from catsim.cat import generate_item_bank</span>
 <span class="sd">        &gt;&gt;&gt; initializer = RandomInitializer()</span>

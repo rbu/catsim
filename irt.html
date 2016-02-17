@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Item Response Theory Functions</title>
+  <title>Item Response Theory Functions – catsim.irt</title>
   
 
   
@@ -31,8 +31,8 @@
 
   
     <link rel="top" title="None" href="index.html"/>
-        <link rel="next" title="Computerized Adaptive Test-related Functions" href="cat.html"/>
-        <link rel="prev" title="Computerized Adaptive Testing Simulation" href="simulation.html"/> 
+        <link rel="next" title="Computerized Adaptive Test-related Functions – catsim.cat" href="cat.html"/>
+        <link rel="prev" title="Computerized Adaptive Testing Simulation – catsim.simulation" href="simulation.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -83,16 +83,17 @@
             
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="item_matrix.html">The Item Matrix</a></li>
-<li class="toctree-l1"><a class="reference internal" href="initialization.html">Initialization Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="selection.html">Item Selection Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="reestimation.html">Reestimation Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stopping.html">Stopping Criteria</a></li>
-<li class="toctree-l1"><a class="reference internal" href="simulation.html">Computerized Adaptive Testing Simulation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Item Response Theory Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cat.html">Computerized Adaptive Test-related Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plot.html">Miscellaneous Plotting Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stats.html">Miscellaneous Statistical Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initialization.html">Initialization Methods &#8211; <code class="docutils literal"><span class="pre">catsim.initialization</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="selection.html">Item Selection Methods &#8211; <code class="docutils literal"><span class="pre">catsim.selection</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="estimation.html">Estimation Methods &#8211; <code class="docutils literal"><span class="pre">catsim.estimation</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="stopping.html">Stopping Criteria &#8211; <code class="docutils literal"><span class="pre">catsim.stopping</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="simulation.html">Computerized Adaptive Testing Simulation &#8211; <code class="docutils literal"><span class="pre">catsim.simulation</span></code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Item Response Theory Functions &#8211; <code class="docutils literal"><span class="pre">catsim.irt</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="cat.html">Computerized Adaptive Test-related Functions &#8211; <code class="docutils literal"><span class="pre">catsim.cat</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot.html">Miscellaneous Plotting Functions &#8211; <code class="docutils literal"><span class="pre">catsim.plot</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="stats.html">Miscellaneous Statistical Functions &#8211; <code class="docutils literal"><span class="pre">catsim.stats</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
 
             
@@ -123,7 +124,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
       
-    <li>Item Response Theory Functions</li>
+    <li>Item Response Theory Functions &#8211; <code class="docutils literal"><span class="pre">catsim.irt</span></code></li>
       <li class="wy-breadcrumbs-aside">
         
           
@@ -138,7 +139,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="module-catsim.irt">
-<span id="item-response-theory-functions"></span><h1>Item Response Theory Functions<a class="headerlink" href="#module-catsim.irt" title="Permalink to this headline">¶</a></h1>
+<span id="item-response-theory-functions-catsim-irt"></span><h1>Item Response Theory Functions &#8211; <a class="reference internal" href="#module-catsim.irt" title="catsim.irt"><code class="xref py py-mod docutils literal"><span class="pre">catsim.irt</span></code></a><a class="headerlink" href="#module-catsim.irt" title="Permalink to this headline">¶</a></h1>
 <p>Item Response Theory is a group of statistical tools created with the purpose
 of measuring latent traits, like personality traits or knowledge in specific areas.
 IRT allows for the creation of a measuring instrument (the test), under which every
@@ -151,38 +152,38 @@ estimation and analysis of examinees proficiencies on the same scale as items
 difficulties. It also allows for the quality of items to be judged by the values
 of their parameters.</p>
 <p>This module containing functions pertaining to the Item Response Theory logistic models.</p>
-<blockquote>
-<div><table class="docutils citation" frame="void" id="ayala2009" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label">[Ayala2009]</td><td><em>(<a class="fn-backref" href="#id1">1</a>, <a class="fn-backref" href="#id2">2</a>, <a class="fn-backref" href="#id4">3</a>, <a class="fn-backref" href="#id5">4</a>, <a class="fn-backref" href="#id6">5</a>)</em> De Ayala, R. J. (2009). The Theory and Practice of Item</td></tr>
-</tbody>
-</table>
-</div></blockquote>
-<p>Response Theory. New York: Guilford Press. Retrieved from
-<a class="reference external" href="http://books.google.com/books?id=-k36zbOBa28C&amp;pgis=1">http://books.google.com/books?id=-k36zbOBa28C&amp;pgis=1</a></p>
-<table class="docutils citation" frame="void" id="thissen00" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id3">[Thissen00]</a></td><td>Thissen, D. (2000). Reliability and measurement precision. In H.</td></tr>
-</tbody>
-</table>
-<p>Wainer (Ed.), Computerized adaptive testing: A primer (2nd ed., pp. 159–184).
-Lawrence Erlbaum Associates Publishers.</p>
 <dl class="function">
 <dt id="catsim.irt.inf">
 <code class="descclassname">catsim.irt.</code><code class="descname">inf</code><span class="sig-paren">(</span><em>theta: float</em>, <em>a: float</em>, <em>b: float</em>, <em>c: float=0</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/irt.html#inf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.irt.inf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the information value of an item using the Item Response Theory
-three-parameter logistic model function <a class="reference internal" href="#ayala2009" id="id1">[Ayala2009]</a>:</p>
-<blockquote>
-<div><div class="math">
+three-parameter logistic model function <a class="reference internal" href="references.html#ayala2009" id="id1">[Ayala2009]</a>:</p>
+<div class="math">
 \[I(\theta) = a^2\frac{(P(\theta)-c)^2}{(1-c)^2}.\frac{(1-P(\theta))}{P(\theta)}\]</div>
-</div></blockquote>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><code class="docutils literal"><span class="pre">float</span></code></td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="docutils literal"><span class="pre">float</span></code></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>theta</strong> (<code class="docutils literal"><span class="pre">float</span></code>) &#8211; the individual&#8217;s proficiency value. This parameter value has
+no boundary, but if a distribution of the form
+<span class="math">\(N(0, 1)\)</span> was used to estimate the parameters, then
+<span class="math">\(-4 \leq \theta \leq 4\)</span>.</li>
+<li><strong>a</strong> (<code class="docutils literal"><span class="pre">float</span></code>) &#8211; the discrimination parameter of the item, usually a positive
+value in which <span class="math">\(0.8 \leq a \leq 2.5\)</span>.</li>
+<li><strong>b</strong> (<code class="docutils literal"><span class="pre">float</span></code>) &#8211; the item difficulty parameter. This parameter value has no
+boundary, but if a distribution of the form <span class="math">\(N(0, 1)\)</span> was
+used to estimate the parameters, then <span class="math">\(-4 \leq b \leq 4\)</span>.</li>
+<li><strong>c</strong> (<code class="docutils literal"><span class="pre">float</span></code>) &#8211; the item pseudo-guessing parameter. Being a probability,
+<span class="math">\(0\leq c \leq 1\)</span>, but items considered good usually have
+<span class="math">\(c \leq 0.2\)</span>.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">the information value of the item at the designated <cite>theta</cite> point.</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -192,7 +193,7 @@ three-parameter logistic model function <a class="reference internal" href="#aya
 <dt id="catsim.irt.logLik">
 <code class="descclassname">catsim.irt.</code><code class="descname">logLik</code><span class="sig-paren">(</span><em>est_theta: float</em>, <em>response_vector: list</em>, <em>administered_items: numpy.ndarray</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/irt.html#logLik"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.irt.logLik" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the log-likelihood of an estimated proficiency, given a
-response vector and the parameters of the answered items <a class="reference internal" href="#ayala2009" id="id2">[Ayala2009]</a>.</p>
+response vector and the parameters of the answered items <a class="reference internal" href="references.html#ayala2009" id="id2">[Ayala2009]</a>.</p>
 <p>The likelihood function of a given <span class="math">\(\theta\)</span> value given the answers to <span class="math">\(I\)</span> items is given by:</p>
 <div class="math">
 \[L(X_{Ij} | \theta_j, a_I, b_I, c_I) = \prod_{i=1} ^ I P_{ij}(\theta)^{X_{ij}} Q_{ij}(\theta)^{1-X_{ij}}\]</div>
@@ -201,10 +202,10 @@ maximization/minimization problems, transforming the product of
 probabilities in a sum of probabilities:</p>
 <blockquote>
 <div><div class="math">
-\[\log L(X_{Ij} | \theta_j, , a_I, b_I, c_I) = \sum_{i=1} ^ I\]</div>
+\[\log L(X_{Ij} | \theta_j, , a_I, b_I, c_I) = \sum_{i=1} ^ I
+\left\lbrace x_{ij} \log P_{ij}(\theta)+ (1 - x_{ij}) \log
+Q_{ij}(\theta) \right\rbrace\]</div>
 </div></blockquote>
-<p>leftlbrace x_{ij} log P_{ij}(theta)+ (1 - x_{ij}) log
-Q_{ij}(theta) rightrbrace</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -213,13 +214,13 @@ Q_{ij}(theta) rightrbrace</p>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
-<li><strong>est_theta</strong> (<code class="docutils literal"><span class="pre">float</span></code>) &#8211; estimated proficiency value</li>
-<li><strong>response_vector</strong> (<code class="docutils literal"><span class="pre">list</span></code>) &#8211; a binary list containing the response vector</li>
-<li><strong>administered_items</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>) &#8211; a numpy array containing the parameters of the answered items</li>
+<li><strong>est_theta</strong> (<code class="docutils literal"><span class="pre">float</span></code>) &#8211; estimated proficiency value.</li>
+<li><strong>response_vector</strong> (<code class="docutils literal"><span class="pre">list</span></code>) &#8211; a binary list containing the response vector.</li>
+<li><strong>administered_items</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>) &#8211; a numpy array containing the parameters of the answered items.</li>
 </ul>
 </td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">log-likelihood of a given proficiency value, given the responses to the administered items</p>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">log-likelihood of a given proficiency value, given the responses to the administered items.</p>
 </td>
 </tr>
 </tbody>
@@ -290,7 +291,7 @@ columns, respectively. the pseudo-guessing column is added such that items simul
 <dl class="function">
 <dt id="catsim.irt.reliability">
 <code class="descclassname">catsim.irt.</code><code class="descname">reliability</code><span class="sig-paren">(</span><em>theta: float</em>, <em>items: numpy.ndarray</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/irt.html#reliability"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.irt.reliability" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes test reliability <a class="reference internal" href="#thissen00" id="id3">[Thissen00]</a>, given by</p>
+<dd><p>Computes test reliability <a class="reference internal" href="references.html#thissen00" id="id3">[Thissen00]</a>, given by</p>
 <div class="math">
 \[Rel = 1 - \frac{1}{I(\theta)}\]</div>
 <p>Test reliability is a measure of internal consistency for the test, similar
@@ -319,7 +320,7 @@ sense, but usually the application of additional items solves this problem.</p>
 <dt id="catsim.irt.see">
 <code class="descclassname">catsim.irt.</code><code class="descname">see</code><span class="sig-paren">(</span><em>theta: float</em>, <em>items: numpy.ndarray</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/irt.html#see"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.irt.see" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the standard error of estimation (<span class="math">\(SEE\)</span>) of a test at a
-specific <span class="math">\(\theta\)</span> value <a class="reference internal" href="#ayala2009" id="id4">[Ayala2009]</a>:</p>
+specific <span class="math">\(\theta\)</span> value <a class="reference internal" href="references.html#ayala2009" id="id4">[Ayala2009]</a>:</p>
 <div class="math">
 \[SEE = \frac{1}{I(\theta)}\]</div>
 <p>where <span class="math">\(I(\theta)\)</span> is the test information (see <a class="reference internal" href="#catsim.irt.test_info" title="catsim.irt.test_info"><code class="xref py py-func docutils literal"><span class="pre">test_info()</span></code></a>).</p>
@@ -346,7 +347,7 @@ specific <span class="math">\(\theta\)</span> value <a class="reference internal
 <dl class="function">
 <dt id="catsim.irt.test_info">
 <code class="descclassname">catsim.irt.</code><code class="descname">test_info</code><span class="sig-paren">(</span><em>theta: float</em>, <em>items: numpy.ndarray</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/irt.html#test_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.irt.test_info" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the test information of a test at a specific <span class="math">\(\theta\)</span> value <a class="reference internal" href="#ayala2009" id="id5">[Ayala2009]</a>:</p>
+<dd><p>Computes the test information of a test at a specific <span class="math">\(\theta\)</span> value <a class="reference internal" href="references.html#ayala2009" id="id5">[Ayala2009]</a>:</p>
 <div class="math">
 \[I(\theta) = \sum_{j \in J} I_j(\theta)\]</div>
 <p>where <span class="math">\(J\)</span> is the set of items in the test and <span class="math">\(I_j(\theta)\)</span> is the
@@ -371,7 +372,7 @@ item information of <span class="math">\(j\)</span> at aspecific <span class="ma
 <dl class="function">
 <dt id="catsim.irt.tpm">
 <code class="descclassname">catsim.irt.</code><code class="descname">tpm</code><span class="sig-paren">(</span><em>theta: float</em>, <em>a: float</em>, <em>b: float</em>, <em>c: float=0</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/irt.html#tpm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.irt.tpm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Item Response Theory three-parameter logistic function <a class="reference internal" href="#ayala2009" id="id6">[Ayala2009]</a>:</p>
+<dd><p>Item Response Theory three-parameter logistic function <a class="reference internal" href="references.html#ayala2009" id="id6">[Ayala2009]</a>:</p>
 <div class="math">
 \[P(X_i = 1| \theta) = c_i + \frac{1-c_i}{1+ e^{Da_i(\theta-b_i)}}\]</div>
 <table class="docutils field-list" frame="void" rules="none">
@@ -434,10 +435,10 @@ just print the error message to standard output.</li>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="cat.html" class="btn btn-neutral float-right" title="Computerized Adaptive Test-related Functions" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="cat.html" class="btn btn-neutral float-right" title="Computerized Adaptive Test-related Functions – catsim.cat" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="simulation.html" class="btn btn-neutral" title="Computerized Adaptive Testing Simulation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="simulation.html" class="btn btn-neutral" title="Computerized Adaptive Testing Simulation – catsim.simulation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Stopping Criteria</title>
+  <title>Stopping Criteria – catsim.stopping</title>
   
 
   
@@ -31,8 +31,8 @@
 
   
     <link rel="top" title="None" href="index.html"/>
-        <link rel="next" title="Computerized Adaptive Testing Simulation" href="simulation.html"/>
-        <link rel="prev" title="Reestimation Methods" href="reestimation.html"/> 
+        <link rel="next" title="Computerized Adaptive Testing Simulation – catsim.simulation" href="simulation.html"/>
+        <link rel="prev" title="Estimation Methods – catsim.estimation" href="estimation.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -83,16 +83,17 @@
             
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="item_matrix.html">The Item Matrix</a></li>
-<li class="toctree-l1"><a class="reference internal" href="initialization.html">Initialization Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="selection.html">Item Selection Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="reestimation.html">Reestimation Methods</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Stopping Criteria</a></li>
-<li class="toctree-l1"><a class="reference internal" href="simulation.html">Computerized Adaptive Testing Simulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="irt.html">Item Response Theory Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cat.html">Computerized Adaptive Test-related Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="plot.html">Miscellaneous Plotting Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="stats.html">Miscellaneous Statistical Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="initialization.html">Initialization Methods &#8211; <code class="docutils literal"><span class="pre">catsim.initialization</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="selection.html">Item Selection Methods &#8211; <code class="docutils literal"><span class="pre">catsim.selection</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="estimation.html">Estimation Methods &#8211; <code class="docutils literal"><span class="pre">catsim.estimation</span></code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="">Stopping Criteria &#8211; <code class="docutils literal"><span class="pre">catsim.stopping</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="simulation.html">Computerized Adaptive Testing Simulation &#8211; <code class="docutils literal"><span class="pre">catsim.simulation</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="irt.html">Item Response Theory Functions &#8211; <code class="docutils literal"><span class="pre">catsim.irt</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="cat.html">Computerized Adaptive Test-related Functions &#8211; <code class="docutils literal"><span class="pre">catsim.cat</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot.html">Miscellaneous Plotting Functions &#8211; <code class="docutils literal"><span class="pre">catsim.plot</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="stats.html">Miscellaneous Statistical Functions &#8211; <code class="docutils literal"><span class="pre">catsim.stats</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
 </ul>
 
             
@@ -123,7 +124,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
       
-    <li>Stopping Criteria</li>
+    <li>Stopping Criteria &#8211; <code class="docutils literal"><span class="pre">catsim.stopping</span></code></li>
       <li class="wy-breadcrumbs-aside">
         
           
@@ -137,12 +138,30 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-catsim.stopping">
-<span id="stopping-criteria"></span><h1>Stopping Criteria<a class="headerlink" href="#module-catsim.stopping" title="Permalink to this headline">¶</a></h1>
-<dl class="class">
+  <div class="section" id="stopping-criteria-catsim-stopping">
+<h1>Stopping Criteria &#8211; <a class="reference internal" href="#module-catsim.stopping" title="catsim.stopping"><code class="xref py py-mod docutils literal"><span class="pre">catsim.stopping</span></code></a><a class="headerlink" href="#stopping-criteria-catsim-stopping" title="Permalink to this headline">¶</a></h1>
+<p>All implemented classes in this module inherit from a base abstract class
+<code class="xref py py-class docutils literal"><span class="pre">Stopper</span></code>. <code class="xref py py-class docutils literal"><span class="pre">Simulator</span></code> allows that a custom stopping criterion be
+used during the simulation, as long as it also inherits from
+<code class="xref py py-class docutils literal"><span class="pre">Stopper</span></code>.</p>
+<p class="graphviz">
+digraph inheritanceb6f22deed1 {
+rankdir=LR;
+size=&quot;8.0, 12.0&quot;;
+  &quot;catsim.estimation.DifferentialEvolutionEstimator&quot; [URL=&quot;estimation.html#catsim.estimation.DifferentialEvolutionEstimator&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;,tooltip=&quot;Estimator that uses :py:func:`scipy.optimize.differential_evolution` to minimize the negative log-likelihood function&quot;];
+  &quot;catsim.estimation.Estimator&quot; -&gt; &quot;catsim.estimation.DifferentialEvolutionEstimator&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;catsim.estimation.Estimator&quot; [URL=&quot;estimation.html#catsim.estimation.Estimator&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;,tooltip=&quot;Base class for proficiency estimators&quot;];
+  &quot;catsim.estimation.FMinEstimator&quot; [URL=&quot;estimation.html#catsim.estimation.FMinEstimator&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;,tooltip=&quot;Estimator that uses :py:func:`scipy.optimize.fmin` to minimize the negative log-likelihood function&quot;];
+  &quot;catsim.estimation.Estimator&quot; -&gt; &quot;catsim.estimation.FMinEstimator&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+  &quot;catsim.estimation.HillClimbingEstimator&quot; [URL=&quot;estimation.html#catsim.estimation.HillClimbingEstimator&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;,tooltip=&quot;Estimator that uses a hill-climbing algorithm to maximize the likelihood function&quot;];
+  &quot;catsim.estimation.Estimator&quot; -&gt; &quot;catsim.estimation.HillClimbingEstimator&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
+}
+</p>
+<span class="target" id="module-catsim.stopping"></span><dl class="class">
 <dt id="catsim.stopping.MaxItemStopper">
 <em class="property">class </em><code class="descclassname">catsim.stopping.</code><code class="descname">MaxItemStopper</code><span class="sig-paren">(</span><em>max_itens: int</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/stopping.html#MaxItemStopper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.stopping.MaxItemStopper" title="Permalink to this definition">¶</a></dt>
-<dd><p>Stopping criterion for maximum number of items in a test</p>
+<dd><p>Bases: <a class="reference internal" href="#catsim.stopping.Stopper" title="catsim.stopping.Stopper"><code class="xref py py-class docutils literal"><span class="pre">catsim.stopping.Stopper</span></code></a></p>
+<p>Stopping criterion for maximum number of items in a test</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -151,7 +170,6 @@
 </tr>
 </tbody>
 </table>
-<p class="rubric">Methods</p>
 <dl class="method">
 <dt id="catsim.stopping.MaxItemStopper.stop">
 <code class="descname">stop</code><span class="sig-paren">(</span><em>administered_items: numpy.ndarray</em>, <em>estimations: list</em><span class="sig-paren">)</span> &rarr; bool<a class="reference internal" href="_modules/catsim/stopping.html#MaxItemStopper.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.stopping.MaxItemStopper.stop" title="Permalink to this definition">¶</a></dt>
@@ -181,7 +199,8 @@
 <dl class="class">
 <dt id="catsim.stopping.MinErrorStopper">
 <em class="property">class </em><code class="descclassname">catsim.stopping.</code><code class="descname">MinErrorStopper</code><span class="sig-paren">(</span><em>min_error: float</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/stopping.html#MinErrorStopper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.stopping.MinErrorStopper" title="Permalink to this definition">¶</a></dt>
-<dd><p>Stopping criterion for minimum standard error of estimation (see <a class="reference internal" href="irt.html#catsim.irt.see" title="catsim.irt.see"><code class="xref py py-func docutils literal"><span class="pre">catsim.irt.see()</span></code></a>)</p>
+<dd><p>Bases: <a class="reference internal" href="#catsim.stopping.Stopper" title="catsim.stopping.Stopper"><code class="xref py py-class docutils literal"><span class="pre">catsim.stopping.Stopper</span></code></a></p>
+<p>Stopping criterion for minimum standard error of estimation (see <a class="reference internal" href="irt.html#catsim.irt.see" title="catsim.irt.see"><code class="xref py py-func docutils literal"><span class="pre">catsim.irt.see()</span></code></a>)</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -190,7 +209,6 @@
 </tr>
 </tbody>
 </table>
-<p class="rubric">Methods</p>
 <dl class="method">
 <dt id="catsim.stopping.MinErrorStopper.stop">
 <code class="descname">stop</code><span class="sig-paren">(</span><em>administered_items: numpy.ndarray</em>, <em>estimations: list</em><span class="sig-paren">)</span> &rarr; bool<a class="reference internal" href="_modules/catsim/stopping.html#MinErrorStopper.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.stopping.MinErrorStopper.stop" title="Permalink to this definition">¶</a></dt>
@@ -220,8 +238,8 @@
 <dl class="class">
 <dt id="catsim.stopping.Stopper">
 <em class="property">class </em><code class="descclassname">catsim.stopping.</code><code class="descname">Stopper</code><a class="reference internal" href="_modules/catsim/stopping.html#Stopper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.stopping.Stopper" title="Permalink to this definition">¶</a></dt>
-<dd><p>Base class for CAT stop criterion</p>
-<p class="rubric">Methods</p>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Base class for CAT stop criterion</p>
 <dl class="method">
 <dt id="catsim.stopping.Stopper.stop">
 <code class="descname">stop</code><span class="sig-paren">(</span><em>administered_items: numpy.ndarray</em>, <em>estimations: list</em><span class="sig-paren">)</span> &rarr; bool<a class="reference internal" href="_modules/catsim/stopping.html#Stopper.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.stopping.Stopper.stop" title="Permalink to this definition">¶</a></dt>
@@ -257,10 +275,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="simulation.html" class="btn btn-neutral float-right" title="Computerized Adaptive Testing Simulation" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="simulation.html" class="btn btn-neutral float-right" title="Computerized Adaptive Testing Simulation – catsim.simulation" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="reestimation.html" class="btn btn-neutral" title="Reestimation Methods" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="estimation.html" class="btn btn-neutral" title="Estimation Methods – catsim.estimation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

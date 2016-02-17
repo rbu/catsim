@@ -82,16 +82,17 @@
             
                 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../item_matrix.html">The Item Matrix</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../initialization.html">Initialization Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../selection.html">Item Selection Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../reestimation.html">Reestimation Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../stopping.html">Stopping Criteria</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../simulation.html">Computerized Adaptive Testing Simulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../irt.html">Item Response Theory Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../cat.html">Computerized Adaptive Test-related Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../plot.html">Miscellaneous Plotting Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../stats.html">Miscellaneous Statistical Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../initialization.html">Initialization Methods &#8211; <code class="docutils literal"><span class="pre">catsim.initialization</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../selection.html">Item Selection Methods &#8211; <code class="docutils literal"><span class="pre">catsim.selection</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../estimation.html">Estimation Methods &#8211; <code class="docutils literal"><span class="pre">catsim.estimation</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stopping.html">Stopping Criteria &#8211; <code class="docutils literal"><span class="pre">catsim.stopping</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../simulation.html">Computerized Adaptive Testing Simulation &#8211; <code class="docutils literal"><span class="pre">catsim.simulation</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../irt.html">Item Response Theory Functions &#8211; <code class="docutils literal"><span class="pre">catsim.irt</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cat.html">Computerized Adaptive Test-related Functions &#8211; <code class="docutils literal"><span class="pre">catsim.cat</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plot.html">Miscellaneous Plotting Functions &#8211; <code class="docutils literal"><span class="pre">catsim.plot</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stats.html">Miscellaneous Statistical Functions &#8211; <code class="docutils literal"><span class="pre">catsim.stats</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
 </ul>
 
             
@@ -150,17 +151,7 @@
 <span class="sd">difficulties. It also allows for the quality of items to be judged by the values</span>
 <span class="sd">of their parameters.</span>
 
-<span class="sd">This module containing functions pertaining to the Item Response Theory logistic models.</span>
-
-<span class="sd"> .. [Ayala2009] De Ayala, R. J. (2009). The Theory and Practice of Item</span>
-<span class="sd">Response Theory. New York: Guilford Press. Retrieved from</span>
-<span class="sd">http://books.google.com/books?id=-k36zbOBa28C&amp;pgis=1</span>
-
-<span class="sd">.. [Thissen00] Thissen, D. (2000). Reliability and measurement precision. In H.</span>
-<span class="sd">Wainer (Ed.), Computerized adaptive testing: A primer (2nd ed., pp. 159–184).</span>
-<span class="sd">Lawrence Erlbaum Associates Publishers.</span>
-
-<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module containing functions pertaining to the Item Response Theory logistic models.&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">numpy</span>
@@ -243,7 +234,7 @@
 
 <div class="viewcode-block" id="inf"><a class="viewcode-back" href="../../irt.html#catsim.irt.inf">[docs]</a><span class="k">def</span> <span class="nf">inf</span><span class="p">(</span><span class="n">theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Calculates the information value of an item using the Item Response Theory</span>
-<span class="sd">three-parameter logistic model function [Ayala2009]_:</span>
+<span class="sd">    three-parameter logistic model function [Ayala2009]_:</span>
 
 <span class="sd">    .. math:: I(\\theta) = a^2\\frac{(P(\\theta)-c)^2}{(1-c)^2}.\\frac{(1-P(\\theta))}{P(\\theta)}</span>
 
@@ -263,8 +254,7 @@
 <span class="sd">        :math:`0\\leq c \\leq 1`, but items considered good usually have</span>
 <span class="sd">        :math:`c \\leq 0.2`.</span>
 
-<span class="sd">    :returns: the information value of the item at the designated `theta` point.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    :returns: the information value of the item at the designated `theta` point.&quot;&quot;&quot;</span>
     <span class="n">ml3</span> <span class="o">=</span> <span class="n">tpm</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">ml3</span> <span class="o">-</span> <span class="n">c</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">c</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ml3</span><span class="p">)</span> <span class="o">/</span> <span class="n">ml3</span></div>
@@ -283,13 +273,13 @@
 <span class="sd">    probabilities in a sum of probabilities:</span>
 
 <span class="sd">     .. math:: \\log L(X_{Ij} | \\theta_j, , a_I, b_I, c_I) = \\sum_{i=1} ^ I</span>
-<span class="sd">    \\left\\lbrace x_{ij} \\log P_{ij}(\\theta)+ (1 - x_{ij}) \\log</span>
-<span class="sd">    Q_{ij}(\\theta) \\right\\rbrace</span>
+<span class="sd">               \\left\\lbrace x_{ij} \\log P_{ij}(\\theta)+ (1 - x_{ij}) \\log</span>
+<span class="sd">               Q_{ij}(\\theta) \\right\\rbrace</span>
 
-<span class="sd">    :param est_theta: estimated proficiency value</span>
-<span class="sd">    :param response_vector: a binary list containing the response vector</span>
-<span class="sd">    :param administered_items: a numpy array containing the parameters of the answered items</span>
-<span class="sd">    :returns: log-likelihood of a given proficiency value, given the responses to the administered items</span>
+<span class="sd">    :param est_theta: estimated proficiency value.</span>
+<span class="sd">    :param response_vector: a binary list containing the response vector.</span>
+<span class="sd">    :param administered_items: a numpy array containing the parameters of the answered items.</span>
+<span class="sd">    :returns: log-likelihood of a given proficiency value, given the responses to the administered items.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># inspired in the example found in</span>
     <span class="c1"># http://stats.stackexchange.com/questions/66199/maximum-likelihood-curve-</span>

@@ -82,16 +82,17 @@
             
                 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../item_matrix.html">The Item Matrix</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../initialization.html">Initialization Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../selection.html">Item Selection Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../reestimation.html">Reestimation Methods</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../stopping.html">Stopping Criteria</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../simulation.html">Computerized Adaptive Testing Simulation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../irt.html">Item Response Theory Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../cat.html">Computerized Adaptive Test-related Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../plot.html">Miscellaneous Plotting Functions</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../stats.html">Miscellaneous Statistical Functions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../initialization.html">Initialization Methods &#8211; <code class="docutils literal"><span class="pre">catsim.initialization</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../selection.html">Item Selection Methods &#8211; <code class="docutils literal"><span class="pre">catsim.selection</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../estimation.html">Estimation Methods &#8211; <code class="docutils literal"><span class="pre">catsim.estimation</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stopping.html">Stopping Criteria &#8211; <code class="docutils literal"><span class="pre">catsim.stopping</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../simulation.html">Computerized Adaptive Testing Simulation &#8211; <code class="docutils literal"><span class="pre">catsim.simulation</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../irt.html">Item Response Theory Functions &#8211; <code class="docutils literal"><span class="pre">catsim.irt</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cat.html">Computerized Adaptive Test-related Functions &#8211; <code class="docutils literal"><span class="pre">catsim.cat</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plot.html">Miscellaneous Plotting Functions &#8211; <code class="docutils literal"><span class="pre">catsim.plot</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stats.html">Miscellaneous Statistical Functions &#8211; <code class="docutils literal"><span class="pre">catsim.stats</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">References</a></li>
 </ul>
 
             
@@ -137,17 +138,7 @@
            <div itemprop="articleBody">
             
   <h1>Source code for catsim.cat</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Functions used specifically during the application/simulation of computerized adaptive tests.</span>
-
-<span class="sd">.. [Bar10] BARRADA, Juan Ramón et al. A method for the comparison of item</span>
-<span class="sd">   selection rules in computerized adaptive testing. Applied Psychological</span>
-<span class="sd">   Measurement, v. 34, n. 6, p. 438-452, 2010.</span>
-
-<span class="sd">.. [Dod90] Dodd, B. G. (1990). The Effect of Item Selection Procedure and</span>
-<span class="sd">  Stepsize on Computerized Adaptive Attitude Measurement Using the Rating</span>
-<span class="sd">  Scale Model. Applied Psychological Measurement, 14(4), 355-366.</span>
-<span class="sd">  http://doi.org/10.1177/014662169001400403</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<span></span><span class="sd">&quot;&quot;&quot;Functions used specifically during the application/simulation of computerized adaptive tests.&quot;&quot;&quot;</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span>
 <span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Iterable</span>
@@ -155,7 +146,7 @@
 
 <div class="viewcode-block" id="dodd"><a class="viewcode-back" href="../../cat.html#catsim.cat.dodd">[docs]</a><span class="k">def</span> <span class="nf">dodd</span><span class="p">(</span><span class="n">theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">correct</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Method proposed by [Dod90]_ for the reestimation of :math:`\\hat{\\theta}`</span>
-<span class="sd">    when the response vector is composed entirely of 1s or 0s</span>
+<span class="sd">    when the response vector is composed entirely of 1s or 0s.</span>
 
 <span class="sd">    .. math::</span>
 
