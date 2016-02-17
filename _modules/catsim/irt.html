@@ -81,7 +81,7 @@
             
             
                 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../item_matrix.html">The Item Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts.html">Basic Concepts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../initialization.html">Initialization Methods &#8211; <code class="docutils literal"><span class="pre">catsim.initialization</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../selection.html">Item Selection Methods &#8211; <code class="docutils literal"><span class="pre">catsim.selection</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../estimation.html">Estimation Methods &#8211; <code class="docutils literal"><span class="pre">catsim.estimation</span></code></a></li>
@@ -138,22 +138,7 @@
            <div itemprop="articleBody">
             
   <h1>Source code for catsim.irt</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Item Response Theory is a group of statistical tools created with the purpose</span>
-<span class="sd">of measuring latent traits, like personality traits or knowledge in specific areas.</span>
-<span class="sd">IRT allows for the creation of a measuring instrument (the test), under which every</span>
-<span class="sd">examinee may be positioned and compared with others. The masuring instrument is</span>
-<span class="sd">created by items, which can be most commonly represented as tasks in a test.</span>
-
-<span class="sd">On the mathematical domain, IRT allows us to calculate the probability with</span>
-<span class="sd">which an examinee might answer an item correctly. For that both items and</span>
-<span class="sd">examinees are modelled using numerical parameters. This allows for the</span>
-<span class="sd">estimation and analysis of examinees proficiencies on the same scale as items</span>
-<span class="sd">difficulties. It also allows for the quality of items to be judged by the values</span>
-<span class="sd">of their parameters.</span>
-
-<span class="sd">This module containing functions pertaining to the Item Response Theory logistic models.&quot;&quot;&quot;</span>
-
-<span class="kn">import</span> <span class="nn">math</span>
+<span></span><span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">numpy</span>
 
 

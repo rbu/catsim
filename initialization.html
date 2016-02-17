@@ -32,7 +32,7 @@
   
     <link rel="top" title="None" href="index.html"/>
         <link rel="next" title="Item Selection Methods – catsim.selection" href="selection.html"/>
-        <link rel="prev" title="The Item Matrix" href="item_matrix.html"/> 
+        <link rel="prev" title="Basic Concepts" href="concepts.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -82,7 +82,7 @@
             
             
                 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="item_matrix.html">The Item Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Basic Concepts</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Initialization Methods &#8211; <code class="docutils literal"><span class="pre">catsim.initialization</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="selection.html">Item Selection Methods &#8211; <code class="docutils literal"><span class="pre">catsim.selection</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="estimation.html">Estimation Methods &#8211; <code class="docutils literal"><span class="pre">catsim.estimation</span></code></a></li>
@@ -144,17 +144,6 @@
 <code class="xref py py-class docutils literal"><span class="pre">Initializer</span></code>. <code class="xref py py-class docutils literal"><span class="pre">Simulator</span></code> allows that a custom initializer be
 used during the simulation, as long as it also inherits from
 <code class="xref py py-class docutils literal"><span class="pre">Initializer</span></code>.</p>
-<p class="graphviz">
-digraph inheritance51267be144 {
-rankdir=LR;
-size=&quot;8.0, 12.0&quot;;
-  &quot;catsim.initialization.FixedPointInitializer&quot; [URL=&quot;#catsim.initialization.FixedPointInitializer&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;,tooltip=&quot;Initializes every proficiency at the same point.&quot;];
-  &quot;catsim.initialization.Initializer&quot; -&gt; &quot;catsim.initialization.FixedPointInitializer&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;catsim.initialization.Initializer&quot; [URL=&quot;#catsim.initialization.Initializer&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;,tooltip=&quot;Base class for CAT initializers&quot;];
-  &quot;catsim.initialization.RandomInitializer&quot; [URL=&quot;#catsim.initialization.RandomInitializer&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;,tooltip=&quot;Randomly initializes the first estimate of an examinee's proficiency&quot;];
-  &quot;catsim.initialization.Initializer&quot; -&gt; &quot;catsim.initialization.RandomInitializer&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-}
-</p>
 <span class="target" id="module-catsim.initialization"></span><dl class="class">
 <dt id="catsim.initialization.FixedPointInitializer">
 <em class="property">class </em><code class="descclassname">catsim.initialization.</code><code class="descname">FixedPointInitializer</code><span class="sig-paren">(</span><em>start: float</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/initialization.html#FixedPointInitializer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.initialization.FixedPointInitializer" title="Permalink to this definition">¶</a></dt>
@@ -245,7 +234,7 @@ and standard deviation values for the normal distribution
         <a href="selection.html" class="btn btn-neutral float-right" title="Item Selection Methods – catsim.selection" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="item_matrix.html" class="btn btn-neutral" title="The Item Matrix" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="concepts.html" class="btn btn-neutral" title="Basic Concepts" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

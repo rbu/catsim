@@ -82,7 +82,7 @@
             
             
                 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="item_matrix.html">The Item Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Basic Concepts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="initialization.html">Initialization Methods &#8211; <code class="docutils literal"><span class="pre">catsim.initialization</span></code></a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Item Selection Methods &#8211; <code class="docutils literal"><span class="pre">catsim.selection</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="estimation.html">Estimation Methods &#8211; <code class="docutils literal"><span class="pre">catsim.estimation</span></code></a></li>
@@ -144,19 +144,6 @@
 <code class="xref py py-class docutils literal"><span class="pre">Selector</span></code>. <code class="xref py py-class docutils literal"><span class="pre">Simulator</span></code> allows that a custom selector be
 used during the simulation, as long as it also inherits from
 <code class="xref py py-class docutils literal"><span class="pre">Selector</span></code>.</p>
-<p class="graphviz">
-digraph inheritanceb6f22deed1 {
-rankdir=LR;
-size=&quot;8.0, 12.0&quot;;
-  &quot;catsim.estimation.DifferentialEvolutionEstimator&quot; [URL=&quot;estimation.html#catsim.estimation.DifferentialEvolutionEstimator&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;,tooltip=&quot;Estimator that uses :py:func:`scipy.optimize.differential_evolution` to minimize the negative log-likelihood function&quot;];
-  &quot;catsim.estimation.Estimator&quot; -&gt; &quot;catsim.estimation.DifferentialEvolutionEstimator&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;catsim.estimation.Estimator&quot; [URL=&quot;estimation.html#catsim.estimation.Estimator&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;,tooltip=&quot;Base class for proficiency estimators&quot;];
-  &quot;catsim.estimation.FMinEstimator&quot; [URL=&quot;estimation.html#catsim.estimation.FMinEstimator&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;,tooltip=&quot;Estimator that uses :py:func:`scipy.optimize.fmin` to minimize the negative log-likelihood function&quot;];
-  &quot;catsim.estimation.Estimator&quot; -&gt; &quot;catsim.estimation.FMinEstimator&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-  &quot;catsim.estimation.HillClimbingEstimator&quot; [URL=&quot;estimation.html#catsim.estimation.HillClimbingEstimator&quot;,fontname=&quot;Vera Sans, DejaVu Sans, Liberation Sans, Arial, Helvetica, sans&quot;,fontsize=10,height=0.25,shape=box,style=&quot;setlinewidth(0.5)&quot;,target=&quot;_top&quot;,tooltip=&quot;Estimator that uses a hill-climbing algorithm to maximize the likelihood function&quot;];
-  &quot;catsim.estimation.Estimator&quot; -&gt; &quot;catsim.estimation.HillClimbingEstimator&quot; [arrowsize=0.5,style=&quot;setlinewidth(0.5)&quot;];
-}
-</p>
 <span class="target" id="module-catsim.selection"></span><dl class="class">
 <dt id="catsim.selection.ClusterSelector">
 <em class="property">class </em><code class="descclassname">catsim.selection.</code><code class="descname">ClusterSelector</code><span class="sig-paren">(</span><em>clusters: list</em>, <em>method: str='item_info'</em>, <em>r_max: float=1</em>, <em>r_control: str='passive'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/selection.html#ClusterSelector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.ClusterSelector" title="Permalink to this definition">¶</a></dt>

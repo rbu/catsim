@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>catsim – Computerized Adaptive Testing Simulator</title>
+  <title>Contents</title>
   
 
   
@@ -31,7 +31,7 @@
 
   
     <link rel="top" title="None" href="#"/>
-        <link rel="next" title="The Item Matrix" href="item_matrix.html"/> 
+        <link rel="next" title="Basic Concepts" href="concepts.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -81,7 +81,7 @@
             
             
                 <ul>
-<li class="toctree-l1"><a class="reference internal" href="item_matrix.html">The Item Matrix</a></li>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Basic Concepts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="initialization.html">Initialization Methods &#8211; <code class="docutils literal"><span class="pre">catsim.initialization</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="selection.html">Item Selection Methods &#8211; <code class="docutils literal"><span class="pre">catsim.selection</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="estimation.html">Estimation Methods &#8211; <code class="docutils literal"><span class="pre">catsim.estimation</span></code></a></li>
@@ -123,7 +123,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="#">Docs</a> &raquo;</li>
       
-    <li><cite>catsim</cite> &#8211; Computerized Adaptive Testing Simulator</li>
+    <li>Contents</li>
       <li class="wy-breadcrumbs-aside">
         
           
@@ -137,8 +137,39 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="catsim-computerized-adaptive-testing-simulator">
-<h1><cite>catsim</cite> &#8211; Computerized Adaptive Testing Simulator<a class="headerlink" href="#catsim-computerized-adaptive-testing-simulator" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="contents">
+<h1>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="concepts.html">Basic Concepts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#the-item-matrix">The Item Matrix</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html#the-cat-lifecycle">The CAT Lifecycle</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="initialization.html">Initialization Methods &#8211; <code class="docutils literal"><span class="pre">catsim.initialization</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="selection.html">Item Selection Methods &#8211; <code class="docutils literal"><span class="pre">catsim.selection</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="estimation.html">Estimation Methods &#8211; <code class="docutils literal"><span class="pre">catsim.estimation</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="estimation.html#comparison-between-estimators">Comparison between estimators</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="stopping.html">Stopping Criteria &#8211; <code class="docutils literal"><span class="pre">catsim.stopping</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="simulation.html">Computerized Adaptive Testing Simulation &#8211; <code class="docutils literal"><span class="pre">catsim.simulation</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="irt.html">Item Response Theory Functions &#8211; <code class="docutils literal"><span class="pre">catsim.irt</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="cat.html">Computerized Adaptive Test-related Functions &#8211; <code class="docutils literal"><span class="pre">catsim.cat</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot.html">Miscellaneous Plotting Functions &#8211; <code class="docutils literal"><span class="pre">catsim.plot</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="stats.html">Miscellaneous Statistical Functions &#8211; <code class="docutils literal"><span class="pre">catsim.stats</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#psychometrics">Psychometrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#software-architecture">Software architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#unit-testing">Unit testing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contributing.html#how-to-contribute">How to contribute</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+</ul>
+</div>
+<div class="section" id="catsim-computerized-adaptive-testing-simulator">
+<h2><cite>catsim</cite> &#8211; Computerized Adaptive Testing Simulator<a class="headerlink" href="#catsim-computerized-adaptive-testing-simulator" title="Permalink to this headline">¶</a></h2>
 <a class="reference external image-reference" href="https://travis-ci.org/douglasrizzo/catsim:"><img alt="Build Status" src="https://travis-ci.org/douglasrizzo/catsim.svg?branch=master" /></a>
 <a class="reference external image-reference" href="https://coveralls.io/github/douglasrizzo/catsim?branch=master"><img alt="Test Coverage" src="https://coveralls.io/repos/github/douglasrizzo/catsim/badge.svg?branch=master" /></a>
 <a class="reference external image-reference" href="https://badge.fury.io/py/catsim"><img alt="Latest Version" src="https://badge.fury.io/py/catsim.svg" /></a>
@@ -147,12 +178,14 @@
 <p><strong>catsim</strong> is a computerized adaptive testing simulator written in Python 3.4. It allow for the simulation of computerized adaptive tests, selecting different test initialization rules, item selection rules, proficiency reestimation methods and stopping criteria.</p>
 <p>Computerized adaptive tests are educational evaluations, usually taken by examinees in a computer or some other digital means, in which the examinee&#8217;s proficiency is evaluated after the response of each item. The new proficiency is then used to select a new item, closer to the examinee&#8217;s real proficiency. This method of test application has several advantages compared to the traditional paper-and-pencil method, since high-proficiency examinees are not required to answer all the easy items in a test, answering only the items that actually give some information regarding his or hers true knowledge of the subject at matter. A similar, but inverse effect happens for those examinees of low proficiency level.</p>
 <p><em>catsim</em> allows users to simulate the application of a computerized adaptive test, given a sample of examinees, represented by their proficiency levels, and an item bank, represented by their parameters according to some Item Response Theory model.</p>
+</div>
+</div>
 <div class="section" id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
 <p>Install it using <cite>pip install catsim</cite>.</p>
 </div>
 <div class="section" id="basic-usage">
-<h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h2>
+<h1>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h1>
 <ol class="arabic simple">
 <li>Have an <a class="reference external" href="https://douglasrizzo.github.io/catsim/item_matrix.html">item matrix</a>;</li>
 <li>Have a sample, or a number of examinees;</li>
@@ -188,35 +221,6 @@
 </td></tr></table></div>
 </div></blockquote>
 </div>
-<div class="section" id="contents">
-<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="item_matrix.html">The Item Matrix</a></li>
-<li class="toctree-l1"><a class="reference internal" href="initialization.html">Initialization Methods &#8211; <code class="docutils literal"><span class="pre">catsim.initialization</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="selection.html">Item Selection Methods &#8211; <code class="docutils literal"><span class="pre">catsim.selection</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="estimation.html">Estimation Methods &#8211; <code class="docutils literal"><span class="pre">catsim.estimation</span></code></a><ul>
-<li class="toctree-l2"><a class="reference internal" href="estimation.html#comparison-between-estimators">Comparison between estimators</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="stopping.html">Stopping Criteria &#8211; <code class="docutils literal"><span class="pre">catsim.stopping</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="simulation.html">Computerized Adaptive Testing Simulation &#8211; <code class="docutils literal"><span class="pre">catsim.simulation</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="irt.html">Item Response Theory Functions &#8211; <code class="docutils literal"><span class="pre">catsim.irt</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="cat.html">Computerized Adaptive Test-related Functions &#8211; <code class="docutils literal"><span class="pre">catsim.cat</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="plot.html">Miscellaneous Plotting Functions &#8211; <code class="docutils literal"><span class="pre">catsim.plot</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="stats.html">Miscellaneous Statistical Functions &#8211; <code class="docutils literal"><span class="pre">catsim.stats</span></code></a></li>
-<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="contributing.html#psychometrics">Psychometrics</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contributing.html#software-architecture">Software architecture</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contributing.html#unit-testing">Unit testing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="contributing.html#how-to-contribute">How to contribute</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
-</ul>
-</div>
-</div>
-</div>
 
 
            </div>
@@ -225,7 +229,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="item_matrix.html" class="btn btn-neutral float-right" title="The Item Matrix" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="concepts.html" class="btn btn-neutral float-right" title="Basic Concepts" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
     </div>
