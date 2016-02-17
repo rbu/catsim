@@ -159,6 +159,15 @@ distributions, refining future estimations.</p>
 <code class="xref py py-class docutils literal"><span class="pre">Estimator</span></code>. <code class="xref py py-class docutils literal"><span class="pre">Simulator</span></code> allows that a custom estimator be
 used during the simulation, as long as it also inherits from
 <code class="xref py py-class docutils literal"><span class="pre">Estimator</span></code>.</p>
+<p class="graphviz">
+<img src="_images/inheritance-1bd3b04049cc9527800d532b2223ae7001968b25.png" alt="Inheritance diagram of catsim.estimation" usemap="#inheritanceb6f22deed1" class="inheritance"/>
+<map id="inheritanceb6f22deed1" name="inheritanceb6f22deed1">
+<area shape="rect" id="node1" href="#catsim.estimation.DifferentialEvolutionEstimator" target="_top" title="Estimator that uses :py:func:`scipy.optimize.differential_evolution` to minimize the negative log&#45;likelihood function" alt="" coords="256,5,587,33"/>
+<area shape="rect" id="node2" href="#catsim.estimation.Estimator" target="_top" title="Base class for proficiency estimators" alt="" coords="5,55,208,83"/>
+<area shape="rect" id="node4" href="#catsim.estimation.FMinEstimator" target="_top" title="Estimator that uses :py:func:`scipy.optimize.fmin` to minimize the negative log&#45;likelihood function" alt="" coords="305,55,537,83"/>
+<area shape="rect" id="node6" href="#catsim.estimation.HillClimbingEstimator" target="_top" title="Estimator that uses a hill&#45;climbing algorithm to maximize the likelihood function" alt="" coords="283,106,560,134"/>
+</map>
+</p>
 <p><code class="xref py py-mod docutils literal"><span class="pre">catsim</span></code> implements a few types of maximum-likelihood estimators.</p>
 <span class="target" id="module-catsim.estimation"></span><dl class="class">
 <dt id="catsim.estimation.DifferentialEvolutionEstimator">

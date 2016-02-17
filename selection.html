@@ -144,6 +144,16 @@
 <code class="xref py py-class docutils literal"><span class="pre">Selector</span></code>. <code class="xref py py-class docutils literal"><span class="pre">Simulator</span></code> allows that a custom selector be
 used during the simulation, as long as it also inherits from
 <code class="xref py py-class docutils literal"><span class="pre">Selector</span></code>.</p>
+<p class="graphviz">
+<img src="_images/inheritance-8e609769f021a2dc74b033693268935a2a3bf40e.png" alt="Inheritance diagram of catsim.selection" usemap="#inheritance57e12ee8dd" class="inheritance"/>
+<map id="inheritance57e12ee8dd" name="inheritance57e12ee8dd">
+<area shape="rect" id="node1" href="#catsim.selection.ClusterSelector" target="_top" title="Cluster&#45;based Item Selection Method." alt="" coords="243,5,469,33"/>
+<area shape="rect" id="node2" href="#catsim.selection.Selector" target="_top" title="Base class representing a CAT item selector." alt="" coords="7,81,188,109"/>
+<area shape="rect" id="node4" href="#catsim.selection.LinearSelector" target="_top" title="Selector that returns item indexes in a linear order, simulating a standard (non&#45;adaptive) test." alt="" coords="245,55,467,83"/>
+<area shape="rect" id="node6" href="#catsim.selection.MaxInfoSelector" target="_top" title="Selector that returns the first non&#45;administered item with maximum information, given an estimated theta" alt="" coords="240,106,472,134"/>
+<area shape="rect" id="node8" href="#catsim.selection.RandomSelector" target="_top" title="Selector that randomly selects items for application." alt="" coords="239,157,473,185"/>
+</map>
+</p>
 <span class="target" id="module-catsim.selection"></span><dl class="class">
 <dt id="catsim.selection.ClusterSelector">
 <em class="property">class </em><code class="descclassname">catsim.selection.</code><code class="descname">ClusterSelector</code><span class="sig-paren">(</span><em>clusters: list</em>, <em>method: str='item_info'</em>, <em>r_max: float=1</em>, <em>r_control: str='passive'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/selection.html#ClusterSelector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.ClusterSelector" title="Permalink to this definition">¶</a></dt>
