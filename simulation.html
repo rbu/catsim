@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.8.2
+                0.8.4
               </div>
             
           
@@ -164,7 +164,7 @@ sampled from a normal distribution; or a :py:type:list containing said
 </table>
 <dl class="method">
 <dt id="catsim.simulation.Simulator.simulate">
-<code class="descname">simulate</code><span class="sig-paren">(</span><em>initializer: catsim.initialization.Initializer</em>, <em>selector: catsim.selection.Selector</em>, <em>estimator: catsim.estimation.Estimator</em>, <em>stopper: catsim.stopping.Stopper</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/simulation.html#Simulator.simulate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.simulation.Simulator.simulate" title="Permalink to this definition">¶</a></dt>
+<code class="descname">simulate</code><span class="sig-paren">(</span><em>initializer: catsim.initialization.Initializer</em>, <em>selector: catsim.selection.Selector</em>, <em>estimator: catsim.estimation.Estimator</em>, <em>stopper: catsim.stopping.Stopper</em>, <em>verbose: bool=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/simulation.html#Simulator.simulate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.simulation.Simulator.simulate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Simulates a computerized adaptive testing application to one or more examinees</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -175,6 +175,7 @@ sampled from a normal distribution; or a :py:type:list containing said
 <li><strong>selector</strong> (<a class="reference internal" href="selection.html#catsim.selection.Selector" title="catsim.selection.Selector"><code class="xref py py-class docutils literal"><span class="pre">Selector</span></code></a>) &#8211; a selector that selects new items to be presented to examinees</li>
 <li><strong>estimator</strong> (<a class="reference internal" href="estimation.html#catsim.estimation.Estimator" title="catsim.estimation.Estimator"><code class="xref py py-class docutils literal"><span class="pre">Estimator</span></code></a>) &#8211; an estimator that reestimates examinees proficiencies after each item is applied</li>
 <li><strong>stopper</strong> (<a class="reference internal" href="stopping.html#catsim.stopping.Stopper" title="catsim.stopping.Stopper"><code class="xref py py-class docutils literal"><span class="pre">Stopper</span></code></a>) &#8211; an object with a stopping criteria for the test</li>
+<li><strong>verbose</strong> (<code class="docutils literal"><span class="pre">bool</span></code>) &#8211; whether to periodically print a message regarding the progress of the simulation. Good for longer simulations.</li>
 </ul>
 </td>
 </tr>
@@ -239,7 +240,7 @@ sampled from a normal distribution; or a :py:type:list containing said
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.8.2',
+            VERSION:'0.8.4',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
