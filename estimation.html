@@ -160,18 +160,18 @@ distributions, refining future estimations.</p>
 used during the simulation, as long as it also inherits from
 <code class="xref py py-class docutils literal"><span class="pre">Estimator</span></code>.</p>
 <p class="graphviz">
-<img src="_images/inheritance-1bd3b04049cc9527800d532b2223ae7001968b25.png" alt="Inheritance diagram of catsim.estimation" usemap="#inheritanceb6f22deed1" class="inheritance"/>
+<img src="_images/inheritance-6ecf6e89e5eb5a4971095ae3a3a1e0f77174733e.png" alt="Inheritance diagram of catsim.estimation" usemap="#inheritanceb6f22deed1" class="inheritance"/>
 <map id="inheritanceb6f22deed1" name="inheritanceb6f22deed1">
-<area shape="rect" id="node1" href="#catsim.estimation.DifferentialEvolutionEstimator" target="_top" title="Estimator that uses :py:func:`scipy.optimize.differential_evolution` to minimize the negative log&#45;likelihood function" alt="" coords="256,5,587,33"/>
-<area shape="rect" id="node2" href="#catsim.estimation.Estimator" target="_top" title="Base class for proficiency estimators" alt="" coords="5,55,208,83"/>
-<area shape="rect" id="node4" href="#catsim.estimation.FMinEstimator" target="_top" title="Estimator that uses :py:func:`scipy.optimize.fmin` to minimize the negative log&#45;likelihood function" alt="" coords="305,55,537,83"/>
-<area shape="rect" id="node6" href="#catsim.estimation.HillClimbingEstimator" target="_top" title="Estimator that uses a hill&#45;climbing algorithm to maximize the likelihood function" alt="" coords="283,106,560,134"/>
+<area shape="rect" id="node1" href="#catsim.estimation.DifferentialEvolutionEstimator" target="_top" title="catsim.estimation.DifferentialEvolutionEstimator" alt="" coords="256,5,587,33"/>
+<area shape="rect" id="node2" href="#catsim.estimation.Estimator" target="_top" title="catsim.estimation.Estimator" alt="" coords="5,55,208,83"/>
+<area shape="rect" id="node4" href="#catsim.estimation.FMinEstimator" target="_top" title="catsim.estimation.FMinEstimator" alt="" coords="305,55,537,83"/>
+<area shape="rect" id="node6" href="#catsim.estimation.HillClimbingEstimator" target="_top" title="catsim.estimation.HillClimbingEstimator" alt="" coords="283,106,560,134"/>
 </map>
 </p>
 <p><code class="xref py py-mod docutils literal"><span class="pre">catsim</span></code> implements a few types of maximum-likelihood estimators.</p>
 <span class="target" id="module-catsim.estimation"></span><dl class="class">
 <dt id="catsim.estimation.DifferentialEvolutionEstimator">
-<em class="property">class </em><code class="descclassname">catsim.estimation.</code><code class="descname">DifferentialEvolutionEstimator</code><span class="sig-paren">(</span><em>bounds: tuple</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/estimation.html#DifferentialEvolutionEstimator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.estimation.DifferentialEvolutionEstimator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">catsim.estimation.</code><code class="descname">DifferentialEvolutionEstimator</code><span class="sig-paren">(</span><em>bounds: tuple</em><span class="sig-paren">)</span><a class="headerlink" href="#catsim.estimation.DifferentialEvolutionEstimator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#catsim.estimation.Estimator" title="catsim.estimation.Estimator"><code class="xref py py-class docutils literal"><span class="pre">catsim.estimation.Estimator</span></code></a></p>
 <p>Estimator that uses <a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.differential_evolution.html#scipy.optimize.differential_evolution" title="(in SciPy v0.17.0)"><code class="xref py py-func docutils literal"><span class="pre">scipy.optimize.differential_evolution()</span></code></a> to minimize the negative log-likelihood function</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -217,7 +217,7 @@ parameters in the item bank, in case no better bounds for
 
 <dl class="method">
 <dt id="catsim.estimation.DifferentialEvolutionEstimator.estimate">
-<code class="descname">estimate</code><span class="sig-paren">(</span><em>response_vector: list</em>, <em>administered_items: numpy.ndarray</em>, <em>current_theta: float=None</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/estimation.html#DifferentialEvolutionEstimator.estimate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.estimation.DifferentialEvolutionEstimator.estimate" title="Permalink to this definition">¶</a></dt>
+<code class="descname">estimate</code><span class="sig-paren">(</span><em>response_vector: list</em>, <em>administered_items: numpy.ndarray</em>, <em>current_theta: float=None</em><span class="sig-paren">)</span> &rarr; float<a class="headerlink" href="#catsim.estimation.DifferentialEvolutionEstimator.estimate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Uses <a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.fmin.html#scipy.optimize.fmin" title="(in SciPy v0.17.0)"><code class="xref py py-func docutils literal"><span class="pre">scipy.optimize.fmin()</span></code></a> to find and return the theta value
 that minimizes the negative log-likelihood function, given a response vector, a
 matrix with the administered items parameters and the current <span class="math">\(\theta\)</span>.</p>
@@ -261,12 +261,12 @@ answered items</li>
 
 <dl class="class">
 <dt id="catsim.estimation.Estimator">
-<em class="property">class </em><code class="descclassname">catsim.estimation.</code><code class="descname">Estimator</code><a class="reference internal" href="_modules/catsim/estimation.html#Estimator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.estimation.Estimator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">catsim.estimation.</code><code class="descname">Estimator</code><a class="headerlink" href="#catsim.estimation.Estimator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>Base class for proficiency estimators</p>
 <dl class="method">
 <dt id="catsim.estimation.Estimator.estimate">
-<code class="descname">estimate</code><span class="sig-paren">(</span><em>response_vector: list</em>, <em>administered_items: numpy.ndarray</em>, <em>current_theta: float</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/estimation.html#Estimator.estimate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.estimation.Estimator.estimate" title="Permalink to this definition">¶</a></dt>
+<code class="descname">estimate</code><span class="sig-paren">(</span><em>response_vector: list</em>, <em>administered_items: numpy.ndarray</em>, <em>current_theta: float</em><span class="sig-paren">)</span> &rarr; float<a class="headerlink" href="#catsim.estimation.Estimator.estimate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Uses a hill-climbing algorithm to find and return the theta value
 that maximizes the likelihood function, given a response vector and a
 matrix with the administered items parameters.</p>
@@ -296,7 +296,7 @@ answered items</li>
 
 <dl class="class">
 <dt id="catsim.estimation.FMinEstimator">
-<em class="property">class </em><code class="descclassname">catsim.estimation.</code><code class="descname">FMinEstimator</code><a class="reference internal" href="_modules/catsim/estimation.html#FMinEstimator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.estimation.FMinEstimator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">catsim.estimation.</code><code class="descname">FMinEstimator</code><a class="headerlink" href="#catsim.estimation.FMinEstimator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#catsim.estimation.Estimator" title="catsim.estimation.Estimator"><code class="xref py py-class docutils literal"><span class="pre">catsim.estimation.Estimator</span></code></a></p>
 <p>Estimator that uses <a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.fmin.html#scipy.optimize.fmin" title="(in SciPy v0.17.0)"><code class="xref py py-func docutils literal"><span class="pre">scipy.optimize.fmin()</span></code></a> to minimize the negative log-likelihood function</p>
 <dl class="attribute">
@@ -329,7 +329,7 @@ answered items</li>
 
 <dl class="method">
 <dt id="catsim.estimation.FMinEstimator.estimate">
-<code class="descname">estimate</code><span class="sig-paren">(</span><em>response_vector: list</em>, <em>administered_items: numpy.ndarray</em>, <em>current_theta: float</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/estimation.html#FMinEstimator.estimate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.estimation.FMinEstimator.estimate" title="Permalink to this definition">¶</a></dt>
+<code class="descname">estimate</code><span class="sig-paren">(</span><em>response_vector: list</em>, <em>administered_items: numpy.ndarray</em>, <em>current_theta: float</em><span class="sig-paren">)</span> &rarr; float<a class="headerlink" href="#catsim.estimation.FMinEstimator.estimate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Uses <a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.optimize.fmin.html#scipy.optimize.fmin" title="(in SciPy v0.17.0)"><code class="xref py py-func docutils literal"><span class="pre">scipy.optimize.fmin()</span></code></a> to find and return the theta value
 that minimizes the negative log-likelihood function, given a response vector, a
 matrix with the administered items parameters and the current <span class="math">\(\theta\)</span>.</p>
@@ -373,7 +373,7 @@ answered items</li>
 
 <dl class="class">
 <dt id="catsim.estimation.HillClimbingEstimator">
-<em class="property">class </em><code class="descclassname">catsim.estimation.</code><code class="descname">HillClimbingEstimator</code><span class="sig-paren">(</span><em>precision: int=6</em>, <em>verbose: bool=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/estimation.html#HillClimbingEstimator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.estimation.HillClimbingEstimator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">catsim.estimation.</code><code class="descname">HillClimbingEstimator</code><span class="sig-paren">(</span><em>precision: int=6</em>, <em>verbose: bool=False</em><span class="sig-paren">)</span><a class="headerlink" href="#catsim.estimation.HillClimbingEstimator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#catsim.estimation.Estimator" title="catsim.estimation.Estimator"><code class="xref py py-class docutils literal"><span class="pre">catsim.estimation.Estimator</span></code></a></p>
 <p>Estimator that uses a hill-climbing algorithm to maximize the likelihood function</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -418,7 +418,7 @@ answered items</li>
 
 <dl class="method">
 <dt id="catsim.estimation.HillClimbingEstimator.estimate">
-<code class="descname">estimate</code><span class="sig-paren">(</span><em>response_vector: list</em>, <em>administered_items: numpy.ndarray</em>, <em>current_theta: float=None</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/estimation.html#HillClimbingEstimator.estimate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.estimation.HillClimbingEstimator.estimate" title="Permalink to this definition">¶</a></dt>
+<code class="descname">estimate</code><span class="sig-paren">(</span><em>response_vector: list</em>, <em>administered_items: numpy.ndarray</em>, <em>current_theta: float=None</em><span class="sig-paren">)</span> &rarr; float<a class="headerlink" href="#catsim.estimation.HillClimbingEstimator.estimate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Uses a hill-climbing algorithm to find and returns the theta value
 that maximizes the likelihood function, given a response vector and a
 matrix with the administered items parameters.</p>

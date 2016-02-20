@@ -159,23 +159,10 @@
 <li>Have a sample, or a number of examinees;</li>
 <li>Create a <a class="reference external" href="https://douglasrizzo.github.io/catsim/initialization.html">initializer</a>, an item <a class="reference external" href="https://douglasrizzo.github.io/catsim/selection.html">selector</a>, a proficiency <a class="reference external" href="https://douglasrizzo.github.io/catsim/estimation.html">estimator</a> and a <a class="reference external" href="https://douglasrizzo.github.io/catsim/stopping.html">stopping criterion</a>;</li>
 <li>Pass them to a <a class="reference external" href="https://douglasrizzo.github.io/catsim/simulation.html">simulator</a> and start the simulation.</li>
-</ol>
-<p>Optional:</p>
-<ol class="arabic simple" start="5">
 <li>Access the simulator&#8217;s properties to get specifics of the results;</li>
 <li><a class="reference external" href="https://douglasrizzo.github.io/catsim/plot.html">Plot</a> your results.</li>
 </ol>
-<blockquote>
-<div><div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">catsim.initialization</span> <span class="kn">import</span> <span class="n">RandomInitializer</span>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">catsim.initialization</span> <span class="kn">import</span> <span class="n">RandomInitializer</span>
 <span class="kn">from</span> <span class="nn">catsim.selection</span> <span class="kn">import</span> <span class="n">MaxInfoSelector</span>
 <span class="kn">from</span> <span class="nn">catsim.reestimation</span> <span class="kn">import</span> <span class="n">HillClimbingEstimator</span>
 <span class="kn">from</span> <span class="nn">catsim.stopping</span> <span class="kn">import</span> <span class="n">MaxItemStopper</span>
@@ -186,8 +173,19 @@
 <span class="n">stopper</span> <span class="o">=</span> <span class="n">MaxItemStopper</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
 <span class="n">Simulator</span><span class="p">(</span><span class="n">generate_item_bank</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">initializer</span><span class="p">,</span> <span class="n">selector</span><span class="p">,</span> <span class="n">estimator</span><span class="p">,</span> <span class="n">stopper</span><span class="p">)</span>
 </pre></div>
-</td></tr></table></div>
-</div></blockquote>
+</div>
+</div>
+<div class="section" id="citing-catsim">
+<h2>Citing <cite>catsim</cite><a class="headerlink" href="#citing-catsim" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bibtex"><div class="highlight"><pre><span></span><span class="kd">@misc</span><span class="p">{</span><span class="nl">catsim</span><span class="p">,</span>
+    <span class="na">author</span> = <span class="p">{</span><span class="s2">Meneghetti, Douglas De Rizzo</span><span class="p">},</span>
+    <span class="na">title</span> = <span class="p">{</span><span class="s2">catsim: Computerized Adaptive Testing Simulator</span><span class="p">},</span>
+    <span class="na">url</span> = <span class="p">{</span><span class="s2">http://douglasrizzo.github.io/catsim/</span><span class="p">},</span>
+    <span class="na">year</span> = <span class="p">{</span><span class="s2">2016</span><span class="p">},</span>
+    <span class="na">doi</span> = <span class="p">{</span><span class="s2">10.5281/zenodo.46259</span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="contents">
 <h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>

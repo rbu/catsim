@@ -145,21 +145,21 @@
 used during the simulation, as long as it also inherits from
 <code class="xref py py-class docutils literal"><span class="pre">Initializer</span></code>.</p>
 <p class="graphviz">
-<img src="_images/inheritance-9873ff917622a1b0f035fb98e81b1323b17b24f6.png" alt="Inheritance diagram of catsim.initialization" usemap="#inheritance51267be144" class="inheritance"/>
+<img src="_images/inheritance-c0fc9f1a370e8c0766b1917d93cac46a47bf88f4.png" alt="Inheritance diagram of catsim.initialization" usemap="#inheritance51267be144" class="inheritance"/>
 <map id="inheritance51267be144" name="inheritance51267be144">
-<area shape="rect" id="node1" href="#catsim.initialization.FixedPointInitializer" target="_top" title="Initializes every proficiency at the same point." alt="" coords="260,5,527,33"/>
-<area shape="rect" id="node2" href="#catsim.initialization.Initializer" target="_top" title="Base class for CAT initializers" alt="" coords="7,30,209,58"/>
-<area shape="rect" id="node4" href="#catsim.initialization.RandomInitializer" target="_top" title="Randomly initializes the first estimate of an examinee&#39;s proficiency" alt="" coords="265,55,521,83"/>
+<area shape="rect" id="node1" href="#catsim.initialization.FixedPointInitializer" target="_top" title="catsim.initialization.FixedPointInitializer" alt="" coords="260,5,527,33"/>
+<area shape="rect" id="node2" href="#catsim.initialization.Initializer" target="_top" title="catsim.initialization.Initializer" alt="" coords="7,30,209,58"/>
+<area shape="rect" id="node4" href="#catsim.initialization.RandomInitializer" target="_top" title="catsim.initialization.RandomInitializer" alt="" coords="265,55,521,83"/>
 </map>
 </p>
 <span class="target" id="module-catsim.initialization"></span><dl class="class">
 <dt id="catsim.initialization.FixedPointInitializer">
-<em class="property">class </em><code class="descclassname">catsim.initialization.</code><code class="descname">FixedPointInitializer</code><span class="sig-paren">(</span><em>start: float</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/initialization.html#FixedPointInitializer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.initialization.FixedPointInitializer" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">catsim.initialization.</code><code class="descname">FixedPointInitializer</code><span class="sig-paren">(</span><em>start: float</em><span class="sig-paren">)</span><a class="headerlink" href="#catsim.initialization.FixedPointInitializer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#catsim.initialization.Initializer" title="catsim.initialization.Initializer"><code class="xref py py-class docutils literal"><span class="pre">catsim.initialization.Initializer</span></code></a></p>
 <p>Initializes every proficiency at the same point.</p>
 <dl class="method">
 <dt id="catsim.initialization.FixedPointInitializer.initialize">
-<code class="descname">initialize</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/initialization.html#FixedPointInitializer.initialize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.initialization.FixedPointInitializer.initialize" title="Permalink to this definition">¶</a></dt>
+<code class="descname">initialize</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; float<a class="headerlink" href="#catsim.initialization.FixedPointInitializer.initialize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the same proficiency value that was passed to the constructor of the initializer</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -175,12 +175,12 @@ used during the simulation, as long as it also inherits from
 
 <dl class="class">
 <dt id="catsim.initialization.Initializer">
-<em class="property">class </em><code class="descclassname">catsim.initialization.</code><code class="descname">Initializer</code><a class="reference internal" href="_modules/catsim/initialization.html#Initializer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.initialization.Initializer" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">catsim.initialization.</code><code class="descname">Initializer</code><a class="headerlink" href="#catsim.initialization.Initializer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>Base class for CAT initializers</p>
 <dl class="method">
 <dt id="catsim.initialization.Initializer.initialize">
-<code class="descname">initialize</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/initialization.html#Initializer.initialize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.initialization.Initializer.initialize" title="Permalink to this definition">¶</a></dt>
+<code class="descname">initialize</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; float<a class="headerlink" href="#catsim.initialization.Initializer.initialize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Selects an examinee&#8217;s initial <span class="math">\(\theta\)</span> value</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -196,7 +196,7 @@ used during the simulation, as long as it also inherits from
 
 <dl class="class">
 <dt id="catsim.initialization.RandomInitializer">
-<em class="property">class </em><code class="descclassname">catsim.initialization.</code><code class="descname">RandomInitializer</code><span class="sig-paren">(</span><em>dist_type: str='uniform'</em>, <em>dist_params: tuple=(-5</em>, <em>5)</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/initialization.html#RandomInitializer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.initialization.RandomInitializer" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">catsim.initialization.</code><code class="descname">RandomInitializer</code><span class="sig-paren">(</span><em>dist_type: str='uniform'</em>, <em>dist_params: tuple=(-5</em>, <em>5)</em><span class="sig-paren">)</span><a class="headerlink" href="#catsim.initialization.RandomInitializer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#catsim.initialization.Initializer" title="catsim.initialization.Initializer"><code class="xref py py-class docutils literal"><span class="pre">catsim.initialization.Initializer</span></code></a></p>
 <p>Randomly initializes the first estimate of an examinee&#8217;s proficiency</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -216,7 +216,7 @@ and standard deviation values for the normal distribution
 </table>
 <dl class="method">
 <dt id="catsim.initialization.RandomInitializer.initialize">
-<code class="descname">initialize</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/initialization.html#RandomInitializer.initialize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.initialization.RandomInitializer.initialize" title="Permalink to this definition">¶</a></dt>
+<code class="descname">initialize</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; float<a class="headerlink" href="#catsim.initialization.RandomInitializer.initialize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generates a value using the chosen distribution and parameters</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />

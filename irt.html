@@ -145,7 +145,7 @@
 <p>This module containing functions pertaining to the Item Response Theory logistic models.</p>
 <span class="target" id="module-catsim.irt"></span><dl class="function">
 <dt id="catsim.irt.inf">
-<code class="descclassname">catsim.irt.</code><code class="descname">inf</code><span class="sig-paren">(</span><em>theta: float</em>, <em>a: float</em>, <em>b: float</em>, <em>c: float=0</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/irt.html#inf"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.irt.inf" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">catsim.irt.</code><code class="descname">inf</code><span class="sig-paren">(</span><em>theta: float</em>, <em>a: float</em>, <em>b: float</em>, <em>c: float=0</em><span class="sig-paren">)</span> &rarr; float<a class="headerlink" href="#catsim.irt.inf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the information value of an item using the Item Response Theory
 three-parameter logistic model function <a class="reference internal" href="references.html#ayala2009" id="id1">[Ayala2009]</a>:</p>
 <div class="math">
@@ -182,7 +182,7 @@ used to estimate the parameters, then <span class="math">\(-4 \leq b \leq 4\)</s
 
 <dl class="function">
 <dt id="catsim.irt.logLik">
-<code class="descclassname">catsim.irt.</code><code class="descname">logLik</code><span class="sig-paren">(</span><em>est_theta: float</em>, <em>response_vector: list</em>, <em>administered_items: numpy.ndarray</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/irt.html#logLik"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.irt.logLik" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">catsim.irt.</code><code class="descname">logLik</code><span class="sig-paren">(</span><em>est_theta: float</em>, <em>response_vector: list</em>, <em>administered_items: numpy.ndarray</em><span class="sig-paren">)</span> &rarr; float<a class="headerlink" href="#catsim.irt.logLik" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the log-likelihood of an estimated proficiency, given a
 response vector and the parameters of the answered items <a class="reference internal" href="references.html#ayala2009" id="id2">[Ayala2009]</a>.</p>
 <p>The likelihood function of a given <span class="math">\(\theta\)</span> value given the answers to <span class="math">\(I\)</span> items is given by:</p>
@@ -220,7 +220,7 @@ Q_{ij}(\theta) \right\rbrace\]</div>
 
 <dl class="function">
 <dt id="catsim.irt.max_info">
-<code class="descclassname">catsim.irt.</code><code class="descname">max_info</code><span class="sig-paren">(</span><em>a=1</em>, <em>b=0</em>, <em>c=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/irt.html#max_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.irt.max_info" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">catsim.irt.</code><code class="descname">max_info</code><span class="sig-paren">(</span><em>a=1</em>, <em>b=0</em>, <em>c=0</em><span class="sig-paren">)</span><a class="headerlink" href="#catsim.irt.max_info" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the <span class="math">\(\theta\)</span> value to which the item with the given parameters
 gives maximum information. For the 1-parameter and 2-parameter logistic models,
 this <span class="math">\(\theta\)</span> corresponds to where <span class="math">\(b = 0.5\)</span>. In the 3-parameter
@@ -232,7 +232,7 @@ logistic model, however, this value is given by the following function
 
 <dl class="function">
 <dt id="catsim.irt.negativelogLik">
-<code class="descclassname">catsim.irt.</code><code class="descname">negativelogLik</code><span class="sig-paren">(</span><em>est_theta: float</em>, <em>*args</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/irt.html#negativelogLik"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.irt.negativelogLik" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">catsim.irt.</code><code class="descname">negativelogLik</code><span class="sig-paren">(</span><em>est_theta: float</em>, <em>*args</em><span class="sig-paren">)</span> &rarr; float<a class="headerlink" href="#catsim.irt.negativelogLik" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function used by <a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/optimize.html#module-scipy.optimize" title="(in SciPy v0.17.0)"><code class="xref py py-mod docutils literal"><span class="pre">scipy.optimize</span></code></a> optimization functions that tend to minimize
 values, instead of maximizing them. Calculates the negative log-likelihood of a proficiency
 value, given a response vector and the parameters of the administered items. The value of
@@ -269,7 +269,7 @@ value, given a response vector and the parameters of the administered items. The
 
 <dl class="function">
 <dt id="catsim.irt.normalize_item_bank">
-<code class="descclassname">catsim.irt.</code><code class="descname">normalize_item_bank</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em><span class="sig-paren">)</span> &rarr; numpy.ndarray<a class="reference internal" href="_modules/catsim/irt.html#normalize_item_bank"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.irt.normalize_item_bank" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">catsim.irt.</code><code class="descname">normalize_item_bank</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em><span class="sig-paren">)</span> &rarr; numpy.ndarray<a class="headerlink" href="#catsim.irt.normalize_item_bank" title="Permalink to this definition">¶</a></dt>
 <dd><p>Normalize an item matrix so that it conforms to the standard used by catsim.
 The item matrix must have dimension nx3, in which column 1 represents item discrimination,
 column 2 represents item difficulty and column 3 represents the pseudo-guessing parameter.</p>
@@ -293,7 +293,7 @@ columns, respectively. the pseudo-guessing column is added such that items simul
 
 <dl class="function">
 <dt id="catsim.irt.reliability">
-<code class="descclassname">catsim.irt.</code><code class="descname">reliability</code><span class="sig-paren">(</span><em>theta: float</em>, <em>items: numpy.ndarray</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/irt.html#reliability"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.irt.reliability" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">catsim.irt.</code><code class="descname">reliability</code><span class="sig-paren">(</span><em>theta: float</em>, <em>items: numpy.ndarray</em><span class="sig-paren">)</span><a class="headerlink" href="#catsim.irt.reliability" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes test reliability <a class="reference internal" href="references.html#thissen00" id="id4">[Thissen00]</a>, given by:</p>
 <div class="math">
 \[Rel = 1 - \frac{1}{I(\theta)}\]</div>
@@ -321,7 +321,7 @@ sense, but usually the application of additional items solves this problem.</p>
 
 <dl class="function">
 <dt id="catsim.irt.see">
-<code class="descclassname">catsim.irt.</code><code class="descname">see</code><span class="sig-paren">(</span><em>theta: float</em>, <em>items: numpy.ndarray</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/irt.html#see"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.irt.see" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">catsim.irt.</code><code class="descname">see</code><span class="sig-paren">(</span><em>theta: float</em>, <em>items: numpy.ndarray</em><span class="sig-paren">)</span> &rarr; float<a class="headerlink" href="#catsim.irt.see" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the standard error of estimation (<span class="math">\(SEE\)</span>) of a test at a
 specific <span class="math">\(\theta\)</span> value <a class="reference internal" href="references.html#ayala2009" id="id5">[Ayala2009]</a>:</p>
 <div class="math">
@@ -349,7 +349,7 @@ specific <span class="math">\(\theta\)</span> value <a class="reference internal
 
 <dl class="function">
 <dt id="catsim.irt.test_info">
-<code class="descclassname">catsim.irt.</code><code class="descname">test_info</code><span class="sig-paren">(</span><em>theta: float</em>, <em>items: numpy.ndarray</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/irt.html#test_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.irt.test_info" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">catsim.irt.</code><code class="descname">test_info</code><span class="sig-paren">(</span><em>theta: float</em>, <em>items: numpy.ndarray</em><span class="sig-paren">)</span><a class="headerlink" href="#catsim.irt.test_info" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the test information of a test at a specific <span class="math">\(\theta\)</span> value <a class="reference internal" href="references.html#ayala2009" id="id6">[Ayala2009]</a>:</p>
 <div class="math">
 \[I(\theta) = \sum_{j \in J} I_j(\theta)\]</div>
@@ -374,7 +374,7 @@ item information of <span class="math">\(j\)</span> at aspecific <span class="ma
 
 <dl class="function">
 <dt id="catsim.irt.tpm">
-<code class="descclassname">catsim.irt.</code><code class="descname">tpm</code><span class="sig-paren">(</span><em>theta: float</em>, <em>a: float</em>, <em>b: float</em>, <em>c: float=0</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/irt.html#tpm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.irt.tpm" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">catsim.irt.</code><code class="descname">tpm</code><span class="sig-paren">(</span><em>theta: float</em>, <em>a: float</em>, <em>b: float</em>, <em>c: float=0</em><span class="sig-paren">)</span> &rarr; float<a class="headerlink" href="#catsim.irt.tpm" title="Permalink to this definition">¶</a></dt>
 <dd><p>Item Response Theory three-parameter logistic function <a class="reference internal" href="references.html#ayala2009" id="id7">[Ayala2009]</a>:</p>
 <div class="math">
 \[P(X_i = 1| \theta) = c_i + \frac{1-c_i}{1+ e^{a_i(\theta-b_i)}}\]</div>
@@ -407,7 +407,7 @@ as <cite>theta</cite> (usually <span class="math">\(-4 \leq b \leq 4\)</span>).<
 
 <dl class="function">
 <dt id="catsim.irt.validate_item_bank">
-<code class="descclassname">catsim.irt.</code><code class="descname">validate_item_bank</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>raise_err: bool=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/irt.html#validate_item_bank"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.irt.validate_item_bank" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">catsim.irt.</code><code class="descname">validate_item_bank</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>raise_err: bool=False</em><span class="sig-paren">)</span><a class="headerlink" href="#catsim.irt.validate_item_bank" title="Permalink to this definition">¶</a></dt>
 <dd><p>Validates the shape and parameters in the item matrix so that it conforms to the standard
 used by catsim. The item matrix must have dimension nx3, in which column 1 represents item
 discrimination, column 2 represents item difficulty and column 3 represents the

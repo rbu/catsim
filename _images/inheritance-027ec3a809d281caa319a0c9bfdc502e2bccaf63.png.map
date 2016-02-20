@@ -1,0 +1,5 @@
+<map id="inheritance76f349e9d6" name="inheritance76f349e9d6">
+<area shape="rect" id="node1" href="#catsim.stopping.MaxItemStopper" target="_top" title="catsim.stopping.MaxItemStopper" alt="" coords="232,5,467,33"/>
+<area shape="rect" id="node2" href="#catsim.stopping.Stopper" target="_top" title="catsim.stopping.Stopper" alt="" coords="5,30,184,58"/>
+<area shape="rect" id="node4" href="#catsim.stopping.MinErrorStopper" target="_top" title="catsim.stopping.MinErrorStopper" alt="" coords="233,55,465,83"/>
+</map>

@@ -1,5 +1,0 @@
-<map id="inheritance76f349e9d6" name="inheritance76f349e9d6">
-<area shape="rect" id="node1" href="#catsim.stopping.MaxItemStopper" target="_top" title="Stopping criterion for maximum number of items in a test" alt="" coords="232,5,467,33"/>
-<area shape="rect" id="node2" href="#catsim.stopping.Stopper" target="_top" title="Base class for CAT stop criterion" alt="" coords="5,30,184,58"/>
-<area shape="rect" id="node4" href="#catsim.stopping.MinErrorStopper" target="_top" title="Stopping criterion for minimum standard error of estimation (see :py:func:`catsim.irt.see`)" alt="" coords="233,55,465,83"/>
-</map>

@@ -145,23 +145,23 @@
 used during the simulation, as long as it also inherits from
 <code class="xref py py-class docutils literal"><span class="pre">Selector</span></code>.</p>
 <p class="graphviz">
-<img src="_images/inheritance-addf0f7f4bc8dfbce69edcb02143adfeb23bc8f4.png" alt="Inheritance diagram of catsim.selection" usemap="#inheritance57e12ee8dd" class="inheritance"/>
+<img src="_images/inheritance-b116e61f4384018d05404622df1c887cb447f796.png" alt="Inheritance diagram of catsim.selection" usemap="#inheritance57e12ee8dd" class="inheritance"/>
 <map id="inheritance57e12ee8dd" name="inheritance57e12ee8dd">
-<area shape="rect" id="node1" href="#catsim.selection.AStratifiedBBlockingSelector" target="_top" title="Implementation of the :math:`\alpha`&#45;stratified selector with :math:`b`" alt="" coords="239,5,551,33"/>
-<area shape="rect" id="node2" href="#catsim.selection.Selector" target="_top" title="Base class representing a CAT item selector." alt="" coords="7,207,188,235"/>
-<area shape="rect" id="node4" href="#catsim.selection.AStratifiedSelector" target="_top" title="Implementation of the :math:`\alpha`&#45;stratified selector proposed by" alt="" coords="269,55,520,83"/>
-<area shape="rect" id="node6" href="#catsim.selection.ClusterSelector" target="_top" title="Cluster&#45;based Item Selection Method." alt="" coords="281,106,508,134"/>
-<area shape="rect" id="node8" href="#catsim.selection.LinearSelector" target="_top" title="Selector that returns item indexes in a linear order, simulating a standard (non&#45;adaptive) test." alt="" coords="284,157,505,185"/>
-<area shape="rect" id="node10" href="#catsim.selection.MaxInfoBBlockingSelector" target="_top" title="Implementation of the maximum information stratification with :math:`b`" alt="" coords="248,207,541,235"/>
-<area shape="rect" id="node12" href="#catsim.selection.MaxInfoSelector" target="_top" title="Selector that returns the first non&#45;administered item with maximum information, given an estimated theta" alt="" coords="279,258,511,286"/>
-<area shape="rect" id="node14" href="#catsim.selection.MaxInfoStratificationSelector" target="_top" title="Implementation of the maximum information stratification (MIS) selector" alt="" coords="239,309,551,337"/>
-<area shape="rect" id="node16" href="#catsim.selection.RandomSelector" target="_top" title="Selector that randomly selects items for application." alt="" coords="277,359,512,387"/>
-<area shape="rect" id="node18" href="#catsim.selection.The54321Selector" target="_top" title="Implementation of the 5&#45;4&#45;3&#45;2&#45;1 selector proposed by [McBride83]_, in which," alt="" coords="272,410,517,438"/>
+<area shape="rect" id="node1" href="#catsim.selection.AStratifiedBBlockingSelector" target="_top" title="catsim.selection.AStratifiedBBlockingSelector" alt="" coords="239,5,551,33"/>
+<area shape="rect" id="node2" href="#catsim.selection.Selector" target="_top" title="catsim.selection.Selector" alt="" coords="7,207,188,235"/>
+<area shape="rect" id="node4" href="#catsim.selection.AStratifiedSelector" target="_top" title="catsim.selection.AStratifiedSelector" alt="" coords="269,55,520,83"/>
+<area shape="rect" id="node6" href="#catsim.selection.ClusterSelector" target="_top" title="catsim.selection.ClusterSelector" alt="" coords="281,106,508,134"/>
+<area shape="rect" id="node8" href="#catsim.selection.LinearSelector" target="_top" title="catsim.selection.LinearSelector" alt="" coords="284,157,505,185"/>
+<area shape="rect" id="node10" href="#catsim.selection.MaxInfoBBlockingSelector" target="_top" title="catsim.selection.MaxInfoBBlockingSelector" alt="" coords="248,207,541,235"/>
+<area shape="rect" id="node12" href="#catsim.selection.MaxInfoSelector" target="_top" title="catsim.selection.MaxInfoSelector" alt="" coords="279,258,511,286"/>
+<area shape="rect" id="node14" href="#catsim.selection.MaxInfoStratificationSelector" target="_top" title="catsim.selection.MaxInfoStratificationSelector" alt="" coords="239,309,551,337"/>
+<area shape="rect" id="node16" href="#catsim.selection.RandomSelector" target="_top" title="catsim.selection.RandomSelector" alt="" coords="277,359,512,387"/>
+<area shape="rect" id="node18" href="#catsim.selection.The54321Selector" target="_top" title="catsim.selection.The54321Selector" alt="" coords="272,410,517,438"/>
 </map>
 </p>
 <span class="target" id="module-catsim.selection"></span><dl class="class">
 <dt id="catsim.selection.AStratifiedBBlockingSelector">
-<em class="property">class </em><code class="descclassname">catsim.selection.</code><code class="descname">AStratifiedBBlockingSelector</code><span class="sig-paren">(</span><em>test_size</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/selection.html#AStratifiedBBlockingSelector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.AStratifiedBBlockingSelector" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">catsim.selection.</code><code class="descname">AStratifiedBBlockingSelector</code><span class="sig-paren">(</span><em>test_size</em><span class="sig-paren">)</span><a class="headerlink" href="#catsim.selection.AStratifiedBBlockingSelector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#catsim.selection.Selector" title="catsim.selection.Selector"><code class="xref py py-class docutils literal"><span class="pre">catsim.selection.Selector</span></code></a></p>
 <p>Implementation of the <span class="math">\(\alpha\)</span>-stratified selector with <span class="math">\(b\)</span>
 blocking proposed by <a class="reference internal" href="references.html#chang2001" id="id1">[Chang2001]</a>, in which the item bank is sorted in ascending
@@ -183,7 +183,7 @@ parameters between all strata, after perceiving that they are correlated.</p>
 </table>
 <dl class="method">
 <dt id="catsim.selection.AStratifiedBBlockingSelector.select">
-<code class="descname">select</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>administered_items: list</em>, <em>est_theta: float=None</em><span class="sig-paren">)</span> &rarr; int<a class="reference internal" href="_modules/catsim/selection.html#AStratifiedBBlockingSelector.select"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.AStratifiedBBlockingSelector.select" title="Permalink to this definition">¶</a></dt>
+<code class="descname">select</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>administered_items: list</em>, <em>est_theta: float=None</em><span class="sig-paren">)</span> &rarr; int<a class="headerlink" href="#catsim.selection.AStratifiedBBlockingSelector.select" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the index of the next item to be administered.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -209,7 +209,7 @@ parameters between all strata, after perceiving that they are correlated.</p>
 
 <dl class="class">
 <dt id="catsim.selection.AStratifiedSelector">
-<em class="property">class </em><code class="descclassname">catsim.selection.</code><code class="descname">AStratifiedSelector</code><span class="sig-paren">(</span><em>test_size</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/selection.html#AStratifiedSelector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.AStratifiedSelector" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">catsim.selection.</code><code class="descname">AStratifiedSelector</code><span class="sig-paren">(</span><em>test_size</em><span class="sig-paren">)</span><a class="headerlink" href="#catsim.selection.AStratifiedSelector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#catsim.selection.Selector" title="catsim.selection.Selector"><code class="xref py py-class docutils literal"><span class="pre">catsim.selection.Selector</span></code></a></p>
 <p>Implementation of the <span class="math">\(\alpha\)</span>-stratified selector proposed by
 <a class="reference internal" href="references.html#chang99" id="id2">[Chang99]</a>, in which the item bank is sorted in ascending order according to the
@@ -229,7 +229,7 @@ presented.</p>
 </table>
 <dl class="method">
 <dt id="catsim.selection.AStratifiedSelector.select">
-<code class="descname">select</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>administered_items: list</em>, <em>est_theta: float=None</em><span class="sig-paren">)</span> &rarr; int<a class="reference internal" href="_modules/catsim/selection.html#AStratifiedSelector.select"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.AStratifiedSelector.select" title="Permalink to this definition">¶</a></dt>
+<code class="descname">select</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>administered_items: list</em>, <em>est_theta: float=None</em><span class="sig-paren">)</span> &rarr; int<a class="headerlink" href="#catsim.selection.AStratifiedSelector.select" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the index of the next item to be administered.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -255,7 +255,7 @@ presented.</p>
 
 <dl class="class">
 <dt id="catsim.selection.ClusterSelector">
-<em class="property">class </em><code class="descclassname">catsim.selection.</code><code class="descname">ClusterSelector</code><span class="sig-paren">(</span><em>clusters: list</em>, <em>method: str='item_info'</em>, <em>r_max: float=1</em>, <em>r_control: str='passive'</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/selection.html#ClusterSelector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.ClusterSelector" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">catsim.selection.</code><code class="descname">ClusterSelector</code><span class="sig-paren">(</span><em>clusters: list</em>, <em>method: str='item_info'</em>, <em>r_max: float=1</em>, <em>r_control: str='passive'</em><span class="sig-paren">)</span><a class="headerlink" href="#catsim.selection.ClusterSelector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#catsim.selection.Selector" title="catsim.selection.Selector"><code class="xref py py-class docutils literal"><span class="pre">catsim.selection.Selector</span></code></a></p>
 <p>Cluster-based Item Selection Method.</p>
 <blockquote>
@@ -298,7 +298,7 @@ with smallest <span class="math">\(r\)</span> value.</li>
 </table>
 <dl class="staticmethod">
 <dt id="catsim.selection.ClusterSelector.avg_cluster_params">
-<em class="property">static </em><code class="descname">avg_cluster_params</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>c: list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/selection.html#ClusterSelector.avg_cluster_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.ClusterSelector.avg_cluster_params" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">avg_cluster_params</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>c: list</em><span class="sig-paren">)</span><a class="headerlink" href="#catsim.selection.ClusterSelector.avg_cluster_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the average values of item parameters by cluster</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -320,7 +320,7 @@ Lines are clusters, columns are parameters.</p>
 
 <dl class="method">
 <dt id="catsim.selection.ClusterSelector.select">
-<code class="descname">select</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>administered_items: list</em>, <em>est_theta: float</em><span class="sig-paren">)</span> &rarr; int<a class="reference internal" href="_modules/catsim/selection.html#ClusterSelector.select"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.ClusterSelector.select" title="Permalink to this definition">¶</a></dt>
+<code class="descname">select</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>administered_items: list</em>, <em>est_theta: float</em><span class="sig-paren">)</span> &rarr; int<a class="headerlink" href="#catsim.selection.ClusterSelector.select" title="Permalink to this definition">¶</a></dt>
 <dd><p>CAT simulation and validation method proposed by <a class="reference internal" href="references.html#bar10" id="id3">[Bar10]</a>.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -346,7 +346,7 @@ difficulty and pseudo-guessing parameters, respectively.</li>
 
 <dl class="staticmethod">
 <dt id="catsim.selection.ClusterSelector.sum_cluster_infos">
-<em class="property">static </em><code class="descname">sum_cluster_infos</code><span class="sig-paren">(</span><em>theta: float</em>, <em>items: numpy.ndarray</em>, <em>clusters: list</em><span class="sig-paren">)</span> &rarr; list<a class="reference internal" href="_modules/catsim/selection.html#ClusterSelector.sum_cluster_infos"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.ClusterSelector.sum_cluster_infos" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">sum_cluster_infos</code><span class="sig-paren">(</span><em>theta: float</em>, <em>items: numpy.ndarray</em>, <em>clusters: list</em><span class="sig-paren">)</span> &rarr; list<a class="headerlink" href="#catsim.selection.ClusterSelector.sum_cluster_infos" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the sum of item informations, separated by cluster</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -371,7 +371,7 @@ difficulty and pseudo-guessing parameters, respectively.</li>
 
 <dl class="staticmethod">
 <dt id="catsim.selection.ClusterSelector.sum_cluster_params">
-<em class="property">static </em><code class="descname">sum_cluster_params</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>c: list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/selection.html#ClusterSelector.sum_cluster_params"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.ClusterSelector.sum_cluster_params" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">sum_cluster_params</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>c: list</em><span class="sig-paren">)</span><a class="headerlink" href="#catsim.selection.ClusterSelector.sum_cluster_params" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the sum of item parameter values for each cluster cluster</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -392,7 +392,7 @@ difficulty and pseudo-guessing parameters, respectively.</li>
 
 <dl class="staticmethod">
 <dt id="catsim.selection.ClusterSelector.weighted_cluster_infos">
-<em class="property">static </em><code class="descname">weighted_cluster_infos</code><span class="sig-paren">(</span><em>theta: float</em>, <em>items: numpy.ndarray</em>, <em>clusters: list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/selection.html#ClusterSelector.weighted_cluster_infos"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.ClusterSelector.weighted_cluster_infos" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><code class="descname">weighted_cluster_infos</code><span class="sig-paren">(</span><em>theta: float</em>, <em>items: numpy.ndarray</em>, <em>clusters: list</em><span class="sig-paren">)</span><a class="headerlink" href="#catsim.selection.ClusterSelector.weighted_cluster_infos" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the weighted sum of item informations, separated by cluster.
 The weight is the number of items in each cluster.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -418,7 +418,7 @@ divided by the number of items in each cluster</p>
 
 <dl class="class">
 <dt id="catsim.selection.LinearSelector">
-<em class="property">class </em><code class="descclassname">catsim.selection.</code><code class="descname">LinearSelector</code><span class="sig-paren">(</span><em>indexes: list</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/selection.html#LinearSelector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.LinearSelector" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">catsim.selection.</code><code class="descname">LinearSelector</code><span class="sig-paren">(</span><em>indexes: list</em><span class="sig-paren">)</span><a class="headerlink" href="#catsim.selection.LinearSelector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#catsim.selection.Selector" title="catsim.selection.Selector"><code class="xref py py-class docutils literal"><span class="pre">catsim.selection.Selector</span></code></a></p>
 <p>Selector that returns item indexes in a linear order, simulating a standard (non-adaptive) test.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -431,7 +431,7 @@ divided by the number of items in each cluster</p>
 </table>
 <dl class="method">
 <dt id="catsim.selection.LinearSelector.select">
-<code class="descname">select</code><span class="sig-paren">(</span><em>items: numpy.ndarray=None</em>, <em>administered_items: list=None</em>, <em>est_theta: float=None</em><span class="sig-paren">)</span> &rarr; int<a class="reference internal" href="_modules/catsim/selection.html#LinearSelector.select"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.LinearSelector.select" title="Permalink to this definition">¶</a></dt>
+<code class="descname">select</code><span class="sig-paren">(</span><em>items: numpy.ndarray=None</em>, <em>administered_items: list=None</em>, <em>est_theta: float=None</em><span class="sig-paren">)</span> &rarr; int<a class="headerlink" href="#catsim.selection.LinearSelector.select" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the index of the next item to be administered. This method does not use any parameter.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -451,7 +451,7 @@ divided by the number of items in each cluster</p>
 
 <dl class="class">
 <dt id="catsim.selection.MaxInfoBBlockingSelector">
-<em class="property">class </em><code class="descclassname">catsim.selection.</code><code class="descname">MaxInfoBBlockingSelector</code><span class="sig-paren">(</span><em>test_size</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/selection.html#MaxInfoBBlockingSelector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.MaxInfoBBlockingSelector" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">catsim.selection.</code><code class="descname">MaxInfoBBlockingSelector</code><span class="sig-paren">(</span><em>test_size</em><span class="sig-paren">)</span><a class="headerlink" href="#catsim.selection.MaxInfoBBlockingSelector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#catsim.selection.Selector" title="catsim.selection.Selector"><code class="xref py py-class docutils literal"><span class="pre">catsim.selection.Selector</span></code></a></p>
 <p>Implementation of the maximum information stratification with <span class="math">\(b\)</span>
 blocking (MIS-B) selector proposed by <a class="reference internal" href="references.html#bar06" id="id4">[Bar06]</a>, in which the item bank is sorted
@@ -477,7 +477,7 @@ positioned in the same place in the proficiency scale in 3PL.</p>
 </table>
 <dl class="method">
 <dt id="catsim.selection.MaxInfoBBlockingSelector.select">
-<code class="descname">select</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>administered_items: list</em>, <em>est_theta: float=None</em><span class="sig-paren">)</span> &rarr; int<a class="reference internal" href="_modules/catsim/selection.html#MaxInfoBBlockingSelector.select"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.MaxInfoBBlockingSelector.select" title="Permalink to this definition">¶</a></dt>
+<code class="descname">select</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>administered_items: list</em>, <em>est_theta: float=None</em><span class="sig-paren">)</span> &rarr; int<a class="headerlink" href="#catsim.selection.MaxInfoBBlockingSelector.select" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the index of the next item to be administered.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -503,12 +503,12 @@ positioned in the same place in the proficiency scale in 3PL.</p>
 
 <dl class="class">
 <dt id="catsim.selection.MaxInfoSelector">
-<em class="property">class </em><code class="descclassname">catsim.selection.</code><code class="descname">MaxInfoSelector</code><a class="reference internal" href="_modules/catsim/selection.html#MaxInfoSelector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.MaxInfoSelector" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">catsim.selection.</code><code class="descname">MaxInfoSelector</code><a class="headerlink" href="#catsim.selection.MaxInfoSelector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#catsim.selection.Selector" title="catsim.selection.Selector"><code class="xref py py-class docutils literal"><span class="pre">catsim.selection.Selector</span></code></a></p>
 <p>Selector that returns the first non-administered item with maximum information, given an estimated theta</p>
 <dl class="method">
 <dt id="catsim.selection.MaxInfoSelector.select">
-<code class="descname">select</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>administered_items: list</em>, <em>est_theta: float</em><span class="sig-paren">)</span> &rarr; int<a class="reference internal" href="_modules/catsim/selection.html#MaxInfoSelector.select"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.MaxInfoSelector.select" title="Permalink to this definition">¶</a></dt>
+<code class="descname">select</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>administered_items: list</em>, <em>est_theta: float</em><span class="sig-paren">)</span> &rarr; int<a class="headerlink" href="#catsim.selection.MaxInfoSelector.select" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the indexes of all items that have not yet been administered, calculate
 their information value and pick the one with maximum information</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -537,7 +537,7 @@ difficulty and pseudo-guessing parameters, respectively.</li>
 
 <dl class="class">
 <dt id="catsim.selection.MaxInfoStratificationSelector">
-<em class="property">class </em><code class="descclassname">catsim.selection.</code><code class="descname">MaxInfoStratificationSelector</code><span class="sig-paren">(</span><em>test_size</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/selection.html#MaxInfoStratificationSelector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.MaxInfoStratificationSelector" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">catsim.selection.</code><code class="descname">MaxInfoStratificationSelector</code><span class="sig-paren">(</span><em>test_size</em><span class="sig-paren">)</span><a class="headerlink" href="#catsim.selection.MaxInfoStratificationSelector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#catsim.selection.Selector" title="catsim.selection.Selector"><code class="xref py py-class docutils literal"><span class="pre">catsim.selection.Selector</span></code></a></p>
 <p>Implementation of the maximum information stratification (MIS) selector
 proposed by <a class="reference internal" href="references.html#bar06" id="id6">[Bar06]</a>, in which the item bank is sorted in ascending order
@@ -560,7 +560,7 @@ scale in 3PL.</p>
 </table>
 <dl class="method">
 <dt id="catsim.selection.MaxInfoStratificationSelector.select">
-<code class="descname">select</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>administered_items: list</em>, <em>est_theta: float=None</em><span class="sig-paren">)</span> &rarr; int<a class="reference internal" href="_modules/catsim/selection.html#MaxInfoStratificationSelector.select"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.MaxInfoStratificationSelector.select" title="Permalink to this definition">¶</a></dt>
+<code class="descname">select</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>administered_items: list</em>, <em>est_theta: float=None</em><span class="sig-paren">)</span> &rarr; int<a class="headerlink" href="#catsim.selection.MaxInfoStratificationSelector.select" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the index of the next item to be administered.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -586,7 +586,7 @@ scale in 3PL.</p>
 
 <dl class="class">
 <dt id="catsim.selection.RandomSelector">
-<em class="property">class </em><code class="descclassname">catsim.selection.</code><code class="descname">RandomSelector</code><span class="sig-paren">(</span><em>replace: bool=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/selection.html#RandomSelector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.RandomSelector" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">catsim.selection.</code><code class="descname">RandomSelector</code><span class="sig-paren">(</span><em>replace: bool=False</em><span class="sig-paren">)</span><a class="headerlink" href="#catsim.selection.RandomSelector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#catsim.selection.Selector" title="catsim.selection.Selector"><code class="xref py py-class docutils literal"><span class="pre">catsim.selection.Selector</span></code></a></p>
 <p>Selector that randomly selects items for application.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -599,7 +599,7 @@ scale in 3PL.</p>
 </table>
 <dl class="method">
 <dt id="catsim.selection.RandomSelector.select">
-<code class="descname">select</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>administered_items: list</em>, <em>est_theta: float=None</em><span class="sig-paren">)</span> &rarr; int<a class="reference internal" href="_modules/catsim/selection.html#RandomSelector.select"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.RandomSelector.select" title="Permalink to this definition">¶</a></dt>
+<code class="descname">select</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>administered_items: list</em>, <em>est_theta: float=None</em><span class="sig-paren">)</span> &rarr; int<a class="headerlink" href="#catsim.selection.RandomSelector.select" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the index of a random item to be administered.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -627,12 +627,12 @@ indexes in <cite>administered_items are excluded from the selection</cite>.</p>
 
 <dl class="class">
 <dt id="catsim.selection.Selector">
-<em class="property">class </em><code class="descclassname">catsim.selection.</code><code class="descname">Selector</code><a class="reference internal" href="_modules/catsim/selection.html#Selector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.Selector" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">catsim.selection.</code><code class="descname">Selector</code><a class="headerlink" href="#catsim.selection.Selector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>Base class representing a CAT item selector.</p>
 <dl class="method">
 <dt id="catsim.selection.Selector.select">
-<code class="descname">select</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>administered_items: list</em>, <em>est_theta: float</em><span class="sig-paren">)</span> &rarr; int<a class="reference internal" href="_modules/catsim/selection.html#Selector.select"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.Selector.select" title="Permalink to this definition">¶</a></dt>
+<code class="descname">select</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>administered_items: list</em>, <em>est_theta: float</em><span class="sig-paren">)</span> &rarr; int<a class="headerlink" href="#catsim.selection.Selector.select" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the indexes of all items that have not yet been administered, calculate
 their information value and pick the one with maximum information</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -661,7 +661,7 @@ difficulty and pseudo-guessing parameters, respectively.</li>
 
 <dl class="class">
 <dt id="catsim.selection.The54321Selector">
-<em class="property">class </em><code class="descclassname">catsim.selection.</code><code class="descname">The54321Selector</code><span class="sig-paren">(</span><em>test_size</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/selection.html#The54321Selector"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.The54321Selector" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">catsim.selection.</code><code class="descname">The54321Selector</code><span class="sig-paren">(</span><em>test_size</em><span class="sig-paren">)</span><a class="headerlink" href="#catsim.selection.The54321Selector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#catsim.selection.Selector" title="catsim.selection.Selector"><code class="xref py py-class docutils literal"><span class="pre">catsim.selection.Selector</span></code></a></p>
 <p>Implementation of the 5-4-3-2-1 selector proposed by <a class="reference internal" href="references.html#mcbride83" id="id8">[McBride83]</a>, in which,
 at each step <span class="math">\(k\)</span> of a test of size <span class="math">\(K\)</span>, an item is chosen from a
@@ -681,7 +681,7 @@ this parameter to set the bin size</td>
 </table>
 <dl class="method">
 <dt id="catsim.selection.The54321Selector.select">
-<code class="descname">select</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>administered_items: list</em>, <em>est_theta: float</em><span class="sig-paren">)</span> &rarr; int<a class="reference internal" href="_modules/catsim/selection.html#The54321Selector.select"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.selection.The54321Selector.select" title="Permalink to this definition">¶</a></dt>
+<code class="descname">select</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>administered_items: list</em>, <em>est_theta: float</em><span class="sig-paren">)</span> &rarr; int<a class="headerlink" href="#catsim.selection.The54321Selector.select" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the index of the next item to be administered.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
