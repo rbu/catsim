@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.8.4
+                0.9
               </div>
             
           
@@ -154,9 +154,9 @@
 <p><strong>catsim</strong> still has a way to go before it can be considered a mature package. Here is a list of features that may be of interest:</p>
 <ul class="simple">
 <li>Bayesian estimators (maybe using <a class="reference external" href="https://pymc-devs.github.io/pymc/">PyMC</a>);</li>
-<li>Stratification-based selection methods (like the ones in <a class="reference internal" href="#chang99" id="id1">[Chang99]</a>, <a class="reference internal" href="#chang2001" id="id2">[Chang2001]</a> and <a class="reference internal" href="#barr2014" id="id3">[Barr2014]</a>);</li>
-<li>Comparison between different simulations (for example <a class="reference internal" href="#barr2010" id="id4">[Barr2010]</a>);</li>
-<li>Other information functions, selection methods based on intervals or areas of information etc. (see <a class="reference internal" href="#lind2010" id="id5">[Lind2010]</a>).</li>
+<li>Test evaluation indexes;</li>
+<li>Comparison between simulation results (for example <a class="reference internal" href="#barr2010" id="id1">[Barr2010]</a>);</li>
+<li>Other information functions, selection methods based on intervals or areas of information etc. (see <a class="reference internal" href="#lind2010" id="id2">[Lind2010]</a>).</li>
 </ul>
 </div>
 <div class="section" id="software-architecture">
@@ -173,34 +173,16 @@ If you think there is something already in the package that is worth testing, yo
 <p><strong>Contributing code:</strong> create a fork on GitHub, make your changes on your own repo and then send a pull request to out <strong>testing</strong> branch so that we can check your contributions. Make sure your version passes on the unit tests.</p>
 <p><strong>Contributing ideas:</strong> file an <a class="reference external" href="https://github.com/douglasrizzo/catsim/issues">issue on GitHub</a>, label it as an <strong>enhancement</strong> and describe as thoroughly as possible what could be done.</p>
 <p><strong>Blaming us:</strong> file an <a class="reference external" href="https://github.com/douglasrizzo/catsim/issues">issue on GitHub</a> describing as thoroughly as possible the problem, with error messages, descriptions of your tests and possibly suggestions for fixing it.</p>
-<table class="docutils citation" frame="void" id="chang99" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[Chang99]</a></td><td>Chang, H.-H., &amp; Ying, Z. (1999). a-Stratified Multistage Computerized Adaptive Testing. Applied Psychological Measurement, 23(3), 211–222. <a class="reference external" href="http://doi.org/10.1177/01466219922031338">http://doi.org/10.1177/01466219922031338</a></td></tr>
-</tbody>
-</table>
 <table class="docutils citation" frame="void" id="lind2010" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id5">[Lind2010]</a></td><td>Linden, W. J. V. D., &amp; Pashley, J. P. Item Selection and Ability Estimation in Adaptive Testing. _In_ Linden, W. J. V. D., &amp; Glas, C. A. W. (2010). Elements of Adaptive Testing. New York, NY, USA: Springer New York.</td></tr>
-</tbody>
-</table>
-<table class="docutils citation" frame="void" id="chang2001" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id2">[Chang2001]</a></td><td>Chang, H.-H., Qian, J., &amp; Ying, Z. (2001). a-Stratified multistage computerized adaptive testing with b blocking. Applied Psychological Measurement, 25(4), 333–341.</td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id2">[Lind2010]</a></td><td>Linden, W. J. V. D., &amp; Pashley, J. P. Item Selection and Ability Estimation in Adaptive Testing. _In_ Linden, W. J. V. D., &amp; Glas, C. A. W. (2010). Elements of Adaptive Testing. New York, NY, USA: Springer New York.</td></tr>
 </tbody>
 </table>
 <table class="docutils citation" frame="void" id="barr2010" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id4">[Barr2010]</a></td><td>Barrada, J. R., Olea, J., Ponsoda, V., &amp; Abad, F. J. (2010). A Method for the Comparison of Item Selection Rules in Computerized Adaptive Testing. Applied Psychological Measurement, 34(6), 438–452. <a class="reference external" href="http://doi.org/10.1177/0146621610370152">http://doi.org/10.1177/0146621610370152</a></td></tr>
-</tbody>
-</table>
-<table class="docutils citation" frame="void" id="barr2014" rules="none">
-<colgroup><col class="label" /><col /></colgroup>
-<tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id3">[Barr2014]</a></td><td>Barrada, J. R., Abad, F. J., &amp; Olea, J. (2014). Optimal Number of Strata for the Stratified Methods in Computerized Adaptive Testing. The Spanish Journal of Psychology, 17. <a class="reference external" href="http://doi.org/10.1017/sjp.2014.50">http://doi.org/10.1017/sjp.2014.50</a></td></tr>
+<tr><td class="label"><a class="fn-backref" href="#id1">[Barr2010]</a></td><td>Barrada, J. R., Olea, J., Ponsoda, V., &amp; Abad, F. J. (2010). A Method for the Comparison of Item Selection Rules in Computerized Adaptive Testing. Applied Psychological Measurement, 34(6), 438–452. <a class="reference external" href="http://doi.org/10.1177/0146621610370152">http://doi.org/10.1177/0146621610370152</a></td></tr>
 </tbody>
 </table>
 </div>
@@ -247,7 +229,7 @@ If you think there is something already in the package that is worth testing, yo
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.8.4',
+            VERSION:'0.9',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

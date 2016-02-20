@@ -1,7 +1,0 @@
-<map id="inheritance57e12ee8dd" name="inheritance57e12ee8dd">
-<area shape="rect" id="node1" href="#catsim.selection.ClusterSelector" target="_top" title="Cluster&#45;based Item Selection Method." alt="" coords="243,5,469,33"/>
-<area shape="rect" id="node2" href="#catsim.selection.Selector" target="_top" title="Base class representing a CAT item selector." alt="" coords="7,81,188,109"/>
-<area shape="rect" id="node4" href="#catsim.selection.LinearSelector" target="_top" title="Selector that returns item indexes in a linear order, simulating a standard (non&#45;adaptive) test." alt="" coords="245,55,467,83"/>
-<area shape="rect" id="node6" href="#catsim.selection.MaxInfoSelector" target="_top" title="Selector that returns the first non&#45;administered item with maximum information, given an estimated theta" alt="" coords="240,106,472,134"/>
-<area shape="rect" id="node8" href="#catsim.selection.RandomSelector" target="_top" title="Selector that randomly selects items for application." alt="" coords="239,157,473,185"/>
-</map>

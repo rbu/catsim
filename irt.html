@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.8.4
+                0.9
               </div>
             
           
@@ -219,6 +219,18 @@ Q_{ij}(\theta) \right\rbrace\]</div>
 </dd></dl>
 
 <dl class="function">
+<dt id="catsim.irt.max_info">
+<code class="descclassname">catsim.irt.</code><code class="descname">max_info</code><span class="sig-paren">(</span><em>a=1</em>, <em>b=0</em>, <em>c=0</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/irt.html#max_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.irt.max_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the <span class="math">\(\theta\)</span> value to which the item with the given parameters
+gives maximum information. For the 1-parameter and 2-parameter logistic models,
+this <span class="math">\(\theta\)</span> corresponds to where <span class="math">\(b = 0.5\)</span>. In the 3-parameter
+logistic model, however, this value is given by the following function
+<a class="reference internal" href="references.html#ayala2009" id="id3">[Ayala2009]</a>:</p>
+<div class="math">
+\[\argmax_{\theta}I(\theta) = \frac{a^2}{8(1-b)^2}[1-20b-8b^2+(1+8b)^{1.5}]\]</div>
+</dd></dl>
+
+<dl class="function">
 <dt id="catsim.irt.negativelogLik">
 <code class="descclassname">catsim.irt.</code><code class="descname">negativelogLik</code><span class="sig-paren">(</span><em>est_theta: float</em>, <em>*args</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/irt.html#negativelogLik"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.irt.negativelogLik" title="Permalink to this definition">¶</a></dt>
 <dd><p>Function used by <a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/optimize.html#module-scipy.optimize" title="(in SciPy v0.17.0)"><code class="xref py py-mod docutils literal"><span class="pre">scipy.optimize</span></code></a> optimization functions that tend to minimize
@@ -271,9 +283,9 @@ columns, respectively. the pseudo-guessing column is added such that items simul
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a></td>
 </tr>
-<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>items</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>) &#8211; the item matrix</td>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><strong>items</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>) &#8211; the item matrix.</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">an nx3 item matrix conforming to 1, 2 and 3 parameter logistic models</td>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">an nx3 item matrix conforming to 1, 2 and 3 parameter logistic models.</td>
 </tr>
 </tbody>
 </table>
@@ -282,7 +294,7 @@ columns, respectively. the pseudo-guessing column is added such that items simul
 <dl class="function">
 <dt id="catsim.irt.reliability">
 <code class="descclassname">catsim.irt.</code><code class="descname">reliability</code><span class="sig-paren">(</span><em>theta: float</em>, <em>items: numpy.ndarray</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/irt.html#reliability"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.irt.reliability" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes test reliability <a class="reference internal" href="references.html#thissen00" id="id3">[Thissen00]</a>, given by</p>
+<dd><p>Computes test reliability <a class="reference internal" href="references.html#thissen00" id="id4">[Thissen00]</a>, given by:</p>
 <div class="math">
 \[Rel = 1 - \frac{1}{I(\theta)}\]</div>
 <p>Test reliability is a measure of internal consistency for the test, similar
@@ -311,7 +323,7 @@ sense, but usually the application of additional items solves this problem.</p>
 <dt id="catsim.irt.see">
 <code class="descclassname">catsim.irt.</code><code class="descname">see</code><span class="sig-paren">(</span><em>theta: float</em>, <em>items: numpy.ndarray</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/irt.html#see"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.irt.see" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the standard error of estimation (<span class="math">\(SEE\)</span>) of a test at a
-specific <span class="math">\(\theta\)</span> value <a class="reference internal" href="references.html#ayala2009" id="id4">[Ayala2009]</a>:</p>
+specific <span class="math">\(\theta\)</span> value <a class="reference internal" href="references.html#ayala2009" id="id5">[Ayala2009]</a>:</p>
 <div class="math">
 \[SEE = \frac{1}{I(\theta)}\]</div>
 <p>where <span class="math">\(I(\theta)\)</span> is the test information (see <a class="reference internal" href="#catsim.irt.test_info" title="catsim.irt.test_info"><code class="xref py py-func docutils literal"><span class="pre">test_info()</span></code></a>).</p>
@@ -338,7 +350,7 @@ specific <span class="math">\(\theta\)</span> value <a class="reference internal
 <dl class="function">
 <dt id="catsim.irt.test_info">
 <code class="descclassname">catsim.irt.</code><code class="descname">test_info</code><span class="sig-paren">(</span><em>theta: float</em>, <em>items: numpy.ndarray</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/irt.html#test_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.irt.test_info" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the test information of a test at a specific <span class="math">\(\theta\)</span> value <a class="reference internal" href="references.html#ayala2009" id="id5">[Ayala2009]</a>:</p>
+<dd><p>Computes the test information of a test at a specific <span class="math">\(\theta\)</span> value <a class="reference internal" href="references.html#ayala2009" id="id6">[Ayala2009]</a>:</p>
 <div class="math">
 \[I(\theta) = \sum_{j \in J} I_j(\theta)\]</div>
 <p>where <span class="math">\(J\)</span> is the set of items in the test and <span class="math">\(I_j(\theta)\)</span> is the
@@ -363,9 +375,9 @@ item information of <span class="math">\(j\)</span> at aspecific <span class="ma
 <dl class="function">
 <dt id="catsim.irt.tpm">
 <code class="descclassname">catsim.irt.</code><code class="descname">tpm</code><span class="sig-paren">(</span><em>theta: float</em>, <em>a: float</em>, <em>b: float</em>, <em>c: float=0</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/irt.html#tpm"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.irt.tpm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Item Response Theory three-parameter logistic function <a class="reference internal" href="references.html#ayala2009" id="id6">[Ayala2009]</a>:</p>
+<dd><p>Item Response Theory three-parameter logistic function <a class="reference internal" href="references.html#ayala2009" id="id7">[Ayala2009]</a>:</p>
 <div class="math">
-\[P(X_i = 1| \theta) = c_i + \frac{1-c_i}{1+ e^{Da_i(\theta-b_i)}}\]</div>
+\[P(X_i = 1| \theta) = c_i + \frac{1-c_i}{1+ e^{a_i(\theta-b_i)}}\]</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -407,7 +419,7 @@ pseudo-guessing parameter.</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>items</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>) &#8211; the item matrix</li>
+<li><strong>items</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>) &#8211; the item matrix.</li>
 <li><strong>raise_err</strong> (<code class="docutils literal"><span class="pre">bool</span></code>) &#8211; whether to raise an error in case the validation fails or
 just print the error message to standard output.</li>
 </ul>
@@ -460,7 +472,7 @@ just print the error message to standard output.</li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.8.4',
+            VERSION:'0.9',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

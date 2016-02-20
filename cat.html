@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.8.4
+                0.9
               </div>
             
           
@@ -142,9 +142,35 @@
 <span id="computerized-adaptive-test-related-functions-catsim-cat"></span><h1>Computerized Adaptive Test-related Functions &#8211; <a class="reference internal" href="#module-catsim.cat" title="catsim.cat"><code class="xref py py-mod docutils literal"><span class="pre">catsim.cat</span></code></a><a class="headerlink" href="#module-catsim.cat" title="Permalink to this headline">¶</a></h1>
 <p>Functions used specifically during the application/simulation of computerized adaptive tests.</p>
 <dl class="function">
+<dt id="catsim.cat.bias">
+<code class="descclassname">catsim.cat.</code><code class="descname">bias</code><span class="sig-paren">(</span><em>actual: collections.abc.Iterable</em>, <em>predicted: collections.abc.Iterable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/cat.html#bias"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cat.bias" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the test bias, an evaluation criterion for computerized adaptive test methodolgies <a class="reference internal" href="references.html#chang2001" id="id1">[Chang2001]</a>.
+The value is calculated by:</p>
+<div class="math">
+\[Bias = \frac{\sum_{i=1}^{N} (\hat{\theta}_i - \theta_{i})}{N}\]</div>
+<p>where <span class="math">\(\hat{\theta}_i\)</span> is examinee <span class="math">\(i\)</span> estimated proficiency and
+<span class="math">\(\hat{\theta}_i\)</span> is examinee <span class="math">\(i\)</span> actual proficiency.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>actual</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">Iterable</span></code></a>) &#8211; a list or 1-D numpy array containing the true proficiency values</li>
+<li><strong>predicted</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">Iterable</span></code></a>) &#8211; a list or 1-D numpy array containing the estimated proficiency values</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">the bias between the predicted values and actual values.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="catsim.cat.dodd">
 <code class="descclassname">catsim.cat.</code><code class="descname">dodd</code><span class="sig-paren">(</span><em>theta: float</em>, <em>items: numpy.ndarray</em>, <em>correct: bool</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/cat.html#dodd"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cat.dodd" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method proposed by <a class="reference internal" href="references.html#dod90" id="id1">[Dod90]</a> for the reestimation of <span class="math">\(\hat{\theta}\)</span>
+<dd><p>Method proposed by <a class="reference internal" href="references.html#dod90" id="id2">[Dod90]</a> for the reestimation of <span class="math">\(\hat{\theta}\)</span>
 when the response vector is composed entirely of 1s or 0s.</p>
 <div class="math">
 \[\begin{split}\hat{\theta}_{t+1} = \left\lbrace \begin{array}{ll}
@@ -179,7 +205,7 @@ correctly answered the current item.</li>
 <dt id="catsim.cat.generate_item_bank">
 <code class="descclassname">catsim.cat.</code><code class="descname">generate_item_bank</code><span class="sig-paren">(</span><em>n: int</em>, <em>itemtype: str='3PL'</em>, <em>corr: float=0.5</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/cat.html#generate_item_bank"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cat.generate_item_bank" title="Permalink to this definition">¶</a></dt>
 <dd><p>Generate a synthetic item bank whose parameters approximately follow
-real-world parameters, as proposed by <a class="reference internal" href="references.html#bar10" id="id2">[Bar10]</a>.</p>
+real-world parameters, as proposed by <a class="reference internal" href="references.html#bar10" id="id3">[Bar10]</a>.</p>
 <p>Item parameters are extracted from the following probability distributions:</p>
 <ul class="simple">
 <li>discrimination: <span class="math">\(N(1.2,0.25)\)</span></li>
@@ -216,9 +242,36 @@ three-parameter logistic model</li>
 </dd></dl>
 
 <dl class="function">
+<dt id="catsim.cat.mse">
+<code class="descclassname">catsim.cat.</code><code class="descname">mse</code><span class="sig-paren">(</span><em>actual: collections.abc.Iterable</em>, <em>predicted: collections.abc.Iterable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/cat.html#mse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cat.mse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mean squared error, a value used when measuring the precision
+with which a computerized adaptive test estimates examinees proficiencies <a class="reference internal" href="references.html#chang2001" id="id4">[Chang2001]</a>.
+The value is calculated by:</p>
+<div class="math">
+\[MSE = \frac{\sum_{i=1}^{N} (\hat{\theta}_i - \theta_{i})^2}{N}\]</div>
+<p>where <span class="math">\(\hat{\theta}_i\)</span> is examinee <span class="math">\(i\)</span> estimated proficiency and
+<span class="math">\(\hat{\theta}_i\)</span> is examinee <span class="math">\(i\)</span> actual proficiency.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>actual</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">Iterable</span></code></a>) &#8211; a list or 1-D numpy array containing the true proficiency values</li>
+<li><strong>predicted</strong> (<a class="reference external" href="https://docs.python.org/3/library/collections.abc.html#collections.abc.Iterable" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">Iterable</span></code></a>) &#8211; a list or 1-D numpy array containing the estimated proficiency values</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">the mean squared error between the predicted values and actual values.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
 <dt id="catsim.cat.overlap_rate">
 <code class="descclassname">catsim.cat.</code><code class="descname">overlap_rate</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>test_size: int</em><span class="sig-paren">)</span> &rarr; float<a class="reference internal" href="_modules/catsim/cat.html#overlap_rate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cat.overlap_rate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Test overlap rate, an average measure of how much of the test two examinees take is equal <a class="reference internal" href="references.html#bar10" id="id3">[Bar10]</a>. It is given by:</p>
+<dd><p>Test overlap rate, an average measure of how much of the test two examinees take is equal <a class="reference internal" href="references.html#bar10" id="id5">[Bar10]</a>. It is given by:</p>
 <div class="math">
 \[T=\frac{N}{Q}S_{r}^2 + \frac{Q}{N}\]</div>
 <p>If, for example <span class="math">\(T = 0.5\)</span>, it means that the tests of two random examinees have 50% of equal items.</p>
@@ -247,7 +300,7 @@ times each item was used in the tests.</li>
 <dt id="catsim.cat.rmse">
 <code class="descclassname">catsim.cat.</code><code class="descname">rmse</code><span class="sig-paren">(</span><em>actual: collections.abc.Iterable</em>, <em>predicted: collections.abc.Iterable</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/cat.html#rmse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.cat.rmse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Root mean squared error, a common value used when measuring the precision
-with which a computerized adaptive test estimates examinees proficiencies <a class="reference internal" href="references.html#bar10" id="id4">[Bar10]</a>.
+with which a computerized adaptive test estimates examinees proficiencies <a class="reference internal" href="references.html#bar10" id="id6">[Bar10]</a>.
 The value is calculated by:</p>
 <div class="math">
 \[RMSE = \sqrt{\frac{\sum_{i=1}^{N} (\hat{\theta}_i - \theta_{i})^2}{N}}\]</div>
@@ -313,7 +366,7 @@ The value is calculated by:</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.8.4',
+            VERSION:'0.9',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

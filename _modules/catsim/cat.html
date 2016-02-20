@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                0.8.4
+                0.9
               </div>
             
           
@@ -140,6 +140,7 @@
   <h1>Source code for catsim.cat</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Functions used specifically during the application/simulation of computerized adaptive tests.&quot;&quot;&quot;</span>
 
+<span class="kn">from</span> <span class="nn">catsim</span> <span class="kn">import</span> <span class="n">irt</span>
 <span class="kn">import</span> <span class="nn">numpy</span>
 <span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Iterable</span>
 
@@ -184,7 +185,44 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">actual</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">predicted</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;actual and predicted vectors need to be the same size&#39;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">predicted</span> <span class="o">-</span> <span class="n">actual</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span></div>
+    <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mse</span><span class="p">(</span><span class="n">actual</span><span class="p">,</span> <span class="n">predicted</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="mse"><a class="viewcode-back" href="../../cat.html#catsim.cat.mse">[docs]</a><span class="k">def</span> <span class="nf">mse</span><span class="p">(</span><span class="n">actual</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">predicted</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Mean squared error, a value used when measuring the precision</span>
+<span class="sd">    with which a computerized adaptive test estimates examinees proficiencies [Chang2001]_.</span>
+<span class="sd">    The value is calculated by:</span>
+
+<span class="sd">    .. math:: MSE = \\frac{\\sum_{i=1}^{N} (\\hat{\\theta}_i - \\theta_{i})^2}{N}</span>
+
+<span class="sd">    where :math:`\\hat{\\theta}_i` is examinee :math:`i` estimated proficiency and</span>
+<span class="sd">    :math:`\\hat{\\theta}_i` is examinee :math:`i` actual proficiency.</span>
+
+<span class="sd">    :param actual: a list or 1-D numpy array containing the true proficiency values</span>
+<span class="sd">    :param predicted: a list or 1-D numpy array containing the estimated proficiency values</span>
+<span class="sd">    :returns: the mean squared error between the predicted values and actual values.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">actual</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">predicted</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;actual and predicted vectors need to be the same size&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">predicted</span> <span class="o">-</span> <span class="n">actual</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="bias"><a class="viewcode-back" href="../../cat.html#catsim.cat.bias">[docs]</a><span class="k">def</span> <span class="nf">bias</span><span class="p">(</span><span class="n">actual</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">predicted</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calculates the test bias, an evaluation criterion for computerized adaptive test methodolgies [Chang2001]_.</span>
+<span class="sd">    The value is calculated by:</span>
+
+<span class="sd">    .. math:: Bias = \\frac{\\sum_{i=1}^{N} (\\hat{\\theta}_i - \\theta_{i})}{N}</span>
+
+<span class="sd">    where :math:`\\hat{\\theta}_i` is examinee :math:`i` estimated proficiency and</span>
+<span class="sd">    :math:`\\hat{\\theta}_i` is examinee :math:`i` actual proficiency.</span>
+
+<span class="sd">    :param actual: a list or 1-D numpy array containing the true proficiency values</span>
+<span class="sd">    :param predicted: a list or 1-D numpy array containing the estimated proficiency values</span>
+<span class="sd">    :returns: the bias between the predicted values and actual values.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">actual</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">predicted</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;actual and predicted vectors need to be the same size&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">predicted</span> <span class="o">-</span> <span class="n">actual</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="overlap_rate"><a class="viewcode-back" href="../../cat.html#catsim.cat.overlap_rate">[docs]</a><span class="k">def</span> <span class="nf">overlap_rate</span><span class="p">(</span><span class="n">items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">test_size</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
@@ -251,7 +289,7 @@
         <span class="n">c</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="o">.</span><span class="mi">25</span><span class="p">,</span> <span class="o">.</span><span class="mo">02</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">c</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n</span><span class="p">))</span>
-    <span class="k">return</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">])</span><span class="o">.</span><span class="n">T</span></div>
+    <span class="k">return</span> <span class="n">irt</span><span class="o">.</span><span class="n">normalize_item_bank</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">])</span><span class="o">.</span><span class="n">T</span><span class="p">)</span></div>
 
 
 <span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
@@ -290,7 +328,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'0.8.4',
+            VERSION:'0.9',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

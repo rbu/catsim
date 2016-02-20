@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                0.8.4
+                0.9
               </div>
             
           
@@ -145,7 +145,7 @@
 <div class="viewcode-block" id="tpm"><a class="viewcode-back" href="../../irt.html#catsim.irt.tpm">[docs]</a><span class="k">def</span> <span class="nf">tpm</span><span class="p">(</span><span class="n">theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Item Response Theory three-parameter logistic function [Ayala2009]_:</span>
 
-<span class="sd">    .. math:: P(X_i = 1| \\theta) = c_i + \\frac{1-c_i}{1+ e^{Da_i(\\theta-b_i)}}</span>
+<span class="sd">    .. math:: P(X_i = 1| \\theta) = c_i + \\frac{1-c_i}{1+ e^{a_i(\\theta-b_i)}}</span>
 
 <span class="sd">    :param theta: the individual&#39;s proficiency value. This parameter value has</span>
 <span class="sd">                  no boundary, but if a distribution of the form :math:`N(0, 1)` was</span>
@@ -163,7 +163,53 @@
 <span class="sd">              :math:`0\\leq c \\leq 1`, but items considered good usually have</span>
 <span class="sd">              :math:`c \\leq 0.2`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">c</span> <span class="o">+</span> <span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">a</span> <span class="o">*</span> <span class="p">(</span><span class="n">theta</span> <span class="o">-</span> <span class="n">b</span><span class="p">))))</span></div>
+    <span class="k">return</span> <span class="n">c</span> <span class="o">+</span> <span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">c</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">_tpm_exponent</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)))</span></div>
+
+
+<span class="k">def</span> <span class="nf">_w</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+    <span class="n">p_star</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">_tpm_exponent</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">q_star</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">p_star</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">tpm</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">p</span>
+
+    <span class="k">return</span> <span class="n">p_star</span> <span class="o">*</span> <span class="n">q_star</span> <span class="o">/</span> <span class="n">p</span> <span class="o">*</span> <span class="n">q</span>
+
+
+<span class="k">def</span> <span class="nf">_tpm_exponent</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">a</span> <span class="o">*</span> <span class="p">(</span><span class="n">theta</span> <span class="o">-</span> <span class="n">b</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">_theta_map</span><span class="p">(</span>
+    <span class="n">theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+    <span class="n">response_vector</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
+    <span class="n">administered_items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="n">mu</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+    <span class="n">sigma</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mi">1</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot; Maximum a posteriori estimation function for :math:`\\hat\\theta` [Andrade2000]_, given by:</span>
+
+<span class="sd">    .. math:: \\sum_{i-1}^{I} a_i(1-c_i)(u_{ji}-P_{JI})W_{ji} - \\frac{(\\theta_j - \\mu)}{\\sigma^2}</span>
+
+<span class="sd">    where .. math:: W = \\frac{P^*Q^*}{P^Q^}</span>
+
+<span class="sd">    where :math:`P` is given by :py:func:`catsim.irt.tpm`, :math:`P^* = (1 + e^{a_i(\\theta-b_i)})^{-1}`,</span>
+<span class="sd">    :math:`Q^* = 1 - P^*` and :math:`Q = 1 - P`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span>
+        <span class="p">[</span>
+            <span class="n">administered_items</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">administered_items</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span>
+                <span class="n">response_vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">tpm</span><span class="p">(</span>
+                    <span class="n">theta</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">administered_items</span><span class="p">[</span>
+                        <span class="n">i</span><span class="p">,</span> <span class="mi">1</span>
+                    <span class="p">],</span> <span class="n">administered_items</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+                <span class="p">)</span> <span class="o">*</span> <span class="n">_w</span><span class="p">(</span>
+                    <span class="n">theta</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">[</span>
+                        <span class="n">i</span><span class="p">,</span> <span class="mi">0</span>
+                    <span class="p">],</span> <span class="n">administered_items</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">administered_items</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+                <span class="p">)</span>
+            <span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">response_vector</span><span class="p">))</span>
+        <span class="p">]</span>
+    <span class="p">)</span> <span class="o">-</span> <span class="p">(</span><span class="n">theta</span> <span class="o">-</span> <span class="n">mu</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
 
 <div class="viewcode-block" id="see"><a class="viewcode-back" href="../../irt.html#catsim.irt.see">[docs]</a><span class="k">def</span> <span class="nf">see</span><span class="p">(</span><span class="n">theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
@@ -200,7 +246,7 @@
 
 
 <div class="viewcode-block" id="reliability"><a class="viewcode-back" href="../../irt.html#catsim.irt.reliability">[docs]</a><span class="k">def</span> <span class="nf">reliability</span><span class="p">(</span><span class="n">theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; Computes test reliability [Thissen00]_, given by</span>
+    <span class="sd">&quot;&quot;&quot; Computes test reliability [Thissen00]_, given by:</span>
 
 <span class="sd">    .. math:: Rel = 1 - \\frac{1}{I(\\theta)}</span>
 
@@ -243,6 +289,18 @@
     <span class="n">ml3</span> <span class="o">=</span> <span class="n">tpm</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">ml3</span> <span class="o">-</span> <span class="n">c</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">c</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">ml3</span><span class="p">)</span> <span class="o">/</span> <span class="n">ml3</span></div>
+
+
+<div class="viewcode-block" id="max_info"><a class="viewcode-back" href="../../irt.html#catsim.irt.max_info">[docs]</a><span class="k">def</span> <span class="nf">max_info</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the :math:`\\theta` value to which the item with the given parameters</span>
+<span class="sd">    gives maximum information. For the 1-parameter and 2-parameter logistic models,</span>
+<span class="sd">    this :math:`\\theta` corresponds to where :math:`b = 0.5`. In the 3-parameter</span>
+<span class="sd">    logistic model, however, this value is given by the following function</span>
+<span class="sd">    [Ayala2009]_:</span>
+
+<span class="sd">    .. math:: \\argmax_{\\theta}I(\\theta) = \\frac{a^2}{8(1-b)^2}[1-20b-8b^2+(1+8b)^{1.5}]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">((</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">b</span> <span class="o">-</span> <span class="mi">8</span> <span class="o">*</span> <span class="n">b</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">8</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span><span class="o">**</span><span class="mf">1.5</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="logLik"><a class="viewcode-back" href="../../irt.html#catsim.irt.logLik">[docs]</a><span class="k">def</span> <span class="nf">logLik</span><span class="p">(</span><span class="n">est_theta</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">response_vector</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
@@ -316,8 +374,8 @@
 <span class="sd">    If the matrix has two columns, they are assumed to be the discrimination and difficulty</span>
 <span class="sd">    columns, respectively. the pseudo-guessing column is added such that items simulate the 2-parameter logistic model.</span>
 
-<span class="sd">    :param items: the item matrix</span>
-<span class="sd">    :returns: an nx3 item matrix conforming to 1, 2 and 3 parameter logistic models</span>
+<span class="sd">    :param items: the item matrix.</span>
+<span class="sd">    :returns: an nx3 item matrix conforming to 1, 2 and 3 parameter logistic models.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">items</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -338,7 +396,7 @@
 <span class="sd">    The item matrix must have at least one line, exactly three columns and</span>
 <span class="sd">    :math:`\\forall i \\in I , a_i &gt; 0 \\wedge 0 &lt; c_i &lt; 1`</span>
 
-<span class="sd">    :param items: the item matrix</span>
+<span class="sd">    :param items: the item matrix.</span>
 <span class="sd">    :param raise_err: whether to raise an error in case the validation fails or</span>
 <span class="sd">                      just print the error message to standard output.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -404,7 +462,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'0.8.4',
+            VERSION:'0.9',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
