@@ -162,6 +162,46 @@ sampled from a normal distribution; or a :py:type:list containing said
 </tr>
 </tbody>
 </table>
+<dl class="attribute">
+<dt id="catsim.simulation.Simulator.administered_items">
+<code class="descname">administered_items</code><a class="headerlink" href="#catsim.simulation.Simulator.administered_items" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of lists containin the indexes of items administered to each
+examinee during the simulation.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="catsim.simulation.Simulator.all_estimations">
+<code class="descname">all_estimations</code><a class="headerlink" href="#catsim.simulation.Simulator.all_estimations" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of lists containing all estimated <span class="math">\(\hat\theta\)</span> values
+for all examinees during each step of the test.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="catsim.simulation.Simulator.duration">
+<code class="descname">duration</code><a class="headerlink" href="#catsim.simulation.Simulator.duration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duration of the simulation, in milliseconds.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="catsim.simulation.Simulator.estimations">
+<code class="descname">estimations</code><a class="headerlink" href="#catsim.simulation.Simulator.estimations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Final estimated <span class="math">\(\hat\theta\)</span> values for all examinees.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="catsim.simulation.Simulator.examinees">
+<code class="descname">examinees</code><a class="headerlink" href="#catsim.simulation.Simulator.examinees" title="Permalink to this definition">¶</a></dt>
+<dd><p>List containing examinees true proficiency values (<span class="math">\(\theta\)</span>).</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="catsim.simulation.Simulator.items">
+<code class="descname">items</code><a class="headerlink" href="#catsim.simulation.Simulator.items" title="Permalink to this definition">¶</a></dt>
+<dd><p>Item matrix used by the simulator. If the simulation already
+occurred, a column containin item esposure rates will be added to the
+matrix.</p>
+</dd></dl>
+
 <dl class="method">
 <dt id="catsim.simulation.Simulator.simulate">
 <code class="descname">simulate</code><span class="sig-paren">(</span><em>initializer: catsim.initialization.Initializer</em>, <em>selector: catsim.selection.Selector</em>, <em>estimator: catsim.estimation.Estimator</em>, <em>stopper: catsim.stopping.Stopper</em>, <em>verbose: bool=False</em><span class="sig-paren">)</span><a class="headerlink" href="#catsim.simulation.Simulator.simulate" title="Permalink to this definition">¶</a></dt>
