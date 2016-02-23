@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                0.9
+                0.9.1
               </div>
             
           
@@ -145,13 +145,31 @@
 <a class="reference external image-reference" href="https://landscape.io/github/douglasrizzo/catsim/master"><img alt="Code Health" src="https://landscape.io/github/douglasrizzo/catsim/master/landscape.svg?style=flat" /></a>
 <a class="reference external image-reference" href="https://requires.io/github/douglasrizzo/catsim/requirements/?branch=master"><img alt="Requirements Status" src="https://requires.io/github/douglasrizzo/catsim/requirements.svg?branch=master" /></a>
 <a class="reference external image-reference" href="https://zenodo.org/badge/latestdoi/20502/douglasrizzo/catsim"><img alt="Digital Object Identifier" src="https://zenodo.org/badge/20502/douglasrizzo/catsim.svg" /></a>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p><strong>catsim</strong> is a computerized adaptive testing simulator written in Python 3.4. It allow for the simulation of computerized adaptive tests, selecting different test initialization rules, item selection rules, proficiency reestimation methods and stopping criteria.</p>
 <p>Computerized adaptive tests are educational evaluations, usually taken by examinees in a computer or some other digital means, in which the examinee&#8217;s proficiency is evaluated after the response of each item. The new proficiency is then used to select a new item, closer to the examinee&#8217;s real proficiency. This method of test application has several advantages compared to the traditional paper-and-pencil method, since high-proficiency examinees are not required to answer all the easy items in a test, answering only the items that actually give some information regarding his or hers true knowledge of the subject at matter. A similar, but inverse effect happens for those examinees of low proficiency level.</p>
 <p><em>catsim</em> allows users to simulate the application of a computerized adaptive test, given a sample of examinees, represented by their proficiency levels, and an item bank, represented by their parameters according to some Item Response Theory model.</p>
+</div>
 <div class="section" id="installation">
 <h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
-<p>Install it using <code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">catsim</span></code>.</p>
+<p><code class="docutils literal"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">catsim</span></code></p>
 </div>
+<div class="section" id="important-links">
+<h2>Important links<a class="headerlink" href="#important-links" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Official source code repo: <a class="reference external" href="https://github.com/douglasrizzo/catsim">https://github.com/douglasrizzo/catsim</a></li>
+<li>HTML documentation (stable release): <a class="reference external" href="http://douglasrizzo.github.io/catsim">http://douglasrizzo.github.io/catsim</a></li>
+<li>Issue tracker: <a class="reference external" href="https://github.com/douglasrizzo/catsim/issues">https://github.com/douglasrizzo/catsim/issues</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="dependencies">
+<h1>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h1>
+<p><cite>catsim</cite> depends on the latest versions of NumPy, SciPy, Matplotlib and scikit-learn,
+which are automatically installed from <cite>pip</cite>.</p>
+<p>To run the tests, you&#8217;ll need <cite>nose</cite>.</p>
+<p>To generate the documentation, Sphinx and its dependencies are needed.</p>
 <div class="section" id="basic-usage">
 <h2>Basic Usage<a class="headerlink" href="#basic-usage" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
@@ -177,6 +195,7 @@
 </div>
 <div class="section" id="citing-catsim">
 <h2>Citing <cite>catsim</cite><a class="headerlink" href="#citing-catsim" title="Permalink to this headline">¶</a></h2>
+<p>You can cite the package using the following bibtex entry:</p>
 <div class="highlight-bibtex"><div class="highlight"><pre><span></span><span class="kd">@misc</span><span class="p">{</span><span class="nl">catsim</span><span class="p">,</span>
     <span class="na">author</span> = <span class="p">{</span><span class="s2">Meneghetti, Douglas De Rizzo</span><span class="p">},</span>
     <span class="na">title</span> = <span class="p">{</span><span class="s2">catsim: Computerized Adaptive Testing Simulator</span><span class="p">},</span>
@@ -260,7 +279,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.9',
+            VERSION:'0.9.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

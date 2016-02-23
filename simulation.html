@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.9
+                0.9.1
               </div>
             
           
@@ -177,6 +177,12 @@ for all examinees during each step of the test.</p>
 </dd></dl>
 
 <dl class="attribute">
+<dt id="catsim.simulation.Simulator.bias">
+<code class="descname">bias</code><a class="headerlink" href="#catsim.simulation.Simulator.bias" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bias between the estimated and true proficiencies. This property is only available after <a class="reference internal" href="#catsim.simulation.Simulator.simulate" title="catsim.simulation.Simulator.simulate"><code class="xref py py-func docutils literal"><span class="pre">simulate()</span></code></a> has been successfully called. For more information on estimation bias, see <a class="reference internal" href="cat.html#catsim.cat.bias" title="catsim.cat.bias"><code class="xref py py-func docutils literal"><span class="pre">catsim.cat.bias()</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
 <dt id="catsim.simulation.Simulator.duration">
 <code class="descname">duration</code><a class="headerlink" href="#catsim.simulation.Simulator.duration" title="Permalink to this definition">¶</a></dt>
 <dd><p>Duration of the simulation, in milliseconds.</p>
@@ -200,6 +206,24 @@ for all examinees during each step of the test.</p>
 <dd><p>Item matrix used by the simulator. If the simulation already
 occurred, a column containin item esposure rates will be added to the
 matrix.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="catsim.simulation.Simulator.mse">
+<code class="descname">mse</code><a class="headerlink" href="#catsim.simulation.Simulator.mse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mean-squared error between the estimated and true proficiencies. This
+property is only available after <a class="reference internal" href="#catsim.simulation.Simulator.simulate" title="catsim.simulation.Simulator.simulate"><code class="xref py py-func docutils literal"><span class="pre">simulate()</span></code></a> has been successfully
+called. For more information on the mean-squared error of estimation, see
+<a class="reference internal" href="cat.html#catsim.cat.mse" title="catsim.cat.mse"><code class="xref py py-func docutils literal"><span class="pre">catsim.cat.mse()</span></code></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="catsim.simulation.Simulator.rmse">
+<code class="descname">rmse</code><a class="headerlink" href="#catsim.simulation.Simulator.rmse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Root mean-squared error between the estimated and true proficiencies. This
+property is only available after <a class="reference internal" href="#catsim.simulation.Simulator.simulate" title="catsim.simulation.Simulator.simulate"><code class="xref py py-func docutils literal"><span class="pre">simulate()</span></code></a> has been successfully
+called. For more information on the root mean-squared error of estimation, see
+<a class="reference internal" href="cat.html#catsim.cat.rmse" title="catsim.cat.rmse"><code class="xref py py-func docutils literal"><span class="pre">catsim.cat.rmse()</span></code></a></p>
 </dd></dl>
 
 <dl class="method">
@@ -280,7 +304,7 @@ matrix.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.9',
+            VERSION:'0.9.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

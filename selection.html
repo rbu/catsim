@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.9
+                0.9.1
               </div>
             
           
@@ -145,10 +145,10 @@
 used during the simulation, as long as it also inherits from
 <code class="xref py py-class docutils literal"><span class="pre">Selector</span></code>.</p>
 <p class="graphviz">
-<img src="_images/inheritance-b116e61f4384018d05404622df1c887cb447f796.png" alt="Inheritance diagram of catsim.selection" usemap="#inheritance57e12ee8dd" class="inheritance"/>
+<img src="_images/inheritance-07f1c400bd4a0bbfb7737b59f998f218877101ac.png" alt="Inheritance diagram of catsim.selection" usemap="#inheritance57e12ee8dd" class="inheritance"/>
 <map id="inheritance57e12ee8dd" name="inheritance57e12ee8dd">
 <area shape="rect" id="node1" href="#catsim.selection.AStratifiedBBlockingSelector" target="_top" title="catsim.selection.AStratifiedBBlockingSelector" alt="" coords="239,5,551,33"/>
-<area shape="rect" id="node2" href="#catsim.selection.Selector" target="_top" title="catsim.selection.Selector" alt="" coords="7,207,188,235"/>
+<area shape="rect" id="node2" href="#catsim.selection.Selector" target="_top" title="catsim.selection.Selector" alt="" coords="7,233,188,261"/>
 <area shape="rect" id="node4" href="#catsim.selection.AStratifiedSelector" target="_top" title="catsim.selection.AStratifiedSelector" alt="" coords="269,55,520,83"/>
 <area shape="rect" id="node6" href="#catsim.selection.ClusterSelector" target="_top" title="catsim.selection.ClusterSelector" alt="" coords="281,106,508,134"/>
 <area shape="rect" id="node8" href="#catsim.selection.LinearSelector" target="_top" title="catsim.selection.LinearSelector" alt="" coords="284,157,505,185"/>
@@ -156,7 +156,8 @@ used during the simulation, as long as it also inherits from
 <area shape="rect" id="node12" href="#catsim.selection.MaxInfoSelector" target="_top" title="catsim.selection.MaxInfoSelector" alt="" coords="279,258,511,286"/>
 <area shape="rect" id="node14" href="#catsim.selection.MaxInfoStratificationSelector" target="_top" title="catsim.selection.MaxInfoStratificationSelector" alt="" coords="239,309,551,337"/>
 <area shape="rect" id="node16" href="#catsim.selection.RandomSelector" target="_top" title="catsim.selection.RandomSelector" alt="" coords="277,359,512,387"/>
-<area shape="rect" id="node18" href="#catsim.selection.The54321Selector" target="_top" title="catsim.selection.The54321Selector" alt="" coords="272,410,517,438"/>
+<area shape="rect" id="node18" href="#catsim.selection.RandomesqueSelector" target="_top" title="catsim.selection.RandomesqueSelector" alt="" coords="257,410,532,438"/>
+<area shape="rect" id="node20" href="#catsim.selection.The54321Selector" target="_top" title="catsim.selection.The54321Selector" alt="" coords="272,461,517,489"/>
 </map>
 </p>
 <span class="target" id="module-catsim.selection"></span><dl class="class">
@@ -173,7 +174,7 @@ discrimination. The final item bank is then ordered such that the first
 sub-strata of each strata forms the first strata of the new ordered item
 bank, and so on. This method tries to balance the distribution of both
 parameters between all strata, after perceiving that they are correlated.</p>
-<img src="_images/b-blocking.svg" /><img src="_images/blocking-end.svg" /><table class="docutils field-list" frame="void" rules="none">
+<img src="_images/b-blocking.svg" /><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
@@ -468,7 +469,7 @@ parameters between all strata and works better than the <span class="math">\(a\)
 with <span class="math">\(b\)</span> blocking method by <a class="reference internal" href="references.html#chang2001" id="id5">[Chang2001]</a> for the three-parameter
 logistic model of IRT, since item difficulty and maximum information are not
 positioned in the same place in the proficiency scale in 3PL.</p>
-<img src="_images/mis-b.svg" /><img src="_images/blocking-end.svg" /><table class="docutils field-list" frame="void" rules="none">
+<img src="_images/mis-b.svg" /><table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
@@ -627,6 +628,50 @@ indexes in <cite>administered_items are excluded from the selection</cite>.</p>
 </dd></dl>
 
 <dl class="class">
+<dt id="catsim.selection.RandomesqueSelector">
+<em class="property">class </em><code class="descclassname">catsim.selection.</code><code class="descname">RandomesqueSelector</code><span class="sig-paren">(</span><em>bin_size</em><span class="sig-paren">)</span><a class="headerlink" href="#catsim.selection.RandomesqueSelector" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#catsim.selection.Selector" title="catsim.selection.Selector"><code class="xref py py-class docutils literal"><span class="pre">catsim.selection.Selector</span></code></a></p>
+<p>Implementation of the randomesque selector proposed by <a class="reference internal" href="references.html#kingsbury89" id="id8">[Kingsbury89]</a>, in which,
+at every step of the test, an item is randomly chosen from the <span class="math">\(n\)</span> most informative
+items in the item bank, <span class="math">\(n\)</span> being a predefined value (originally 5, but user-defined
+in this implementation)</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>bin_size</strong> &#8211; the number of most informative items to be taken into</td>
+</tr>
+</tbody>
+</table>
+<p>consideration when randomly selecting one of them.</p>
+<dl class="method">
+<dt id="catsim.selection.RandomesqueSelector.select">
+<code class="descname">select</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>administered_items: list</em>, <em>est_theta: float</em><span class="sig-paren">)</span> &rarr; int<a class="headerlink" href="#catsim.selection.RandomesqueSelector.select" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the index of the next item to be administered.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first"><code class="docutils literal"><span class="pre">int</span></code></p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>items</strong> (<a class="reference external" href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.10)"><code class="xref py py-class docutils literal"><span class="pre">ndarray</span></code></a>) &#8211; a valid item matrix.</li>
+<li><strong>adminitered_items</strong> &#8211; a list containing the indexes of items that were already administered to this examinee.</li>
+<li><strong>est_theta</strong> (<code class="docutils literal"><span class="pre">float</span></code>) &#8211; estimated proficiency value</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">index of the next item to be applied.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
 <dt id="catsim.selection.Selector">
 <em class="property">class </em><code class="descclassname">catsim.selection.</code><code class="descname">Selector</code><a class="headerlink" href="#catsim.selection.Selector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
@@ -664,13 +709,15 @@ difficulty and pseudo-guessing parameters, respectively.</li>
 <dt id="catsim.selection.The54321Selector">
 <em class="property">class </em><code class="descclassname">catsim.selection.</code><code class="descname">The54321Selector</code><span class="sig-paren">(</span><em>test_size</em><span class="sig-paren">)</span><a class="headerlink" href="#catsim.selection.The54321Selector" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#catsim.selection.Selector" title="catsim.selection.Selector"><code class="xref py py-class docutils literal"><span class="pre">catsim.selection.Selector</span></code></a></p>
-<p>Implementation of the 5-4-3-2-1 selector proposed by <a class="reference internal" href="references.html#mcbride83" id="id8">[McBride83]</a>, in which,
-at each step <span class="math">\(k\)</span> of a test of size <span class="math">\(K\)</span>, an item is chosen from a
-bin containing the <span class="math">\(K-k\)</span> most informative items in the bank, given the
-current <span class="math">\(\hat\theta\)</span>. As the test progresses, the bin gets smaller
-and more informative items have a higher probability of being chosen by the
-end of the test, when the estimation of &#8216;<span class="math">\(\hat\theta\)</span> is more
-precise.</p>
+<p>Implementation of the 5-4-3-2-1 selector proposed by <a class="reference internal" href="references.html#mcbride83" id="id9">[McBride83]</a>, in which,
+at each step <span class="math">\(k\)</span> of a test of size <span class="math">\(K\)</span>, an item is chosen from a bin
+containing the <span class="math">\(K-k\)</span> most informative items in the bank, given the current
+<span class="math">\(\hat\theta\)</span>. As the test progresses, the bin gets smaller and more
+informative items have a higher probability of being chosen by the end of the
+test, when the estimation of &#8216;<span class="math">\(\hat\theta\)</span> is more precise. The
+5-4-3-2-1 selector can be viewed as a specialization of the
+<a class="reference internal" href="#catsim.selection.RandomesqueSelector" title="catsim.selection.RandomesqueSelector"><code class="xref py py-class docutils literal"><span class="pre">catsim.selection.RandomesqueSelector</span></code></a>, in which the bin size of most
+informative items gets smaller as the test progresses.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -750,7 +797,7 @@ this parameter to set the bin size</td>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.9',
+            VERSION:'0.9.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
