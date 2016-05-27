@@ -1,0 +1,450 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>catsim.simulation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="None" href="../../index.html"/>
+        <link rel="up" title="Module code" href="../index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> catsim
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.10
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html#package-architecture">Package architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../introduction.html#examples">Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../initialization.html">Initialization Methods &#8211; <code class="docutils literal"><span class="pre">catsim.initialization</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../selection.html">Item Selection Methods &#8211; <code class="docutils literal"><span class="pre">catsim.selection</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../estimation.html">Estimation Methods &#8211; <code class="docutils literal"><span class="pre">catsim.estimation</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stopping.html">Stopping Criteria &#8211; <code class="docutils literal"><span class="pre">catsim.stopping</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../simulation.html">Computerized Adaptive Testing Simulation &#8211; <code class="docutils literal"><span class="pre">catsim.simulation</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../irt.html">Item Response Theory Functions &#8211; <code class="docutils literal"><span class="pre">catsim.irt</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cat.html">Computerized Adaptive Test-related Functions &#8211; <code class="docutils literal"><span class="pre">catsim.cat</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plot.html">Miscellaneous Plotting Functions &#8211; <code class="docutils literal"><span class="pre">catsim.plot</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stats.html">Miscellaneous Statistical Functions &#8211; <code class="docutils literal"><span class="pre">catsim.stats</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">Bibliography</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">catsim</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      
+    <li>catsim.simulation</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for catsim.simulation</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Module containing functions relevant to the process of simulating the</span>
+<span class="sd">application of adaptive tests. Most of this module is based on the work of</span>
+<span class="sd">[Bar10]_.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">import</span> <span class="nn">json_tricks.np</span> <span class="kn">as</span> <span class="nn">jsnp</span>
+<span class="kn">import</span> <span class="nn">numpy</span>
+<span class="kn">from</span> <span class="nn">catsim</span> <span class="kn">import</span> <span class="n">cat</span><span class="p">,</span> <span class="n">irt</span>
+<span class="kn">from</span> <span class="nn">catsim.estimation</span> <span class="kn">import</span> <span class="n">Estimator</span>
+<span class="kn">from</span> <span class="nn">catsim.initialization</span> <span class="kn">import</span> <span class="n">Initializer</span>
+<span class="kn">from</span> <span class="nn">catsim.selection</span> <span class="kn">import</span> <span class="n">Selector</span>
+<span class="kn">from</span> <span class="nn">catsim.stopping</span> <span class="kn">import</span> <span class="n">Stopper</span>
+
+
+<div class="viewcode-block" id="Simulator"><a class="viewcode-back" href="../../simulation.html#catsim.simulation.Simulator">[docs]</a><span class="k">class</span> <span class="nc">Simulator</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Class representing the simulator. It gathers several objects that describe the full</span>
+<span class="sd">    simulation process and simulates one or more computerized adaptive tests</span>
+
+<span class="sd">    :param items: a matrix containing item parameters</span>
+<span class="sd">    :param examinees: an integer with the number of examinees, whose real :math:`\\theta` values will be</span>
+<span class="sd">                      sampled from a normal distribution; or a :py:type:list containing said</span>
+<span class="sd">                      :math:`\\theta_0` values</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">items</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">examinees</span><span class="p">,</span>
+        <span class="n">initializer</span><span class="p">:</span> <span class="n">Initializer</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+        <span class="n">selector</span><span class="p">:</span> <span class="n">Selector</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+        <span class="n">estimator</span><span class="p">:</span> <span class="n">Estimator</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+        <span class="n">stopper</span><span class="p">:</span> <span class="n">Stopper</span><span class="o">=</span><span class="bp">None</span>
+    <span class="p">):</span>
+        <span class="n">irt</span><span class="o">.</span><span class="n">validate_item_bank</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+
+        <span class="c1"># adds a column for each item&#39;s exposure rate and their cluster membership</span>
+        <span class="n">items</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">numpy</span><span class="o">.</span><span class="n">zeros</span><span class="p">([</span><span class="n">items</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">1</span><span class="p">]),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_duration</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_items</span> <span class="o">=</span> <span class="n">items</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_estimations</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_administered_items</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_initializer</span> <span class="o">=</span> <span class="n">initializer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_selector</span> <span class="o">=</span> <span class="n">selector</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_estimator</span> <span class="o">=</span> <span class="n">estimator</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_stopper</span> <span class="o">=</span> <span class="n">stopper</span>
+
+        <span class="c1"># `examinees` is passed to its special setter</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">examinees</span> <span class="o">=</span> <span class="n">examinees</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">items</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Item matrix used by the simulator. If the simulation already</span>
+<span class="sd">        occurred, a column containin item esposure rates will be added to the</span>
+<span class="sd">        matrix.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_items</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">administered_items</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;List of lists containin the indexes of items administered to each</span>
+<span class="sd">        examinee during the simulation.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_administered_items</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">all_estimations</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;List of lists containing all estimated :math:`\\hat\\theta` values</span>
+<span class="sd">        for all examinees during each step of the test.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_estimations</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">estimations</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Final estimated :math:`\\hat\\theta` values for all examinees.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">ests</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">ests</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_estimations</span><span class="p">]</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">examinees</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;List containing examinees true proficiency values (:math:`\\theta`).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_examinees</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">duration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Duration of the simulation, in milliseconds.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_duration</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">initializer</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Initializer</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_initializer</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">selector</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Selector</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_selector</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">estimator</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Estimator</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_estimator</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">stopper</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Stopper</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stopper</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">bias</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Bias between the estimated and true proficiencies. This property is only available after :py:func:`simulate` has been successfully called. For more information on estimation bias, see :py:func:`catsim.cat.bias`&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_bias</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">mse</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Mean-squared error between the estimated and true proficiencies. This</span>
+<span class="sd">        property is only available after :py:func:`simulate` has been successfully</span>
+<span class="sd">        called. For more information on the mean-squared error of estimation, see</span>
+<span class="sd">        :py:func:`catsim.cat.mse`&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_mse</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">rmse</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Root mean-squared error between the estimated and true proficiencies. This</span>
+<span class="sd">        property is only available after :py:func:`simulate` has been successfully</span>
+<span class="sd">        called. For more information on the root mean-squared error of estimation, see</span>
+<span class="sd">        :py:func:`catsim.cat.rmse`&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_rmse</span>
+
+    <span class="nd">@examinees.setter</span>
+    <span class="k">def</span> <span class="nf">examinees</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">examinees</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">examinees</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_examinees</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">examinees</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">examinees</span><span class="p">)</span> <span class="o">==</span> <span class="nb">list</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_examinees</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">examinees</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Simulator.simulate"><a class="viewcode-back" href="../../simulation.html#catsim.simulation.Simulator.simulate">[docs]</a>    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">initializer</span><span class="p">:</span> <span class="n">Initializer</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+        <span class="n">selector</span><span class="p">:</span> <span class="n">Selector</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+        <span class="n">estimator</span><span class="p">:</span> <span class="n">Estimator</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+        <span class="n">stopper</span><span class="p">:</span> <span class="n">Stopper</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+        <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="bp">False</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Simulates a computerized adaptive testing application to one or more examinees</span>
+
+<span class="sd">        :param initializer: an initializer that selects examinees :math:`\\theta_0`</span>
+<span class="sd">        :param selector: a selector that selects new items to be presented to examinees</span>
+<span class="sd">        :param estimator: an estimator that reestimates examinees proficiencies after each item is applied</span>
+<span class="sd">        :param stopper: an object with a stopping criteria for the test</span>
+<span class="sd">        :param verbose: whether to periodically print a message regarding the progress of the simulation. Good for longer simulations.</span>
+
+<span class="sd">        &gt;&gt;&gt; from catsim.initialization import RandomInitializer</span>
+<span class="sd">        &gt;&gt;&gt; from catsim.selection import MaxInfoSelector</span>
+<span class="sd">        &gt;&gt;&gt; from catsim.estimation import HillClimbingEstimator</span>
+<span class="sd">        &gt;&gt;&gt; from catsim.stopping import MaxItemStopper</span>
+<span class="sd">        &gt;&gt;&gt; from catsim.cat import generate_item_bank</span>
+<span class="sd">        &gt;&gt;&gt; initializer = RandomInitializer()</span>
+<span class="sd">        &gt;&gt;&gt; selector = MaxInfoSelector()</span>
+<span class="sd">        &gt;&gt;&gt; estimator = HillClimbingEstimator()</span>
+<span class="sd">        &gt;&gt;&gt; stopper = MaxItemStopper(20)</span>
+<span class="sd">        &gt;&gt;&gt; Simulator(generate_item_bank(100), 10).simulate(initializer, selector, estimator, stopper)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">initializer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_initializer</span> <span class="o">=</span> <span class="n">initializer</span>
+        <span class="k">if</span> <span class="n">selector</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_selector</span> <span class="o">=</span> <span class="n">selector</span>
+        <span class="k">if</span> <span class="n">estimator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_estimator</span> <span class="o">=</span> <span class="n">estimator</span>
+        <span class="k">if</span> <span class="n">stopper</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_stopper</span> <span class="o">=</span> <span class="n">stopper</span>
+
+        <span class="c1"># if verbose:</span>
+        <span class="k">print</span><span class="p">(</span>
+            <span class="s1">&#39;Starting simulation: {0} {1} {2} {3}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_initializer</span><span class="o">.</span><span class="n">__class__</span><span class="p">,</span> <span class="n">selector</span><span class="o">.</span><span class="n">__class__</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_estimator</span><span class="o">.</span><span class="n">__class__</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_stopper</span><span class="o">.</span><span class="n">__class__</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+        <span class="n">start_time</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">current_examinee</span><span class="p">,</span> <span class="n">true_theta</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">examinees</span><span class="p">):</span>
+
+            <span class="c1"># if verbose:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s1">&#39;{0}/{1} examinees...&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">current_examinee</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">examinees</span><span class="p">)))</span>
+
+            <span class="n">est_theta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_initializer</span><span class="o">.</span><span class="n">initialize</span><span class="p">()</span>
+            <span class="n">response_vector</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">,</span> <span class="n">est_thetas</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+
+            <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_stopper</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">administered_items</span><span class="p">],</span> <span class="n">est_thetas</span><span class="p">):</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">selected_item</span> <span class="o">=</span> <span class="n">selector</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">,</span> <span class="n">administered_items</span><span class="p">,</span> <span class="n">est_theta</span><span class="p">)</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">administered_items</span><span class="p">))</span>
+                    <span class="k">raise</span>
+
+                <span class="c1"># simulates the examinee&#39;s response via the four-parameter</span>
+                <span class="c1"># logistic function</span>
+                <span class="n">response</span> <span class="o">=</span> <span class="n">irt</span><span class="o">.</span><span class="n">icc</span><span class="p">(</span>
+                    <span class="n">true_theta</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">selected_item</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">selected_item</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">selected_item</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">selected_item</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span>
+                <span class="p">)</span> <span class="o">&gt;=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">()</span>
+
+                <span class="n">response_vector</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+                <span class="c1"># adds the item selected by the selector to the pool of administered items</span>
+                <span class="n">administered_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">selected_item</span><span class="p">)</span>
+
+                <span class="c1"># estimate the new theta using the given estimator</span>
+                <span class="n">est_theta</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_estimator</span><span class="o">.</span><span class="n">estimate</span><span class="p">(</span>
+                    <span class="n">response_vector</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">administered_items</span><span class="p">],</span> <span class="n">est_theta</span>
+                <span class="p">)</span>
+
+                <span class="c1"># flatten the list of lists so that we can count occurrences of items easier</span>
+                <span class="n">flattened_administered_items</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="n">administered_item</span>
+                    <span class="k">for</span> <span class="n">administered_list</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">administered_items</span>
+                    <span class="k">for</span> <span class="n">administered_item</span> <span class="ow">in</span> <span class="n">administered_list</span>
+                <span class="p">]</span>
+
+                <span class="c1"># update the exposure value for this item</span>
+                <span class="c1"># r = number of tests item has been used / total number of tests</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">selected_item</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span>
+                    <span class="n">flattened_administered_items</span> <span class="o">==</span> <span class="n">selected_item</span>
+                <span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">examinees</span>
+                <span class="p">)</span>
+
+                <span class="n">est_thetas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">est_theta</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_estimations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">est_thetas</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_administered_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">administered_items</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_duration</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">))</span> <span class="o">-</span> <span class="n">start_time</span>
+
+        <span class="c1"># if verbose:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Simulation took {0} milliseconds&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_duration</span><span class="p">))</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_bias</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">bias</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">examinees</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">estimations</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_mse</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">mse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">examinees</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">estimations</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_rmse</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">rmse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">examinees</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">estimations</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">dumps</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">jsnp</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">loads</span><span class="p">(</span><span class="n">json</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">jsnp</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">json</span><span class="p">)</span></div>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">doctest</span>
+    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Douglas De Rizzo Meneghetti.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'0.10',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

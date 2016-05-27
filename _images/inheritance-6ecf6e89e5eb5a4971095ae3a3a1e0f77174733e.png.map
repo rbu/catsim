@@ -1,6 +1,0 @@
-<map id="inheritanceb6f22deed1" name="inheritanceb6f22deed1">
-<area shape="rect" id="node1" href="#catsim.estimation.DifferentialEvolutionEstimator" target="_top" title="catsim.estimation.DifferentialEvolutionEstimator" alt="" coords="256,5,587,33"/>
-<area shape="rect" id="node2" href="#catsim.estimation.Estimator" target="_top" title="catsim.estimation.Estimator" alt="" coords="5,55,208,83"/>
-<area shape="rect" id="node4" href="#catsim.estimation.FMinEstimator" target="_top" title="catsim.estimation.FMinEstimator" alt="" coords="305,55,537,83"/>
-<area shape="rect" id="node6" href="#catsim.estimation.HillClimbingEstimator" target="_top" title="catsim.estimation.HillClimbingEstimator" alt="" coords="283,106,560,134"/>
-</map>

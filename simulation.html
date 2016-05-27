@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.9.2
+                0.10
               </div>
             
           
@@ -82,18 +82,20 @@
             
             
                 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="concepts.html">Basic Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#package-architecture">Package architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#examples">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="initialization.html">Initialization Methods &#8211; <code class="docutils literal"><span class="pre">catsim.initialization</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="selection.html">Item Selection Methods &#8211; <code class="docutils literal"><span class="pre">catsim.selection</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="estimation.html">Estimation Methods &#8211; <code class="docutils literal"><span class="pre">catsim.estimation</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="stopping.html">Stopping Criteria &#8211; <code class="docutils literal"><span class="pre">catsim.stopping</span></code></a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Computerized Adaptive Testing Simulation &#8211; <code class="docutils literal"><span class="pre">catsim.simulation</span></code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Computerized Adaptive Testing Simulation &#8211; <code class="docutils literal"><span class="pre">catsim.simulation</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="irt.html">Item Response Theory Functions &#8211; <code class="docutils literal"><span class="pre">catsim.irt</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="cat.html">Computerized Adaptive Test-related Functions &#8211; <code class="docutils literal"><span class="pre">catsim.cat</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="plot.html">Miscellaneous Plotting Functions &#8211; <code class="docutils literal"><span class="pre">catsim.plot</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="stats.html">Miscellaneous Statistical Functions &#8211; <code class="docutils literal"><span class="pre">catsim.stats</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">Bibliography</a></li>
 </ul>
 
             
@@ -145,7 +147,7 @@ application of adaptive tests. Most of this module is based on the work of
 <a class="reference internal" href="references.html#bar10" id="id1">[Bar10]</a>.</p>
 <dl class="class">
 <dt id="catsim.simulation.Simulator">
-<em class="property">class </em><code class="descclassname">catsim.simulation.</code><code class="descname">Simulator</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>examinees</em><span class="sig-paren">)</span><a class="headerlink" href="#catsim.simulation.Simulator" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">catsim.simulation.</code><code class="descname">Simulator</code><span class="sig-paren">(</span><em>items: numpy.ndarray</em>, <em>examinees</em>, <em>initializer: catsim.initialization.Initializer = None</em>, <em>selector: catsim.selection.Selector = None</em>, <em>estimator: catsim.estimation.Estimator = None</em>, <em>stopper: catsim.stopping.Stopper = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/simulation.html#Simulator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.simulation.Simulator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class representing the simulator. It gathers several objects that describe the full
 simulation process and simulates one or more computerized adaptive tests</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -228,7 +230,7 @@ called. For more information on the root mean-squared error of estimation, see
 
 <dl class="method">
 <dt id="catsim.simulation.Simulator.simulate">
-<code class="descname">simulate</code><span class="sig-paren">(</span><em>initializer: catsim.initialization.Initializer</em>, <em>selector: catsim.selection.Selector</em>, <em>estimator: catsim.estimation.Estimator</em>, <em>stopper: catsim.stopping.Stopper</em>, <em>verbose: bool=False</em><span class="sig-paren">)</span><a class="headerlink" href="#catsim.simulation.Simulator.simulate" title="Permalink to this definition">¶</a></dt>
+<code class="descname">simulate</code><span class="sig-paren">(</span><em>initializer: catsim.initialization.Initializer = None</em>, <em>selector: catsim.selection.Selector = None</em>, <em>estimator: catsim.estimation.Estimator = None</em>, <em>stopper: catsim.stopping.Stopper = None</em>, <em>verbose: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/simulation.html#Simulator.simulate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.simulation.Simulator.simulate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Simulates a computerized adaptive testing application to one or more examinees</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -245,11 +247,11 @@ called. For more information on the root mean-squared error of estimation, see
 </tr>
 </tbody>
 </table>
-<div class="highlight-python"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">catsim.initialization</span> <span class="kn">import</span> <span class="n">RandomInitializer</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">catsim.selection</span> <span class="kn">import</span> <span class="n">MaxInfoSelector</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">catsim.estimation</span> <span class="kn">import</span> <span class="n">HillClimbingEstimator</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">catsim.stopping</span> <span class="kn">import</span> <span class="n">MaxItemStopper</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">catsim.cat</span> <span class="kn">import</span> <span class="n">generate_item_bank</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">catsim.initialization</span> <span class="k">import</span> <span class="n">RandomInitializer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">catsim.selection</span> <span class="k">import</span> <span class="n">MaxInfoSelector</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">catsim.estimation</span> <span class="k">import</span> <span class="n">HillClimbingEstimator</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">catsim.stopping</span> <span class="k">import</span> <span class="n">MaxItemStopper</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">catsim.cat</span> <span class="k">import</span> <span class="n">generate_item_bank</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">initializer</span> <span class="o">=</span> <span class="n">RandomInitializer</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">selector</span> <span class="o">=</span> <span class="n">MaxInfoSelector</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">estimator</span> <span class="o">=</span> <span class="n">HillClimbingEstimator</span><span class="p">()</span>
@@ -304,7 +306,7 @@ called. For more information on the root mean-squared error of estimation, see
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.9.2',
+            VERSION:'0.10',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

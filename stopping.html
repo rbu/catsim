@@ -60,7 +60,7 @@
             
             
               <div class="version">
-                0.9.2
+                0.10
               </div>
             
           
@@ -82,18 +82,20 @@
             
             
                 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="concepts.html">Basic Concepts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#package-architecture">Package architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html#examples">Examples</a></li>
 <li class="toctree-l1"><a class="reference internal" href="initialization.html">Initialization Methods &#8211; <code class="docutils literal"><span class="pre">catsim.initialization</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="selection.html">Item Selection Methods &#8211; <code class="docutils literal"><span class="pre">catsim.selection</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="estimation.html">Estimation Methods &#8211; <code class="docutils literal"><span class="pre">catsim.estimation</span></code></a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Stopping Criteria &#8211; <code class="docutils literal"><span class="pre">catsim.stopping</span></code></a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Stopping Criteria &#8211; <code class="docutils literal"><span class="pre">catsim.stopping</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="simulation.html">Computerized Adaptive Testing Simulation &#8211; <code class="docutils literal"><span class="pre">catsim.simulation</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="irt.html">Item Response Theory Functions &#8211; <code class="docutils literal"><span class="pre">catsim.irt</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="cat.html">Computerized Adaptive Test-related Functions &#8211; <code class="docutils literal"><span class="pre">catsim.cat</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="plot.html">Miscellaneous Plotting Functions &#8211; <code class="docutils literal"><span class="pre">catsim.plot</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="stats.html">Miscellaneous Statistical Functions &#8211; <code class="docutils literal"><span class="pre">catsim.stats</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="references.html">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">Bibliography</a></li>
 </ul>
 
             
@@ -144,17 +146,15 @@
 <code class="xref py py-class docutils literal"><span class="pre">Stopper</span></code>. <code class="xref py py-class docutils literal"><span class="pre">Simulator</span></code> allows that a custom stopping criterion be
 used during the simulation, as long as it also inherits from
 <code class="xref py py-class docutils literal"><span class="pre">Stopper</span></code>.</p>
-<p class="graphviz">
-<img src="_images/inheritance-027ec3a809d281caa319a0c9bfdc502e2bccaf63.png" alt="Inheritance diagram of catsim.stopping" usemap="#inheritance76f349e9d6" class="inheritance"/>
+<img src="_images/inheritance-cfa4897734ec0f5dd176718870b1b10cb392b335.png" alt="Inheritance diagram of catsim.stopping" usemap="#inheritance76f349e9d6" class="inheritance"/>
 <map id="inheritance76f349e9d6" name="inheritance76f349e9d6">
-<area shape="rect" id="node1" href="#catsim.stopping.MaxItemStopper" target="_top" title="catsim.stopping.MaxItemStopper" alt="" coords="232,5,467,33"/>
-<area shape="rect" id="node2" href="#catsim.stopping.Stopper" target="_top" title="catsim.stopping.Stopper" alt="" coords="5,30,184,58"/>
-<area shape="rect" id="node4" href="#catsim.stopping.MinErrorStopper" target="_top" title="catsim.stopping.MinErrorStopper" alt="" coords="233,55,465,83"/>
+<area shape="rect" id="node1" href="#catsim.stopping.MaxItemStopper" target="_top" title="Stopping criterion for maximum number of items in a test" alt="" coords="232,5,467,33"/>
+<area shape="rect" id="node2" href="#catsim.stopping.Stopper" target="_top" title="Base class for CAT stop criterion" alt="" coords="5,30,184,58"/>
+<area shape="rect" id="node4" href="#catsim.stopping.MinErrorStopper" target="_top" title="Stopping criterion for minimum standard error of estimation (see :py:func:`catsim.irt.see`)" alt="" coords="233,55,465,83"/>
 </map>
-</p>
 <span class="target" id="module-catsim.stopping"></span><dl class="class">
 <dt id="catsim.stopping.MaxItemStopper">
-<em class="property">class </em><code class="descclassname">catsim.stopping.</code><code class="descname">MaxItemStopper</code><span class="sig-paren">(</span><em>max_itens: int</em><span class="sig-paren">)</span><a class="headerlink" href="#catsim.stopping.MaxItemStopper" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">catsim.stopping.</code><code class="descname">MaxItemStopper</code><span class="sig-paren">(</span><em>max_itens: int</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/stopping.html#MaxItemStopper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.stopping.MaxItemStopper" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#catsim.stopping.Stopper" title="catsim.stopping.Stopper"><code class="xref py py-class docutils literal"><span class="pre">catsim.stopping.Stopper</span></code></a></p>
 <p>Stopping criterion for maximum number of items in a test</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -167,7 +167,7 @@ used during the simulation, as long as it also inherits from
 </table>
 <dl class="method">
 <dt id="catsim.stopping.MaxItemStopper.stop">
-<code class="descname">stop</code><span class="sig-paren">(</span><em>administered_items: numpy.ndarray</em>, <em>estimations: list</em><span class="sig-paren">)</span> &rarr; bool<a class="headerlink" href="#catsim.stopping.MaxItemStopper.stop" title="Permalink to this definition">¶</a></dt>
+<code class="descname">stop</code><span class="sig-paren">(</span><em>administered_items: numpy.ndarray</em>, <em>estimations: list</em><span class="sig-paren">)</span> &rarr; bool<a class="reference internal" href="_modules/catsim/stopping.html#MaxItemStopper.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.stopping.MaxItemStopper.stop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks whether the test reached its stopping criterion</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -193,7 +193,7 @@ used during the simulation, as long as it also inherits from
 
 <dl class="class">
 <dt id="catsim.stopping.MinErrorStopper">
-<em class="property">class </em><code class="descclassname">catsim.stopping.</code><code class="descname">MinErrorStopper</code><span class="sig-paren">(</span><em>min_error: float</em><span class="sig-paren">)</span><a class="headerlink" href="#catsim.stopping.MinErrorStopper" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">catsim.stopping.</code><code class="descname">MinErrorStopper</code><span class="sig-paren">(</span><em>min_error: float</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/catsim/stopping.html#MinErrorStopper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.stopping.MinErrorStopper" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#catsim.stopping.Stopper" title="catsim.stopping.Stopper"><code class="xref py py-class docutils literal"><span class="pre">catsim.stopping.Stopper</span></code></a></p>
 <p>Stopping criterion for minimum standard error of estimation (see <a class="reference internal" href="irt.html#catsim.irt.see" title="catsim.irt.see"><code class="xref py py-func docutils literal"><span class="pre">catsim.irt.see()</span></code></a>)</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -206,7 +206,7 @@ used during the simulation, as long as it also inherits from
 </table>
 <dl class="method">
 <dt id="catsim.stopping.MinErrorStopper.stop">
-<code class="descname">stop</code><span class="sig-paren">(</span><em>administered_items: numpy.ndarray</em>, <em>estimations: list</em><span class="sig-paren">)</span> &rarr; bool<a class="headerlink" href="#catsim.stopping.MinErrorStopper.stop" title="Permalink to this definition">¶</a></dt>
+<code class="descname">stop</code><span class="sig-paren">(</span><em>administered_items: numpy.ndarray</em>, <em>estimations: list</em><span class="sig-paren">)</span> &rarr; bool<a class="reference internal" href="_modules/catsim/stopping.html#MinErrorStopper.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.stopping.MinErrorStopper.stop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks whether the test reached its stopping criterion</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -232,12 +232,12 @@ used during the simulation, as long as it also inherits from
 
 <dl class="class">
 <dt id="catsim.stopping.Stopper">
-<em class="property">class </em><code class="descclassname">catsim.stopping.</code><code class="descname">Stopper</code><a class="headerlink" href="#catsim.stopping.Stopper" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">catsim.stopping.</code><code class="descname">Stopper</code><a class="reference internal" href="_modules/catsim/stopping.html#Stopper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.stopping.Stopper" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
 <p>Base class for CAT stop criterion</p>
 <dl class="method">
 <dt id="catsim.stopping.Stopper.stop">
-<code class="descname">stop</code><span class="sig-paren">(</span><em>administered_items: numpy.ndarray</em>, <em>estimations: list</em><span class="sig-paren">)</span> &rarr; bool<a class="headerlink" href="#catsim.stopping.Stopper.stop" title="Permalink to this definition">¶</a></dt>
+<code class="descname">stop</code><span class="sig-paren">(</span><em>administered_items: numpy.ndarray</em>, <em>estimations: list</em><span class="sig-paren">)</span> &rarr; bool<a class="reference internal" href="_modules/catsim/stopping.html#Stopper.stop"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#catsim.stopping.Stopper.stop" title="Permalink to this definition">¶</a></dt>
 <dd><p>Checks whether the test reached its stopping criterion</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -304,7 +304,7 @@ used during the simulation, as long as it also inherits from
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.9.2',
+            VERSION:'0.10',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
